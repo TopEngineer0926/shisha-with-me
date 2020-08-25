@@ -1,0 +1,7 @@
+{
+  "name": "shisha-with-me",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

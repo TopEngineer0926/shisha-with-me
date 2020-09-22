@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Shisha With Me</string>
+    <string name="title_activity_main">Shisha With Me</string>
+    <string name="package_name">de.codext.shishawithme</string>
+    <string name="custom_url_scheme">de.codext.shishawithme</string>
+</resources>

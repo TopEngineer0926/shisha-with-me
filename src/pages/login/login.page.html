@@ -1,28 +1,36 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>login</ion-title>
+    <ion-title>Anmelden</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="flex-center">
-    <ion-buttons>
-      <ion-button>
-        <ion-icon slot="start" name="logo-facebook"></ion-icon>Über Facebook
-        anmelden</ion-button
-      >
-      <ion-button>
-        <ion-icon slot="start" name="logo-google"></ion-icon>Über Google
-        anmelden</ion-button
-      >
-      <ion-button>
-        <ion-icon slot="start" name="call-outline"></ion-icon>Über Telefonnummer
-        anmelden</ion-button
-      >
-      <ion-button>
-        <ion-icon slot="start" name="logo-snapchat"></ion-icon>Über Snapchat
-        anmelden</ion-button
-      ></ion-buttons
-    >
+  <div class="spacer">
+    <div class="title">
+      <div class="logo"></div>
+      <div>
+        <strong>Willkommen</strong><br>
+        <span> in der Community</span>
+      </div>
+
+    </div>
+    <div class="btn-container">
+      <ion-button class="facebook" expand="block">
+        <ion-icon slot="start" name="logo-facebook"></ion-icon><span>Facebook</span>
+      </ion-button>
+      <ion-button class="google" expand="block">
+        <img src="assets/icons/512px-Google__G__Logo.svg.webp">
+        <span>Google</span>
+      </ion-button>
+      <ion-button class="phone" expand="block">
+        <ion-icon slot="start" name="call"></ion-icon>
+        <span>Telefonnummer</span>
+      </ion-button>
+      <ion-button class="apple" expand="block">
+        <ion-icon slot="start" name="logo-apple"></ion-icon><span>Apple</span>
+      </ion-button>
+    </div>
   </div>
+
+
 </ion-content>

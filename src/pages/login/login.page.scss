@@ -1,8 +1,82 @@
-.flex-center {
+.spacer {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100%;
+}
+
+.title {
+  .logo {
+    width: 100px;
+    height: 100px;
+    background: #333;
+    margin-bottom: 50px;
+  }
+
   display: flex;
   align-items: center;
-  justify-content: center;
-
   flex-direction: column;
-  margin: 20px 0;
+
+  text-align: center;
+  font-size: 22px;
+  width: 70%;
+  margin: 50px auto;
+
+  strong {
+    font-weight: bolder;
+    font-size: 35px;
+  }
+
+  span {
+    font-size: 18px;
+
+    font-weight: 300;
+  }
+
+}
+
+.btn-container {
+  width: 70%;
+  margin: 50px auto;
+  min-width: 250px;
+
+  ion-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+
+    span {
+      margin-left: 10px;
+      margin-top: 3px;
+    }
+
+    &.facebook {
+      --background: #3b5998;
+      color: #fff;
+    }
+
+    &.phone {
+      --background: #ef233c;
+      color: #fff;
+    }
+
+    &.google {
+      color: #8a8a8a;
+      --background: #fff;
+
+      img {
+        height: 22px;
+        width: auto;
+      }
+    }
+
+    &.apple {
+      --background: #fff;
+      color: #000;
+
+    }
+
+  }
 }

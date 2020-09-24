@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SwiperOptions } from 'swiper';
+import { Plugins } from '@capacitor/core';
+
+const { Geolocation } = Plugins;
 
 @Component({
   selector: 'app-dashboard',
@@ -7,10 +10,6 @@ import { SwiperOptions } from 'swiper';
   styleUrls: ['./dashboard.page.scss'],
 })
 export class DashboardPage implements OnInit {
-  title = 'My first AGM project';
-  lat = 51.678418;
-  lng = 7.809007;
-
   styles = [
     {
       elementType: 'geometry',
@@ -488,7 +487,34 @@ export class DashboardPage implements OnInit {
       },
     },
   };
+
+  locationLoading: boolean = false;
+  lat = 51.178418;
+  lng = 9.95;
+  zoom = 6;
+
+  markers = [];
   constructor() {}
 
   ngOnInit() {}
+
+  async getCurrentPosition() {
+    this.locationLoading = true;
+    try {
+      const coordinates = await Geolocation.getCurrentPosition();
+      console.log('Current', coordinates);
+      this.lat = coordinates.coords.latitude;
+      this.lng = coordinates.coords.longitude;
+      this.markers.push({
+        lat: coordinates.coords.latitude,
+        lng: coordinates.coords.longitude,
+      });
+      this.zoom = 12;
+    } catch (error) {
+    } finally {
+      setTimeout(() => {
+        this.locationLoading = false;
+      }, 1000);
+    }
+  }
 }

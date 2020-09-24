@@ -32,7 +32,6 @@
 
     font-weight: 300;
   }
-
 }
 
 .btn-container {
@@ -50,6 +49,13 @@
     span {
       margin-left: 10px;
       margin-top: 3px;
+    }
+    --background-activated: #000;
+    --background-focused: #000;
+    --background-hover: #000;
+
+    &.ion-activated {
+      color: #fff !important;
     }
 
     &.facebook {
@@ -75,8 +81,6 @@
     &.apple {
       --background: #fff;
       color: #000;
-
     }
-
   }
 }

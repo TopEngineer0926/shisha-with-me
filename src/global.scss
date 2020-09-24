@@ -10,17 +10,101 @@
  */
 
 /* Core CSS required for Ionic components to work properly */
-@import "~@ionic/angular/css/core.css";
+@import '~@ionic/angular/css/core.css';
 
 /* Basic CSS for apps built with Ionic */
-@import "~@ionic/angular/css/normalize.css";
-@import "~@ionic/angular/css/structure.css";
-@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/normalize.css';
+@import '~@ionic/angular/css/structure.css';
+@import '~@ionic/angular/css/typography.css';
 @import '~@ionic/angular/css/display.css';
 
 /* Optional CSS utils that can be commented out */
-@import "~@ionic/angular/css/padding.css";
-@import "~@ionic/angular/css/float-elements.css";
-@import "~@ionic/angular/css/text-alignment.css";
-@import "~@ionic/angular/css/text-transformation.css";
-@import "~@ionic/angular/css/flex-utils.css";
+@import '~@ionic/angular/css/padding.css';
+@import '~@ionic/angular/css/float-elements.css';
+@import '~@ionic/angular/css/text-alignment.css';
+@import '~@ionic/angular/css/text-transformation.css';
+@import '~@ionic/angular/css/flex-utils.css';
+
+@import '~swiper/swiper.scss';
+
+.ios {
+  ion-refresher {
+    ion-spinner,
+    ion-icon {
+      color: #fff !important;
+    }
+    ::ng-deep {
+      ion-spinner {
+        color: #fff !important;
+      }
+    }
+  }
+}
+
+ion-button,
+button {
+  text-transform: none !important;
+  &.bold {
+    font-weight: bold !important;
+  }
+}
+
+ion-toolbar {
+  ::ng-deep {
+    .toolbar-container {
+      overflow: hidden;
+      border-radius: 4px;
+    }
+  }
+}
+.toast-top-right {
+  top: 60px;
+  right: 12px;
+}
+ion-tabs {
+  ion-tab-button {
+    transform: scale(0.7);
+  }
+  .tab-selected {
+    transform: scale(0.9);
+    transition: transform 0.1s ease-in-out;
+  }
+}
+
+.shisha-with-me {
+  ion-list-header.ios {
+    &:first-of-type {
+      margin-top: 0;
+    }
+
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 300;
+    padding-bottom: 8px;
+    margin-left: -5px;
+  }
+
+  ion-list[header='ios'] {
+    margin-top: 0;
+  }
+
+  ion-list {
+    border-top: 1px solid #d9dce0;
+    border-bottom: 1px solid #d9dce0;
+
+    ion-item {
+      --border-color: #d9dce0;
+    }
+
+    ion-item:last-of-type {
+      --border-color: transparent;
+    }
+  }
+  ion-list.md {
+    padding: 0;
+  }
+
+  ion-list-header {
+    text-transform: none !important;
+  }
+}

@@ -3,6 +3,12 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { TabsPageModule } from './tabs/tabs.module';
 import { WalkthroughPageModule } from 'src/pages/walkthrough/walkthrough.module';
 import { LoginPageModule } from 'src/pages/login/login.module';
+import { DashboardPageModule } from 'src/pages/dashboard/dashboard.module';
+import { FriendsListPageModule } from 'src/pages/friends-list/friends-list.module';
+import { HistoryPageModule } from 'src/pages/history/history.module';
+import { MapPageModule } from 'src/pages/map/map.module';
+import { ProfilePageModule } from 'src/pages/profile/profile.module';
+import { SettingsPageModule } from 'src/pages/settings/settings.module';
 
 const routes: Routes = [
   {
@@ -11,12 +17,40 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'tabs',
+    loadChildren: () => TabsPageModule,
+  },
+  {
     path: 'walkthrough',
     loadChildren: () => WalkthroughPageModule,
   },
   {
     path: 'login',
     loadChildren: () => LoginPageModule,
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () => DashboardPageModule,
+  },
+  {
+    path: 'map',
+    loadChildren: () => MapPageModule,
+  },
+  {
+    path: 'friends-list',
+    loadChildren: () => FriendsListPageModule,
+  },
+  {
+    path: 'profile',
+    loadChildren: () => ProfilePageModule,
+  },
+  {
+    path: 'history',
+    loadChildren: () => HistoryPageModule,
+  },
+  {
+    path: 'settings',
+    loadChildren: () => SettingsPageModule,
   },
 ];
 @NgModule({

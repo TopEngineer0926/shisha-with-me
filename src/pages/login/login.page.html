@@ -9,28 +9,26 @@
     <div class="title">
       <div class="logo"></div>
       <div>
-        <strong>Willkommen</strong><br>
+        <strong>Willkommen</strong><br />
         <span> in der Community</span>
       </div>
-
     </div>
     <div class="btn-container">
-      <ion-button class="facebook" expand="block">
-        <ion-icon slot="start" name="logo-facebook"></ion-icon><span>Facebook</span>
+      <ion-button class="facebook" expand="block" (click)="login('facebook')">
+        <ion-icon slot="start" name="logo-facebook"></ion-icon
+        ><span>Facebook</span>
       </ion-button>
-      <ion-button class="google" expand="block">
-        <img src="assets/icons/512px-Google__G__Logo.svg.webp">
+      <ion-button class="google" expand="block" (click)="login('google')">
+        <img src="assets/icons/512px-Google__G__Logo.svg.webp" />
         <span>Google</span>
       </ion-button>
-      <ion-button class="phone" expand="block">
+      <ion-button class="phone" expand="block" (click)="login('phone')">
         <ion-icon slot="start" name="call"></ion-icon>
         <span>Telefonnummer</span>
       </ion-button>
-      <ion-button class="apple" expand="block">
+      <ion-button class="apple" expand="block" (click)="login('apple')">
         <ion-icon slot="start" name="logo-apple"></ion-icon><span>Apple</span>
       </ion-button>
     </div>
   </div>
-
-
 </ion-content>

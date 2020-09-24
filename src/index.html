@@ -1,27 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Shisha With Me</title>
 
-<head>
-  <meta charset="utf-8" />
-  <title>Shisha with me</title>
+    <base href="/" />
 
-  <base href="/" />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="viewport"
+      content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
 
-  <meta name="color-scheme" content="light dark" />
-  <meta name="viewport"
-    content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="format-detection" content="telephone=no" />
-  <meta name="msapplication-tap-highlight" content="no" />
+    <link rel="icon" type="image/png" href="assets/icon/favicon.png" />
 
-  <link rel="icon" type="image/png" href="assets/icon/favicon.png" />
+    <!-- add to homescreen for ios -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
-  <!-- add to homescreen for ios -->
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-</head>
+    <script>
+      function setColorScheme() {
+        const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)')
+          .matches;
+        const isLightMode = window.matchMedia('(prefers-color-scheme: light)')
+          .matches;
+        const isNotSpecified = window.matchMedia(
+          '(prefers-color-scheme: no-preference)'
+        ).matches;
+        const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified;
 
-<body>
-  <app-root></app-root>
-</body>
+        window
+          .matchMedia('(prefers-color-scheme: dark)')
+          .addListener((e) => e.matches && activateDarkMode());
+        window
+          .matchMedia('(prefers-color-scheme: light)')
+          .addListener((e) => e.matches && activateLightMode());
 
+        if (isDarkMode) activateDarkMode();
+        if (isLightMode) activateLightMode();
+        if (isNotSpecified || hasNoSupport) {
+          now = new Date();
+          hour = now.getHours();
+          if (hour < 4 || hour >= 16) {
+            // activateDarkMode();
+          }
+        }
+      }
+
+      function activateDarkMode() {
+        if (document && document.body && document.body.classList) {
+          document.body.classList.add('dark');
+        }
+      }
+
+      function activateLightMode() {
+        if (document && document.body && document.body.classList) {
+          document.body.classList.remove('dark');
+        }
+      }
+
+      window.activateDarkMode = activateDarkMode;
+      window.activateLightMode = activateLightMode;
+    </script>
+  </head>
+
+  <body class="shisha-with-me">
+    <app-root></app-root>
+  </body>
 </html>

@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Dashboard</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Dashboard</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div class="dot"></div>
+  <ion-slides [options]="slideOpts">
+    <ion-slide>
+      <div class="slide-item"></div>
+    </ion-slide>
+    <ion-slide> <div class="slide-item"></div></ion-slide>
+    <ion-slide> <div class="slide-item"></div></ion-slide>
+    <ion-slide> <div class="slide-item"></div></ion-slide>
+  </ion-slides>
+
+  <div class="map" slot="fixed">
+    <div class="overlay"></div>
+    <agm-map
+      [latitude]="lat"
+      [longitude]="lng"
+      [disableDefaultUI]="true"
+      [styles]="styles"
+    >
+    </agm-map>
+  </div>
+</ion-content>

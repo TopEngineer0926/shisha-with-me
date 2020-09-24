@@ -10,7 +10,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "resources": "cordova-res --skip-config --copy"
+    "resources:ios": "cordova-res ios --skip-config --copy",
+    "resources:android": "cordova-res android --skip-config --copy"
   },
   "private": true,
   "dependencies": {

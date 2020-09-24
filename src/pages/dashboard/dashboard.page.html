@@ -27,7 +27,7 @@
       [longitude]="lng"
       [zoom]="zoom"
       [disableDefaultUI]="true"
-      [styles]="styles"
+      [styles]="mapService.styles"
     >
       <agm-marker
         *ngFor="let marker of markers"
@@ -41,6 +41,12 @@
     <ion-fab-button (click)="getCurrentPosition()" [disabled]="locationLoading">
       <ion-icon *ngIf="!locationLoading" name="location-outline"></ion-icon>
       <ion-spinner *ngIf="locationLoading"></ion-spinner>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="camera-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>

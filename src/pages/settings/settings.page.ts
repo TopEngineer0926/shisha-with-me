@@ -22,7 +22,8 @@ export class SettingsPage implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.language = await this.getLang();
+    const language = await this.getLang();
+    this.language = JSON.parse(language);
   }
 
   async getLang() {
@@ -51,6 +52,7 @@ export class SettingsPage implements OnInit {
 
     await actionSheetCtrl.present();
   }
+
   async changeLanguage(selection: { text: string; code: string }) {
     set('language', JSON.stringify(selection));
     this.language = selection;

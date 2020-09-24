@@ -5,5 +5,23 @@
 </ion-header>
 
 <ion-content>
-
+  <agm-map
+    [latitude]="lat"
+    [longitude]="lng"
+    [zoom]="zoom"
+    [disableDefaultUI]="true"
+    [styles]="mapService.styles"
+  >
+    <agm-marker
+      *ngFor="let marker of markers"
+      [latitude]="marker.lat"
+      [longitude]="marker.lng"
+    ></agm-marker>
+  </agm-map>
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button (click)="getCurrentPosition()" [disabled]="locationLoading">
+      <ion-icon *ngIf="!locationLoading" name="location-outline"></ion-icon>
+      <ion-spinner *ngIf="locationLoading"></ion-spinner>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

@@ -32,6 +32,7 @@
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
     "@techiediaries/ngx-qrcode": "^9.1.0",
+    "cupertino-pane": "^1.1.83",
     "ngx-swiper-wrapper": "^10.0.0",
     "ngx-useful-swiper": "^9.0.5",
     "rxjs": "~6.6.3",

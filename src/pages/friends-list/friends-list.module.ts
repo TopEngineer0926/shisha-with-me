@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { FriendsListPageRoutingModule } from './friends-list-routing.module';
 
 import { FriendsListPage } from './friends-list.page';
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import { FriendsListPage } from './friends-list.page';
     FormsModule,
     IonicModule,
     FriendsListPageRoutingModule,
-
+    NgxQRCodeModule,
     ProfilePageModule,
   ],
   declarations: [FriendsListPage],

@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ActionSheetController } from '@ionic/angular';
+import {
+  ActionSheetController,
+  IonRouterOutlet,
+  ModalController,
+} from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { HelperService } from 'src/common/services/helper.service';
 import { get, set } from 'src/common/services/storage.service';
+import { ProfilePage } from '../profile/profile.page';
 
 @Component({
   selector: 'app-settings',
@@ -18,12 +23,24 @@ export class SettingsPage implements OnInit {
   constructor(
     public helper: HelperService,
     private translate: TranslateService,
-    private actionSheetCtrl: ActionSheetController
+    private actionSheetCtrl: ActionSheetController,
+    private modalCtrl: ModalController,
+    private routerOutlet: IonRouterOutlet
   ) {}
 
   async ngOnInit() {
     const language = await this.getLang();
     this.language = JSON.parse(language);
+  }
+
+  async goToProfile() {
+    const modal = await this.modalCtrl.create({
+      component: ProfilePage,
+      cssClass: 'my-custom-class',
+      swipeToClose: true,
+      presentingElement: this.routerOutlet.nativeEl,
+    });
+    return await modal.present();
   }
 
   async getLang() {

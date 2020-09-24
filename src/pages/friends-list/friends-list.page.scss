@@ -1,0 +1,40 @@
+.cupertino-pane {
+  display: none;
+  padding: 25px;
+  text-align: center;
+  .center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+  }
+  ngx-qrcode {
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  ion-list {
+    margin-top: 20px;
+    border-radius: 10px;
+
+    border: none !important;
+  }
+}
+
+::ng-deep .pane {
+  border-radius: 30px !important;
+  width: calc(100% - 16px) !important;
+  margin: auto;
+  left: 0;
+  right: 0;
+  height: auto !important;
+  background: rgba(0, 0, 0, 0.4) !important;
+  backdrop-filter: saturate(180%) blur(20px) !important;
+  padding-top: 0px !important;
+  z-index: 2000 !important;
+}
+
+::ng-deep .move {
+  background: rgba(255, 255, 255, 0.4) !important;
+}

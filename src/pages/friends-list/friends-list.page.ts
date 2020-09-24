@@ -15,23 +15,15 @@ export class FriendsListPage implements OnInit {
   friends = [
     { name: 'Mathis Monn' },
     { name: 'Daniel Ehrhardt' },
+    { name: 'Mathis Monn' },
     { name: 'Daniel Ehrhardt' },
+    { name: 'Mathis Monn' },
     { name: 'Daniel Ehrhardt' },
+    { name: 'Mathis Monn' },
     { name: 'Daniel Ehrhardt' },
+    { name: 'Mathis Monn' },
     { name: 'Daniel Ehrhardt' },
-    { name: 'Daniel Ehrhardt' },
-    { name: 'Daniel Ehrhardt' },
-    { name: 'Daniel Ehrhardt' },
-    { name: 'Daniel Ehrhardt' },
-    { name: 'Daniel Ehrhardt' },
-    { name: 'Daniel Ehrhardt' },
-    { name: 'Daniel Ehrhardt' },
-    { name: 'Daniel Ehrhardt' },
-    { name: 'Daniel Ehrhardt' },
-    { name: 'Daniel Ehrhardt' },
-    { name: 'Daniel Ehrhardt' },
-    { name: 'Daniel Ehrhardt' },
-    { name: 'Daniel Ehrhardt' },
+    { name: 'Mathis Monn' },
     { name: 'Daniel Ehrhardt' },
   ];
   constructor(
@@ -42,12 +34,15 @@ export class FriendsListPage implements OnInit {
 
   ngOnInit() {}
 
-  async openFriend(friend) {
+  async openFriend(user) {
     const modal = await this.modalCtrl.create({
       component: ProfilePage,
       cssClass: 'my-custom-class',
       swipeToClose: true,
       presentingElement: this.routerOutlet.nativeEl,
+      componentProps: {
+        user,
+      },
     });
     return await modal.present();
   }

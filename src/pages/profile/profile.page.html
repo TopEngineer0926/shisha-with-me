@@ -1,19 +1,84 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>{{user.name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ngx-qrcode
-    *ngIf="value"
-    [elementType]="elementType"
-    [value]="value"
-    [width]="250"
-    [colorDark]="'#fff'"
-    [colorLight]="'#202442'"
-    cssClass="center"
-    errorCorrectionLevel="L"
-  >
-  </ngx-qrcode>
+  <div class="user-image"></div>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Benutzerprofil</ion-card-subtitle>
+      <ion-card-title>{{user.name}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      This is content, without any paragraph or header tags, within an
+      ion-card-content element.
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Nachrichten</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-chip color="secondary" (click)="sendMessage()">
+        <ion-icon name="chatbubbles-outline"></ion-icon>
+        <ion-label>Soll ich vorbei kommen?</ion-label>
+      </ion-chip>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>QR Code teilen</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ngx-qrcode
+        *ngIf="value"
+        [elementType]="elementType"
+        [value]="value"
+        [width]="200"
+        [colorDark]="'#fff'"
+        [colorLight]="'#080808'"
+        cssClass="center"
+        errorCorrectionLevel="L"
+      >
+      </ngx-qrcode>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Standort</ion-card-subtitle>
+    </ion-card-header>
+
+    <agm-map
+      [latitude]="lat"
+      [longitude]="lng"
+      [zoom]="zoom"
+      [disableDefaultUI]="true"
+      [styles]="mapService.styles"
+    >
+    </agm-map>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Andere</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div class="settings-item">
+        <ion-label>Benachrichtigungen stumm schalten</ion-label>
+        <ion-toggle slot="end"></ion-toggle>
+      </div>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

@@ -7,3 +7,28 @@ ngx-qrcode {
   border-radius: 10px;
   overflow: hidden;
 }
+ion-card {
+  background: #080808;
+  ion-chip {
+    margin: 0;
+  }
+}
+agm-map {
+  height: 200px;
+}
+.user-image {
+  height: 100px;
+  width: 100px;
+  background: #333;
+  border-radius: 50%;
+
+  margin: 30px auto;
+}
+.settings-item {
+  background: #131313;
+  border-radius: 10px;
+  padding: 10px;
+  ion-toggle {
+    margin-top: 10px;
+  }
+}

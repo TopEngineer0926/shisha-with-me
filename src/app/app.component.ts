@@ -1,10 +1,10 @@
 import { AfterViewInit, Component } from '@angular/core';
-import { Plugins, StatusBarStyle } from '@capacitor/core';
+import { Capacitor, Plugins, StatusBarStyle } from '@capacitor/core';
 import { TranslateService } from '@ngx-translate/core';
 import { HelperService } from 'src/common/services/helper.service';
 import { get } from 'src/common/services/storage.service';
 
-const { SplashScreen, StatusBar, Capacitor } = Plugins;
+const { SplashScreen, StatusBar } = Plugins;
 
 @Component({
   selector: 'app-root',
@@ -18,8 +18,9 @@ export class AppComponent implements AfterViewInit {
   ) {}
 
   async ngAfterViewInit() {
-    StatusBar.setStyle({ style: StatusBarStyle.Dark });
-    this.setLanguage();
+    if (Capacitor.isNative) {
+      StatusBar.setStyle({ style: StatusBarStyle.Dark });
+    }
 
     const darkMode = await this.helperService.getDarkMode();
     await this.helperService.setDarkMode(darkMode || true);
@@ -27,6 +28,8 @@ export class AppComponent implements AfterViewInit {
     setTimeout(() => {
       SplashScreen.hide();
     }, 300);
+
+    this.setLanguage();
   }
 
   async setLanguage() {

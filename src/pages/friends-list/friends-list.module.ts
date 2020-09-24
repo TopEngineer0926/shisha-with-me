@@ -1,3 +1,4 @@
+import { ProfilePageModule } from 'src/pages/profile/profile.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,8 +14,10 @@ import { FriendsListPage } from './friends-list.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    FriendsListPageRoutingModule
+    FriendsListPageRoutingModule,
+
+    ProfilePageModule,
   ],
-  declarations: [FriendsListPage]
+  declarations: [FriendsListPage],
 })
 export class FriendsListPageModule {}

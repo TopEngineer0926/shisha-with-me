@@ -1,9 +1,19 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>profile</ion-title>
+    <ion-title>{{user.name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content [fullscreen]="true">
+  <ngx-qrcode
+    *ngIf="value"
+    [elementType]="elementType"
+    [value]="value"
+    [width]="250"
+    [colorDark]="'#fff'"
+    [colorLight]="'#202442'"
+    cssClass="center"
+    errorCorrectionLevel="L"
+  >
+  </ngx-qrcode>
 </ion-content>

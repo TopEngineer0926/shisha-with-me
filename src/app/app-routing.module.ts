@@ -9,6 +9,7 @@ import { HistoryPageModule } from 'src/pages/history/history.module';
 import { MapPageModule } from 'src/pages/map/map.module';
 import { ProfilePageModule } from 'src/pages/profile/profile.module';
 import { SettingsPageModule } from 'src/pages/settings/settings.module';
+import { ProfileEditPageModule } from 'src/pages/profile-edit/profile-edit.module';
 
 const routes: Routes = [
   {
@@ -41,7 +42,7 @@ const routes: Routes = [
     loadChildren: () => FriendsListPageModule,
   },
   {
-    path: 'profile',
+    path: 'profile/:id',
     loadChildren: () => ProfilePageModule,
   },
   {
@@ -51,6 +52,10 @@ const routes: Routes = [
   {
     path: 'settings',
     loadChildren: () => SettingsPageModule,
+  },
+  {
+    path: 'profile-edit',
+    loadChildren: () => ProfileEditPageModule,
   },
 ];
 @NgModule({

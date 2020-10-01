@@ -10,6 +10,7 @@ import { MapPageModule } from 'src/pages/map/map.module';
 import { ProfilePageModule } from 'src/pages/profile/profile.module';
 import { SettingsPageModule } from 'src/pages/settings/settings.module';
 import { ProfileEditPageModule } from 'src/pages/profile-edit/profile-edit.module';
+import { ChatPageModule } from 'src/pages/chat/chat.module';
 
 const routes: Routes = [
   {
@@ -56,6 +57,10 @@ const routes: Routes = [
   {
     path: 'profile-edit',
     loadChildren: () => ProfileEditPageModule,
+  },
+  {
+    path: 'chat',
+    loadChildren: () => ChatPageModule,
   },
 ];
 @NgModule({

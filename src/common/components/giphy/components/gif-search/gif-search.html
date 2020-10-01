@@ -1,0 +1,35 @@
+<div class="giphy-component">
+  <div class="giphy-container">
+    <div class="giphy-loading" *ngIf="isLoading">
+      <ion-spinner></ion-spinner>
+    </div>
+    <div class="no-result" *ngIf="!isLoading && gifs.length === 0">
+      Kein GIF gefunden
+    </div>
+    <div class="scroll-horizontal" *ngIf="!isLoading">
+      <div
+        class="scroll-item"
+        *ngFor="let gif of gifs"
+        (mousedown)="$event.preventDefault(); select(gif)"
+      >
+        <img [src]="gif.images.fixed_height_small.url" alt="" />
+      </div>
+    </div>
+  </div>
+
+  <ion-toolbar>
+    <ion-buttons slot="start" (mousedown)="$event.preventDefault(); close()">
+      <ion-button color="danger" class="giphy-close">
+        <ion-icon slot="start" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-input
+      type="text"
+      [(ngModel)]="query"
+      debounce="500"
+      autofocus
+      placeholder="GIF suchen ..."
+      (ionChange)="searchGif(query)"
+    ></ion-input>
+  </ion-toolbar>
+</div>

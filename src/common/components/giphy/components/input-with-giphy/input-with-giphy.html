@@ -1,0 +1,25 @@
+<gif-search *ngIf="showGiphy" (onSelect)="sendGif($event)" (onClose)="toggleGiphy()"></gif-search>
+
+<div class="toolbar" *ngIf="!showGiphy">
+  <ion-buttons slot="start" align-self-bottom class="stick-bottom">
+    <ion-button small class="button-small" (mousedown)="$event.preventDefault(); toggleGiphy()">
+      GIF
+    </ion-button>
+    <ion-button suppressEvents small class="button-small" (mousedown)="$event.preventDefault(); sendPhoto($event)">
+      <ion-icon name="camera"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <div class="input-block">
+    <ion-textarea #messageInput spellcheck="true" autocomplete="on" autocorrect="on" autocapitalize="on" auto-resize (onResize)="resize()" (ionFocus)="resize()"
+      [(ngModel)]="typingMessage" rows="1" placeholder="Schreib eine Nachricht"></ion-textarea>
+
+
+    <ion-buttons right class="button-submit">
+
+      <ion-button suppressEvents type="submit" size="small" class="button-small" [disabled]="typingMessage.length == 0"
+        (mousedown)="$event.preventDefault(); sendText(typingMessage)">
+        <ion-icon name="arrow-up"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </div>
+</div>

@@ -29,26 +29,9 @@ export class FriendsListPage implements OnInit {
   ];
   elementType = 'canvas';
   value = 'Mathis';
-  constructor(
-    private navCtrl: NavController,
-    private modalCtrl: ModalController,
-    private routerOutlet: IonRouterOutlet
-  ) {}
+  constructor(private navCtrl: NavController) {}
 
   ngOnInit() {}
-
-  async openFriend(user) {
-    const modal = await this.modalCtrl.create({
-      component: ProfilePage,
-      cssClass: 'my-custom-class',
-      swipeToClose: true,
-      presentingElement: this.routerOutlet.nativeEl,
-      componentProps: {
-        user,
-      },
-    });
-    return await modal.present();
-  }
 
   doRefresh(event) {
     console.log('Begin async operation');
@@ -61,7 +44,7 @@ export class FriendsListPage implements OnInit {
 
   async addFriend() {
     const settings: CupertinoSettings = {
-      initialBreak: 'bottom',
+      initialBreak: 'top',
       darkMode: true,
       backdrop: true,
       backdropOpacity: 0.4,

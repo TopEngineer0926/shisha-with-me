@@ -1,0 +1,343 @@
+:host {
+  .center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: -25px;
+
+    min-height: 250px;
+
+    ng-lottie {
+      width: 67%;
+      margin-left: -5%;
+    }
+  }
+
+  ion-list {
+    --ion-item-background: transparent;
+    contain: unset;
+  }
+
+  .profile-info {
+    .avatar {
+      img {
+        border-radius: 50%;
+      }
+
+      border-radius: 50%;
+      height: 40px;
+      width: 40px;
+    }
+
+    .connection-status-indicator {
+      background-color: var(--ion-color-danger);
+      position: absolute;
+      right: -6px;
+      z-index: 100;
+      top: 0px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.6);
+
+      &.isConnected {
+        background-color: var(--ion-color-success);
+      }
+    }
+  }
+
+  .connection-status {
+    width: 100%;
+    z-index: 9;
+    color: #fff;
+    top: 44px;
+    position: fixed;
+    left: 0;
+    height: 30px;
+    min-height: 30px;
+    background-color: rgba(253, 80, 104, 0.52);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    backdrop-filter: saturate(180%) blur(20px);
+
+    &.isConnected {
+      animation-name: fadeOutUp;
+      animation-delay: 4s;
+      animation-duration: 1s;
+      animation-fill-mode: both;
+      background-color: rgba(16, 220, 96, 0.5);
+    }
+  }
+
+  ion-toolbar {
+    ion-title {
+      margin-left: 5px;
+
+      small {
+        color: rgba(255, 255, 255, 0.6);
+        display: block;
+        margin-top: -2px;
+      }
+    }
+
+    ion-title {
+      text-align: center;
+      display: flex;
+
+      .toolbar-title {
+        font-size: 1.4rem;
+      }
+
+      .flex {
+        display: flex;
+      }
+    }
+    .header-avatar {
+      display: flex;
+      > div {
+        border-radius: 50%;
+        height: 40px;
+        width: 40px;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+      img {
+        border-radius: 50%;
+        height: 40px;
+      }
+    }
+  }
+}
+
+@keyframes fadeOutUp {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+}
+
+$myMsgColor: #0dccf8;
+$otherMsgColor: #e8e5eb;
+$tailSize: 10px;
+$greyColor: #8e8e90;
+
+.center {
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 100px;
+  width: 100%;
+  position: absolute;
+  z-index: 199;
+}
+
+.chat-list {
+  width: 100%;
+  //height: calc(100vh - 130px);
+  //scroll-behavior: smooth;
+  //overflow-y: scroll;
+  // position: absolute;
+  margin: 0 auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  //bottom: 36px;
+  padding: 50px 15px 20px;
+
+  .chat-item {
+    margin-bottom: 8px;
+  }
+
+  .chat-item-status {
+    font-size: 0.8em;
+    color: $greyColor;
+  }
+
+  .chat-avatar {
+    margin-right: 8px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .chat-item-content {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    align-items: flex-end;
+
+    &.date-visible {
+      .chat-item-bubble,
+      .chat-avatar {
+        margin-bottom: 28px;
+      }
+    }
+
+    .date {
+      position: absolute;
+      bottom: -10px;
+      font-size: 11px;
+      border-radius: 5px;
+      color: #333;
+      right: 0;
+      padding: 5px;
+      background: transparent !important;
+    }
+
+    .seen {
+      position: absolute;
+      bottom: -15px;
+      font-size: 10px;
+      color: #333;
+      opacity: 0.6;
+      right: 0;
+    }
+
+    .seen-avatar {
+      position: absolute;
+      bottom: -15px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      overflow: hidden;
+      right: 0;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
+
+    .sending-spinner {
+      position: absolute;
+      bottom: -15px;
+      font-size: 11px;
+      color: #333;
+      right: -7px;
+
+      ion-spinner {
+        width: 15px;
+        height: 15px;
+      }
+    }
+  }
+
+  .chat-item-bubble {
+    position: relative;
+    width: 80%;
+    max-width: 500px;
+
+    .giphy {
+      position: relative;
+
+      span {
+        bottom: 10px;
+        left: 15px;
+        opacity: 0.5;
+        color: #fff;
+        font-weight: 800;
+        font-size: 11px;
+        text-transform: uppercase;
+        position: absolute;
+      }
+    }
+
+    .giphy,
+    .image {
+      transform: translate3d(0, 0, 0) !important;
+      background: #ddd;
+      border-radius: 20px;
+      width: 70%;
+      max-width: 400px;
+      height: 250px;
+
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      overflow: hidden;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom-right-radius: 25px;
+      border-bottom-left-radius: 8px;
+
+      img {
+        display: block;
+      }
+    }
+
+    .chat-body {
+      user-select: text;
+      display: inline-block;
+      background: #3c3c3c;
+      border-radius: 25px;
+      padding: 5px 12px;
+      white-space: pre-wrap;
+      max-width: 100%;
+      text-align: left;
+      font-size: 16px;
+      border-bottom-right-radius: 25px;
+      border-bottom-left-radius: 8px;
+
+      ::ng-deep .joypixels {
+        width: 17px;
+        height: 17px;
+      }
+
+      &.photo {
+        padding: 0;
+      }
+    }
+  }
+
+  .chat-item {
+    &.me {
+      text-align: right;
+
+      .chat-item-content {
+        justify-content: flex-end;
+      }
+
+      .chat-body {
+        background-image: linear-gradient(315deg, #3689ee 0%, #009ffd 74%);
+        color: #fff;
+        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 25px;
+      }
+
+      .chat-item-bubble {
+        display: flex;
+        justify-content: flex-end;
+
+        .image,
+        .giphy {
+          border-bottom-right-radius: 8px;
+          border-bottom-left-radius: 25px;
+        }
+      }
+    }
+  }
+
+  .chat-item-reaction {
+    text-align: center;
+    font-size: 1.5em;
+    color: $otherMsgColor;
+    align-self: center;
+    flex-grow: 99;
+    padding-left: 8px;
+
+    i.mdi {
+      font-size: 2em;
+    }
+  }
+}

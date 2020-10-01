@@ -1,0 +1,112 @@
+<ion-header translucent="true" #ionHeader>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="chat">
+      <div *ngFor="let chatMember of api.exceptMe(chat.chat_members, 'user')">
+        <span (click)="openFriend(chatMember?.user?.id)"
+          >{{ chatMember?.user?.first_name }} {{ chatMember?.user?.last_name
+          }}</span
+        >
+      </div>
+      <small
+        *ngIf="chatService.isConnected"
+        [class.isConnected]="chatService.isConnected"
+        >Verbunden</small
+      >
+    </ion-title>
+    <ion-buttons slot="end">
+      <div
+        *ngFor="let chatMember of api.exceptMe(chat.chat_members, 'user')"
+        (click)="openFriend(chatMember?.user?.id)"
+        class="header-avatar"
+      >
+        <div
+          [style.backgroundImage]="'url(' +  chatMember?.user?.picture_50x50 + ')'"
+        ></div>
+      </div>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+  <div *ngIf="messages && !messages.length" class="center no-data">
+    Schreibe die erste Nachricht
+  </div>
+
+  <ion-refresher slot="fixed">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="chat-list" #chatList *ngIf="messages.length >= 1" infiniteScroll>
+    <div
+      class="chat-item"
+      [id]="last ? 'last-item': 'item' + i"
+      *ngFor="let item of messages; let i = index; let last = last"
+      [class.me]="item.author?.id == api.userStorage.id"
+    >
+      <div class="chat-item-content" [class.date-visible]="item.info">
+        <div class="chat-avatar" *ngIf="item.author?.id !== api.userStorage.id">
+          <img [src]="item.author?.picture_50x50" />
+        </div>
+        <div
+          class="chat-item-bubble"
+          (click)="item.giphy_id || item.picture_1280x1280 ? onMessageHold(item) : item.info =
+          !item.info"
+          [class.bubble-image]="item.giphy_id || item.picture_1280x1280"
+        >
+          <div
+            *ngIf="item.message"
+            class="chat-body"
+            [innerHtml]="item.message"
+          ></div>
+
+          <div
+            *ngIf="item.giphy_id"
+            class="giphy"
+            [ngStyle]="{'background-image': 'url(' + 'https://media.giphy.com/media/' + item.giphy_id + '/giphy.gif' + ')' }"
+          >
+            <span>Giphy</span>
+          </div>
+          <div
+            class="image"
+            *ngIf="item.picture_1280x1280"
+            [ngStyle]="{'background-image': 'url(' + item.picture_1280x1280 + ')' }"
+          ></div>
+        </div>
+        <div class="date" *ngIf="item.info"></div>
+
+        <div *ngIf="last && !item.info && item.chat_message_statuses">
+          <!-- <div
+            *ngFor="let chatMember of onlyReadStatus(api.exceptMe(item.chat_message_statuses, 'user'))"
+            (click)="openProfile(chatMember?.user?.id)"
+            class="seen-avatar"
+            [style.backgroundImage]="'url(' + chatMember?.user?.picture_50x50 + ')'"
+          ></div>-->
+        </div>
+
+        <div class="sending-spinner" *ngIf="item.sending">
+          <ion-spinner name="crescent"></ion-spinner>
+        </div>
+
+        <div
+          class="chat-item-reaction"
+          *ngIf="item.author?.id !== api?.userStorage?.id && item.type == 'image'"
+        >
+          <ion-icon name="md-heart" class="text-muted"></ion-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer *ngIf="chat">
+  <ion-toolbar>
+    <input-with-giphy
+      (onSubmit)="onSubmitMessage($event)"
+      (onSizeChange)="scrollToBottom()"
+    >
+    </input-with-giphy>
+  </ion-toolbar>
+</ion-footer>

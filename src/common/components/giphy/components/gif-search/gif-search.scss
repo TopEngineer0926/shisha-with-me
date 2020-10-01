@@ -1,0 +1,52 @@
+.giphy-component {
+  .giphy-container {
+    background-color: #000;
+    padding: 6px 0 0;
+    height: 118px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .giphy-loading {
+    padding-top: 38px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .no-result {
+    text-align: center;
+    font-weight: 700;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.12);
+    padding-top: 2em;
+    text-transform: uppercase;
+  }
+
+  ion-input {
+    border-radius: 17px;
+    //--background: #f8f8f8;
+    --padding-start: 12px;
+    --padding-end: 12px;
+    --padding-top: 6px;
+    --padding-bottom: 8px;
+  }
+}
+
+.scroll-horizontal {
+  white-space: nowrap;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  height: 112px;
+
+  .scroll-item {
+    display: inline-block;
+
+    &:first-child {
+      margin-left: 6px;
+    }
+
+    img {
+      border-radius: 6px;
+      margin-right: 6px;
+    }
+  }
+}

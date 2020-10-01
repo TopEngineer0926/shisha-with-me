@@ -1,0 +1,62 @@
+:host {
+  display: block;
+
+  .toolbar {
+    --border-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 8px;
+  }
+
+  ion-textarea {
+    border-radius: 17px;
+    // border: 1px solid rgba(0, 0, 0, 0.05);
+    // --background: #f8f8f8;
+    --padding-start: 12px;
+    --padding-end: 64px;
+    --padding-top: 6px;
+    --padding-bottom: 8px;
+    margin-top: 0;
+  }
+
+  .button-small {
+    background-color: #2fb1ff;
+    --color: #fff;
+    color: white !important;
+    font-weight: 700;
+    font-size: 12px;
+    border-radius: 999em;
+    width: 28px;
+    height: 28px;
+
+    --color-activated: #eee;
+    --color-focused: #eee;
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: #eee;
+    }
+  }
+
+  .button-submit {
+    position: absolute;
+    right: -4px;
+    width: 50px;
+    height: 50px;
+
+    ion-button {
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+  }
+
+  .input-block {
+    margin: 0 0 0 8px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

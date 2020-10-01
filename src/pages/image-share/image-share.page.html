@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Bild teilen</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="image-wrapper">
+    <div
+      class="image"
+      [style.backgroundImage]="'url(' + image.webPath + ')'"
+    ></div>
+    <ion-button size="small" (click)="takePicture()"> Neues Bild </ion-button>
+  </div>
+
+  <div class="image-wrapper">
+    <ion-button size="large" (click)="share()">
+      <ion-icon slot="start" name="share-outline"></ion-icon> Bild teilen
+    </ion-button>
+  </div>
+</ion-content>

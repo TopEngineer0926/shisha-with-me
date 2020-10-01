@@ -11,6 +11,7 @@ import { ProfilePageModule } from 'src/pages/profile/profile.module';
 import { SettingsPageModule } from 'src/pages/settings/settings.module';
 import { ProfileEditPageModule } from 'src/pages/profile-edit/profile-edit.module';
 import { ChatPageModule } from 'src/pages/chat/chat.module';
+import { ImageSharePageModule } from 'src/pages/image-share/image-share.module';
 
 const routes: Routes = [
   {
@@ -61,6 +62,10 @@ const routes: Routes = [
   {
     path: 'chat',
     loadChildren: () => ChatPageModule,
+  },
+  {
+    path: 'image-share',
+    loadChildren: () => ImageSharePageModule,
   },
 ];
 @NgModule({

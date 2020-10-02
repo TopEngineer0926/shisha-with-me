@@ -5,8 +5,10 @@ import {
   IonContent,
   IonRouterOutlet,
   ModalController,
+  NavController,
 } from '@ionic/angular';
 import { ChatService } from 'src/common/services/chat.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-chat',
@@ -16,14 +18,12 @@ import { ChatService } from 'src/common/services/chat.service';
 export class ChatPage implements OnInit {
   chat: any = {
     chat_members: [
-      { user: { id: 1, first_name: 'Test', last_name: 'Test' } },
+      { user: { id: 1, name: 'Test' } },
       {
         user: {
           id: 2,
-          first_name: 'Daniel',
-          last_name: 'Ehrhardt',
-          picture_50x50:
-            'https://images.pexels.com/photos/343717/pexels-photo-343717.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+          name: '',
+          image: '',
         },
       },
     ],
@@ -33,28 +33,34 @@ export class ChatPage implements OnInit {
       id: 1,
       author: { id: 1 },
       type: '',
-      message: 'tester',
+      message: `Wie geht's dir?`,
     },
     {
       id: 2,
       author: {
         id: 2,
-        picture_50x50:
+        image:
           'https://images.pexels.com/photos/3764119/pexels-photo-3764119.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
       },
       type: '',
-      message: 'tester',
+      message: 'Soweit gut',
     },
     {
       id: 3,
       author: {
-        id: 3,
-        picture_50x50:
+        id: 2,
+        image:
           'https://images.pexels.com/photos/3764119/pexels-photo-3764119.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
       },
       type: '',
       message: '',
       giphy_id: 'Icv7Clq2I7rvLTHqRV',
+    },
+    {
+      id: 4,
+      author: { id: 1 },
+      type: '',
+      message: `Sollen wir zusammen Rauchen gehen?`,
     },
   ];
   userActive: boolean = true;
@@ -63,8 +69,7 @@ export class ChatPage implements OnInit {
   api = {
     userStorage: {
       id: 1,
-      first_name: 'Daniel',
-      last_name: 'Ehrhardt',
+      name: 'Daniel',
       picture_50x50: '',
     },
     exceptMe(array: any, pathToUser?: string): any {
@@ -81,15 +86,31 @@ export class ChatPage implements OnInit {
     },
   };
 
+  id: number;
+
   constructor(
     public chatService: ChatService,
     private actionSheetCtrl: ActionSheetController,
     private cdr: ChangeDetectorRef,
     private modalCtrl: ModalController,
-    private routerOutlet: IonRouterOutlet
+    private routerOutlet: IonRouterOutlet,
+    private route: ActivatedRoute,
+    private navCtrl: NavController
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.id = this.route.snapshot.params.id;
+    if (this.id) {
+      const chatPartner = this.chatService.friends.find(
+        (friend) => friend.id == this.id
+      );
+      console.log(chatPartner);
+      this.chat.chat_members[1].user.name = chatPartner.name;
+      this.chat.chat_members[1].user.image = chatPartner.image;
+    } else {
+      this.navCtrl.back();
+    }
+  }
 
   scrollToBottom() {
     setTimeout(() => {
@@ -130,7 +151,7 @@ export class ChatPage implements OnInit {
       swipeToClose: true,
       presentingElement: this.routerOutlet.nativeEl,
       componentProps: {
-        user,
+        id: this.id,
       },
     });
     return await modal.present();

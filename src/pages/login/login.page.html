@@ -15,23 +15,34 @@
     </div>
     <div class="btn-container">
       <ion-button class="snapchat" expand="block" (click)="login('snapchat')">
-        <ion-icon slot="start" name="logo-snapchat"></ion-icon
-        ><span>Snapchat</span>
+        <span class="wrapper"
+          ><ion-icon slot="start" name="logo-snapchat"></ion-icon
+          ><span class="text">Snapchat</span></span
+        >
       </ion-button>
       <ion-button class="facebook" expand="block" (click)="login('facebook')">
-        <ion-icon slot="start" name="logo-facebook"></ion-icon
-        ><span>Facebook</span>
+        <span class="wrapper"
+          ><ion-icon slot="start" name="logo-facebook"></ion-icon
+          ><span class="text">Facebook</span></span
+        >
       </ion-button>
       <ion-button class="google" expand="block" (click)="login('google')">
-        <img src="assets/icons/512px-Google__G__Logo.svg.webp" />
-        <span>Google</span>
+        <span class="wrapper">
+          <img src="assets/icons/512px-Google__G__Logo.svg.webp" />
+          <span class="text">Google</span></span
+        >
       </ion-button>
       <ion-button class="phone" expand="block" (click)="login('phone')">
-        <ion-icon slot="start" name="call"></ion-icon>
-        <span>Telefonnummer</span>
+        <span class="wrapper"
+          ><ion-icon slot="start" name="call"></ion-icon>
+          <span class="text">Telefonnummer</span></span
+        >
       </ion-button>
       <ion-button class="apple" expand="block" (click)="login('apple')">
-        <ion-icon slot="start" name="logo-apple"></ion-icon><span>Apple</span>
+        <span class="wrapper"
+          ><ion-icon slot="start" name="logo-apple"></ion-icon
+          ><span class="text">Apple</span></span
+        >
       </ion-button>
     </div>
   </div>

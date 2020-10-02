@@ -8,7 +8,10 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div class="user-image"></div>
+  <div
+    class="user-image"
+    [style.backgroundImage]="'url(' +  user?.image + ')'"
+  ></div>
   <ion-card>
     <ion-card-header>
       <ion-card-subtitle>Benutzerprofil</ion-card-subtitle>

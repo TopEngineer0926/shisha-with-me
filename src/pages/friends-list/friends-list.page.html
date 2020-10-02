@@ -16,20 +16,22 @@
   </ion-refresher>
 
   <ion-list
-    ><ion-item button [routerLink]="['/chat']" *ngFor=" let friend of friends">
+    ><ion-item
+      button
+      [routerLink]="['/chat', friend.id]"
+      *ngFor=" let friend of chatService.friends"
+    >
       <ion-avatar slot="start">
-        <img
-          src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
-        />
+        <img [src]="friend.image" />
       </ion-avatar>
       <ion-label
         ><h2>{{friend.name}}</h2>
-        <p>Freund</p></ion-label
+        <p>{{friend.type}}</p></ion-label
       >
     </ion-item></ion-list
   >
 
-  <ion-fab
+  <!--<ion-fab
     vertical="bottom"
     horizontal="end"
     slot="fixed"
@@ -38,6 +40,21 @@
     <ion-fab-button>
       <ion-icon name="person-add-outline"></ion-icon>
     </ion-fab-button>
+  </ion-fab>-->
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button data-desc="Freund hinzufügen" (click)="addFriend()"
+        ><ion-icon name="person-add-outline"></ion-icon
+      ></ion-fab-button>
+
+      <ion-fab-button data-desc="Gruppe erstellen" (click)="createGroup()"
+        ><ion-icon name="people-outline"></ion-icon
+      ></ion-fab-button>
+    </ion-fab-list>
   </ion-fab>
 </ion-content>
 

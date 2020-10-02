@@ -1,10 +1,6 @@
-import {
-  IonRouterOutlet,
-  ModalController,
-  NavController,
-} from '@ionic/angular';
+import { ChatService } from './../../common/services/chat.service';
 import { Component, OnInit } from '@angular/core';
-import { ProfilePage } from '../profile/profile.page';
+import { AlertController, NavController } from '@ionic/angular';
 import { CupertinoPane, CupertinoSettings } from 'cupertino-pane';
 
 @Component({
@@ -13,23 +9,14 @@ import { CupertinoPane, CupertinoSettings } from 'cupertino-pane';
   styleUrls: ['./friends-list.page.scss'],
 })
 export class FriendsListPage implements OnInit {
-  friends = [
-    { name: 'Mathis Monn' },
-    { name: 'Daniel Ehrhardt' },
-    { name: 'Mathis Monn' },
-    { name: 'Daniel Ehrhardt' },
-    { name: 'Mathis Monn' },
-    { name: 'Daniel Ehrhardt' },
-    { name: 'Mathis Monn' },
-    { name: 'Daniel Ehrhardt' },
-    { name: 'Mathis Monn' },
-    { name: 'Daniel Ehrhardt' },
-    { name: 'Mathis Monn' },
-    { name: 'Daniel Ehrhardt' },
-  ];
   elementType = 'canvas';
   value = 'Mathis';
-  constructor(private navCtrl: NavController) {}
+
+  constructor(
+    private navCtrl: NavController,
+    private alertController: AlertController,
+    public chatService: ChatService
+  ) {}
 
   ngOnInit() {}
 
@@ -54,5 +41,38 @@ export class FriendsListPage implements OnInit {
     };
     const myPane = new CupertinoPane('.cupertino-pane', settings);
     myPane.present();
+  }
+
+  async createGroup() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Gruppe erstellen',
+      translucent: true,
+      inputs: [
+        {
+          name: 'name1',
+          type: 'text',
+          placeholder: 'Name',
+        },
+      ],
+      buttons: [
+        {
+          text: 'Abbrechen',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          },
+        },
+        {
+          text: 'Erstellen',
+          handler: () => {
+            console.log('Confirm Ok');
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 }

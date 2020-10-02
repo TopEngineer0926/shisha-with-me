@@ -60,7 +60,7 @@ const routes: Routes = [
     loadChildren: () => ProfileEditPageModule,
   },
   {
-    path: 'chat',
+    path: 'chat/:id',
     loadChildren: () => ChatPageModule,
   },
   {

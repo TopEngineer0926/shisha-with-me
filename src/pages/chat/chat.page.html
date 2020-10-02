@@ -6,8 +6,7 @@
     <ion-title *ngIf="chat">
       <div *ngFor="let chatMember of api.exceptMe(chat.chat_members, 'user')">
         <span (click)="openFriend(chatMember?.user?.id)"
-          >{{ chatMember?.user?.first_name }} {{ chatMember?.user?.last_name
-          }}</span
+          >{{ chatMember?.user?.name }}</span
         >
       </div>
       <small
@@ -23,7 +22,7 @@
         class="header-avatar"
       >
         <div
-          [style.backgroundImage]="'url(' +  chatMember?.user?.picture_50x50 + ')'"
+          [style.backgroundImage]="'url(' +  chatMember?.user?.image + ')'"
         ></div>
       </div>
     </ion-buttons>
@@ -48,7 +47,7 @@
     >
       <div class="chat-item-content" [class.date-visible]="item.info">
         <div class="chat-avatar" *ngIf="item.author?.id !== api.userStorage.id">
-          <img [src]="item.author?.picture_50x50" />
+          <img [src]="item.author?.image" />
         </div>
         <div
           class="chat-item-bubble"

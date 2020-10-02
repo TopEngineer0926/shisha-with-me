@@ -17,6 +17,7 @@
     [zoom]="zoom"
     [disableDefaultUI]="true"
     [styles]="mapService.styles"
+    (mapReady)="mapReady($event)"
   >
     <agm-marker
       *ngFor="let marker of markers"

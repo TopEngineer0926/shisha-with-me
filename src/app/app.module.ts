@@ -54,6 +54,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SwiperModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDfBZEEoOwxq0nqGAtU49iNbsC8Lhp88pU',
+      libraries: ['places'],
     }),
   ],
   providers: [

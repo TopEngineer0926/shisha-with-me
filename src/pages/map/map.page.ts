@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Plugins } from '@capacitor/core';
+import { PopoverController } from '@ionic/angular';
 import { MapService } from 'src/common/services/map.service';
+import { MapFilterComponent } from './components/map-filter/map-filter.component';
 const { Geolocation } = Plugins;
 @Component({
   selector: 'app-map',
@@ -15,8 +17,23 @@ export class MapPage implements OnInit {
 
   markers = [];
 
-  constructor(public mapService: MapService) {}
+  constructor(
+    public mapService: MapService,
+    public popoverController: PopoverController
+  ) {}
+
   ngOnInit() {}
+
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: MapFilterComponent,
+      cssClass: 'my-custom-class',
+      event: ev,
+      animated: true,
+      translucent: true,
+    });
+    return await popover.present();
+  }
 
   async getCurrentPosition() {
     this.locationLoading = true;

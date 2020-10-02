@@ -14,7 +14,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {}
 
-  async login(type: 'facebook' | 'google' | 'apple' | 'phone') {
+  async login(type: 'facebook' | 'google' | 'apple' | 'phone' | 'snapchat') {
     let message;
     switch (type) {
       case 'facebook':
@@ -28,6 +28,9 @@ export class LoginPage implements OnInit {
         break;
       case 'phone':
         message = 'Login mit deiner Telefonnummer ...';
+        break;
+      case 'snapchat':
+        message = 'Login mit Snapchat ...';
         break;
     }
     const loading = await this.loadingCtrl.create({ message });

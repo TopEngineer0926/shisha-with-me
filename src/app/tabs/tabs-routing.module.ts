@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardPageModule } from 'src/pages/dashboard/dashboard.module';
 import { FriendsListPageModule } from 'src/pages/friends-list/friends-list.module';
+import { MapPageModule } from 'src/pages/map/map.module';
 import { SettingsPageModule } from 'src/pages/settings/settings.module';
 import { TabsPage } from './tabs.page';
 
@@ -13,6 +14,10 @@ const routes: Routes = [
       {
         path: 'home',
         loadChildren: () => DashboardPageModule,
+      },
+      {
+        path: 'map',
+        loadChildren: () => MapPageModule,
       },
       {
         path: 'friends',

@@ -8,6 +8,7 @@ import { MapPageRoutingModule } from './map-routing.module';
 
 import { MapPage } from './map.page';
 import { AgmCoreModule } from '@agm/core';
+import { MapFilterComponent } from './components/map-filter/map-filter.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { AgmCoreModule } from '@agm/core';
     MapPageRoutingModule,
     AgmCoreModule,
   ],
-  declarations: [MapPage],
+  declarations: [MapPage, MapFilterComponent],
 })
 export class MapPageModule {}

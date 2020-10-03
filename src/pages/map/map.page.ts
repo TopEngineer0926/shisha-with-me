@@ -1,16 +1,13 @@
-import { AgmMap } from '@agm/core';
-import {
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-  AfterViewInit,
-} from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { Plugins } from '@capacitor/core';
-import { PopoverController } from '@ionic/angular';
-import { async } from 'rxjs';
+import {
+  IonRouterOutlet,
+  ModalController,
+  PopoverController,
+} from '@ionic/angular';
 import { MapService } from 'src/common/services/map.service';
 import { MapFilterComponent } from './components/map-filter/map-filter.component';
+import { PlacePage } from './place/place.page';
 const { Geolocation } = Plugins;
 
 @Component({
@@ -32,7 +29,9 @@ export class MapPage implements AfterViewInit {
 
   constructor(
     public mapService: MapService,
-    public popoverController: PopoverController
+    public popoverController: PopoverController,
+    private modalCtrl: ModalController,
+    private routerOutlet: IonRouterOutlet
   ) {}
 
   ngAfterViewInit() {}
@@ -148,6 +147,19 @@ export class MapPage implements AfterViewInit {
         this.loadPlaces();
       }, 1000);
     }
+  }
+
+  async openPlace(place) {
+    const modal = await this.modalCtrl.create({
+      component: PlacePage,
+      cssClass: 'my-custom-class',
+      swipeToClose: true,
+      presentingElement: this.routerOutlet.nativeEl,
+      componentProps: {
+        place,
+      },
+    });
+    return await modal.present();
   }
 
   loadPlaces() {

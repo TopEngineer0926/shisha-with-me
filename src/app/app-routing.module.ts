@@ -12,6 +12,7 @@ import { SettingsPageModule } from 'src/pages/settings/settings.module';
 import { ProfileEditPageModule } from 'src/pages/profile-edit/profile-edit.module';
 import { ChatPageModule } from 'src/pages/chat/chat.module';
 import { ImageSharePageModule } from 'src/pages/image-share/image-share.module';
+import { PlacePageModule } from 'src/pages/map/place/place.module';
 
 const routes: Routes = [
   {
@@ -66,6 +67,10 @@ const routes: Routes = [
   {
     path: 'image-share',
     loadChildren: () => ImageSharePageModule,
+  },
+  {
+    path: 'place',
+    loadChildren: () => PlacePageModule,
   },
 ];
 @NgModule({

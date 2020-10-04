@@ -9,8 +9,8 @@ android {
 
 apply from: "../capacitor-cordova-android-plugins/cordova.variables.gradle"
 dependencies {
-
-
+    implementation project(':byteowls-capacitor-filesharer')
+    implementation "com.squareup.okhttp3:okhttp:3.12.0"
 }
 
 

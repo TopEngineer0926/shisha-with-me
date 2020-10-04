@@ -24,6 +24,7 @@ import {
 } from '@angular/common/http';
 
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LaunchNavigator } from '@ionic-native/launch-navigator/ngx';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -49,7 +50,9 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
     }),
     BrowserModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({
+      backButtonText: 'Zurück',
+    }),
     AppRoutingModule,
     SwiperModule,
     AgmCoreModule.forRoot({
@@ -62,6 +65,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       provide: SWIPER_CONFIG,
       useValue: DEFAULT_SWIPER_CONFIG,
     },
+    LaunchNavigator,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

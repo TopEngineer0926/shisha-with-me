@@ -1,9 +1,62 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>profile-edit</ion-title>
+    <ion-title>Profil</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Profil</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
+  <div class="image-wrapper">
+    <div class="image" [style.backgroundImage]="'url(' + image.webPath + ')'">
+      <ion-fab-button (click)="takePicture()"
+        ><ion-icon name="camera-outline"></ion-icon
+      ></ion-fab-button>
+    </div>
+  </div>
+
+  <ion-list>
+    <ion-item lines="none" button (click)="change('name', profile.name)">
+      <ion-label>
+        <small>Anzeigename</small>
+        <h2>{{profile.name}}</h2>
+        <p></p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item
+      lines="none"
+      button
+      (click)="change('phoneNumber', profile.phoneNumber)"
+    >
+      <ion-label>
+        <small>Telefon</small>
+        <h2>{{profile.phoneNumber}}</h2>
+        <p></p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label>
+        <small>Sitzungsdauer</small>
+        <h2>{{profile.sessionDuration}} Minuten</h2>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-range
+        [(ngModel)]="profile.sessionDuration"
+        mode="md"
+        min="10"
+        max="240"
+        step="5"
+        pin="true"
+        snaps="true"
+        color="secondary"
+      ></ion-range>
+    </ion-item>
+  </ion-list>
 </ion-content>

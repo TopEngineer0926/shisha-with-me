@@ -1,3 +1,4 @@
+import { ProfileEditPage } from './../profile-edit/profile-edit.page';
 import { Component, OnInit } from '@angular/core';
 import {
   ActionSheetController,
@@ -35,7 +36,7 @@ export class SettingsPage implements OnInit {
 
   async goToProfile() {
     const modal = await this.modalCtrl.create({
-      component: ProfilePage,
+      component: ProfileEditPage,
       cssClass: 'my-custom-class',
       swipeToClose: true,
       presentingElement: this.routerOutlet.nativeEl,

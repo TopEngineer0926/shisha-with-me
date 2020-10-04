@@ -38,8 +38,9 @@ export class MapPage implements AfterViewInit {
 
   ngAfterViewInit() {}
 
-  mapReady(map) {
+  async mapReady(map) {
     this.map = map;
+    await this.getCurrentPosition();
 
     this.loadPlaces();
   }
@@ -56,23 +57,24 @@ export class MapPage implements AfterViewInit {
   }
 
   async getCurrentPosition() {
-    this.locationLoading = true;
-    try {
-      const coordinates = await Geolocation.getCurrentPosition();
+    return new Promise(async (resolve) => {
+      this.locationLoading = true;
+      try {
+        const coordinates = await Geolocation.getCurrentPosition();
 
-      this.lat = coordinates.coords.latitude;
-      this.lng = coordinates.coords.longitude;
-      this.markers.push({
-        lat: coordinates.coords.latitude,
-        lng: coordinates.coords.longitude,
-      });
-      this.zoom = 12;
-    } catch (error) {
-    } finally {
-      setTimeout(() => {
+        this.lat = coordinates.coords.latitude;
+        this.lng = coordinates.coords.longitude;
+        this.markers.push({
+          lat: coordinates.coords.latitude,
+          lng: coordinates.coords.longitude,
+        });
+        this.zoom = 12;
+      } catch (error) {
+      } finally {
         this.locationLoading = false;
-      }, 1000);
-    }
+        resolve();
+      }
+    });
   }
 
   async openPlace(place) {

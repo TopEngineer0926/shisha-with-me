@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Werbung</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Werbung</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="swipe-area">
+    <ion-slides spaceBetween="-15" slidesPerView="auto">
+      <ion-slide *ngFor="let s of slides">
+        <div style="">
+          <div class="image"></div>
+          <p class="ion-text-center">{{s.title}}</p>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+      <ion-card-title>Card Title</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      Keep close to Nature's heart... and break clear away, once in awhile, and
+      climb a mountain or spend a week in the woods. Wash your spirit clean.
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -13,6 +13,7 @@ import { ProfileEditPageModule } from 'src/pages/profile-edit/profile-edit.modul
 import { ChatPageModule } from 'src/pages/chat/chat.module';
 import { ImageSharePageModule } from 'src/pages/image-share/image-share.module';
 import { PlacePageModule } from 'src/pages/map/place/place.module';
+import { AdvertisingPageModule } from 'src/pages/advertising/advertising.module';
 
 const routes: Routes = [
   {
@@ -71,6 +72,10 @@ const routes: Routes = [
   {
     path: 'place',
     loadChildren: () => PlacePageModule,
+  },
+  {
+    path: 'advertising',
+    loadChildren: () => AdvertisingPageModule,
   },
 ];
 @NgModule({

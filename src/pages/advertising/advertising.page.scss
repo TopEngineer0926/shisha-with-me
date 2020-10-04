@@ -1,0 +1,20 @@
+ion-slide {
+  padding: 15px;
+  padding-bottom: 0px;
+  max-width: 95px;
+  .image {
+    margin: 0 auto;
+    width: 65px;
+    height: 65px;
+    border: 2px solid black;
+    box-shadow: 0 0 0 2px var(--ion-color-bars-tint);
+    border-radius: 50px;
+    background-color: #ddd;
+  }
+  p {
+    font-size: 13px;
+  }
+}
+ion-slides {
+  height: auto;
+}

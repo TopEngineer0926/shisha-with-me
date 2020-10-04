@@ -1,3 +1,4 @@
+import { ThemeSelectorComponent } from './components/theme-selector/theme-selector.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -17,6 +18,6 @@ import { TranslateModule } from '@ngx-translate/core';
     IonicModule,
     SettingsPageRoutingModule,
   ],
-  declarations: [SettingsPage],
+  declarations: [SettingsPage, ThemeSelectorComponent],
 })
 export class SettingsPageModule {}

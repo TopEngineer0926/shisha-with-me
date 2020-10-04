@@ -1,9 +1,11 @@
+import { ThemeSelectorComponent } from './components/theme-selector/theme-selector.component';
 import { ProfileEditPage } from './../profile-edit/profile-edit.page';
 import { Component, OnInit } from '@angular/core';
 import {
   ActionSheetController,
   IonRouterOutlet,
   ModalController,
+  PopoverController,
 } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { HelperService } from 'src/common/services/helper.service';
@@ -21,12 +23,16 @@ export class SettingsPage implements OnInit {
     code: 'de',
   };
 
+  theme = 'Blau';
+
   constructor(
     public helper: HelperService,
     private translate: TranslateService,
     private actionSheetCtrl: ActionSheetController,
     private modalCtrl: ModalController,
-    private routerOutlet: IonRouterOutlet
+    private routerOutlet: IonRouterOutlet,
+    private popoverController: PopoverController,
+    private actionSheetController: ActionSheetController
   ) {}
 
   async ngOnInit() {
@@ -42,6 +48,69 @@ export class SettingsPage implements OnInit {
       presentingElement: this.routerOutlet.nativeEl,
     });
     return await modal.present();
+  }
+
+  async selectTheme(ev: any) {
+    const popover = await this.popoverController.create({
+      component: ThemeSelectorComponent,
+      cssClass: 'my-custom-class',
+      event: ev,
+      animated: true,
+      translucent: true,
+    });
+    return await popover.present();
+  }
+
+  async selectThemeNew() {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Theme',
+      translucent: true,
+      buttons: [
+        {
+          text: 'Pink',
+          cssClass: 'pink',
+          handler: () => {
+            console.log('Delete clicked');
+          },
+        },
+        {
+          text: 'Blau',
+          cssClass: 'blue',
+          handler: () => {
+            console.log('Delete clicked');
+          },
+        },
+        {
+          text: 'Rot',
+          cssClass: 'red',
+          handler: () => {
+            console.log('Delete clicked');
+          },
+        },
+        {
+          text: 'Gelb',
+          cssClass: 'yellow',
+          handler: () => {
+            console.log('Share clicked');
+          },
+        },
+        {
+          text: 'Grün',
+          cssClass: 'green',
+          handler: () => {
+            console.log('Play clicked');
+          },
+        },
+        {
+          text: 'Abbrechen',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          },
+        },
+      ],
+    });
+    await actionSheet.present();
   }
 
   async getLang() {

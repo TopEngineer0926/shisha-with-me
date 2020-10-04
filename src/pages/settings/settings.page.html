@@ -41,6 +41,15 @@
       >
       </ion-toggle>
     </ion-item>
+
+    <ion-item (click)="selectThemeNew()" button>
+      <ion-label
+        ><h2>Theme</h2>
+        <p>Personalisiere die Farben deiner App</p></ion-label
+      >
+
+      <ion-badge slot="end">{{theme}}</ion-badge>
+    </ion-item>
   </ion-list>
 
   <ion-list-header> {{'Other' |translate}} </ion-list-header>

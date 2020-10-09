@@ -10,6 +10,10 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "build:native:android": "npm run build:prod && npx cap update android && npx jetifier && npx cap sync && npx cap copy",
+    "build:native:ios": "npm run build:prod && npx cap update ios && npx cap sync &&  npx cap copy",
+    "native:sync": "npx cap sync",
+    "native:copy": "npx cap copy",
     "resources:ios": "cordova-res ios --skip-config --copy",
     "resources:android": "cordova-res android --skip-config --copy"
   },

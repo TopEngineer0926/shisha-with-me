@@ -46,6 +46,8 @@ export class InputWithGiphyComponent {
     }
   }
 
+  sendPhoto(ev) {}
+
   sendGif(giphy) {
     this.onSubmit.emit({
       type: 'giphy',

@@ -4,6 +4,14 @@
   color: #afafaf;
   margin-top: 20px;
 }
+
+.logout {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .language {
   img {
     max-height: 25px;
@@ -20,10 +28,4 @@
     height: 60px;
     width: auto;
   }
-}
-.logout {
-  margin-top: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }

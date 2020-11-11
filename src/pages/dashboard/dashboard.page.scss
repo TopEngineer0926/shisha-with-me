@@ -1,17 +1,12 @@
-ion-header {
-  background: #000;
-}
 .selector {
   display: block;
   margin: 50px auto;
   height: 100px;
   width: 100px;
 }
-::ng-deep {
-}
 
 ion-slides.first {
-  margin: 50px 0 10px 0;
+  // margin: 25px 0 10px 0;
   height: 275px;
   display: flex;
   align-items: center;
@@ -19,6 +14,8 @@ ion-slides.first {
 }
 
 ion-slides {
+  z-index: 5;
+  overflow: visible !important;
   ion-slide {
     opacity: 0.5;
     transform: scale(0.6);
@@ -34,14 +31,14 @@ ion-slides {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 180px;
-  width: 180px;
+  height: 200px;
+  width: 200px;
   .inside-dot {
     display: block;
 
     background: #333;
-    height: 130px;
-    width: 130px;
+    height: 150px;
+    width: 150px;
     border-radius: 50%;
   }
 }

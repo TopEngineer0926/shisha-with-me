@@ -1,5 +1,5 @@
 import { ImageSharePage } from '../image-share/image-share.page';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Plugins } from '@capacitor/core';
 import { IonRouterOutlet, ModalController } from '@ionic/angular';
 import { MapService } from 'src/common/services/map.service';
@@ -13,7 +13,7 @@ const { Geolocation, Camera, Share } = Plugins;
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
 })
-export class DashboardPage implements OnInit {
+export class DashboardPage implements AfterViewInit {
   slideOpts = slideOpts;
   locationLoading: boolean = false;
   lat = 51.178418;
@@ -21,29 +21,18 @@ export class DashboardPage implements OnInit {
   zoom = 6;
 
   markers = [];
+  slideOptsVert = {
+    direction: 'vertical',
+    ...slideOpts,
+  };
+
   constructor(
     public mapService: MapService,
     private modalCtrl: ModalController,
     private routerOutlet: IonRouterOutlet
   ) {}
 
-  ngOnInit() {
-    var swiperH = new Swiper('.swiper-container-h', {
-      spaceBetween: 50,
-      pagination: {
-        el: '.swiper-pagination-h',
-        clickable: true,
-      },
-    });
-    var swiperV = new Swiper('.swiper-container-v', {
-      direction: 'vertical',
-      spaceBetween: 50,
-      pagination: {
-        el: '.swiper-pagination-v',
-        clickable: true,
-      },
-    });
-  }
+  ngAfterViewInit() {}
 
   async getCurrentPosition() {
     this.locationLoading = true;

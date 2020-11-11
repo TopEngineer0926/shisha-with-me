@@ -8,29 +8,42 @@ ion-header {
   width: 100px;
 }
 ::ng-deep {
-  .swiper-container {
-    overflow: visible !important;
-  }
-  .swiper-cube-shadow {
-    background: rgba(255, 255, 255, 0.1) !important;
-    filter: none !important;
+}
 
-    bottom: -50px;
-
-    border-radius: 57px;
-  }
+ion-slides.first {
+  margin: 50px 0 10px 0;
+  height: 275px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 ion-slides {
-  margin: 50px 0 10px 0;
+  ion-slide {
+    opacity: 0.5;
+    transform: scale(0.6);
+    transition: all ease-in-out 0.3s;
+    &.swiper-slide-active {
+      opacity: 1;
+
+      transform: scale(1);
+    }
+  }
 }
 .slide-item {
   display: block;
   margin: 0 auto;
-  background: #333;
-  height: 150px;
-  width: 150px;
-  border-radius: 50%;
+  padding: 20px;
+  height: 180px;
+  width: 180px;
+  .inside-dot {
+    display: block;
+
+    background: #333;
+    height: 130px;
+    width: 130px;
+    border-radius: 50%;
+  }
 }
 .dot {
   position: absolute;

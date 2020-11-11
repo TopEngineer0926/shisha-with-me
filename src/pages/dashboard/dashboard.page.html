@@ -12,35 +12,33 @@
   </ion-header>
   <div class="dot"></div>
 
-  <div class="swiper-container swiper-container-h">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide">Horizontal Slide 1</div>
-      <div class="swiper-slide">
-        <div class="swiper-container swiper-container-v">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">Vertical Slide 1</div>
-            <div class="swiper-slide">Vertical Slide 2</div>
-            <div class="swiper-slide">Vertical Slide 3</div>
-            <div class="swiper-slide">Vertical Slide 4</div>
-            <div class="swiper-slide">Vertical Slide 5</div>
-          </div>
-          <div class="swiper-pagination swiper-pagination-v"></div>
-        </div>
-      </div>
-      <div class="swiper-slide">Horizontal Slide 3</div>
-      <div class="swiper-slide">Horizontal Slide 4</div>
-    </div>
-    <!-- Add Pagination -->
-    <div class="swiper-pagination swiper-pagination-h"></div>
-  </div>
-  <!--<ion-slides [options]="slideOpts">
+  <ion-slides class="first" slot="fixed" [options]="slideOpts">
     <ion-slide>
-      <div class="slide-item"></div>
+      <div class="slide-item">
+        <div class="inside-dot"></div>
+      </div>
     </ion-slide>
-    <ion-slide> <div class="slide-item"></div></ion-slide>
-    <ion-slide> <div class="slide-item"></div></ion-slide>
-    <ion-slide> <div class="slide-item"></div></ion-slide>
-  </ion-slides>-->
+    <ion-slide>
+      <ion-slides [options]="slideOptsVert">
+        <ion-slide>
+          <div class="slide-item">
+            <div class="inside-dot"></div>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="slide-item"><div class="inside-dot"></div></div>
+        </ion-slide>
+      </ion-slides>
+    </ion-slide>
+    <ion-slide>
+      <div class="slide-item">
+        <div class="inside-dot"></div></div
+    ></ion-slide>
+    <ion-slide>
+      <div class="slide-item">
+        <div class="inside-dot"></div></div
+    ></ion-slide>
+  </ion-slides>
 
   <div class="map" slot="fixed">
     <div class="overlay"></div>

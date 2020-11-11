@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AddictionCounselingPage } from './pages/addiction-counseling/addiction-counseling.page';
 import { AddictionInformationPage } from './pages/addiction-information/addiction-information.page';
 import { AddictionMotivationPage } from './pages/addiction-motivation/addiction-motivation.page';
+import Swiper from 'swiper';
 
 @Component({
   selector: 'app-no-smoke',
@@ -14,6 +15,16 @@ export class NoSmokePage implements OnInit {
     private modalCtrl: ModalController,
     private routerOutlet: IonRouterOutlet
   ) {}
+
+  ngAfterViewInit() {
+    var swiperH = new Swiper('.swiper-container-h', {
+      spaceBetween: 50,
+      pagination: {
+        el: '.swiper-pagination-h',
+        clickable: true,
+      },
+    });
+  }
 
   ngOnInit() {}
 

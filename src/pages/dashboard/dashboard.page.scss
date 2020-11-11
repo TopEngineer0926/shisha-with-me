@@ -31,8 +31,9 @@ ion-slides {
   }
 }
 .slide-item {
-  display: block;
-  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 20px;
   height: 180px;
   width: 180px;

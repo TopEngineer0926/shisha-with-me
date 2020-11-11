@@ -5,6 +5,7 @@
   --card-border-radius: 3px;
   --card-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.35);
   --contrast: #ffffff;
+  --contrastSwap: #000;
 
   /** primary **/
   --ion-color-primary: #005c92;
@@ -207,6 +208,7 @@ body {
 }
 body.dark {
   --contrast: #000000;
+  --contrastSwap: #fff;
   --chatBodyBg: #fff;
   --chatBodyColor: #333;
   ion-content {

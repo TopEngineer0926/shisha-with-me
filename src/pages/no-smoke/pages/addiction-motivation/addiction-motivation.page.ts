@@ -1,3 +1,4 @@
+import { ModalController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./addiction-motivation.page.scss'],
 })
 export class AddictionMotivationPage implements OnInit {
+  constructor(private modalCtrl: ModalController) {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
+  close() {
+    this.modalCtrl.dismiss();
   }
-
 }

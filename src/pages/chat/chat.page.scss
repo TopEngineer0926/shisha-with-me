@@ -279,14 +279,15 @@ $greyColor: #8e8e90;
     .chat-body {
       user-select: text;
       display: inline-block;
-      background: #3c3c3c;
-      border-radius: 25px;
+      background: var(--chatBodyBg);
+      color: var(--chatBodyColor);
+      border-radius: 15px;
       padding: 5px 12px;
       white-space: pre-wrap;
       max-width: 100%;
       text-align: left;
       font-size: 16px;
-      border-bottom-right-radius: 25px;
+      border-bottom-right-radius: 15px;
       border-bottom-left-radius: 8px;
 
       ::ng-deep .joypixels {
@@ -312,7 +313,7 @@ $greyColor: #8e8e90;
         background-image: linear-gradient(315deg, #3689ee 0%, #009ffd 74%);
         color: #fff;
         border-bottom-right-radius: 8px;
-        border-bottom-left-radius: 25px;
+        border-bottom-left-radius: 15px;
       }
 
       .chat-item-bubble {
@@ -322,7 +323,7 @@ $greyColor: #8e8e90;
         .image,
         .giphy {
           border-bottom-right-radius: 8px;
-          border-bottom-left-radius: 25px;
+          border-bottom-left-radius: 15px;
         }
       }
     }

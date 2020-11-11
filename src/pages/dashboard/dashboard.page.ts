@@ -4,6 +4,7 @@ import { Plugins } from '@capacitor/core';
 import { IonRouterOutlet, ModalController } from '@ionic/angular';
 import { MapService } from 'src/common/services/map.service';
 import { slideOpts } from './slider-config';
+import { Swiper } from 'swiper';
 
 const { Geolocation, Camera, Share } = Plugins;
 
@@ -26,7 +27,23 @@ export class DashboardPage implements OnInit {
     private routerOutlet: IonRouterOutlet
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    var swiperH = new Swiper('.swiper-container-h', {
+      spaceBetween: 50,
+      pagination: {
+        el: '.swiper-pagination-h',
+        clickable: true,
+      },
+    });
+    var swiperV = new Swiper('.swiper-container-v', {
+      direction: 'vertical',
+      spaceBetween: 50,
+      pagination: {
+        el: '.swiper-pagination-v',
+        clickable: true,
+      },
+    });
+  }
 
   async getCurrentPosition() {
     this.locationLoading = true;

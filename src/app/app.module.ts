@@ -25,6 +25,8 @@ import {
 
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LaunchNavigator } from '@ionic-native/launch-navigator/ngx';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -59,6 +61,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       apiKey: 'AIzaSyDfBZEEoOwxq0nqGAtU49iNbsC8Lhp88pU',
       libraries: ['places'],
     }),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     {

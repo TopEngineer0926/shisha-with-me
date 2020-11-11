@@ -2,6 +2,7 @@ import { AfterViewInit, Component } from '@angular/core';
 import { Plugins } from '@capacitor/core';
 import {
   IonRouterOutlet,
+  LoadingController,
   ModalController,
   PopoverController,
 } from '@ionic/angular';
@@ -33,16 +34,24 @@ export class MapPage implements AfterViewInit {
     public mapService: MapService,
     public popoverController: PopoverController,
     private modalCtrl: ModalController,
-    private routerOutlet: IonRouterOutlet
+    private routerOutlet: IonRouterOutlet,
+    private loadingCtrl: LoadingController
   ) {}
 
   ngAfterViewInit() {}
 
   async mapReady(map) {
     this.map = map;
-    await this.getCurrentPosition();
+    const loading = await this.loadingCtrl.create({});
+    loading.present();
 
-    this.loadPlaces();
+    try {
+      await this.getCurrentPosition();
+      await this.loadPlaces();
+    } catch (error) {
+    } finally {
+      loading.dismiss();
+    }
   }
 
   async presentPopover(ev: any) {
@@ -96,8 +105,6 @@ export class MapPage implements AfterViewInit {
       location: { lat: this.lat, lng: this.lng },
       radius: 50000,
     };
-
-    console.log(request);
 
     const service = new google.maps.places.PlacesService(this.map);
 

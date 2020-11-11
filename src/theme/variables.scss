@@ -1,5 +1,7 @@
 /** Ionic CSS Variables **/
 :root {
+  --chatBodyBg: #fff;
+  --chatBodyColor: #333;
   --card-border-radius: 3px;
   --card-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.35);
   --contrast: #ffffff;
@@ -205,6 +207,8 @@ body {
 }
 body.dark {
   --contrast: #000000;
+  --chatBodyBg: #fff;
+  --chatBodyColor: #333;
   ion-content {
     --background: #000;
   }

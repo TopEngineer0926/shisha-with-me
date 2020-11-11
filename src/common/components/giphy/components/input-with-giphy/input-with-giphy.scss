@@ -12,7 +12,7 @@
   ion-textarea {
     border-radius: 17px;
     // border: 1px solid rgba(0, 0, 0, 0.05);
-    --background: #000;
+    --background: var(--contrast);
     --padding-start: 12px;
     --padding-end: 64px;
     --padding-top: 6px;

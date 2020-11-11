@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Suchtberatung</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Suchtberatung</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card button (click)="addictionCounseling()">
+    <ion-card-header>
+      <ion-card-subtitle>Informationen</ion-card-subtitle>
+      <ion-card-title>Suchtberatung</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card button (click)="addictionInformation()">
+    <ion-card-header>
+      <ion-card-subtitle>Informationen</ion-card-subtitle>
+      <ion-card-title>Info & Aufklärung</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card button (click)="addictionMotivation()">
+    <ion-card-header>
+      <ion-card-subtitle>Informationen</ion-card-subtitle>
+      <ion-card-title>Motivation</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+</ion-content>

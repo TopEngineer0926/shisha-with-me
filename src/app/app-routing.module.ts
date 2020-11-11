@@ -14,6 +14,10 @@ import { ChatPageModule } from 'src/pages/chat/chat.module';
 import { ImageSharePageModule } from 'src/pages/image-share/image-share.module';
 import { PlacePageModule } from 'src/pages/map/place/place.module';
 import { AdvertisingPageModule } from 'src/pages/advertising/advertising.module';
+import { NoSmokePageModule } from 'src/pages/no-smoke/no-smoke.module';
+import { AddictionCounselingPageModule } from 'src/pages/no-smoke/pages/addiction-counseling/addiction-counseling.module';
+import { AddictionInformationPageModule } from 'src/pages/no-smoke/pages/addiction-information/addiction-information.module';
+import { AddictionMotivationPageModule } from 'src/pages/no-smoke/pages/addiction-motivation/addiction-motivation.module';
 
 const routes: Routes = [
   {
@@ -76,6 +80,22 @@ const routes: Routes = [
   {
     path: 'advertising',
     loadChildren: () => AdvertisingPageModule,
+  },
+  {
+    path: 'no-smoke',
+    loadChildren: () => NoSmokePageModule,
+  },
+  {
+    path: 'addiction-counseling',
+    loadChildren: () => AddictionCounselingPageModule,
+  },
+  {
+    path: 'addiction-information',
+    loadChildren: () => AddictionInformationPageModule,
+  },
+  {
+    path: 'addiction-motivation',
+    loadChildren: () => AddictionMotivationPageModule,
   },
 ];
 @NgModule({

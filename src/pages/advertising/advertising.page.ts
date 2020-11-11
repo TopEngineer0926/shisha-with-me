@@ -11,6 +11,9 @@ export class AdvertisingPage implements OnInit {
     { title: 'Bar 2' },
     { title: 'Bar 3' },
     { title: 'Bar 4' },
+    { title: 'Bar 5' },
+    { title: 'Bar 6' },
+    { title: 'Bar 7' },
   ];
   constructor() {}
 

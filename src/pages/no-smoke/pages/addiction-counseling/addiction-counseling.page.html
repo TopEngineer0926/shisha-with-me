@@ -1,0 +1,74 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Suchtberatung</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card
+    button
+    (click)="helper.openLink('https://www.bzga.de/service/beratungsstellen/suchtprobleme/')"
+  >
+    <img src="assets/no-smoke/support.png" />
+    <ion-button size="small">Mehr Informationen</ion-button>
+  </ion-card>
+
+  <ion-list-header>Anlaufstellen</ion-list-header>
+
+  <ion-card>
+    <ion-card-header
+      ><ion-card-subtitle>
+        Get in - Anlauf- und Kontaktstelle für DrogengebraucherInnen
+      </ion-card-subtitle></ion-card-header
+    >
+    <ion-card-content>
+      <p>
+        Kriegsstr. 76<br />
+        76133 Karlsruhe<br />
+        0721375635
+      </p>
+    </ion-card-content>
+    <ion-button (click)="helper.openLink('tel:0721375635')" size="small"
+      >Anrufen</ion-button
+    >
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header
+      ><ion-card-subtitle>
+        AGJ-Suchtberatung im Main-Tauber-Kreis
+      </ion-card-subtitle></ion-card-header
+    >
+    <ion-card-content>
+      <p>
+        Schmiederstr. 25<br />
+        97941 Tauberbischofsheim<br />
+        09341897370
+      </p>
+    </ion-card-content>
+    <ion-button (click)="helper.openLink('tel:09341897370')" size="small"
+      >Anrufen</ion-button
+    >
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header
+      ><ion-card-subtitle>
+        Beratungsstelle des Blauenkreuzes - Außenstelle München-Nord
+      </ion-card-subtitle></ion-card-header
+    >
+    <ion-card-content>
+      <p>
+        Schleißheimer Str. 487<br />
+        80933 München<br />
+        0891711292380
+      </p>
+    </ion-card-content>
+    <ion-button (click)="helper.openLink('tel:0891711292380')" size="small"
+      >Anrufen</ion-button
+    >
+  </ion-card>
+</ion-content>

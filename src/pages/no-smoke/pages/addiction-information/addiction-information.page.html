@@ -1,0 +1,70 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Info & Aufklärung</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header
+      ><ion-card-title> Wasserpeife </ion-card-title></ion-card-header
+    >
+    <ion-card-content>
+      <p>Ist die Wasserpeife schädlich?</p>
+    </ion-card-content>
+    <ion-button
+      (click)="helper.openLink('/assets/pdfs/Wasserpfeife_.pdf')"
+      size="small"
+      >PDF öffnen</ion-button
+    >
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header
+      ><ion-card-title> Beratungstelefon </ion-card-title></ion-card-header
+    >
+    <ion-button
+      (click)="helper.openLink('/assets/pdfs/berartungstelefon.pdf')"
+      size="small"
+      >PDF öffnen</ion-button
+    >
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header
+      ><ion-card-title> Rauchfrei Kalender </ion-card-title></ion-card-header
+    >
+    <ion-button
+      (click)="helper.openLink('/assets/pdfs/rauchfrei_kalender.pdf')"
+      size="small"
+      >PDF öffnen</ion-button
+    >
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header
+      ><ion-card-title>
+        Shisha Rauchen ist riskant</ion-card-title
+      ></ion-card-header
+    >
+    <ion-button
+      (click)="helper.openLink('/assets/pdfs/Shisha_Rauchen_ist_riskant.pdf')"
+      size="small"
+      >PDF öffnen</ion-button
+    >
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header
+      ><ion-card-title> Tabak Basisinformation</ion-card-title></ion-card-header
+    >
+    <ion-button
+      (click)="helper.openLink('/assets/pdfs/Tabak_Basisinformation.pdf')"
+      size="small"
+      >PDF öffnen</ion-button
+    >
+  </ion-card>
+</ion-content>

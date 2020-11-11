@@ -56,7 +56,7 @@ export class HelperService {
   async getDarkMode() {
     const darkMode = await get('darkMode');
 
-    if (JSON.parse(darkMode)) {
+    if (darkMode) {
       this.darkModeEnabled = true;
     } else {
       this.darkModeEnabled = false;
@@ -66,7 +66,7 @@ export class HelperService {
   }
 
   async setDarkMode(enabled: boolean) {
-    await set('darkMode', enabled.toString());
+    await set('darkMode', enabled);
     this.darkModeEnabled = enabled;
     if (enabled) {
       window.activateDarkMode();

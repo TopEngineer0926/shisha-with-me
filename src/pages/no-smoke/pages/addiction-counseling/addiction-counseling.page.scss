@@ -1,0 +1,11 @@
+ion-card.flex {
+  display: flex;
+}
+
+ion-card {
+  ion-button {
+    margin-left: auto;
+    width: calc(100% - 40px);
+    margin: 15px 20px 20px;
+  }
+}

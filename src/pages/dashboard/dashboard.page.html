@@ -27,7 +27,7 @@
       [longitude]="lng"
       [zoom]="zoom"
       [disableDefaultUI]="true"
-      [styles]="mapService.styles"
+      [styles]="mapService.getStyles()"
     >
       <agm-marker
         *ngFor="let marker of markers"

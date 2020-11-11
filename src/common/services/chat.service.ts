@@ -13,13 +13,6 @@ export class ChatService {
       image: '/assets/mathis.png',
     },
     {
-      id: 2,
-      name: 'Daniel Ehrhardt',
-      type: 'Freund',
-      image:
-        'https://scontent-muc2-1.xx.fbcdn.net/v/t1.0-9/15095590_1226055697437458_7597798733590853990_n.jpg?_nc_cat=107&_nc_sid=09cbfe&_nc_ohc=HRwklIQ7Eg4AX_1C_KG&_nc_ht=scontent-muc2-1.xx&oh=96bb77963c0e0bc3eb07610de41a4141&oe=5F9C0F57',
-    },
-    {
       id: 3,
       name: 'Kumpels',
       type: 'Gruppe',

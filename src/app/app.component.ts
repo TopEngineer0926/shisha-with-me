@@ -23,7 +23,7 @@ export class AppComponent implements AfterViewInit {
     }
 
     const darkMode = await this.helperService.getDarkMode();
-    await this.helperService.setDarkMode(darkMode || true);
+    await this.helperService.setDarkMode(darkMode);
 
     setTimeout(() => {
       SplashScreen.hide();

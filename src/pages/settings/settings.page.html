@@ -17,10 +17,16 @@
       <ion-label> Mathis Monn </ion-label>
     </ion-item>
 
-    <ion-item button [routerLink]="['/history']">
+    <!--<ion-item button [routerLink]="['/history']">
       <ion-label> Verlauf </ion-label>
-    </ion-item>
+    </ion-item>-->
   </ion-list>
+  <ion-list class="ion-margin-top"
+    ><ion-item class="no-smoke" button (click)="goToNoSmoke()">
+      <img slot="start" src="/assets/rauchfrei.png" />
+      <!--<ion-label>Gesundheit</ion-label>-->
+    </ion-item></ion-list
+  >
 
   <ion-list-header> Einstellungen </ion-list-header>
   <ion-list>
@@ -33,7 +39,7 @@
     </ion-item>
 
     <ion-item>
-      <ion-label> {{'Dark mode' |translate}} </ion-label>
+      <ion-label>Darkmode</ion-label>
       <ion-toggle
         slot="end"
         [(ngModel)]="helper.darkModeEnabled"

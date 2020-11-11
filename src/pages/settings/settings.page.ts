@@ -5,6 +5,7 @@ import {
   ActionSheetController,
   IonRouterOutlet,
   ModalController,
+  NavController,
   PopoverController,
 } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
@@ -32,12 +33,17 @@ export class SettingsPage implements OnInit {
     private modalCtrl: ModalController,
     private routerOutlet: IonRouterOutlet,
     private popoverController: PopoverController,
-    private actionSheetController: ActionSheetController
+    private actionSheetController: ActionSheetController,
+    private navCtrl: NavController
   ) {}
 
   async ngOnInit() {
     const language = await this.getLang();
-    this.language = JSON.parse(language);
+    this.language = language;
+  }
+
+  async goToNoSmoke() {
+    this.navCtrl.navigateForward('no-smoke');
   }
 
   async goToProfile() {

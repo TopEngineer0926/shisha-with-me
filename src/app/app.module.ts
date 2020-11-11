@@ -53,7 +53,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     BrowserModule,
     IonicModule.forRoot({
-      backButtonText: 'Zurück',
+      backButtonText: '',
     }),
     AppRoutingModule,
     SwiperModule,
@@ -61,7 +61,9 @@ export function HttpLoaderFactory(http: HttpClient) {
       apiKey: 'AIzaSyDfBZEEoOwxq0nqGAtU49iNbsC8Lhp88pU',
       libraries: ['places'],
     }),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+    }),
   ],
   providers: [
     {

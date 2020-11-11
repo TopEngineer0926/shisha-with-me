@@ -31,6 +31,10 @@ export class ProfilePage implements OnInit {
     private modalCtrl: ModalController
   ) {}
 
+  close() {
+    this.modalCtrl.dismiss();
+  }
+
   ngOnInit() {
     if (this.id) {
       this.user = this.chatService.friends.find(

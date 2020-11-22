@@ -10,6 +10,10 @@
     <param name="ios-package" value="CDVNotification"/>
   </feature>
 
+  <feature name="SitewaertsDocumentViewer">
+    <param name="ios-package" value="SitewaertsDocumentViewer"/>
+  </feature>
+
   <feature name="LaunchNavigator">
     <param name="ios-package" value="LaunchNavigatorPlugin"/>
   </feature>

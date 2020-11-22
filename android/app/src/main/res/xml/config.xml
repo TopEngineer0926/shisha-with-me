@@ -10,6 +10,10 @@
     <param name="android-package" value="org.apache.cordova.dialogs.Notification"/>
   </feature>
 
+  <feature name="SitewaertsDocumentViewer">
+    <param name="android-package" value="de.sitewaerts.cordova.documentviewer.DocumentViewerPlugin"/>
+  </feature>
+
   <feature name="LaunchNavigator">
     <param name="android-package" value="uk.co.workingedge.phonegap.plugin.LaunchNavigatorPlugin"/>
   </feature>

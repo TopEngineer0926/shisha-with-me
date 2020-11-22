@@ -2,8 +2,12 @@ import { TranslateService } from '@ngx-translate/core';
 import { AlertController } from '@ionic/angular';
 import { Injectable } from '@angular/core';
 
-import { Plugins } from '@capacitor/core';
+import { Capacitor, Plugins } from '@capacitor/core';
 import { get, set } from './storage.service';
+
+import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
+import { DocumentViewerOptions } from '@ionic-native/document-viewer';
+
 const { Browser } = Plugins;
 
 declare var window: any;
@@ -15,13 +19,31 @@ export class HelperService {
 
   constructor(
     private alertController: AlertController,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private document: DocumentViewer
   ) {
     this.getDarkMode();
   }
 
   async openLink(url) {
     await Browser.open({ url: url });
+  }
+
+  async openPdf(url) {
+    url = this.figureOutFile(url);
+    const options: DocumentViewerOptions = {};
+
+    await this.document.viewDocument(url, 'application/pdf', options);
+  }
+
+  figureOutFile(file: string) {
+    if (Capacitor.platform == 'ios') {
+      const baseUrl = location.href.replace('/index.html', '');
+      return baseUrl + `/assets/${file}`;
+    }
+    if (Capacitor.platform == 'android') {
+      return `file:///android_asset/www/assets/${file}`;
+    }
   }
 
   confirmDelete(message?) {

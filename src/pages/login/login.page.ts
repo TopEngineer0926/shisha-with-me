@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingController, NavController } from '@ionic/angular';
+import {
+  IonRouterOutlet,
+  LoadingController,
+  NavController,
+  ModalController,
+} from '@ionic/angular';
+import { AgeValidationPage } from '../age-validation/age-validation.page';
 
 @Component({
   selector: 'app-login',
@@ -9,10 +15,26 @@ import { LoadingController, NavController } from '@ionic/angular';
 export class LoginPage implements OnInit {
   constructor(
     private loadingCtrl: LoadingController,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+
+    private routerOutlet: IonRouterOutlet,
+    private modalCtrl: ModalController
   ) {}
 
-  ngOnInit() {}
+  async ngOnInit() {
+    await this.openAgeValidation();
+  }
+  async openAgeValidation() {
+    const modal = await this.modalCtrl.create({
+      component: AgeValidationPage,
+      cssClass: 'transparent-background',
+      swipeToClose: false,
+      backdropDismiss: false,
+      presentingElement: this.routerOutlet.nativeEl,
+      componentProps: {},
+    });
+    return await modal.present();
+  }
 
   async login(type: 'facebook' | 'google' | 'apple' | 'phone' | 'snapchat') {
     let message;

@@ -18,6 +18,7 @@ import { NoSmokePageModule } from 'src/pages/no-smoke/no-smoke.module';
 import { AddictionCounselingPageModule } from 'src/pages/no-smoke/pages/addiction-counseling/addiction-counseling.module';
 import { AddictionInformationPageModule } from 'src/pages/no-smoke/pages/addiction-information/addiction-information.module';
 import { AddictionMotivationPageModule } from 'src/pages/no-smoke/pages/addiction-motivation/addiction-motivation.module';
+import { AgeValidationPageModule } from 'src/pages/age-validation/age-validation.module';
 
 const routes: Routes = [
   {
@@ -96,6 +97,10 @@ const routes: Routes = [
   {
     path: 'addiction-motivation',
     loadChildren: () => AddictionMotivationPageModule,
+  },
+  {
+    path: 'age-validation',
+    loadChildren: () => AgeValidationPageModule,
   },
 ];
 @NgModule({

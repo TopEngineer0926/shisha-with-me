@@ -60,6 +60,12 @@
   }
 }
 
+.transparent-background {
+  .modal-wrapper {
+    --background: transparent !important;
+  }
+}
+
 .ios {
   ion-toolbar {
     background: var(--contrast);

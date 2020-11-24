@@ -1,0 +1,35 @@
+ion-content {
+  --background: rgb(0 122 255 / 39%) !important;
+  backdrop-filter: blur(10px);
+  .wrapper {
+    h1 {
+      font-size: 37px;
+      text-transform: uppercase;
+    }
+    display: block;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    flex-direction: column;
+    padding: 15px;
+    input {
+      height: 80px;
+      width: 130px;
+      border: 8px solid #ffffff;
+      background: transparent;
+      text-align: center;
+      font-size: 25px;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  .year-input {
+    margin-top: 40px;
+  }
+  .small {
+    opacity: 0.4;
+    font-size: 12px;
+  }
+}

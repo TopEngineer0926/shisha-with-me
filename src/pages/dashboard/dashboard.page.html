@@ -16,35 +16,30 @@
 
   <div class="dot"></div>
 
-  <ion-slides class="first" slot="fixed" [options]="slideOpts">
-    <ion-slide>
-      <div class="slide-item">
-        <div class="inside-dot"></div>
-      </div>
-    </ion-slide>
-    <ion-slide>
+  <ion-slides #mainSlider class="first" [options]="slideOpts">
+    <ion-slide *ngFor="let slide of slides">
       <ion-slides [options]="slideOptsVert">
         <ion-slide>
-          <div class="slide-item">
-            <div class="inside-dot"></div>
+          <div class="slide-item" (click)="startSession()">
+            <div
+              class="inside-dot"
+              [style.backgroundImage]="'url(' + slide.image + ')'"
+            ></div>
           </div>
         </ion-slide>
-        <ion-slide>
-          <div class="slide-item"><div class="inside-dot"></div></div>
+        <ion-slide *ngFor="let children of slide.children">
+          <div class="slide-item" (click)="startSession()">
+            <div
+              class="inside-dot"
+              [style.backgroundImage]="'url(' + children.image + ')'"
+            ></div>
+          </div>
         </ion-slide>
       </ion-slides>
     </ion-slide>
-    <ion-slide>
-      <div class="slide-item">
-        <div class="inside-dot"></div></div
-    ></ion-slide>
-    <ion-slide>
-      <div class="slide-item">
-        <div class="inside-dot"></div></div
-    ></ion-slide>
   </ion-slides>
 
-  <div class="map" slot="fixed">
+  <div class="map">
     <div class="overlay"></div>
     <agm-map
       [latitude]="lat"

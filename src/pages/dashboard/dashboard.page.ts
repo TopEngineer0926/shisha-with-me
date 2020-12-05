@@ -1,10 +1,16 @@
 import { ImageSharePage } from '../image-share/image-share.page';
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { Plugins } from '@capacitor/core';
-import { IonRouterOutlet, ModalController } from '@ionic/angular';
+import {
+  IonRouterOutlet,
+  IonSlides,
+  ModalController,
+  AlertController,
+} from '@ionic/angular';
 import { MapService } from 'src/common/services/map.service';
 import { slideOpts } from './slider-config';
 import { Swiper } from 'swiper';
+import { StartSessionPage } from '../start-session/start-session.page';
 
 const { Geolocation, Camera, Share } = Plugins;
 
@@ -14,6 +20,7 @@ const { Geolocation, Camera, Share } = Plugins;
   styleUrls: ['./dashboard.page.scss'],
 })
 export class DashboardPage implements AfterViewInit {
+  @ViewChild('mainSlider') mainSlider: IonSlides;
   slideOpts = slideOpts;
   locationLoading: boolean = false;
   lat = 51.178418;
@@ -21,18 +28,40 @@ export class DashboardPage implements AfterViewInit {
   zoom = 6;
 
   markers = [];
+
   slideOptsVert = {
     direction: 'vertical',
     ...slideOpts,
   };
+  slides = [
+    { image: 'assets/images/slider/capital-bra.png' },
+
+    {
+      image: 'assets/images/slider/zomo.png',
+      children: [{ image: 'assets/images/slider/flavor/almassiva.png' }],
+    },
+    {
+      image: 'assets/images/slider/alfakher.png',
+    },
+    {
+      image: 'assets/images/slider/bushidu.png',
+      children: [{ image: 'assets/images/slider/flavor/zomo.png' }],
+    },
+    { image: 'assets/images/slider/holster.png' },
+    { image: 'assets/images/slider/true-passion.png' },
+    { image: 'assets/images/slider/shisha-station.png' },
+  ];
 
   constructor(
     public mapService: MapService,
     private modalCtrl: ModalController,
-    private routerOutlet: IonRouterOutlet
+    private routerOutlet: IonRouterOutlet,
+    private alertCtrl: AlertController
   ) {}
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() {
+    this.mainSlider.slideTo(1);
+  }
 
   async getCurrentPosition() {
     this.locationLoading = true;
@@ -63,6 +92,25 @@ export class DashboardPage implements AfterViewInit {
       componentProps: {},
     });
     return await modal.present();
+  }
+
+  async startSession() {
+    const alert = await this.alertCtrl.create({
+      header: 'Session gestartet!',
+      buttons: ['Ok'],
+      translucent: true,
+      backdropDismiss: true,
+    });
+
+    await alert.present();
+    /*
+    const modal = await this.modalCtrl.create({
+      component: StartSessionPage,
+      swipeToClose: true,
+      presentingElement: this.routerOutlet.nativeEl,
+      componentProps: {},
+    });
+    return await modal.present();*/
   }
 
   async sharePosition() {

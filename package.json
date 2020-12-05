@@ -45,6 +45,7 @@
     "cordova-plugin-dialogs": "^2.0.2",
     "cordova-plugin-document-viewer": "^1.0.0",
     "cupertino-pane": "^1.1.94",
+    "momentum-slider": "0.0.8",
     "ngx-swiper-wrapper": "^10.0.0",
     "ngx-useful-swiper": "^10.0.1",
     "rxjs": "~6.6.3",

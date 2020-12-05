@@ -28,6 +28,8 @@ export class AgeValidationPage implements OnInit {
       const alert = await this.alertCtrl.create({
         header: 'Kein Zutritt!',
         message: 'Die App ist nur für Personen ab 18 Jahren geeignet.',
+
+        translucent: true,
         backdropDismiss: false,
       });
 

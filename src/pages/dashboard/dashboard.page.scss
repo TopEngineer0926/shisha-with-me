@@ -36,10 +36,13 @@ ion-slides {
   .inside-dot {
     display: block;
 
-    background: #333;
-    height: 150px;
-    width: 150px;
+    //background: #333;
+    height: 170px;
+    width: 170px;
     border-radius: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
   }
 }
 .dot {
@@ -55,7 +58,7 @@ ion-slides {
   position: absolute;
   height: 52vh;
 
-  bottom: -25px;
+  bottom: 0;
   left: 0;
   width: 100%;
 

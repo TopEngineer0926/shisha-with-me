@@ -10,6 +10,9 @@ ion-slide {
     box-shadow: 0 0 0 2px var(--ion-color-bars-tint);
     border-radius: 50px;
     background-color: #ddd;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
   }
   p {
     font-size: 13px;
@@ -17,4 +20,19 @@ ion-slide {
 }
 ion-slides {
   height: auto;
+}
+
+ion-card.flex {
+  display: flex;
+}
+
+ion-card {
+  img {
+    margin-bottom: -5px;
+  }
+  ion-button {
+    margin-left: auto;
+    width: calc(100% - 40px);
+    margin: 15px 20px 20px;
+  }
 }

@@ -5,8 +5,12 @@
       <p>Du musst über 18 sein, um diese Seite zu besuchen</p>
 
       <div class="ion-margin-top year-input">
-        <p>Bitte gib dein Geburtsdatum ein</p>
-        <input [(ngModel)]="year" type="number" />
+        <p>Bitte gib dein Geburtsjahr ein</p>
+        <input
+          [(ngModel)]="year"
+          type="number"
+          (ngModelChange)="year?.toString().length === 4 ? validate() : ''"
+        />
       </div>
     </div>
 

@@ -1,4 +1,3 @@
-import { AgmCoreModule } from '@agm/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -16,7 +15,6 @@ import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
     FormsModule,
     IonicModule,
     ProfilePageRoutingModule,
-    AgmCoreModule,
     NgxQRCodeModule,
   ],
   declarations: [ProfilePage],

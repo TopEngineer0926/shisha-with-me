@@ -29,6 +29,10 @@ export class MapPage implements AfterViewInit {
   map: google.maps.Map;
 
   infowindow: google.maps.InfoWindow;
+  options: google.maps.MapOptions = {
+    center: { lat: 40, lng: -20 },
+    zoom: 4,
+  };
 
   constructor(
     public mapService: MapService,
@@ -81,7 +85,7 @@ export class MapPage implements AfterViewInit {
       } catch (error) {
       } finally {
         this.locationLoading = false;
-        resolve();
+        resolve(true);
       }
     });
   }

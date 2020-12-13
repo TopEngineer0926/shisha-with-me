@@ -10,7 +10,7 @@
       <ion-title size="large">Map</ion-title>
     </ion-toolbar>
   </ion-header>
-
+  <!--
   <agm-map
     [latitude]="lat"
     [longitude]="lng"
@@ -25,6 +25,10 @@
       [longitude]="marker.lng"
     ></agm-marker>
   </agm-map>
+-->
+
+  <google-map [options]="options"></google-map>
+
   <ion-fab vertical="bottom" horizontal="start" slot="fixed">
     <ion-fab-button (click)="getCurrentPosition()" [disabled]="locationLoading">
       <ion-icon *ngIf="!locationLoading" name="location-outline"></ion-icon>

@@ -1,3 +1,4 @@
+import { GoogleMapsModule } from '@angular/google-maps';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -8,16 +9,15 @@ import { DashboardPageRoutingModule } from './dashboard-routing.module';
 
 import { DashboardPage } from './dashboard.page';
 import { SwiperModule } from 'ngx-swiper-wrapper';
-import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   imports: [
+    GoogleMapsModule,
     CommonModule,
     FormsModule,
     IonicModule,
     DashboardPageRoutingModule,
     SwiperModule,
-    AgmCoreModule,
   ],
   declarations: [DashboardPage],
 })

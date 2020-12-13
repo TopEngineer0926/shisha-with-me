@@ -7,16 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { MapPageRoutingModule } from './map-routing.module';
 
 import { MapPage } from './map.page';
-import { AgmCoreModule } from '@agm/core';
 import { MapFilterComponent } from './components/map-filter/map-filter.component';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
   imports: [
+    GoogleMapsModule,
     CommonModule,
     FormsModule,
     IonicModule,
     MapPageRoutingModule,
-    AgmCoreModule,
   ],
   declarations: [MapPage, MapFilterComponent],
 })

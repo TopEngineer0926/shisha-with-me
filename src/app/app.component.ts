@@ -19,7 +19,7 @@ export class AppComponent implements AfterViewInit {
 
   async ngAfterViewInit() {
     if (Capacitor.isNative) {
-      StatusBar.setStyle({ style: StatusBarStyle.Dark });
+      // StatusBar.setStyle({ style: StatusBarStyle.Light });
     }
 
     const darkMode = await this.helperService.getDarkMode();

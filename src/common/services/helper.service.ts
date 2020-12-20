@@ -2,13 +2,13 @@ import { TranslateService } from '@ngx-translate/core';
 import { AlertController } from '@ionic/angular';
 import { Injectable } from '@angular/core';
 
-import { Capacitor, Plugins } from '@capacitor/core';
+import { Capacitor, Plugins, StatusBarStyle } from '@capacitor/core';
 import { get, set } from './storage.service';
 
 import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
 import { DocumentViewerOptions } from '@ionic-native/document-viewer';
 
-const { Browser } = Plugins;
+const { SplashScreen, StatusBar, Browser } = Plugins;
 
 declare var window: any;
 @Injectable({
@@ -66,7 +66,7 @@ export class HelperService {
             role: 'delete',
             cssClass: 'danger',
             handler: async (data) => {
-              resolve();
+              resolve(true);
             },
           },
         ],
@@ -92,8 +92,14 @@ export class HelperService {
     this.darkModeEnabled = enabled;
     if (enabled) {
       window.activateDarkMode();
+      if (Capacitor.isNative) {
+      StatusBar.setStyle({ style: StatusBarStyle.Dark });
+      }
     } else {
       window.activateLightMode();
+      if (Capacitor.isNative) {
+      StatusBar.setStyle({ style: StatusBarStyle.Light });
+      }
     }
   }
 }

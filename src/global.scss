@@ -12,7 +12,7 @@
 @import '~swiper/swiper.scss';
 
 .overlay {
-  background: linear-gradient(
+  /*background: linear-gradient(
     to bottom,
     rgb(244, 246, 249) 0%,
     rgba(244, 246, 249, 0.987) 8.1%,
@@ -30,6 +30,14 @@
     rgba(244, 246, 249, 0.049) 84.5%,
     rgba(244, 246, 249, 0.013) 91.9%,
     rgba(244, 246, 249, 0) 100%
+  );*/
+  background: linear-gradient(
+    180deg,
+    rgba(244, 246, 249, 0) 0%,
+    rgba(244, 246, 249, 1) 30%,
+    rgba(244, 246, 249, 1) 50%,
+    rgba(244, 246, 249, 1) 70%,
+    rgba(244, 246, 249, 0) 100%
   );
 }
 
@@ -38,7 +46,7 @@
     background: #333;
   }
   .overlay {
-    background: linear-gradient(
+    /*background: linear-gradient(
       to bottom,
       black 0%,
       rgba(0, 0, 0, 0.987) 8.1%,
@@ -55,6 +63,14 @@
       rgba(0, 0, 0, 0.104) 77.5%,
       rgba(0, 0, 0, 0.049) 84.5%,
       rgba(0, 0, 0, 0.013) 91.9%,
+      rgba(0, 0, 0, 0) 100%
+    );*/
+    background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 1) 30%,
+      rgba(0, 0, 0, 1) 50%,
+      rgba(0, 0, 0, 1) 70%,
       rgba(0, 0, 0, 0) 100%
     );
   }
@@ -165,7 +181,7 @@ ion-fab-button[data-desc]::after {
   background-color: var(--ion-color-light);
   padding: 9px;
   border-radius: 15px;
-  color: white;
+  color: var(--ion-color-dark);
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
     0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
 }

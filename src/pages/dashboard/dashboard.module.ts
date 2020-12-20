@@ -12,12 +12,13 @@ import { SwiperModule } from 'ngx-swiper-wrapper';
 
 @NgModule({
   imports: [
-    GoogleMapsModule,
     CommonModule,
     FormsModule,
     IonicModule,
     DashboardPageRoutingModule,
     SwiperModule,
+
+    GoogleMapsModule,
   ],
   declarations: [DashboardPage],
 })

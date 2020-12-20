@@ -1,16 +1,14 @@
-import { ImageSharePage } from '../image-share/image-share.page';
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { Plugins } from '@capacitor/core';
 import {
+  AlertController,
   IonRouterOutlet,
   IonSlides,
   ModalController,
-  AlertController,
 } from '@ionic/angular';
 import { MapService } from 'src/common/services/map.service';
+import { ImageSharePage } from '../image-share/image-share.page';
 import { slideOpts } from './slider-config';
-import { Swiper } from 'swiper';
-import { StartSessionPage } from '../start-session/start-session.page';
 
 const { Geolocation, Camera, Share } = Plugins;
 
@@ -21,31 +19,47 @@ const { Geolocation, Camera, Share } = Plugins;
 })
 export class DashboardPage implements AfterViewInit {
   @ViewChild('mainSlider') mainSlider: IonSlides;
+  @ViewChild('map') map: google.maps.Map;
   slideOpts = slideOpts;
   locationLoading: boolean = false;
-  lat = 51.178418;
-  lng = 9.95;
-  zoom = 6;
 
-  markers = [];
+  options: google.maps.MapOptions = {
+    disableDefaultUI: true,
+    styles: this.mapService.getStyles(),
+  };
+
+  center: google.maps.LatLngLiteral = { lat: 51.178418, lng: 9.95 };
+  zoom = 6;
+  // markerOptions: google.maps.MarkerOptions = { draggable: false };
+  markerPositions: google.maps.LatLngLiteral[] = [];
+
+  loadIcons = false;
 
   slideOptsVert = {
     direction: 'vertical',
     ...slideOpts,
   };
+
   slides = [
-    { image: 'assets/images/slider/capital-bra.png' },
+    {
+      image: 'assets/images/slider/capital-bra.png',
+    },
+    {
+      image: 'assets/images/slider/almassiva.png',
+
+      children: [
+        { image: 'assets/images/slider/flavor/almassiva.png' },
+        { image: 'assets/images/slider/flavor/almassiva2.png' },
+        { image: 'assets/images/slider/flavor/almassiva3.png' },
+      ],
+    },
 
     {
       image: 'assets/images/slider/zomo.png',
-      children: [{ image: 'assets/images/slider/flavor/almassiva.png' }],
-    },
-    {
-      image: 'assets/images/slider/alfakher.png',
+      children: [{ image: 'assets/images/slider/flavor/zomo.png' }],
     },
     {
       image: 'assets/images/slider/bushidu.png',
-      children: [{ image: 'assets/images/slider/flavor/zomo.png' }],
     },
     { image: 'assets/images/slider/holster.png' },
     { image: 'assets/images/slider/true-passion.png' },
@@ -60,20 +74,30 @@ export class DashboardPage implements AfterViewInit {
   ) {}
 
   ngAfterViewInit() {
-    this.mainSlider.slideTo(1);
+    setTimeout(() => {
+      this.loadIcons = true;
+      setTimeout(() => {
+        this.mainSlider.slideTo(1);
+      }, 100);
+    }, 200);
   }
 
   async getCurrentPosition() {
     this.locationLoading = true;
     try {
       const coordinates = await Geolocation.getCurrentPosition();
-      console.log('Current', coordinates);
-      this.lat = coordinates.coords.latitude;
-      this.lng = coordinates.coords.longitude;
-      this.markers.push({
+      this.center = {
         lat: coordinates.coords.latitude,
         lng: coordinates.coords.longitude,
-      });
+      };
+
+      this.markerPositions = [
+        {
+          lat: coordinates.coords.latitude,
+          lng: coordinates.coords.longitude,
+        },
+      ];
+
       this.zoom = 12;
     } catch (error) {
     } finally {

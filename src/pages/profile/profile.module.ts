@@ -1,3 +1,4 @@
+import { GoogleMapsModule } from '@angular/google-maps';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -16,6 +17,7 @@ import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
     IonicModule,
     ProfilePageRoutingModule,
     NgxQRCodeModule,
+    GoogleMapsModule,
   ],
   declarations: [ProfilePage],
 })

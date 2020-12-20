@@ -10,11 +10,16 @@ ngx-qrcode {
 ion-card {
   background: var(--contrast);
   ion-chip {
-    margin: 0;
+    margin: 0 10px 10px;
   }
 }
-agm-map {
-  height: 200px;
+google-map {
+  ::ng-deep {
+    .map-container {
+      height: 200px;
+      pointer-events: none;
+    }
+  }
 }
 .user-image {
   height: 100px;
@@ -29,7 +34,7 @@ agm-map {
   background-repeat: no-repeat;
 }
 .settings-item {
-  background: #131313;
+  //background: var(--ion-color-dark);
   border-radius: 10px;
   padding: 10px;
   ion-toggle {

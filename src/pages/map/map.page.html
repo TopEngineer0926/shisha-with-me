@@ -27,7 +27,14 @@
   </agm-map>
 -->
 
-  <google-map [options]="options"></google-map>
+  <div class="map">
+    <google-map [center]="center" [zoom]="zoom" [options]="options">
+      <map-marker
+        *ngFor="let markerPosition of markerPositions"
+        [position]="markerPosition"
+      ></map-marker>
+    </google-map>
+  </div>
 
   <ion-fab vertical="bottom" horizontal="start" slot="fixed">
     <ion-fab-button (click)="getCurrentPosition()" [disabled]="locationLoading">

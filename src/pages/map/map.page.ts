@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, ChangeDetectorRef } from '@angular/core';
 import { Plugins } from '@capacitor/core';
 import {
   IonRouterOutlet,
@@ -20,26 +20,28 @@ import MarkerClusterer from '@google/markerclusterer';
 })
 export class MapPage implements AfterViewInit {
   locationLoading: boolean = false;
-  lat = 51.178418;
-  lng = 9.95;
-  zoom = 6;
-
-  markers = [];
 
   map: google.maps.Map;
 
   infowindow: google.maps.InfoWindow;
+
   options: google.maps.MapOptions = {
-    center: { lat: 40, lng: -20 },
-    zoom: 4,
+    disableDefaultUI: true,
+    styles: this.mapService.getStyles(),
   };
+
+  center: google.maps.LatLngLiteral = { lat: 51.178418, lng: 9.95 };
+  zoom = 6;
+  // markerOptions: google.maps.MarkerOptions = { draggable: false, icon: };
+  markerPositions: google.maps.LatLngLiteral[] = [];
 
   constructor(
     public mapService: MapService,
     public popoverController: PopoverController,
     private modalCtrl: ModalController,
     private routerOutlet: IonRouterOutlet,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngAfterViewInit() {}
@@ -74,13 +76,18 @@ export class MapPage implements AfterViewInit {
       this.locationLoading = true;
       try {
         const coordinates = await Geolocation.getCurrentPosition();
-
-        this.lat = coordinates.coords.latitude;
-        this.lng = coordinates.coords.longitude;
-        this.markers.push({
+        this.center = {
           lat: coordinates.coords.latitude,
           lng: coordinates.coords.longitude,
-        });
+        };
+
+        this.markerPositions = [
+          {
+            lat: coordinates.coords.latitude,
+            lng: coordinates.coords.longitude,
+          },
+        ];
+
         this.zoom = 12;
       } catch (error) {
       } finally {
@@ -103,10 +110,10 @@ export class MapPage implements AfterViewInit {
   }
 
   loadPlaces() {
-    const request = {
+    const request: any = {
       keyword: 'shisha bar',
       fields: ['name', 'geometry'],
-      location: { lat: this.lat, lng: this.lng },
+      location: { lat: this.options.center.lat, lng: this.options.center.lng },
       radius: 50000,
     };
 

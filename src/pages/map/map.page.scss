@@ -1,6 +1,33 @@
-agm-map {
-  height: 100%;
-}
 #pac-input {
   //display: none;
+}
+
+.map {
+  position: absolute;
+  height: 100vh;
+
+  bottom: -25px;
+  left: 0;
+  width: 100%;
+
+  google-map {
+    height: 100vh;
+
+    width: 100%;
+    ::ng-deep {
+      .map-container {
+        height: 100vh !important;
+
+        width: 100% !important;
+      }
+    }
+  }
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    z-index: 1;
+  }
 }

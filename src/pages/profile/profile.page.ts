@@ -17,12 +17,19 @@ export class ProfilePage implements OnInit {
   elementType = 'canvas';
   value = 'Mathis';
   locationLoading: boolean = false;
-  lat = 51.178418;
-  lng = 9.95;
-  zoom = 6;
   user: any = {};
 
   markers = [];
+
+  options: google.maps.MapOptions = {
+    disableDefaultUI: true,
+    styles: this.mapService.getStyles(),
+  };
+
+  center: google.maps.LatLngLiteral = { lat: 51.178418, lng: 9.95 };
+  zoom = 6;
+  // markerOptions: google.maps.MarkerOptions = { draggable: false };
+  markerPositions: google.maps.LatLngLiteral[] = [];
 
   constructor(
     public mapService: MapService,

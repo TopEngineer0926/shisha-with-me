@@ -1,3 +1,4 @@
+import { ModalController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 import { Plugins, CameraResultType, CameraPhoto } from '@capacitor/core';
@@ -11,10 +12,14 @@ const { Geolocation, Camera, Share } = Plugins;
 export class ImageSharePage implements OnInit {
   image: CameraPhoto;
 
-  constructor() {}
+  constructor(private modalCtrl: ModalController) {}
 
   ngOnInit() {
     this.takePicture();
+  }
+
+  close() {
+    this.modalCtrl.dismiss();
   }
 
   async takePicture() {

@@ -1,4 +1,4 @@
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { CameraPhoto, CameraResultType, Plugins } from '@capacitor/core';
 const { Geolocation, Camera, Share } = Plugins;
@@ -17,9 +17,16 @@ export class ProfileEditPage implements OnInit {
     sessionDuration: 60,
   };
 
-  constructor(private alertController: AlertController) {}
+  constructor(
+    private alertController: AlertController,
+    private modalCtrl: ModalController
+  ) {}
 
   ngOnInit() {}
+
+  close() {
+    this.modalCtrl.dismiss();
+  }
 
   async change(mode, value) {
     let text, inputType;

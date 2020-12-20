@@ -125,7 +125,7 @@ export class SettingsPage implements OnInit {
 
   public async selectLanguage(ev): Promise<any> {
     const actionSheetCtrl = await this.actionSheetCtrl.create({
-      header: this.translate.instant('Select Language'),
+      header: this.translate.instant('Sprache ändern'),
       translucent: true,
       buttons: [
         {

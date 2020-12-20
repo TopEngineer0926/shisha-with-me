@@ -5,7 +5,7 @@ import { Plugins } from '@capacitor/core';
   providedIn: 'root',
 })
 export class MapService {
-  getStyles() {
+  getStyles(): google.maps.MapTypeStyle[] {
     const body = document.querySelector('body');
     if (body.classList.contains('dark')) {
       return [

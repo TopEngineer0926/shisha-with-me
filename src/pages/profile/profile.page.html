@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-buttons slot="end">
+    <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>{{user.name}}</ion-title>
@@ -75,6 +75,8 @@
       <ion-card-subtitle>Standort</ion-card-subtitle>
     </ion-card-header>
 
+    <google-map #map [center]="center" [zoom]="zoom" [options]="options">
+    </google-map>
     <!--<agm-map
       [latitude]="lat"
       [longitude]="lng"
@@ -91,10 +93,10 @@
     </ion-card-header>
 
     <ion-card-content>
-      <div class="settings-item">
+      <ion-item class="settings-item" lines="none">
         <ion-label>Benachrichtigungen stumm schalten</ion-label>
         <ion-toggle slot="end"></ion-toggle>
-      </div>
+      </ion-item>
     </ion-card-content>
   </ion-card>
 </ion-content>

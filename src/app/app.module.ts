@@ -21,6 +21,7 @@ import {
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -56,6 +57,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
   ],
   providers: [
+    LocalNotifications,
     DocumentViewer,
     {
       provide: SWIPER_CONFIG,

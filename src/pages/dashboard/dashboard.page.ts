@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { Plugins } from '@capacitor/core';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import {
   AlertController,
   IonRouterOutlet,
@@ -70,7 +71,8 @@ export class DashboardPage implements AfterViewInit {
     public mapService: MapService,
     private modalCtrl: ModalController,
     private routerOutlet: IonRouterOutlet,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private localNotifications: LocalNotifications
   ) {}
 
   ngAfterViewInit() {
@@ -127,6 +129,20 @@ export class DashboardPage implements AfterViewInit {
     });
 
     await alert.present();
+
+    this.localNotifications.schedule({
+      id: 1,
+      text: '💨 Frankenstraße 20, 74562 Wolpertshausen, Deutschland',
+      title: 'Mathis raucht eine Shisha',
+      attachments: [
+        `https://maps.googleapis.com/maps/api/staticmap?center=Wolpertshausen&zoom=13&size=300x200&maptype=roadmap&key=`,
+      ],
+      actions: [
+        { id: '1', title: 'Guter Rauch!' },
+        { id: '2', title: 'Leg nochmal Kohle auf. Ich bin unterwegs!' },
+      ],
+    });
+
     /*
     const modal = await this.modalCtrl.create({
       component: StartSessionPage,

@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>on-boarding</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides #mySlider pager="true" [options]="slideOpts">
+    <ion-slide>
+      <div class="wrapper">
+        <h1>Wie ist dein Benutzername?</h1>
+        <p>Wie willst du von deinen Freunden gefunden/angzeigt werden?</p>
+
+        <ion-item>
+          <ion-input></ion-input>
+        </ion-item>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="wrapper">
+        <h1>Wie willst du gefunden werden?</h1>
+        <div>
+          <ion-item>
+            <ion-label>mit Rufnummer</ion-label>
+            <ion-checkbox slot="end"></ion-checkbox>
+          </ion-item>
+        </div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="wrapper">
+        <h1>Slide 3</h1>
+      </div>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button (click)="back()">Zurück</ion-button>
+    <ion-button (click)="next()">Weiter</ion-button>
+    <ion-button (click)="goTo()">Starten</ion-button>
+  </ion-toolbar>
+</ion-footer>

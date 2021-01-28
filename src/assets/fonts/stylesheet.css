@@ -1,0 +1,7 @@
+@font-face {
+  font-family: 'neoneonregular';
+  src: url('neoneon-webfont.woff2') format('woff2'),
+    url('neoneon-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}

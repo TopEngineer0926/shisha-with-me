@@ -8,12 +8,12 @@
   --contrastSwap: #000;
 
   /** primary **/
-  --ion-color-primary: #005c92;
-  --ion-color-primary-rgb: 0, 92, 146;
-  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary: #f4a942;
+  --ion-color-primary-rgb: 244, 169, 66;
+  --ion-color-primary-contrast: #fff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #005180;
-  --ion-color-primary-tint: #1a6c9d;
+  --ion-color-primary-shade: #d7953a;
+  --ion-color-primary-tint: #f5b255;
 
   /** secondary **/
   --ion-color-secondary: #06d79c;
@@ -99,6 +99,22 @@
   --ion-color-shops-contrast-rgb: 0, 0, 0;
   --ion-color-shops-shade: #e06280;
   --ion-color-shops-tint: #ff7d9c;
+
+  --ion-color-white: #f4f4f4;
+  --ion-color-white-rgb: 244, 244, 244;
+  --ion-color-white-contrast: #000;
+  --ion-color-white-contrast-rgb: 0, 0, 0;
+  --ion-color-white-shade: #d7d7d7;
+  --ion-color-white-tint: #f5f5f5;
+}
+
+.ion-color-white {
+  --ion-color-base: var(--ion-color-white);
+  --ion-color-base-rgb: var(--ion-color-white-rgb);
+  --ion-color-contrast: var(--ion-color-white-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-white-contrast-rgb);
+  --ion-color-shade: var(--ion-color-white-shade);
+  --ion-color-tint: var(--ion-color-white-tint);
 }
 
 .ion-color-bars {
@@ -133,12 +149,12 @@
    */
 
   body {
-    --ion-color-primary: #1d84d6;
-    --ion-color-primary-rgb: 29, 132, 214;
-    --ion-color-primary-contrast: #ffffff;
+    --ion-color-primary: #f4a942;
+    --ion-color-primary-rgb: 244, 169, 66;
+    --ion-color-primary-contrast: #fff;
     --ion-color-primary-contrast-rgb: 255, 255, 255;
-    --ion-color-primary-shade: #1a74bc;
-    --ion-color-primary-tint: #3490da;
+    --ion-color-primary-shade: #d7953a;
+    --ion-color-primary-tint: #f5b255;
 
     --ion-color-secondary: #50c8ff;
     --ion-color-secondary-rgb: 80, 200, 255;
@@ -223,12 +239,12 @@ body.dark {
       --border-color: #333;
     }
   }
-  --ion-color-primary: #005c92;
-  --ion-color-primary-rgb: 0, 92, 146;
-  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary: #f4a942;
+  --ion-color-primary-rgb: 244, 169, 66;
+  --ion-color-primary-contrast: #fff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #005180;
-  --ion-color-primary-tint: #1a6c9d;
+  --ion-color-primary-shade: #d7953a;
+  --ion-color-primary-tint: #f5b255;
 
   --ion-color-secondary: #50c8ff;
   --ion-color-secondary-rgb: 80, 200, 255;

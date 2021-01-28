@@ -10,6 +10,18 @@
 @import '~@ionic/angular/css/flex-utils.css';
 
 @import '~swiper/swiper.scss';
+@import './assets/fonts/stylesheet.css';
+.title {
+  text-shadow: 5px 0 20px #ffeb3b, 0 0 20px #ffeb3b, 0 0 20px #ff9800;
+  color: #fff;
+  width: 100%;
+  font-size: 40px;
+  font-size: 2.5rem;
+  line-height: 1.176;
+  font-weight: 300;
+  padding-bottom: 4.5px;
+  font-family: 'neoneonregular';
+}
 
 .overlay {
   /*background: linear-gradient(

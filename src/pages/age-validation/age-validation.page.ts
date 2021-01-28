@@ -1,3 +1,4 @@
+import { HelperService } from 'src/common/services/helper.service';
 import { Component, OnInit } from '@angular/core';
 import {
   ToastController,
@@ -16,10 +17,15 @@ export class AgeValidationPage implements OnInit {
   constructor(
     private toastCtrl: ToastController,
     private alertCtrl: AlertController,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    public helperService: HelperService
   ) {}
 
   ngOnInit() {}
+
+  close() {
+    this.modalCtrl.dismiss();
+  }
 
   async validate() {
     const date = new Date(this.year, 1, 1);

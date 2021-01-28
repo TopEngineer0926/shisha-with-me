@@ -76,7 +76,7 @@ export class HelperService {
   }
 
   async getDarkMode() {
-    const darkMode = await get('darkMode');
+    const darkMode = (await get('darkMode')) || true;
 
     if (darkMode) {
       this.darkModeEnabled = true;
@@ -93,12 +93,12 @@ export class HelperService {
     if (enabled) {
       window.activateDarkMode();
       if (Capacitor.isNative) {
-      StatusBar.setStyle({ style: StatusBarStyle.Dark });
+        StatusBar.setStyle({ style: StatusBarStyle.Dark });
       }
     } else {
       window.activateLightMode();
       if (Capacitor.isNative) {
-      StatusBar.setStyle({ style: StatusBarStyle.Light });
+        StatusBar.setStyle({ style: StatusBarStyle.Light });
       }
     }
   }

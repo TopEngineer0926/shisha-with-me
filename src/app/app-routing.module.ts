@@ -21,6 +21,7 @@ import { AddictionMotivationPageModule } from 'src/pages/no-smoke/pages/addictio
 import { AgeValidationPageModule } from 'src/pages/age-validation/age-validation.module';
 import { StartSessionPageModule } from 'src/pages/start-session/start-session.module';
 import { OnBoardingPageModule } from 'src/pages/on-boarding/on-boarding.module';
+import { AdPageModule } from 'src/pages/ad/ad.module';
 
 const routes: Routes = [
   {
@@ -111,6 +112,10 @@ const routes: Routes = [
   {
     path: 'on-boarding',
     loadChildren: () => OnBoardingPageModule,
+  },
+  {
+    path: 'ad/:id',
+    loadChildren: () => AdPageModule,
   },
 ];
 @NgModule({

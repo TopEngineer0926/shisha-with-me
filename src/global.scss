@@ -12,6 +12,32 @@
 @import '~swiper/swiper.scss';
 @import './assets/fonts/stylesheet.css';
 
+.header-image {
+  height: 30vh;
+  position: relative;
+  background-color: #d3ff7f;
+  background-size: cover;
+
+  &::before {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    pointer-events: none;
+    mix-blend-mode: var(--cs-mode-image);
+    background: var(--cs-gradient-linear);
+  }
+
+  .icon-small {
+    color: var(--cs-icon-color-secondary, #ffffff) !important;
+    position: relative;
+    z-index: 999;
+  }
+}
+
 .title {
   text-shadow: 5px 0 20px #ffeb3b, 0 0 20px #ffeb3b, 0 0 20px #ff9800;
   color: #fff;

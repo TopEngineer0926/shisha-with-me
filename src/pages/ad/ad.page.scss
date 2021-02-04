@@ -1,0 +1,33 @@
+h1 {
+  text-align: center;
+  padding: 20px 20px 30px;
+}
+
+.price {
+  position: relative;
+  padding: 20px 20px;
+
+  background: linear-gradient(0deg, #3c3c3c 0%, #171717 100%);
+  text-align: center;
+  .small {
+  }
+  .amount {
+  }
+
+  .share,
+  .wishlist {
+    position: absolute;
+    top: 30px;
+  }
+
+  .share {
+    left: 0;
+  }
+  .wishlist {
+    right: 0;
+  }
+}
+
+.main-content {
+  width: 100%;
+}

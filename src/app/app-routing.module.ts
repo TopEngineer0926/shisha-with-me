@@ -21,8 +21,7 @@ import { AddictionMotivationPageModule } from 'src/pages/no-smoke/pages/addictio
 import { AgeValidationPageModule } from 'src/pages/age-validation/age-validation.module';
 import { StartSessionPageModule } from 'src/pages/start-session/start-session.module';
 import { OnBoardingPageModule } from 'src/pages/on-boarding/on-boarding.module';
-import { AdPageModule } from 'src/pages/ad/ad.module';
-
+import { AdPageModule } from 'src/pages/advertising/pages/ad/ad.module';
 const routes: Routes = [
   {
     path: '',
@@ -114,7 +113,7 @@ const routes: Routes = [
     loadChildren: () => OnBoardingPageModule,
   },
   {
-    path: 'ad/:id',
+    path: 'advertising/:id',
     loadChildren: () => AdPageModule,
   },
 ];

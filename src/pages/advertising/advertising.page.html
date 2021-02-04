@@ -28,9 +28,7 @@
     </ion-slides>
   </div>
 
-  <ion-card button (click)="helper.openLink('https://www.shisha-world.com/')">
-    <img src="/assets/images/advertising/1.png" />
-  </ion-card>
+  <app-ad-item *ngFor="let ad of adService.ads" [ad]="ad"></app-ad-item>
 
   <ion-card button (click)="helper.openLink('https://www.shisha-world.com/')">
     <img src="/assets/images/advertising/2.png" />

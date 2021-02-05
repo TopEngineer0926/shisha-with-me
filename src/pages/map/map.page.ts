@@ -51,7 +51,9 @@ export class MapPage implements AfterViewInit {
   ) {}
 
   ngAfterViewInit() {
-    this.mapReady();
+    setTimeout(() => {
+      this.mapReady();
+    }, 1000);
   }
 
   async mapReady() {
@@ -70,7 +72,6 @@ export class MapPage implements AfterViewInit {
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
       component: MapFilterComponent,
-      cssClass: 'my-custom-class',
       event: ev,
       animated: true,
       translucent: true,
@@ -95,7 +96,7 @@ export class MapPage implements AfterViewInit {
           },
         ];
 
-        this.zoom = 12;
+        this.zoom = 14;
       } catch (error) {
       } finally {
         this.locationLoading = false;

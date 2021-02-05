@@ -69,6 +69,8 @@ export class DashboardPage implements AfterViewInit {
     { image: 'assets/images/slider/shisha-station.png' },
   ];
 
+  cupertino: boolean = false;
+
   constructor(
     public mapService: MapService,
     private modalCtrl: ModalController,
@@ -91,6 +93,7 @@ export class DashboardPage implements AfterViewInit {
   }
 
   openMap() {
+    this.cupertino = true;
     const settings: CupertinoSettings = {
       initialBreak: 'top',
       darkMode: true,
@@ -99,9 +102,12 @@ export class DashboardPage implements AfterViewInit {
       buttonClose: true,
       bottomOffset: 20,
       clickBottomOpen: true,
+      fastSwipeClose: false,
+      showDraggable: false,
     };
     const myPane = new CupertinoPane('.cupertino-pane', settings);
     myPane.present({ animate: true });
+    myPane.disableDrag();
   }
 
   async getCurrentPosition() {

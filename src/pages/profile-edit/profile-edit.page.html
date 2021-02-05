@@ -90,4 +90,43 @@
       </ion-segment>
     </div>
   </ion-list>
+
+  <ion-list-header class="ion-margin-top">Mein Shisha Setup</ion-list-header>
+  <ion-list class="ion-margin-bottom">
+    <ion-item
+      lines="none"
+      button
+      (click)="change('myShisha', profile.myShisha)"
+    >
+      <ion-label>
+        <small>Meine Shisha</small>
+        <h2>{{profile.myShisha}}</h2>
+        <p></p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item
+      lines="none"
+      button
+      (click)="change('myShishaHead', profile.myShishaHead)"
+    >
+      <ion-label>
+        <small>Meine Kopf</small>
+        <h2>{{profile.myShishaHead}}</h2>
+        <p></p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item
+      lines="none"
+      button
+      (click)="change('myMolassesCatcher', profile.myMolassesCatcher)"
+    >
+      <ion-label>
+        <small>Meine Molassefänger</small>
+        <h2>{{profile.myMolassesCatcher}}</h2>
+        <p></p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

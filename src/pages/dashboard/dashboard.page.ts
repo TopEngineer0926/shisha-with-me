@@ -74,7 +74,8 @@ export class DashboardPage implements AfterViewInit {
     private modalCtrl: ModalController,
     private routerOutlet: IonRouterOutlet,
     private alertCtrl: AlertController,
-    private localNotifications: LocalNotifications
+    private localNotifications: LocalNotifications,
+    private alertController: AlertController
   ) {}
 
   ngAfterViewInit() {
@@ -137,6 +138,30 @@ export class DashboardPage implements AfterViewInit {
       componentProps: {},
     });
     return await modal.present();
+  }
+
+  async selectSession() {
+    const alert = await this.alertController.create({
+      header: 'Wo wird geraucht?',
+      translucent: true,
+
+      buttons: [
+        {
+          text: 'Privat',
+          handler: async (blah) => {
+            await this.startSession();
+          },
+        },
+        {
+          text: 'Shisha Bar',
+          handler: async () => {
+            await this.startSession();
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
   async startSession() {

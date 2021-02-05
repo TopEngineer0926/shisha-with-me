@@ -14,7 +14,10 @@ export class ProfileEditPage implements OnInit {
   profile = {
     name: 'Mathis Monn',
     phoneNumber: '+49 1516 1018772',
-    sessionDuration: 60,
+    sessionDuration: 120,
+    myShisha: 'INVI Tesseract',
+    myShishaHead: 'KS APPO BlACK-Edition',
+    myMolassesCatcher: 'Smokezilla Molassefänger Diamond 18/7 Clear',
   };
 
   constructor(

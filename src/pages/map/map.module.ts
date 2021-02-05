@@ -19,5 +19,6 @@ import { GoogleMapsModule } from '@angular/google-maps';
     MapPageRoutingModule,
   ],
   declarations: [MapPage, MapFilterComponent],
+  exports: [MapPage],
 })
 export class MapPageModule {}

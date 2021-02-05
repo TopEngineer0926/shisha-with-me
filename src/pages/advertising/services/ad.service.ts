@@ -15,5 +15,23 @@ export class AdService {
       price: '99,99',
       link: 'https://google.de',
     },
+    {
+      id: 2,
+      image: '/assets/images/advertising/2.png',
+      name: 'The North Face 1985 Mountain Jacket "Black"',
+      description: 'Lorem Impsum',
+      offerPrice: '69,99',
+      price: '99,99',
+      link: 'https://google.de',
+    },
+    {
+      id: 3,
+      image: '/assets/images/advertising/3.png',
+      name: 'The North Face 1985 Mountain Jacket "Black"',
+      description: 'Lorem Impsum',
+      offerPrice: '69,99',
+      price: '99,99',
+      link: 'https://google.de',
+    },
   ];
 }

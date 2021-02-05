@@ -1,4 +1,9 @@
-import { AfterViewInit, Component, ChangeDetectorRef } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ChangeDetectorRef,
+  ViewChild,
+} from '@angular/core';
 import { Plugins } from '@capacitor/core';
 import {
   IonRouterOutlet,
@@ -12,6 +17,7 @@ import { PlacePage } from './place/place.page';
 const { Geolocation } = Plugins;
 
 import MarkerClusterer from '@google/markerclusterer';
+import { GoogleMap } from '@angular/google-maps';
 
 @Component({
   selector: 'app-map',
@@ -19,9 +25,9 @@ import MarkerClusterer from '@google/markerclusterer';
   styleUrls: ['./map.page.scss'],
 })
 export class MapPage implements AfterViewInit {
-  locationLoading: boolean = false;
+  @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
 
-  map: google.maps.Map;
+  locationLoading: boolean = false;
 
   infowindow: google.maps.InfoWindow;
 
@@ -44,10 +50,11 @@ export class MapPage implements AfterViewInit {
     private cdr: ChangeDetectorRef
   ) {}
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() {
+    this.mapReady();
+  }
 
-  async mapReady(map) {
-    this.map = map;
+  async mapReady() {
     const loading = await this.loadingCtrl.create({});
     loading.present();
 
@@ -110,24 +117,29 @@ export class MapPage implements AfterViewInit {
   }
 
   loadPlaces() {
+    console.log('loadPlaces', this.options, this.map);
+
     const request: any = {
       keyword: 'shisha bar',
       fields: ['name', 'geometry'],
-      location: { lat: this.options.center.lat, lng: this.options.center.lng },
+      location: { lat: this.center.lat, lng: this.center.lng },
       radius: 50000,
     };
 
-    const service = new google.maps.places.PlacesService(this.map);
+    console.log('request', request);
+
+    const service = new google.maps.places.PlacesService(this.map.googleMap);
 
     service.nearbySearch(request, (results, status) => {
+      console.log('service');
       console.log(results, status);
       if (status === google.maps.places.PlacesServiceStatus.OK) {
-        this.addMarkersforPlaces(results);
+        this.addMarkersForPlaces(results);
       }
     });
   }
 
-  addMarkersforPlaces(places: google.maps.places.PlaceResult[]) {
+  addMarkersForPlaces(places: google.maps.places.PlaceResult[]) {
     let markers: google.maps.Marker[] = [];
     if (places.length == 0) {
       return;
@@ -155,7 +167,7 @@ export class MapPage implements AfterViewInit {
       };
 
       const marker = new google.maps.Marker({
-        map: this.map,
+        map: this.map.googleMap,
         icon,
         title: place.name,
         position: place.geometry.location,

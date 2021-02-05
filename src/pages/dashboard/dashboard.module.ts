@@ -1,3 +1,4 @@
+import { MapPageModule } from 'src/pages/map/map.module';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -17,7 +18,7 @@ import { SwiperModule } from 'ngx-swiper-wrapper';
     IonicModule,
     DashboardPageRoutingModule,
     SwiperModule,
-
+    MapPageModule,
     GoogleMapsModule,
   ],
   declarations: [DashboardPage],

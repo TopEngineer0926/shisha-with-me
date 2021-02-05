@@ -51,7 +51,7 @@
         <h2>{{profile.sessionDuration}} Minuten</h2>
       </ion-label>
     </ion-item>
-    <ion-item>
+    <!--<ion-item>
       <ion-range
         [(ngModel)]="profile.sessionDuration"
         mode="md"
@@ -62,6 +62,32 @@
         snaps="true"
         color="secondary"
       ></ion-range>
-    </ion-item>
+    </ion-item>-->
+
+    <div class="session-timer">
+      <h3>Dauer der Rauch-Session</h3>
+      <p>
+        Deine Freunde erhalten eine Benachrichtigung wenn du eine Session
+        startest und du wirst als rauchend angezeigt während der Sitzung.
+      </p>
+      <ion-segment
+        mode="ios"
+        [value]="profile.sessionDuration"
+        (ionChange)="segmentChanged($event)"
+      >
+        <ion-segment-button mode="ios" value="30">
+          <ion-label>30 Minuten</ion-label>
+        </ion-segment-button>
+        <ion-segment-button mode="ios" value="60">
+          <ion-label>1 Stunde</ion-label>
+        </ion-segment-button>
+        <ion-segment-button mode="ios" value="120">
+          <ion-label>2 Stunden</ion-label>
+        </ion-segment-button>
+        <ion-segment-button mode="ios" value="240">
+          <ion-label>4 Stunden</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
   </ion-list>
 </ion-content>

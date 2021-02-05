@@ -24,6 +24,10 @@ export class ProfileEditPage implements OnInit {
 
   ngOnInit() {}
 
+  segmentChanged($event) {
+    this.profile.sessionDuration = $event.detail.value;
+  }
+
   close() {
     this.modalCtrl.dismiss();
   }

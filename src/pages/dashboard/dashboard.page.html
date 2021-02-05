@@ -39,7 +39,7 @@
     </ion-slide>
   </ion-slides>
 
-  <div class="map">
+  <div class="map" (click)="openMap()">
     <div class="overlay"></div>
     <google-map #map [center]="center" [zoom]="zoom" [options]="options">
       <map-marker
@@ -103,3 +103,7 @@
     </ion-fab-button>
   </ion-fab>-->
 </ion-content>
+
+<div class="cupertino-pane">
+  <app-map></app-map>
+</div>

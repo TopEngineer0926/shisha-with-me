@@ -40,5 +40,16 @@
   "Infos": "Infos",
   "Change Name": "Name ändern",
   "Live-Video": "Live-Video",
-  "Open Door": "Open Door"
+  "Open Door": "Open Door",
+  "SliderPage": {
+    "Back": "Back",
+    "Continue": "Continue",
+    "Start": "Start",
+    "QrCode": "Qr Code",
+    "Benutzername": "Benutzername",
+    "Telefonnumber": "Telefonnumber",
+    "Instagran": "Instagran",
+    "Title": "on-boarding",
+    "Friend": "Freunde"
+  }
 }

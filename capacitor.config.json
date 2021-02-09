@@ -4,7 +4,6 @@
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
-
   "backgroundColor": "#21252dff",
   "windowsAndroidStudioPath": "C:\\Users\\Daniel\\AppData\\Local\\JetBrains\\Toolbox\\apps\\AndroidStudio\\ch-0\\192.6392135\\bin\\studio64.exe",
   "plugins": {
@@ -24,6 +23,5 @@
     "captureInput": true,
     "backgroundColor": "#21252dff"
   },
-
   "cordova": {}
 }

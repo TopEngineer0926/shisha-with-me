@@ -1,11 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>on-boarding</ion-title>
+    <ion-title>{{'SliderPage.Title' | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-slides #mySlider pager="true" [options]="slideOpts">
+  <ion-slides #mySlider pager="true" [options]="slideOpts" (ionSlideDidChange)="slideChange()">
     <ion-slide>
       <div class="wrapper">
         <h1>Wie ist dein Benutzername?</h1>
@@ -19,17 +19,40 @@
     <ion-slide>
       <div class="wrapper">
         <h1>Wie willst du gefunden werden?</h1>
-        <div>
-          <ion-item>
-            <ion-label>mit Rufnummer</ion-label>
-            <ion-checkbox slot="end"></ion-checkbox>
-          </ion-item>
-        </div>
+        <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
+            <ion-item>
+              <ion-label>{{'SliderPage.QrCode' | translate}}*</ion-label>
+              <ion-checkbox formControlName="qrCode" slot="end"></ion-checkbox>
+            </ion-item>
+            <!-- Error messages -->
+            <ion-text color="danger" class="error" *ngIf="isSubmitted && errorControl.qrCode.errors?.required">
+              <p class="ion-no-margin ion-margin-horizontal">{{'SliderPage.QrCode' | translate}} Code is required.</p>
+            </ion-text>
+
+            <ion-item>
+              <ion-label>{{'SliderPage.Benutzername' | translate}}*</ion-label>
+              <ion-checkbox formControlName="benutzername" slot="end"></ion-checkbox>
+            </ion-item>
+            <!-- Error messages -->
+            <ion-text color="danger" class="error" *ngIf="isSubmitted && errorControl.benutzername.errors?.required">
+              <p class="ion-no-margin ion-margin-horizontal">{{'SliderPage.Benutzername' | translate}} is required.</p>
+            </ion-text>
+
+            <ion-item>
+              <ion-label>{{'SliderPage.Telefonnumber' | translate}}</ion-label>
+              <ion-checkbox formControlName="telefonnumber" slot="end"></ion-checkbox>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>{{'SliderPage.Instagran' | translate}}</ion-label>
+              <ion-checkbox formControlName="instagran" slot="end"></ion-checkbox>
+            </ion-item>
+        </form>
       </div>
     </ion-slide>
     <ion-slide>
       <div class="wrapper">
-        <h1>Slide 3</h1>
+        <h1>Slider 3</h1>
       </div>
     </ion-slide>
   </ion-slides>
@@ -37,8 +60,13 @@
 
 <ion-footer>
   <ion-toolbar>
-    <ion-button (click)="back()">Zurück</ion-button>
-    <ion-button (click)="next()">Weiter</ion-button>
-    <ion-button (click)="goTo()">Starten</ion-button>
+    <ion-button (click)="back()">{{'SliderPage.Back' | translate}}</ion-button>
+    <ion-button *ngIf="(sliderNum < 1); else elseIf1" (click)="next()">{{'SliderPage.Continue' | translate}}</ion-button>
+    <ng-template #elseIf1>
+      <ion-button *ngIf="(sliderNum === 1) else elseIf2" (click)="submitForm()">{{'SliderPage.Continue' | translate}}</ion-button>
+    </ng-template>
+    <ng-template #elseIf2>
+      <ion-button (click)="goTo()">{{'SliderPage.Start' | translate}}</ion-button>
+    </ng-template>
   </ion-toolbar>
 </ion-footer>

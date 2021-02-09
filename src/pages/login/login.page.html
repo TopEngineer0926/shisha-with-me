@@ -10,8 +10,10 @@
       <div class="title">
         <div class="logo"></div>
         <div>
-          <strong>Willkommen</strong><br />
-          <span> in der Community</span>
+          <strong>DIENE APP</strong><br />
+          <span> WENN ES UM</span><br />
+          <span> SHISHA</span><br />
+          <span> GEHT</span>
         </div>
       </div>
     </div>
@@ -40,12 +42,24 @@
       >
     </ion-button>
     <ion-button class="phone" expand="block" (click)="login('phone')">
-      <span class="wrapper"
-        ><ion-icon name="call-outline"></ion-icon>
-        <span class="text">Login mit Telefonnummer</span></span
-      >
+      <span class="wrapper">
+       <ion-icon slot="start" name="call"></ion-icon>
+        <span class="text">Login mit Telefonnummer</span> 
+      </span>
+    </ion-button>
+    <ion-button class="mail" expand="block" (click)="login('phone')">
+      <span class="wrapper">
+        <ion-icon slot="start" name="mail"></ion-icon>
+        <span class="text">Login mit Telefonnummer</span>
+      </span>
     </ion-button>
 
+    <ion-button class="instagram" expand="block" (click)="login('phone')">
+      <span class="wrapper">
+        <ion-icon slot="start" name="logo-instagram"></ion-icon>
+        <span class="text">Instagram</span>
+      </span>
+    </ion-button>
     <!--<div class="info">
       <small>Hinweis</small>
       <p>Der Konsum von Shisha ist Gesundheitsschädlich</p>

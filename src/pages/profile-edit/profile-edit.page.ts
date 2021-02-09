@@ -1,6 +1,6 @@
 import { AlertController, ModalController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
-import { CameraPhoto, CameraResultType, Plugins } from '@capacitor/core';
+import { CameraPhoto, CameraResultType, CameraSource, Plugins } from '@capacitor/core';
 const { Geolocation, Camera, Share } = Plugins;
 
 @Component({
@@ -83,9 +83,10 @@ export class ProfileEditPage implements OnInit {
 
   async takePicture() {
     const image = await Camera.getPhoto({
+      source: CameraSource.Prompt,
       quality: 90,
       allowEditing: true,
-      resultType: CameraResultType.Uri,
+      resultType: CameraResultType.Uri
     });
 
     this.image = image;

@@ -1,7 +1,9 @@
 import { ChatService } from './../../common/services/chat.service';
 import { Component, OnInit } from '@angular/core';
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController, ModalController, NavController } from '@ionic/angular';
 import { CupertinoPane, CupertinoSettings } from 'cupertino-pane';
+import { Plugins } from '@capacitor/core';
+const { Share } = Plugins;
 
 @Component({
   selector: 'app-friends-list',
@@ -15,7 +17,8 @@ export class FriendsListPage implements OnInit {
   constructor(
     private navCtrl: NavController,
     private alertController: AlertController,
-    public chatService: ChatService
+    public chatService: ChatService,
+    public modalController: ModalController
   ) {}
 
   ngOnInit() {}
@@ -74,5 +77,14 @@ export class FriendsListPage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  async SocialSharing() {
+    let shareRet = await Share.share({
+      title: 'See cool stuff',
+      text: 'Really awesome thing you need to see right meow',
+      url: 'http://ionicframework.com/',
+      dialogTitle: 'Share with buddies'
+    });
   }
 }

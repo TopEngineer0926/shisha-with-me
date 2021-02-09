@@ -77,5 +77,16 @@
   "Language": "Sprache",
   "FAQ": "Fragen und Antworten",
   "Instructions": "Anleitungen",
-  "Links": "Links"
+  "Links": "Links",
+  "SliderPage": {
+    "Back": "Back",
+    "Continue": "Continue",
+    "Start": "Start",
+    "QrCode": "Qr Code",
+    "Benutzername": "Benutzername",
+    "Telefonnumber": "Telefonnumber",
+    "Instagran": "Instagran",
+    "Title": "on-boarding",
+    "Friend": "Freunde"
+  }
 }

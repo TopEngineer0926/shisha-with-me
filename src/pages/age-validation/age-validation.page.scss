@@ -40,7 +40,14 @@ ion-content {
     width: 100px;
     height: 100px;
     background: #333;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
+  }
+
+  .border-box {
+    border: 1px solid #B2CCD3;
+    .small-font {
+      font-size: 16px;
+    }
   }
 
   display: flex;
@@ -50,7 +57,7 @@ ion-content {
   text-align: center;
   font-size: 22px;
   width: 70%;
-  margin: 50px auto;
+  margin: 30px auto;
 
   strong {
     font-weight: bolder;

@@ -1,6 +1,10 @@
 import { ChatService } from './../../common/services/chat.service';
-import { Component, OnInit } from '@angular/core';
-import { AlertController, ModalController, NavController } from '@ionic/angular';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  AlertController,
+  ModalController,
+  NavController,
+} from '@ionic/angular';
 import { CupertinoPane, CupertinoSettings } from 'cupertino-pane';
 import { Plugins } from '@capacitor/core';
 const { Share } = Plugins;
@@ -10,9 +14,10 @@ const { Share } = Plugins;
   templateUrl: './friends-list.page.html',
   styleUrls: ['./friends-list.page.scss'],
 })
-export class FriendsListPage implements OnInit {
+export class FriendsListPage implements OnInit, OnDestroy {
   elementType = 'canvas';
   value = 'Mathis';
+  myPane: CupertinoPane;
 
   constructor(
     private navCtrl: NavController,
@@ -22,6 +27,10 @@ export class FriendsListPage implements OnInit {
   ) {}
 
   ngOnInit() {}
+
+  ngOnDestroy() {
+    this.myPane.destroy();
+  }
 
   doRefresh(event) {
     console.log('Begin async operation');
@@ -42,8 +51,8 @@ export class FriendsListPage implements OnInit {
       bottomOffset: 20,
       clickBottomOpen: true,
     };
-    const myPane = new CupertinoPane('.cupertino-pane', settings);
-    myPane.present();
+    this.myPane = new CupertinoPane('.cupertino-pane', settings);
+    this.myPane.present({ animate: true });
   }
 
   async createGroup() {
@@ -84,7 +93,7 @@ export class FriendsListPage implements OnInit {
       title: 'See cool stuff',
       text: 'Really awesome thing you need to see right meow',
       url: 'http://ionicframework.com/',
-      dialogTitle: 'Share with buddies'
+      dialogTitle: 'Share with buddies',
     });
   }
 }

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
 import { Plugins } from '@capacitor/core';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import {
@@ -19,7 +19,7 @@ const { Geolocation, Camera, Share } = Plugins;
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
 })
-export class DashboardPage implements AfterViewInit {
+export class DashboardPage implements AfterViewInit, OnDestroy {
   audio: HTMLAudioElement;
   @ViewChild('mainSlider') mainSlider: IonSlides;
   @ViewChild('map') map: google.maps.Map;
@@ -71,6 +71,8 @@ export class DashboardPage implements AfterViewInit {
 
   cupertino: boolean = false;
 
+  myPane: CupertinoPane;
+
   constructor(
     public mapService: MapService,
     private modalCtrl: ModalController,
@@ -92,6 +94,10 @@ export class DashboardPage implements AfterViewInit {
     this.audio.loop = false;
   }
 
+  ngOnDestroy() {
+    this.myPane.destroy();
+  }
+
   openMap() {
     this.cupertino = true;
     const settings: CupertinoSettings = {
@@ -105,9 +111,12 @@ export class DashboardPage implements AfterViewInit {
       fastSwipeClose: false,
       showDraggable: false,
     };
-    const myPane = new CupertinoPane('.cupertino-pane', settings);
-    myPane.present({ animate: true });
-    myPane.disableDrag();
+    if (this.myPane) {
+      this.myPane.destroy();
+    }
+    this.myPane = new CupertinoPane('.cupertino-pane-home', settings);
+    this.myPane.present({ animate: true });
+    this.myPane.disableDrag();
   }
 
   async getCurrentPosition() {

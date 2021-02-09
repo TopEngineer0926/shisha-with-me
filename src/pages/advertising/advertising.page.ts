@@ -1,3 +1,4 @@
+import { AdService } from './services/ad.service';
 import { HelperService } from './../../common/services/helper.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -13,7 +14,8 @@ export class AdvertisingPage implements OnInit {
     { title: 'shisharia', image: '/assets/images/stories/3.jpg' },
     { title: 'shishazentrale', image: '/assets/images/stories/4.jpg' },
   ];
-  constructor(public helper: HelperService) {}
+
+  constructor(public helper: HelperService, public adService: AdService) {}
 
   ngOnInit() {}
 }

@@ -7,14 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { AdvertisingPageRoutingModule } from './advertising-routing.module';
 
 import { AdvertisingPage } from './advertising.page';
+import { AdItemComponent } from './components/ad-item/ad-item.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AdvertisingPageRoutingModule
+    AdvertisingPageRoutingModule,
   ],
-  declarations: [AdvertisingPage]
+  declarations: [AdvertisingPage, AdItemComponent],
 })
 export class AdvertisingPageModule {}

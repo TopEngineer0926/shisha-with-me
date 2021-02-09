@@ -1,0 +1,41 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen scrollEvents="true" parallax-header *ngIf="ad">
+  <div
+    class="header-image"
+    [ngStyle]="{'background-image': 'url(' + ad.image + ')'}"
+  ></div>
+  <div class="main-content">
+    <h1>{{ad.name}}</h1>
+
+    <div class="price">
+      <ion-button class="share" color="white"
+        ><ion-icon name="share-outline"></ion-icon
+      ></ion-button>
+      <div class="small">für nur</div>
+      <div class="amount offer">{{ad.offerPrice}} €</div>
+      <div class="small">
+        statt <span class="normal-price">{{ad.price}} €</span>
+      </div>
+      <ion-button class="wishlist" color="white"
+        ><ion-icon name="heart-outline"></ion-icon
+      ></ion-button>
+    </div>
+
+    <div class="description">
+      <p>{{ad.description}}</p>
+    </div>
+
+    <div class="deal">
+      <ion-button expand="block" size="large" (click)="helper.openLink(ad.link)"
+        >Zum Deal</ion-button
+      >
+    </div>
+  </div>
+</ion-content>

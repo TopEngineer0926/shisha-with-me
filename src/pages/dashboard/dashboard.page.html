@@ -20,7 +20,7 @@
     <ion-slide *ngFor="let slide of slides">
       <ion-slides [options]="slideOptsVert">
         <ion-slide>
-          <div class="slide-item" (click)="startSession()">
+          <div class="slide-item" (click)="selectSession()">
             <div
               class="inside-dot"
               [style.backgroundImage]="'url(' + slide.image + ')'"
@@ -28,7 +28,7 @@
           </div>
         </ion-slide>
         <ion-slide *ngFor="let children of slide.children">
-          <div class="slide-item" (click)="startSession()">
+          <div class="slide-item" (click)="selectSession()">
             <div
               class="inside-dot"
               [style.backgroundImage]="'url(' + children.image + ')'"
@@ -39,7 +39,7 @@
     </ion-slide>
   </ion-slides>
 
-  <div class="map">
+  <div class="map" (click)="openMap()">
     <div class="overlay"></div>
     <google-map #map [center]="center" [zoom]="zoom" [options]="options">
       <map-marker
@@ -103,3 +103,7 @@
     </ion-fab-button>
   </ion-fab>-->
 </ion-content>
+
+<div class="cupertino-pane">
+  <app-map *ngIf="cupertino"></app-map>
+</div>

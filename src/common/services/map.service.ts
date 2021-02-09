@@ -7,7 +7,7 @@ import { Plugins } from '@capacitor/core';
 export class MapService {
   getStyles(): google.maps.MapTypeStyle[] {
     const body = document.querySelector('body');
-    if (body.classList.contains('dark')) {
+    if (true) {
       return [
         {
           elementType: 'geometry',

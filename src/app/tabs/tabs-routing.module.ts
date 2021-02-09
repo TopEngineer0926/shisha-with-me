@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdSavedPageModule } from 'src/pages/ad-saved/ad-saved.module';
 import { DashboardPageModule } from 'src/pages/dashboard/dashboard.module';
 import { FriendsListPageModule } from 'src/pages/friends-list/friends-list.module';
 import { MapPageModule } from 'src/pages/map/map.module';
@@ -18,6 +19,10 @@ const routes: Routes = [
       {
         path: 'map',
         loadChildren: () => MapPageModule,
+      },
+      {
+        path: 'saved',
+        loadChildren: () => AdSavedPageModule,
       },
       {
         path: 'friends',

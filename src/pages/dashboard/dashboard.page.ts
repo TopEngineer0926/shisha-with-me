@@ -10,6 +10,7 @@ import {
 import { MapService } from 'src/common/services/map.service';
 import { ImageSharePage } from '../image-share/image-share.page';
 import { slideOpts } from './slider-config';
+import { CupertinoPane, CupertinoSettings } from 'cupertino-pane';
 
 const { Geolocation, Camera, Share } = Plugins;
 
@@ -19,6 +20,7 @@ const { Geolocation, Camera, Share } = Plugins;
   styleUrls: ['./dashboard.page.scss'],
 })
 export class DashboardPage implements AfterViewInit {
+  audio: HTMLAudioElement;
   @ViewChild('mainSlider') mainSlider: IonSlides;
   @ViewChild('map') map: google.maps.Map;
   slideOpts = slideOpts;
@@ -29,7 +31,7 @@ export class DashboardPage implements AfterViewInit {
     styles: this.mapService.getStyles(),
   };
 
-  center: google.maps.LatLngLiteral = { lat: 51.178418, lng: 9.95 };
+  center: google.maps.LatLngLiteral = { lat: 51.178418, lng: 11 };
   zoom = 6;
   // markerOptions: google.maps.MarkerOptions = { draggable: false };
   markerPositions: google.maps.LatLngLiteral[] = [];
@@ -67,12 +69,15 @@ export class DashboardPage implements AfterViewInit {
     { image: 'assets/images/slider/shisha-station.png' },
   ];
 
+  cupertino: boolean = false;
+
   constructor(
     public mapService: MapService,
     private modalCtrl: ModalController,
     private routerOutlet: IonRouterOutlet,
     private alertCtrl: AlertController,
-    private localNotifications: LocalNotifications
+    private localNotifications: LocalNotifications,
+    private alertController: AlertController
   ) {}
 
   ngAfterViewInit() {
@@ -82,6 +87,27 @@ export class DashboardPage implements AfterViewInit {
         this.mainSlider.slideTo(1);
       }, 100);
     }, 200);
+
+    this.audio = new Audio('assets/sounds/Shisha_Sound.mp3');
+    this.audio.loop = false;
+  }
+
+  openMap() {
+    this.cupertino = true;
+    const settings: CupertinoSettings = {
+      initialBreak: 'top',
+      darkMode: true,
+      backdrop: true,
+      backdropOpacity: 0.4,
+      buttonClose: true,
+      bottomOffset: 20,
+      clickBottomOpen: true,
+      fastSwipeClose: false,
+      showDraggable: false,
+    };
+    const myPane = new CupertinoPane('.cupertino-pane', settings);
+    myPane.present({ animate: true });
+    myPane.disableDrag();
   }
 
   async getCurrentPosition() {
@@ -120,7 +146,33 @@ export class DashboardPage implements AfterViewInit {
     return await modal.present();
   }
 
+  async selectSession() {
+    const alert = await this.alertController.create({
+      header: 'Wo wird geraucht?',
+      translucent: true,
+
+      buttons: [
+        {
+          text: 'Privat',
+          handler: async (blah) => {
+            await this.startSession();
+          },
+        },
+        {
+          text: 'Shisha Bar',
+          handler: async () => {
+            await this.startSession();
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
   async startSession() {
+    await this.audio.play();
+    /*
     const alert = await this.alertCtrl.create({
       header: 'Session gestartet!',
       buttons: ['Ok'],
@@ -128,20 +180,22 @@ export class DashboardPage implements AfterViewInit {
       backdropDismiss: true,
     });
 
-    await alert.present();
+    await alert.present();*/
 
-    this.localNotifications.schedule({
-      id: 1,
-      text: '💨 Frankenstraße 20, 74562 Wolpertshausen, Deutschland',
-      title: 'Mathis raucht eine Shisha',
-      attachments: [
-        `https://maps.googleapis.com/maps/api/staticmap?center=Wolpertshausen&zoom=13&size=300x200&maptype=roadmap&key=`,
-      ],
-      actions: [
-        { id: '1', title: 'Guter Rauch!' },
-        { id: '2', title: 'Leg nochmal Kohle auf. Ich bin unterwegs!' },
-      ],
-    });
+    setTimeout(() => {
+      this.localNotifications.schedule({
+        id: 1,
+        text: '💨 Frankenstraße 20, 74562 Wolpertshausen, Deutschland',
+        title: 'Mathis raucht eine Shisha',
+        attachments: [
+          `https://maps.googleapis.com/maps/api/staticmap?center=Wolpertshausen&zoom=13&size=300x200&maptype=roadmap&key=AIzaSyDfBZEEoOwxq0nqGAtU49iNbsC8Lhp88pU`,
+        ],
+        actions: [
+          { id: '1', title: 'Guter Rauch!' },
+          { id: '2', title: 'Leg nochmal Kohle auf. Ich bin unterwegs!' },
+        ],
+      });
+    }, 2000);
 
     /*
     const modal = await this.modalCtrl.create({

@@ -12,10 +12,12 @@
 @import '~swiper/swiper.scss';
 @import './assets/fonts/stylesheet.css';
 
-.cupertino-pane {
+.cupertino-pane-home {
   z-index: 9000;
 }
-
+small {
+  opacity: 0.5;
+}
 .header-image {
   height: 30vh;
   position: relative;

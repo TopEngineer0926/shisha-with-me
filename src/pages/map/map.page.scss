@@ -2,6 +2,9 @@
   //display: none;
 }
 
+ion-fab {
+  z-index: 2000;
+}
 ion-content {
   --background: transparent !important;
   --overflow: hidden;
@@ -10,7 +13,7 @@ ion-content {
 .map {
   position: absolute;
 
-  height: calc(100vh - 70px);
+  height: 100%;
   top: 0;
   left: 0;
   width: 100%;

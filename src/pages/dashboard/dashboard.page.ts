@@ -110,6 +110,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
       clickBottomOpen: true,
       fastSwipeClose: false,
       showDraggable: false,
+      // parentElement: 'body',
     };
     if (this.myPane) {
       this.myPane.destroy();

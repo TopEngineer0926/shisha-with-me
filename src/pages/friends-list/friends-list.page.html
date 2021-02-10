@@ -1,9 +1,20 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>Freunde</ion-title>
-    <ion-buttons slot="secondary">
+    <ion-buttons slot="end">
+      <ion-button (click)="createGroup()">
+        <ion-icon
+          slot="icon-only"
+          name="people-outline"
+          color="warning"
+        ></ion-icon>
+      </ion-button>
       <ion-button (click)="addFriend()">
-        <ion-icon slot="icon-only" name="person-add-outline" color="warning"></ion-icon>
+        <ion-icon
+          slot="icon-only"
+          name="person-add-outline"
+          color="warning"
+        ></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -47,7 +58,7 @@
     </ion-fab-button>
   </ion-fab>-->
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <!--<ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button>
       <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
     </ion-fab-button>
@@ -60,7 +71,7 @@
         ><ion-icon name="people-outline"></ion-icon
       ></ion-fab-button>
     </ion-fab-list>
-  </ion-fab>
+  </ion-fab>-->
 </ion-content>
 
 <div class="cupertino-pane">
@@ -88,7 +99,7 @@
         <ion-icon slot="start" name="wifi-outline"></ion-icon>
         <ion-label>In der Nähe suchen</ion-label>
       </ion-item>
-      
+
       <ion-item button>
         <ion-icon slot="start" name="qr-code-outline"></ion-icon>
         <ion-label>QR-Code Scannen</ion-label>

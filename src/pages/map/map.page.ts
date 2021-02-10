@@ -148,7 +148,7 @@ export class MapPage implements AfterViewInit {
 
     // Clear out the old markers.
     markers.forEach((marker) => {
-      marker.setMap(null);
+      marker?.setMap(null);
     });
     markers = [];
 
@@ -160,7 +160,7 @@ export class MapPage implements AfterViewInit {
         return;
       }
       const icon = {
-        url: place.icon as string,
+        url: '/assets/icons/pint-outline.svg',
         size: new google.maps.Size(71, 71),
         origin: new google.maps.Point(0, 0),
         anchor: new google.maps.Point(17, 34),
@@ -169,7 +169,7 @@ export class MapPage implements AfterViewInit {
 
       const marker = new google.maps.Marker({
         map: this.map.googleMap,
-        icon,
+        icon: icon,
         title: place.name,
         position: place.geometry.location,
       });
@@ -191,9 +191,9 @@ export class MapPage implements AfterViewInit {
     });
     this.map.fitBounds(bounds);
 
-    new MarkerClusterer(this.map, markers, {
+    /*new MarkerClusterer(this.map, markers, {
       imagePath:
         'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
-    });
+    });*/
   }
 }

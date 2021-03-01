@@ -28,41 +28,8 @@ export class ChatPage implements OnInit {
       },
     ],
   };
-  messages: any = [
-    {
-      id: 1,
-      author: { id: 1 },
-      type: '',
-      message: `Wie geht's dir?`,
-    },
-    {
-      id: 2,
-      author: {
-        id: 2,
-        image:
-          'https://images.pexels.com/photos/3764119/pexels-photo-3764119.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-      },
-      type: '',
-      message: 'Soweit gut',
-    },
-    {
-      id: 3,
-      author: {
-        id: 2,
-        image:
-          'https://images.pexels.com/photos/3764119/pexels-photo-3764119.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-      },
-      type: '',
-      message: '',
-      giphy_id: 'Icv7Clq2I7rvLTHqRV',
-    },
-    {
-      id: 4,
-      author: { id: 1 },
-      type: '',
-      message: `Sollen wir zusammen Rauchen gehen?`,
-    },
-  ];
+
+  messages: any = [];
   userActive: boolean = true;
   @ViewChild(IonContent) content: IonContent;
 

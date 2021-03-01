@@ -1,41 +1,68 @@
 import { Injectable } from '@angular/core';
 import { Plugins } from '@capacitor/core';
 
+export interface Author {
+  id?: number;
+  image?: string;
+}
+export interface Message {
+  id?: number;
+  author?: Author;
+  type?: string;
+  message?: string;
+  giphy_id?: string;
+}
+export interface Friend {
+  id: number;
+  name: string;
+  type: string;
+  image: string;
+  messages: Message[];
+}
 @Injectable({
   providedIn: 'root',
 })
 export class ChatService {
-  friends = [
+  friends: Friend[] = [
     {
       id: 1,
       name: 'Mathis Monn',
       type: 'Freund',
       image: '/assets/mathis.png',
-    },
-    {
-      id: 3,
-      name: 'Kumpels',
-      type: 'Gruppe',
-      image:
-        'https://images.pexels.com/photos/4843441/pexels-photo-4843441.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-    },
-    {
-      id: 4,
-      name: 'Lee Parker',
-      type: 'Freund',
-      image: 'https://randomuser.me/api/portraits/men/81.jpg',
-    },
-    {
-      id: 5,
-      name: 'Ernest Reyes',
-      type: 'Freund',
-      image: 'https://randomuser.me/api/portraits/men/52.jpg',
-    },
-    {
-      id: 6,
-      name: 'Veronica Watts',
-      type: 'Freundin',
-      image: 'https://randomuser.me/api/portraits/women/87.jpg',
+      messages: [
+        {
+          id: 1,
+          author: { id: 1 },
+          type: '',
+          message: `Danke für's Programmieren der App! 🤩`,
+        },
+        {
+          id: 2,
+          author: {
+            id: 2,
+            image:
+              'https://images.pexels.com/photos/3764119/pexels-photo-3764119.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+          },
+          type: '',
+          message: 'Easy - Gerne wieder! 🤝',
+        },
+        {
+          id: 3,
+          author: {
+            id: 1,
+          },
+          type: '',
+          message:
+            'Heute Abend gehen wir erstmal eine Shisha rauchen - geht auf mich!',
+          giphy_id: '',
+        },
+        {
+          id: 4,
+          author: { id: 1 },
+          type: '',
+          message: `Sollen wir zusammen Rauchen gehen?`,
+        },
+      ],
     },
   ];
 

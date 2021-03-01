@@ -44,7 +44,6 @@ export class FriendsListPage implements OnInit, OnDestroy {
   async addFriend() {
     const settings: CupertinoSettings = {
       initialBreak: 'top',
-      darkMode: true,
       backdrop: true,
       backdropOpacity: 0.4,
       buttonClose: true,

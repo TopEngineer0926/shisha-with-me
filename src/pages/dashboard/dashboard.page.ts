@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { Plugins } from '@capacitor/core';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import {
@@ -11,20 +17,36 @@ import { MapService } from 'src/common/services/map.service';
 import { ImageSharePage } from '../image-share/image-share.page';
 import { slideOpts } from './slider-config';
 import { CupertinoPane, CupertinoSettings } from 'cupertino-pane';
-
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+} from '@angular/animations';
 const { Geolocation, Camera, Share } = Plugins;
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
+  animations: [
+    trigger('visibilityChanged', [
+      state('shown', style({ opacity: 1 })),
+      state('hidden', style({ opacity: 0 })),
+      transition('shown => hidden', animate('600ms')),
+      transition('hidden => shown', animate('300ms')),
+    ]),
+  ],
 })
 export class DashboardPage implements AfterViewInit, OnDestroy {
   audio: HTMLAudioElement;
   @ViewChild('mainSlider') mainSlider: IonSlides;
   @ViewChild('map') map: google.maps.Map;
+  @ViewChild('videoElm') videoElm: ElementRef<HTMLVideoElement>;
   slideOpts = slideOpts;
   locationLoading: boolean = false;
+  visiblityState = 'hidden';
 
   options: google.maps.MapOptions = {
     disableDefaultUI: true,
@@ -102,7 +124,6 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
     this.cupertino = true;
     const settings: CupertinoSettings = {
       initialBreak: 'top',
-      darkMode: true,
       backdrop: true,
       backdropOpacity: 0.4,
       buttonClose: true,
@@ -181,7 +202,18 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
   }
 
   async startSession() {
+    this.visiblityState = 'shown';
+    const video = this.videoElm.nativeElement;
     await this.audio.play();
+    await video.play();
+    video.addEventListener('ended', () => {
+      this.visiblityState = 'hidden';
+      setTimeout(() => {
+        video.currentTime = 0;
+      }, 600);
+
+      // video.play();
+    });
     /*
     const alert = await this.alertCtrl.create({
       header: 'Session gestartet!',

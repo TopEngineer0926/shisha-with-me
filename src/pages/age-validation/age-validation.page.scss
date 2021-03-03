@@ -44,9 +44,18 @@ ion-content {
   }
 
   .border-box {
-    border: 1px solid #B2CCD3;
+    // border: 1px solid #b2ccd3;
+    margin-top: 30px;
+    padding: 10px 15px;
     .small-font {
-      font-size: 16px;
+      // font-size: 16px;
+    }
+    span {
+      font-size: 22px;
+    }
+    .app-name {
+      padding-top: 10px;
+      display: block;
     }
   }
 

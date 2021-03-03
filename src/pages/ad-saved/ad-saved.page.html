@@ -8,5 +8,8 @@
 </ion-header>
 
 <ion-content>
-  <app-ad-item *ngFor="let ad of adService.ads" [ad]="ad"></app-ad-item>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <app-ad-item *ngFor="let ad of wishlist.wishlist" [ad]="ad"></app-ad-item>
 </ion-content>

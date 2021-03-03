@@ -11,8 +11,7 @@ h1 {
 .price {
   position: relative;
   padding: 20px 20px;
-
-  background: linear-gradient(0deg, #3c3c3c 0%, #171717 100%);
+  background: linear-gradient(0deg, #171717 0%, #000000 100%);
   text-align: center;
   .small {
   }
@@ -47,4 +46,42 @@ h1 {
 
 .main-content {
   width: 100%;
+}
+.image-wrapper {
+  overflow: hidden;
+  position: relative;
+  .image-background {
+    display: block;
+    top: 0;
+    position: absolute;
+    height: 200px;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    filter: blur(20px);
+    z-index: 1;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: #000;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.3;
+    }
+  }
+  .image {
+    display: block;
+
+    position: relative;
+    height: 200px;
+    width: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    z-index: 2;
+  }
 }

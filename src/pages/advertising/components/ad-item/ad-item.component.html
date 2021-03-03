@@ -1,5 +1,13 @@
 <ion-card [routerLink]="['/advertising', ad.id]" button>
-  <img [src]="ad.image" />
+  <div class="image-wrapper">
+    <div
+      class="image-background"
+      [style.backgroundImage]="'url(' + ad.image + ')'"
+    ></div>
+
+    <div class="image" [style.backgroundImage]="'url(' + ad.image + ')'"></div>
+  </div>
+
   <ion-card-header>
     <ion-card-title>{{ ad.name }}</ion-card-title>
   </ion-card-header>

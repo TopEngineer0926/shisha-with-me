@@ -6,11 +6,20 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content fullscreen scrollEvents="true" parallax-header *ngIf="ad">
-  <div
+<ion-content fullscreen *ngIf="ad">
+  <!--<div
     class="header-image"
     [ngStyle]="{'background-image': 'url(' + ad.image + ')'}"
-  ></div>
+  ></div>-->
+  <div class="image-wrapper">
+    <div
+      class="image-background"
+      [style.backgroundImage]="'url(' + ad.image + ')'"
+    ></div>
+
+    <div class="image" [style.backgroundImage]="'url(' + ad.image + ')'"></div>
+  </div>
+
   <div class="main-content">
     <h1>{{ad.name}}</h1>
 
@@ -23,8 +32,12 @@
       <div class="small">
         statt <span class="normal-price">{{ad.price}} €</span>
       </div>
-      <ion-button class="wishlist" color="white"
-        ><ion-icon name="heart-outline"></ion-icon
+      <ion-button
+        (click)="addOrRemoveFromWishList()"
+        class="wishlist"
+        color="white"
+        ><ion-icon *ngIf="!isInWishList" name="heart-outline"></ion-icon>
+        <ion-icon *ngIf="isInWishList" name="heart"></ion-icon
       ></ion-button>
     </div>
 

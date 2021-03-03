@@ -3,14 +3,14 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Werbung</ion-title>
+    <!--<ion-title>Werbung</ion-title>-->
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Werbung</ion-title>
+      <!-- <ion-title size="large">Werbung</ion-title>-->
     </ion-toolbar>
   </ion-header>
 
@@ -29,26 +29,31 @@
   </div>
 
   <app-ad-item *ngFor="let ad of adService.ads" [ad]="ad"></app-ad-item>
-  <!--
-  <ion-card button (click)="helper.openLink('https://www.shisha-world.com/')">
-    <img src="/assets/images/advertising/2.png" />
-  </ion-card>
-  <ion-card button (click)="helper.openLink('https://www.shisha-world.com/')">
-    <img src="/assets/images/advertising/3.png" />
-  </ion-card>
-  <ion-card button (click)="helper.openLink('https://www.shisha-world.com/')">
-    <img src="/assets/images/advertising/4.png" />
-  </ion-card>
-  <ion-card button (click)="helper.openLink('https://www.shisha-world.com/')">
-    <img src="/assets/images/advertising/5.png" />
-  </ion-card>
-  <ion-card button (click)="helper.openLink('https://www.shisha-world.com/')">
-    <img src="/assets/images/advertising/6.png" />
-  </ion-card>
-  <ion-card button (click)="helper.openLink('https://www.shisha-world.com/')">
-    <img src="/assets/images/advertising/7.png" />
-  </ion-card>
-  <ion-card button (click)="helper.openLink('https://www.shisha-world.com/')">
-    <img src="/assets/images/advertising/8.png" />
-  </ion-card>-->
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-segment scrollable value="heart">
+      <ion-segment-button value="home">
+        <ion-label>Shisha</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="heart">
+        <ion-label>Köpfe</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="pin">
+        <ion-label>Kohle</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="star">
+        <ion-label>Molassefänger</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="call">
+        <ion-label>Zubehör</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="globe">
+        <ion-label>Mundstücke</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="basket">
+        <ion-label>Schläuche</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-footer>

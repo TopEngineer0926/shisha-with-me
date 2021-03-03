@@ -12,6 +12,9 @@
 @import '~swiper/swiper.scss';
 @import './assets/fonts/stylesheet.css';
 
+.cupertino-pane-wrapper {
+  z-index: 1000;
+}
 .cupertino-pane-home {
   z-index: 9000;
 }

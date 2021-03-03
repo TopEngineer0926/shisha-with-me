@@ -79,14 +79,14 @@
   "Instructions": "Anleitungen",
   "Links": "Links",
   "SliderPage": {
-    "Back": "Back",
-    "Continue": "Continue",
-    "Start": "Start",
-    "QrCode": "Qr Code",
+    "Back": "Zurück",
+    "Continue": "Weiter",
+    "Start": "Starten",
+    "QrCode": "QR Code",
     "Benutzername": "Benutzername",
-    "Telefonnumber": "Telefonnumber",
-    "Instagran": "Instagran",
-    "Title": "on-boarding",
+    "Telefonnumber": "Telefonnummer",
+    "Instagran": "Instagram",
+    "Title": "Willkommen",
     "Friend": "Freunde"
   }
 }

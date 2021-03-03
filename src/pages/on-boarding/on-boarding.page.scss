@@ -3,10 +3,27 @@ ion-slides {
   ion-slide {
     .wrapper {
       width: 100vw;
+
+      padding: 0 35px;
+      h1 {
+        margin-bottom: 30px;
+      }
+      form {
+        border-radius: 10px;
+        overflow: hidden;
+      }
     }
   }
 }
+
 .error {
   font-size: 0.8em;
   text-align: left;
+}
+ion-toolbar {
+  padding: 0 10px;
+  > div {
+    display: flex;
+    justify-content: space-between;
+  }
 }

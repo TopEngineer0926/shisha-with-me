@@ -14,27 +14,29 @@ export class OnBoardingPage implements OnInit {
   slideOpts = {
     initialSlide: 0,
     speed: 400,
-    allowTouchMove: false
+    allowTouchMove: false,
   };
   sliderNum = 0;
-  constructor(private navCtrl: NavController, public formBuilder: FormBuilder) {
-  }
+  constructor(
+    private navCtrl: NavController,
+    public formBuilder: FormBuilder
+  ) {}
 
   ngOnInit() {
     this.ionicForm = this.formBuilder.group({
       qrCode: [null, [Validators.required]],
       benutzername: [null, [Validators.required]],
       telefonnumber: [null],
-      instagran: [null]
+      instagran: [null],
     });
   }
 
   async goTo() {
-    await this.navCtrl.navigateRoot('/tabs/friends');
+    await this.navCtrl.navigateRoot('/tabs/home');
   }
 
   slideChange() {
-    this.slides.getActiveIndex().then(res => {
+    this.slides.getActiveIndex().then((res) => {
       this.sliderNum = res;
     });
   }

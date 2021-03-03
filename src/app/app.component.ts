@@ -1,3 +1,4 @@
+import { WishlistService } from './../common/services/wishlist.service';
 import { AfterViewInit, Component } from '@angular/core';
 import { Capacitor, Plugins, StatusBarStyle } from '@capacitor/core';
 import { TranslateService } from '@ngx-translate/core';
@@ -14,10 +15,12 @@ const { SplashScreen, StatusBar } = Plugins;
 export class AppComponent implements AfterViewInit {
   constructor(
     private helperService: HelperService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private wishlist: WishlistService
   ) {}
 
   async ngAfterViewInit() {
+    await this.wishlist.loadWishlist();
     if (Capacitor.isNative) {
       // StatusBar.setStyle({ style: StatusBarStyle.Light });
     }

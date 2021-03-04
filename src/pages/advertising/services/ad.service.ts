@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Plugins } from '@capacitor/core';
 
@@ -20,4 +21,10 @@ export class AdService {
         'https://www.shisha-world.com/ath-shisha-t-brass-ba-collection-mit-safir-base--hurrem-rauchrohr?number=SHWD13594',
     },
   ];
+
+  constructor(private http: HttpClient) {}
+
+  async load() {
+    return this.http.get('').toPromise();
+  }
 }

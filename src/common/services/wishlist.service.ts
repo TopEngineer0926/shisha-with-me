@@ -19,7 +19,7 @@ export class WishlistService {
   }
 
   async isInWishList(adItem) {
-    return this.wishlist.find((_adItem) => _adItem.id == adItem.id);
+    return this.wishlist?.find((_adItem) => _adItem.id == adItem.id);
   }
 
   async addToWishlist(adItem) {

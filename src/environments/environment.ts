@@ -6,6 +6,8 @@ export const environment = {
   production: false,
 
   appName: 'shisha-with-me',
+
+  apiUrl: 'https://api.shisha-with-me.codext.de',
 };
 
 /*

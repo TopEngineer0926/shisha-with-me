@@ -7,6 +7,7 @@ import { get, set } from './storage.service';
 
 import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
 import { DocumentViewerOptions } from '@ionic-native/document-viewer';
+import { environment } from 'src/environments/environment';
 
 const { SplashScreen, StatusBar, Browser } = Plugins;
 
@@ -27,6 +28,12 @@ export class HelperService {
 
   async openLink(url) {
     await Browser.open({ url: url });
+  }
+
+  getImageUrl(url) {
+    if (url) {
+      return `${environment.apiUrl}${url}`;
+    }
   }
 
   async openPdf(url) {

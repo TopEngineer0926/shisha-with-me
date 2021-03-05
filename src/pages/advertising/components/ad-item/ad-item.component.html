@@ -2,18 +2,28 @@
   <div class="image-wrapper">
     <div
       class="image-background"
-      [style.backgroundImage]="'url(' + ad.image + ')'"
+      [style.backgroundImage]="
+        'url(' + helper.getImageUrl(ad.image?.formats?.medium?.url) + ')'
+      "
     ></div>
 
-    <div class="image" [style.backgroundImage]="'url(' + ad.image + ')'"></div>
+    <div
+      class="image"
+      [style.backgroundImage]="
+        'url(' + helper.getImageUrl(ad.image?.formats?.medium?.url) + ')'
+      "
+    ></div>
   </div>
 
   <ion-card-header>
-    <ion-card-title>{{ ad.name }}</ion-card-title>
+    <ion-card-title>{{ ad.title }}</ion-card-title>
   </ion-card-header>
   <ion-card-content>
-    <p>
+    <p *ngIf="ad.offerPrice">
       für nur <span class="offer">{{ ad.offerPrice }} €</span> statt
+      <span class="price">{{ ad.price }} €</span>
+    </p>
+    <p *ngIf="!ad.offerPrice">
       <span class="price">{{ ad.price }} €</span>
     </p>
   </ion-card-content>

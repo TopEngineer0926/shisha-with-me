@@ -25,6 +25,14 @@ export class AdService {
   constructor(private http: HttpClient) {}
 
   async load() {
-    return this.http.get('').toPromise();
+    return this.http
+      .get('https://api.shisha-with-me.codext.de/categories')
+      .toPromise();
+  }
+
+  async loadOne(id: number) {
+    return this.http
+      .get('https://api.shisha-with-me.codext.de/ads/' + id)
+      .toPromise();
   }
 }

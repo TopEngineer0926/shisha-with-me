@@ -14,14 +14,17 @@
   <div class="image-wrapper">
     <div
       class="image-background"
-      [style.backgroundImage]="'url(' + ad.image + ')'"
+      [style.backgroundImage]="'url(' + helper.getImageUrl(ad.image?.formats?.medium?.url) + ')'"
     ></div>
 
-    <div class="image" [style.backgroundImage]="'url(' + ad.image + ')'"></div>
+    <div
+      class="image"
+      [style.backgroundImage]="'url(' + helper.getImageUrl(ad.image?.formats?.medium?.url) + ')'"
+    ></div>
   </div>
 
   <div class="main-content">
-    <h1>{{ad.name}}</h1>
+    <h1>{{ad.title}}</h1>
 
     <div class="price">
       <ion-button class="share" color="white"

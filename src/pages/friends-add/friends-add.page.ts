@@ -51,22 +51,4 @@ export class FriendsAddPage implements OnInit {
       event.target.complete();
     }, 2000);
   }
-
-  async connect(friend) {
-    const toast = await this.toastCtrl.create({
-      message: 'Anfrage gesendet',
-      translucent: true,
-      duration: 3000,
-      buttons: [
-        {
-          text: 'Ok',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          },
-        },
-      ],
-    });
-    toast.present();
-  }
 }

@@ -1,12 +1,16 @@
+import { HelperService } from './../../common/services/helper.service';
+import { HttpClient } from '@angular/common/http';
 import { ChatService } from './../../common/services/chat.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {
   AlertController,
+  LoadingController,
   ModalController,
   NavController,
 } from '@ionic/angular';
 import { CupertinoPane, CupertinoSettings } from 'cupertino-pane';
 import { Plugins } from '@capacitor/core';
+import { environment } from 'src/environments/environment';
 const { Share } = Plugins;
 
 @Component({
@@ -23,18 +27,38 @@ export class FriendsListPage implements OnInit, OnDestroy {
     private navCtrl: NavController,
     private alertController: AlertController,
     public chatService: ChatService,
-    public modalController: ModalController
+    public modalController: ModalController,
+    private loadingCtrl: LoadingController,
+    private http: HttpClient,
+    public helper: HelperService
   ) {}
 
-  ngOnInit() {}
+  async ngOnInit() {
+    await this.load();
+  }
 
   ngOnDestroy() {
     this.myPane.destroy();
   }
 
-  doRefresh(event) {
-    console.log('Begin async operation');
+  async load() {
+    const loading = await this.loadingCtrl.create();
+    loading.present();
+    try {
+      const data: any = await this.http
+        .get(`${environment.apiUrl}/chats`)
+        .toPromise();
+      this.chatService.chats = data;
+      console.log('data', data);
+    } catch (error) {
+    } finally {
+      loading.dismiss();
+    }
+  }
 
+  async doRefresh(event) {
+    console.log('Begin async operation');
+    await this.load();
     setTimeout(() => {
       console.log('Async operation has ended');
       event.target.complete();

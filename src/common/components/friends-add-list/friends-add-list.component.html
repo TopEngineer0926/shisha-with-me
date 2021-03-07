@@ -1,3 +1,15 @@
-<p>
-  friends-add-list works!
-</p>
+<ion-list>
+  <ion-list-header>
+    <ion-label>Vorschläge</ion-label>
+  </ion-list-header>
+  <ion-item *ngFor="let friend of friends">
+    <ion-avatar slot="start">
+      <img [src]="helper.getImageUrl(friend.image?.url)" />
+    </ion-avatar>
+    <ion-label>
+      <h2>{{ friend.name }}</h2>
+      <p>{{ friend.Platform }}</p>
+    </ion-label>
+    <ion-button slot="end" (click)="connect(friend)"> Verbinden </ion-button>
+  </ion-item>
+</ion-list>

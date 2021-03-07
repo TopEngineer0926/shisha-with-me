@@ -4,10 +4,8 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title *ngIf="chat">
-      <div *ngFor="let chatMember of api.exceptMe(chat.chat_members, 'user')">
-        <span (click)="openFriend(chatMember?.user?.id)"
-          >{{ chatMember?.user?.name }}</span
-        >
+      <div>
+        <span (click)="openFriend(chatNew?.id)">{{ chatNew?.name}}</span>
       </div>
       <small
         *ngIf="chatService.isConnected"
@@ -16,13 +14,9 @@
       >
     </ion-title>
     <ion-buttons slot="end">
-      <div
-        *ngFor="let chatMember of api.exceptMe(chat.chat_members, 'user')"
-        (click)="openFriend(chatMember?.user?.id)"
-        class="header-avatar"
-      >
+      <div (click)="openFriend(chatNew.id)" class="header-avatar">
         <div
-          [style.backgroundImage]="'url(' +  chatMember?.user?.image + ')'"
+          [style.backgroundImage]="'url(' +  helper.getImageUrl(chatNew?.image?.url) + ')'"
         ></div>
       </div>
     </ion-buttons>
@@ -30,7 +24,10 @@
 </ion-header>
 
 <ion-content fullscreen="true">
-  <div *ngIf="messages && !messages.length" class="center no-data">
+  <div
+    *ngIf="chatNew?.messages && !chatNew?.messages?.length"
+    class="center no-data"
+  >
     Schreibe die erste Nachricht
   </div>
 
@@ -38,16 +35,21 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <div class="chat-list" #chatList *ngIf="messages.length >= 1" infiniteScroll>
+  <div
+    class="chat-list"
+    #chatList
+    *ngIf="chatNew?.messages?.length >= 1"
+    infiniteScroll
+  >
     <div
       class="chat-item"
       [id]="last ? 'last-item': 'item' + i"
-      *ngFor="let item of messages; let i = index; let last = last"
-      [class.me]="item.author?.id == api.userStorage.id"
+      *ngFor="let item of chatNew?.messages; let i = index; let last = last"
+      [class.me]="item.myMessage"
     >
       <div class="chat-item-content" [class.date-visible]="item.info">
-        <div class="chat-avatar" *ngIf="item.author?.id !== api.userStorage.id">
-          <img [src]="item.author?.image" />
+        <div class="chat-avatar" *ngIf="!item.myMessage">
+          <img [src]="helper.getImageUrl(chatNew?.image?.url)" />
         </div>
         <div
           class="chat-item-bubble"

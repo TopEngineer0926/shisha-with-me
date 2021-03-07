@@ -1,14 +1,18 @@
+import { HttpClient } from '@angular/common/http';
+import { HelperService } from './../../common/services/helper.service';
 import { ProfilePage } from './../profile/profile.page';
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import {
   ActionSheetController,
   IonContent,
   IonRouterOutlet,
+  LoadingController,
   ModalController,
   NavController,
 } from '@ionic/angular';
 import { ChatService } from 'src/common/services/chat.service';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-chat',
@@ -55,6 +59,8 @@ export class ChatPage implements OnInit {
 
   id: number;
 
+  chatNew: any;
+
   constructor(
     public chatService: ChatService,
     private actionSheetCtrl: ActionSheetController,
@@ -62,10 +68,13 @@ export class ChatPage implements OnInit {
     private modalCtrl: ModalController,
     private routerOutlet: IonRouterOutlet,
     private route: ActivatedRoute,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private loadingCtrl: LoadingController,
+    public helper: HelperService,
+    private http: HttpClient
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.id = this.route.snapshot.params.id;
     if (this.id) {
       const chatPartner = this.chatService.friends.find(
@@ -74,8 +83,25 @@ export class ChatPage implements OnInit {
       console.log(chatPartner);
       this.chat.chat_members[1].user.name = chatPartner.name;
       this.chat.chat_members[1].user.image = chatPartner.image;
+
+      await this.load();
     } else {
       this.navCtrl.back();
+    }
+  }
+
+  async load() {
+    const loading = await this.loadingCtrl.create();
+    loading.present();
+    try {
+      const data: any = await this.http
+        .get(`${environment.apiUrl}/chats/${this.id}`)
+        .toPromise();
+      this.chatNew = data;
+      console.log('data', data);
+    } catch (error) {
+    } finally {
+      loading.dismiss();
     }
   }
 

@@ -8,6 +8,7 @@ import { OnBoardingPageRoutingModule } from './on-boarding-routing.module';
 
 import { OnBoardingPage } from './on-boarding.page';
 import { TranslateModule } from '@ngx-translate/core';
+import { FriendsAddListComponentModule } from 'src/common/components/friends-add-list/friends-add-list.module';
 
 @NgModule({
   imports: [
@@ -16,8 +17,10 @@ import { TranslateModule } from '@ngx-translate/core';
     IonicModule,
     OnBoardingPageRoutingModule,
     TranslateModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
+    FriendsAddListComponentModule,
   ],
-  declarations: [OnBoardingPage]
+  declarations: [OnBoardingPage],
 })
 export class OnBoardingPageModule {}

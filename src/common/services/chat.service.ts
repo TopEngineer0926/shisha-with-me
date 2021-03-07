@@ -23,6 +23,7 @@ export interface Friend {
   providedIn: 'root',
 })
 export class ChatService {
+  chats: any = [];
   friends: Friend[] = [
     {
       id: 1,

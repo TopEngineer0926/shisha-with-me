@@ -7,14 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { FriendsAddPageRoutingModule } from './friends-add-routing.module';
 
 import { FriendsAddPage } from './friends-add.page';
+import { FriendsAddListComponentModule } from 'src/common/components/friends-add-list/friends-add-list.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FriendsAddPageRoutingModule
+    FriendsAddPageRoutingModule,
+
+    FriendsAddListComponentModule,
   ],
-  declarations: [FriendsAddPage]
+  declarations: [FriendsAddPage],
 })
 export class FriendsAddPageModule {}

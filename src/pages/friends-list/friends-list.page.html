@@ -35,10 +35,10 @@
     <ion-item
       button
       [routerLink]="['/chat', friend.id]"
-      *ngFor=" let friend of chatService.friends"
+      *ngFor="let friend of chatService.chats"
     >
       <ion-avatar slot="start">
-        <img [src]="friend.image" />
+        <img [src]="helper.getImageUrl(friend.image?.url)" />
       </ion-avatar>
       <ion-label
         ><h2>{{friend.name}}</h2>

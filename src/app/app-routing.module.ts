@@ -22,6 +22,7 @@ import { AgeValidationPageModule } from 'src/pages/age-validation/age-validation
 import { StartSessionPageModule } from 'src/pages/start-session/start-session.module';
 import { OnBoardingPageModule } from 'src/pages/on-boarding/on-boarding.module';
 import { AdPageModule } from 'src/pages/advertising/pages/ad/ad.module';
+import { FriendsAddPageModule } from 'src/pages/friends-add/friends-add.module';
 const routes: Routes = [
   {
     path: '',
@@ -115,6 +116,10 @@ const routes: Routes = [
   {
     path: 'advertising/:id',
     loadChildren: () => AdPageModule,
+  },
+  {
+    path: 'friends-add',
+    loadChildren: () => FriendsAddPageModule,
   },
 ];
 @NgModule({

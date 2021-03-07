@@ -41,6 +41,10 @@ export class FriendsListPage implements OnInit, OnDestroy {
     }, 2000);
   }
 
+  async openFriendAddList() {
+    this.navCtrl.navigateForward('/friends-add');
+  }
+
   async addFriend() {
     const settings: CupertinoSettings = {
       initialBreak: 'top',

@@ -12,4 +12,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <app-ad-item *ngFor="let ad of wishlist.wishlist" [ad]="ad"></app-ad-item>
+  <div class="no-items" *ngIf="!(wishlist?.wishlist?.length > 0)">
+    Noch keine Einträge vorhanden
+  </div>
 </ion-content>

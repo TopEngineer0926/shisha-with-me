@@ -1,3 +1,7 @@
+import { HelperService } from './../../common/services/helper.service';
+import { environment } from './../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { ToastController, LoadingController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +10,63 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./friends-add.page.scss'],
 })
 export class FriendsAddPage implements OnInit {
+  friends = [
+    {
+      name: 'Daniel Ehrhardt',
+      platform: 'Instagram',
+    },
+  ];
 
-  constructor() { }
+  constructor(
+    private loadingCtrl: LoadingController,
+    private toastCtrl: ToastController,
+    private http: HttpClient,
+    public helper: HelperService
+  ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.load();
   }
 
+  async load() {
+    const loading = await this.loadingCtrl.create();
+    loading.present();
+    try {
+      const data: any = await this.http
+        .get(`${environment.apiUrl}/friends`)
+        .toPromise();
+      this.friends = data;
+      console.log('data', data);
+    } catch (error) {
+    } finally {
+      loading.dismiss();
+    }
+  }
+
+  async doRefresh(event) {
+    console.log('Begin async operation');
+    await this.load();
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
+  }
+
+  async connect(friend) {
+    const toast = await this.toastCtrl.create({
+      message: 'Anfrage gesendet',
+      translucent: true,
+      duration: 3000,
+      buttons: [
+        {
+          text: 'Ok',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          },
+        },
+      ],
+    });
+    toast.present();
+  }
 }

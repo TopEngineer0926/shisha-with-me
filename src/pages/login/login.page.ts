@@ -36,7 +36,9 @@ export class LoginPage implements OnInit {
     return await modal.present();
   }
 
-  async login(type: 'facebook' | 'google' | 'apple' | 'phone' | 'snapchat') {
+  async login(
+    type: 'facebook' | 'google' | 'apple' | 'phone' | 'snapchat' | 'instagram'
+  ) {
     let message;
     switch (type) {
       case 'facebook':
@@ -53,6 +55,10 @@ export class LoginPage implements OnInit {
         break;
       case 'snapchat':
         message = 'Login mit Snapchat ...';
+        break;
+
+      case 'instagram':
+        message = 'Login mit Instagram ...';
         break;
     }
     const loading = await this.loadingCtrl.create({ message });

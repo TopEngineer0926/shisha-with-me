@@ -4,6 +4,9 @@ import { HelperService } from './../../../../common/services/helper.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AdService } from '../../services/ad.service';
+import { Plugins } from '@capacitor/core';
+
+const { Share } = Plugins;
 
 @Component({
   selector: 'app-ad',
@@ -30,6 +33,15 @@ export class AdPage implements OnInit {
     console.log(this.wishlist.wishlist);
     this.isInWishList = !!(await this.wishlist.isInWishList(this.ad));
     console.log(this.isInWishList);
+  }
+
+  async shareAd() {
+    await Share.share({
+      title: 'Shisha With Me',
+      text: `Das habe ich bei Shisha With Me gefunden: ${this.ad.link}`,
+      url: this.ad.link,
+      dialogTitle: 'Teile diesen Eintrag',
+    });
   }
 
   async load(id) {

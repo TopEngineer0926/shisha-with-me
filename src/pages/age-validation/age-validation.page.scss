@@ -26,6 +26,9 @@ ion-content {
   }
   .year-input {
     margin-top: 40px;
+    background: #071c2f;
+    padding: 20px;
+    border-radius: 20px;
   }
   .small {
     opacity: 0.4;
@@ -51,10 +54,10 @@ ion-content {
       // font-size: 16px;
     }
     span {
-      font-size: 22px;
+      font-size: 30px;
     }
     .app-name {
-      padding-top: 10px;
+      padding-top: 20px;
       display: block;
     }
   }
@@ -70,7 +73,7 @@ ion-content {
 
   strong {
     font-weight: bolder;
-    font-size: 35px;
+    font-size: 43px;
   }
 
   span {

@@ -11,9 +11,11 @@ apply from: "../capacitor-cordova-android-plugins/cordova.variables.gradle"
 dependencies {
     implementation project(':byteowls-capacitor-filesharer')
     implementation "androidx.appcompat:appcompat:1.0.0"
+    implementation "com.android.support:support-v4:26.+"
     implementation "com.squareup.okhttp3:okhttp:3.12.0"
 }
-
+apply from: "../../node_modules/cordova-plugin-badge/src/android/badge.gradle"
+apply from: "../../node_modules/cordova-plugin-local-notification/src/android/build/localnotification.gradle"
 
 if (hasProperty('postBuildExtras')) {
   postBuildExtras()

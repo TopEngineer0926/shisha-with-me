@@ -8,6 +8,9 @@
     justify-content: center;
 
     flex-direction: column;
+    h3 {
+      color: #fff;
+    }
   }
   ngx-qrcode {
     border-radius: 10px;

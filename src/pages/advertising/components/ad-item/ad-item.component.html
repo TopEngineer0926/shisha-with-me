@@ -2,16 +2,12 @@
   <div class="image-wrapper">
     <div
       class="image-background"
-      [style.backgroundImage]="
-        'url(' + helper.getImageUrl(ad.image?.formats?.medium?.url) + ')'
-      "
+      [style.backgroundImage]="'url(' + helper.getImageUrl(ad.image?.url) + ')'"
     ></div>
 
     <div
       class="image"
-      [style.backgroundImage]="
-        'url(' + helper.getImageUrl(ad.image?.formats?.medium?.url) + ')'
-      "
+      [style.backgroundImage]="'url(' + helper.getImageUrl(ad.image?.url) + ')'"
     ></div>
   </div>
 

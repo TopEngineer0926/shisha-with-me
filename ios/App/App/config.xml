@@ -6,12 +6,24 @@
     <param name="ios-package" value="ActionSheet"/>
   </feature>
 
+  <feature name="Badge">
+    <param name="ios-package" value="APPBadge"/>
+  </feature>
+
+  <feature name="Device">
+    <param name="ios-package" value="CDVDevice"/>
+  </feature>
+
   <feature name="Notification">
     <param name="ios-package" value="CDVNotification"/>
   </feature>
 
   <feature name="SitewaertsDocumentViewer">
     <param name="ios-package" value="SitewaertsDocumentViewer"/>
+  </feature>
+
+  <feature name="LocalNotification">
+    <param name="ios-package" value="APPLocalNotification"/>
   </feature>
 
   <feature name="LaunchNavigator">

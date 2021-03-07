@@ -1,3 +1,4 @@
+import { HelperService } from './../../common/services/helper.service';
 import { IonRouterOutlet, ModalController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { AddictionCounselingPage } from './pages/addiction-counseling/addiction-counseling.page';
@@ -13,7 +14,8 @@ import Swiper from 'swiper';
 export class NoSmokePage implements OnInit {
   constructor(
     private modalCtrl: ModalController,
-    private routerOutlet: IonRouterOutlet
+    private routerOutlet: IonRouterOutlet,
+    public helper: HelperService
   ) {}
 
   ngAfterViewInit() {

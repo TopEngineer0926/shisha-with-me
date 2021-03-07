@@ -28,7 +28,7 @@
         <h1>Wie willst du gefunden werden?</h1>
         <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
           <ion-item>
-            <ion-label>{{'SliderPage.QrCode' | translate}}*</ion-label>
+            <ion-label>{{'SliderPage.QrCode' | translate}}</ion-label>
             <ion-checkbox formControlName="qrCode" slot="end"></ion-checkbox>
           </ion-item>
           <!-- Error messages -->
@@ -38,25 +38,22 @@
             *ngIf="isSubmitted && errorControl.qrCode.errors?.required"
           >
             <p class="ion-no-margin ion-margin-horizontal">
-              {{'SliderPage.QrCode' | translate}} Code is required.
+              {{'SliderPage.QrCode' | translate}} Code ist erforderlich.
             </p>
           </ion-text>
 
           <ion-item>
-            <ion-label>{{'SliderPage.Benutzername' | translate}}*</ion-label>
-            <ion-checkbox
-              formControlName="benutzername"
-              slot="end"
-            ></ion-checkbox>
+            <ion-label>{{'SliderPage.Benutzername' | translate}}</ion-label>
+            <ion-checkbox formControlName="username" slot="end"></ion-checkbox>
           </ion-item>
           <!-- Error messages -->
           <ion-text
             color="danger"
             class="error"
-            *ngIf="isSubmitted && errorControl.benutzername.errors?.required"
+            *ngIf="isSubmitted && errorControl.username.errors?.required"
           >
             <p class="ion-no-margin ion-margin-horizontal">
-              {{'SliderPage.Benutzername' | translate}} is required.
+              {{'SliderPage.Benutzername' | translate}} ist erforderlich.
             </p>
           </ion-text>
 
@@ -77,7 +74,7 @@
     </ion-slide>
     <ion-slide>
       <div class="wrapper">
-        <h1>Slider 3</h1>
+        <h1>Freunde hinzufügen</h1>
       </div>
     </ion-slide>
   </ion-slides>

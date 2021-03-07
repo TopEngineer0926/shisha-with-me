@@ -24,8 +24,8 @@ export class OnBoardingPage implements OnInit {
 
   ngOnInit() {
     this.ionicForm = this.formBuilder.group({
-      qrCode: [null, [Validators.required]],
-      benutzername: [null, [Validators.required]],
+      qrCode: [true, [Validators.required]],
+      username: [true, [Validators.required]],
       telefonnumber: [null],
       instagran: [null],
     });

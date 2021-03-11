@@ -23,15 +23,17 @@ import { StartSessionPageModule } from 'src/pages/start-session/start-session.mo
 import { OnBoardingPageModule } from 'src/pages/on-boarding/on-boarding.module';
 import { AdPageModule } from 'src/pages/advertising/pages/ad/ad.module';
 import { FriendsAddPageModule } from 'src/pages/friends-add/friends-add.module';
+import { AuthGuard } from 'src/common/guards/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: '/tabs/home',
     pathMatch: 'full',
   },
   {
     path: 'tabs',
     loadChildren: () => TabsPageModule,
+    canActivate: [AuthGuard],
   },
   {
     path: 'walkthrough',
@@ -44,70 +46,87 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: () => DashboardPageModule,
+    canActivate: [AuthGuard],
   },
   {
     path: 'map',
     loadChildren: () => MapPageModule,
+    canActivate: [AuthGuard],
   },
   {
     path: 'friends-list',
     loadChildren: () => FriendsListPageModule,
+    canActivate: [AuthGuard],
   },
   {
     path: 'profile/:id',
     loadChildren: () => ProfilePageModule,
+    canActivate: [AuthGuard],
   },
   {
     path: 'history',
     loadChildren: () => HistoryPageModule,
+    canActivate: [AuthGuard],
   },
   {
     path: 'settings',
     loadChildren: () => SettingsPageModule,
+    canActivate: [AuthGuard],
   },
   {
     path: 'profile-edit',
     loadChildren: () => ProfileEditPageModule,
+    canActivate: [AuthGuard],
   },
   {
     path: 'chat/:id',
     loadChildren: () => ChatPageModule,
+    canActivate: [AuthGuard],
   },
   {
     path: 'image-share',
     loadChildren: () => ImageSharePageModule,
+    canActivate: [AuthGuard],
   },
   {
     path: 'place',
     loadChildren: () => PlacePageModule,
+    canActivate: [AuthGuard],
   },
   {
     path: 'advertising',
     loadChildren: () => AdvertisingPageModule,
+    canActivate: [AuthGuard],
   },
   {
     path: 'no-smoke',
     loadChildren: () => NoSmokePageModule,
+    canActivate: [AuthGuard],
   },
   {
     path: 'addiction-counseling',
     loadChildren: () => AddictionCounselingPageModule,
+    canActivate: [AuthGuard],
   },
   {
     path: 'addiction-information',
     loadChildren: () => AddictionInformationPageModule,
+    canActivate: [AuthGuard],
   },
   {
     path: 'addiction-motivation',
     loadChildren: () => AddictionMotivationPageModule,
+    canActivate: [AuthGuard],
   },
   {
     path: 'age-validation',
     loadChildren: () => AgeValidationPageModule,
+    canActivate: [AuthGuard],
   },
   {
     path: 'start-session',
     loadChildren: () => StartSessionPageModule,
+    canActivate: [AuthGuard],
   },
   {
     path: 'on-boarding',
@@ -116,10 +135,12 @@ const routes: Routes = [
   {
     path: 'advertising/:id',
     loadChildren: () => AdPageModule,
+    canActivate: [AuthGuard],
   },
   {
     path: 'friends-add',
     loadChildren: () => FriendsAddPageModule,
+    canActivate: [AuthGuard],
   },
 ];
 @NgModule({

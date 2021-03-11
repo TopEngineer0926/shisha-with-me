@@ -77,12 +77,12 @@ export class ChatPage implements OnInit {
   async ngOnInit() {
     this.id = this.route.snapshot.params.id;
     if (this.id) {
-      const chatPartner = this.chatService.friends.find(
+      /*const chatPartner = this.chatService.friends.find(
         (friend) => friend.id == this.id
       );
       console.log(chatPartner);
       this.chat.chat_members[1].user.name = chatPartner.name;
-      this.chat.chat_members[1].user.image = chatPartner.image;
+      this.chat.chat_members[1].user.image = chatPartner.image;*/
 
       await this.load();
     } else {

@@ -78,11 +78,7 @@
   </ion-list>
 
   <div class="logout">
-    <ion-button
-      [routerLink]="['/login']"
-      color="danger"
-      fill="outline"
-      size="small"
+    <ion-button (click)="logout()" color="danger" fill="outline" size="small"
       >Abmelden</ion-button
     >
   </div>

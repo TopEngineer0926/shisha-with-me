@@ -23,6 +23,10 @@ export class WishlistService {
   }
 
   async addToWishlist(adItem) {
+    console.log('adItem', adItem, this.wishlist);
+    if (!this.wishlist) {
+      this.wishlist = [];
+    }
     this.wishlist.push(adItem);
     await this.saveWishlist();
 

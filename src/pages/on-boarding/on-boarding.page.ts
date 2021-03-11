@@ -1,6 +1,7 @@
 import { IonSlides, NavController } from '@ionic/angular';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { set } from 'src/common/services/storage.service';
 
 @Component({
   selector: 'app-on-boarding',
@@ -32,6 +33,7 @@ export class OnBoardingPage implements OnInit {
   }
 
   async goTo() {
+    await set('loggedIn', true);
     await this.navCtrl.navigateRoot('/tabs/home');
   }
 

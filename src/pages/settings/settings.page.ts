@@ -10,7 +10,7 @@ import {
 } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { HelperService } from 'src/common/services/helper.service';
-import { get, set } from 'src/common/services/storage.service';
+import { get, remove, set } from 'src/common/services/storage.service';
 import { ProfilePage } from '../profile/profile.page';
 
 @Component({
@@ -150,5 +150,10 @@ export class SettingsPage implements OnInit {
     set('language', JSON.stringify(selection));
     this.language = selection;
     this.translate.use(selection.code);
+  }
+
+  async logout() {
+    await remove('loggedIn');
+    this.navCtrl.navigateRoot('/login');
   }
 }

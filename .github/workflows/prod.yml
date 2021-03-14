@@ -66,4 +66,4 @@ jobs:
           serviceAccountJson: service_account.json
           packageName: de.codext.shishawithme
           releaseFiles: ${{steps.sign.outputs.signedReleaseFile}}
-          track: production
+          track: internal

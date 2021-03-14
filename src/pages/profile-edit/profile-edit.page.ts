@@ -1,7 +1,12 @@
-import { AlertController, ModalController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
-import { CameraPhoto, CameraResultType, CameraSource, Plugins } from '@capacitor/core';
-const { Geolocation, Camera, Share } = Plugins;
+import {
+  CameraPhoto,
+  CameraResultType,
+  CameraSource,
+  Plugins,
+} from '@capacitor/core';
+import { AlertController, ModalController } from '@ionic/angular';
+const { Camera } = Plugins;
 
 @Component({
   selector: 'app-profile-edit',
@@ -93,7 +98,11 @@ export class ProfileEditPage implements OnInit {
       source: CameraSource.Prompt,
       quality: 90,
       allowEditing: true,
-      resultType: CameraResultType.Uri
+      resultType: CameraResultType.Uri,
+      promptLabelHeader: '',
+      promptLabelCancel: 'Abbrechen',
+      promptLabelPhoto: 'Foto aufnehmen',
+      promptLabelPicture: 'Foto auswählen',
     });
 
     this.image = image;

@@ -1,7 +1,12 @@
 import { ModalController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
-import { Plugins, CameraResultType, CameraPhoto } from '@capacitor/core';
+import {
+  Plugins,
+  CameraResultType,
+  CameraPhoto,
+  CameraSource,
+} from '@capacitor/core';
 const { Geolocation, Camera, Share } = Plugins;
 
 @Component({
@@ -24,9 +29,14 @@ export class ImageSharePage implements OnInit {
 
   async takePicture() {
     const image = await Camera.getPhoto({
+      source: CameraSource.Prompt,
       quality: 90,
       allowEditing: true,
       resultType: CameraResultType.Uri,
+      promptLabelHeader: '',
+      promptLabelCancel: 'Abbrechen',
+      promptLabelPhoto: 'Foto aufnehmen',
+      promptLabelPicture: 'Foto auswählen',
     });
 
     this.image = image;

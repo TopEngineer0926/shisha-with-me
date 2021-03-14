@@ -31,9 +31,10 @@
         ><ion-icon name="share-outline"></ion-icon
       ></ion-button>
       <div class="small">für nur</div>
-      <div class="amount offer">{{ad.offerPrice}} €</div>
+      <div class="amount offer">{{ad.offerPrice |currency:'EUR':true}}</div>
       <div class="small">
-        statt <span class="normal-price">{{ad.price}} €</span>
+        statt
+        <span class="normal-price">{{ad.price |currency:'EUR':true}}</span>
       </div>
       <ion-button
         (click)="addOrRemoveFromWishList()"

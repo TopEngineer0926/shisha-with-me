@@ -33,7 +33,7 @@
   <div class="swipe-area">
     <ion-slides slidesPerView="auto">
       <ion-slide *ngFor="let topDeal of topDeals">
-        <div>
+        <div [routerLink]="['/advertising', topDeal.id]">
           <div
             class="image"
             [style.backgroundImage]="'url(' + helper.getImageUrl(topDeal.image?.formats?.small?.url) + ')'"

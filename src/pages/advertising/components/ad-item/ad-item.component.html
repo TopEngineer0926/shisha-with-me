@@ -16,11 +16,13 @@
   </ion-card-header>
   <ion-card-content>
     <p *ngIf="ad.offerPrice">
-      für nur <span class="offer">{{ ad.offerPrice }} €</span> statt
-      <span class="price">{{ ad.price }} €</span>
+      für nur
+      <span class="offer">{{ ad.offerPrice | currency: 'EUR':true }}</span>
+      statt
+      <span class="price">{{ ad.price | currency: 'EUR':true }}</span>
     </p>
     <p *ngIf="!ad.offerPrice">
-      <span class="price">{{ ad.price }} €</span>
+      <span class="price">{{ ad.price | currency: 'EUR':true }} </span>
     </p>
   </ion-card-content>
 </ion-card>

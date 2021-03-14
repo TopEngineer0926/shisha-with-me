@@ -31,6 +31,10 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
+  <div class="no-items" *ngIf="!(chatService?.chats?.length > 0)">
+    Noch keine Einträge vorhanden
+  </div>
+
   <ion-list>
     <ion-item
       button

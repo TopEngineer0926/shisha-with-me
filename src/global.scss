@@ -164,6 +164,12 @@ small {
   }
 }
 
+ion-item {
+  ion-label {
+    white-space: pre-wrap !important;
+  }
+}
+
 ion-button,
 button {
   text-transform: none !important;

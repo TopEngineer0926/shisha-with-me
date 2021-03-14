@@ -7,7 +7,7 @@ export const environment = {
 
   appName: 'shisha-with-me',
 
-  apiUrl: 'http://localhost:1337',
+  apiUrl: 'https://api.shisha-with-me.codext.de',
 };
 
 /*

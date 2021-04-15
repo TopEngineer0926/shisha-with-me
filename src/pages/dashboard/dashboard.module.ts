@@ -18,7 +18,6 @@ import { SwiperModule } from 'ngx-swiper-wrapper';
     IonicModule,
     DashboardPageRoutingModule,
     SwiperModule,
-    MapPageModule,
     GoogleMapsModule,
   ],
   declarations: [DashboardPage],

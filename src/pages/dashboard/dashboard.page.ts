@@ -1,9 +1,16 @@
 import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
+import {
   AfterViewInit,
   Component,
+  ElementRef,
   OnDestroy,
   ViewChild,
-  ElementRef,
 } from '@angular/core';
 import { Plugins } from '@capacitor/core';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
@@ -13,17 +20,11 @@ import {
   IonSlides,
   ModalController,
 } from '@ionic/angular';
+import { CupertinoPane, CupertinoSettings } from 'cupertino-pane';
 import { MapService } from 'src/common/services/map.service';
 import { ImageSharePage } from '../image-share/image-share.page';
+import { MapPage } from '../map/map.page';
 import { slideOpts } from './slider-config';
-import { CupertinoPane, CupertinoSettings } from 'cupertino-pane';
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition,
-} from '@angular/animations';
 const { Geolocation, Camera, Share } = Plugins;
 
 @Component({
@@ -71,7 +72,6 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
     },
     {
       image: 'assets/images/slider/almassiva.png',
-
       children: [
         { image: 'assets/images/slider/flavor/almassiva.png' },
         { image: 'assets/images/slider/flavor/almassiva2.png' },
@@ -92,14 +92,12 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
   ];
 
   cupertino: boolean = false;
-
   myPane: CupertinoPane;
 
   constructor(
     public mapService: MapService,
     private modalCtrl: ModalController,
     private routerOutlet: IonRouterOutlet,
-    private alertCtrl: AlertController,
     private localNotifications: LocalNotifications,
     private alertController: AlertController
   ) {}
@@ -109,6 +107,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
       this.loadIcons = true;
       setTimeout(() => {
         this.mainSlider.slideTo(1);
+        google.maps.event.trigger(this.map, 'resize');
       }, 100);
     }, 200);
 
@@ -141,6 +140,16 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
     this.myPane.disableDrag();
   }
 
+  async openMapModal() {
+    const modal = await this.modalCtrl.create({
+      component: MapPage,
+      // swipeToClose: true,
+      presentingElement: this.routerOutlet.nativeEl,
+      componentProps: {},
+    });
+    await modal.present();
+  }
+
   async getCurrentPosition() {
     this.locationLoading = true;
     try {
@@ -169,7 +178,6 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
   async openImageModal() {
     const modal = await this.modalCtrl.create({
       component: ImageSharePage,
-      cssClass: 'my-custom-class',
       swipeToClose: true,
       presentingElement: this.routerOutlet.nativeEl,
       componentProps: {},
@@ -181,7 +189,6 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
     const alert = await this.alertController.create({
       header: 'Wo wird geraucht?',
       translucent: true,
-
       buttons: [
         {
           text: 'Privat',
@@ -210,7 +217,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
       this.visiblityState = 'hidden';
       setTimeout(() => {
         video.currentTime = 0;
-      }, 600);
+      }, 50);
 
       // video.play();
     });

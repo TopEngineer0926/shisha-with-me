@@ -47,8 +47,16 @@ ion-slides {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  flex-direction: column;
   height: 200px;
   width: 200px;
+  .item-title {
+    margin-top: -25px;
+    background: rgb(0 0 0 / 58%);
+    padding: 3px 19px;
+    border-radius: 10px;
+  }
   .inside-dot {
     display: block;
 
@@ -72,23 +80,28 @@ ion-slides {
 }
 .map {
   position: absolute;
-  height: 55vh;
+  height: 40vh;
   bottom: -25px;
   left: 0;
-  width: 100%;
+  width: 100vw;
   z-index: 100;
 
   google-map {
     pointer-events: none;
+    width: 100vw;
+    ::ng-deep .map-container {
+      width: 100vw !important;
+    }
   }
 
   .overlay {
     position: absolute;
 
-    top: -46px;
+    top: -26px;
     left: 0;
-    width: 100%;
-    height: 100px;
+    width: 101%;
+    height: 50px;
     z-index: 1;
+    pointer-events: none;
   }
 }

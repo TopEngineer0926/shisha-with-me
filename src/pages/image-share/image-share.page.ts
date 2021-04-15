@@ -1,12 +1,12 @@
-import { ModalController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
-
 import {
-  Plugins,
-  CameraResultType,
   CameraPhoto,
+  CameraResultType,
   CameraSource,
+  Plugins,
 } from '@capacitor/core';
+import { ModalController } from '@ionic/angular';
+
 const { Geolocation, Camera, Share } = Plugins;
 
 @Component({

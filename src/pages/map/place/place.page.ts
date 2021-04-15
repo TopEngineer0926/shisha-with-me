@@ -1,3 +1,4 @@
+import { HelperService } from './../../../common/services/helper.service';
 import { ModalController } from '@ionic/angular';
 import { Component, Input, OnInit } from '@angular/core';
 import {
@@ -15,7 +16,7 @@ export class PlacePage implements OnInit {
 
   constructor(
     private modalCtrl: ModalController,
-    private launchNavigator: LaunchNavigator
+    private helper: HelperService
   ) {}
 
   ngOnInit() {
@@ -27,13 +28,17 @@ export class PlacePage implements OnInit {
   }
 
   navigate() {
-    let options: LaunchNavigatorOptions = {
+    /*let options: LaunchNavigatorOptions = {
       start: 'London, ON',
     };
 
     this.launchNavigator.navigate('Toronto, ON', options).then(
       (success) => console.log('Launched navigator'),
       (error) => console.log('Error launching navigator', error)
+    );*/
+    console.log('this.place', this.place);
+    this.helper.openLink(
+      'https://www.google.com/maps/place/?q=place_id:' + this.place.place_id
     );
   }
 }

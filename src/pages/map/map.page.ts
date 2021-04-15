@@ -25,17 +25,13 @@ import { GoogleMap } from '@angular/google-maps';
   styleUrls: ['./map.page.scss'],
 })
 export class MapPage implements AfterViewInit {
-  @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
-
+  @ViewChild(GoogleMap) map: GoogleMap;
   locationLoading: boolean = false;
-
   infowindow: google.maps.InfoWindow;
-
   options: google.maps.MapOptions = {
     disableDefaultUI: true,
     styles: this.mapService.getStyles(),
   };
-
   center: google.maps.LatLngLiteral = { lat: 51.178418, lng: 9.95 };
   zoom = 6;
   // markerOptions: google.maps.MarkerOptions = { draggable: false, icon: };
@@ -45,22 +41,27 @@ export class MapPage implements AfterViewInit {
     public mapService: MapService,
     public popoverController: PopoverController,
     private modalCtrl: ModalController,
-    private routerOutlet: IonRouterOutlet,
-    private loadingCtrl: LoadingController,
-    private cdr: ChangeDetectorRef
+    // private routerOutlet: IonRouterOutlet,
+    private loadingCtrl: LoadingController
   ) {}
 
   ngAfterViewInit() {
-    setTimeout(() => {
-      this.mapReady();
-    }, 1000);
+    this.mapReady();
+  }
+
+  close() {
+    this.modalCtrl.dismiss();
   }
 
   async mapReady() {
-    const loading = await this.loadingCtrl.create({});
+    const loading = await this.loadingCtrl.create();
     loading.present();
 
     try {
+      google.maps.event.addListener(this.map.googleMap, 'dragend', async () => {
+        await this.loadPlaces(true);
+      });
+
       await this.getCurrentPosition();
       await this.loadPlaces();
     } catch (error) {
@@ -83,7 +84,10 @@ export class MapPage implements AfterViewInit {
     return new Promise(async (resolve) => {
       this.locationLoading = true;
       try {
-        const coordinates = await Geolocation.getCurrentPosition();
+        const coordinates = await Geolocation.getCurrentPosition({
+          enableHighAccuracy: false,
+          timeout: 1000,
+        });
         this.center = {
           lat: coordinates.coords.latitude,
           lng: coordinates.coords.longitude,
@@ -106,10 +110,11 @@ export class MapPage implements AfterViewInit {
   }
 
   async openPlace(place) {
+    const elm = await this.modalCtrl.getTop();
     const modal = await this.modalCtrl.create({
       component: PlacePage,
       swipeToClose: true,
-      presentingElement: this.routerOutlet.nativeEl,
+      presentingElement: elm, //this.routerOutlet.nativeEl,
       componentProps: {
         place,
       },
@@ -117,30 +122,30 @@ export class MapPage implements AfterViewInit {
     return await modal.present();
   }
 
-  loadPlaces() {
+  loadPlaces(doBounds = false) {
     console.log('loadPlaces', this.options, this.map);
 
     const request: any = {
-      keyword: 'shisha bar',
+      keyword: 'shisha',
       fields: ['name', 'geometry'],
-      location: { lat: this.center.lat, lng: this.center.lng },
+      location: this.map.googleMap.getCenter(), //{ lat: this.center.lat, lng: this.center.lng },
       radius: 50000,
     };
 
-    console.log('request', request);
-
     const service = new google.maps.places.PlacesService(this.map.googleMap);
-
     service.nearbySearch(request, (results, status) => {
       console.log('service');
       console.log(results, status);
       if (status === google.maps.places.PlacesServiceStatus.OK) {
-        this.addMarkersForPlaces(results);
+        this.addMarkersForPlaces(results, doBounds);
       }
     });
   }
 
-  addMarkersForPlaces(places: google.maps.places.PlaceResult[]) {
+  addMarkersForPlaces(
+    places: google.maps.places.PlaceResult[],
+    doBounds = false
+  ) {
     let markers: google.maps.Marker[] = [];
     if (places.length == 0) {
       return;
@@ -189,8 +194,9 @@ export class MapPage implements AfterViewInit {
         bounds.extend(place.geometry.location);
       }
     });
-    this.map.fitBounds(bounds);
-
+    if (!doBounds) {
+      this.map.googleMap.fitBounds(bounds);
+    }
     /*new MarkerClusterer(this.map, markers, {
       imagePath:
         'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',

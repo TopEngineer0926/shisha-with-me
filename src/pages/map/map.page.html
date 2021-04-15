@@ -29,24 +29,29 @@
 
 </ion-content>-->
 
-<div class="map">
-  <google-map [center]="center" [zoom]="zoom" [options]="options">
-    <map-marker
-      *ngFor="let markerPosition of markerPositions"
-      [position]="markerPosition"
-    ></map-marker>
-  </google-map>
-</div>
+<ion-content [fullscreen]="true">
+  <ion-button fill="none" class="close" (click)="close()">
+    <ion-icon name="close-circle-outline"></ion-icon>
+  </ion-button>
+  <div class="map">
+    <google-map [center]="center" [zoom]="zoom" [options]="options">
+      <map-marker
+        *ngFor="let markerPosition of markerPositions"
+        [position]="markerPosition"
+      ></map-marker>
+    </google-map>
+  </div>
 
-<ion-fab vertical="bottom" horizontal="start" slot="fixed">
-  <ion-fab-button (click)="getCurrentPosition()" [disabled]="locationLoading">
-    <ion-icon *ngIf="!locationLoading" name="location-outline"></ion-icon>
-    <ion-spinner *ngIf="locationLoading"></ion-spinner>
-  </ion-fab-button>
-</ion-fab>
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button (click)="getCurrentPosition()" [disabled]="locationLoading">
+      <ion-icon *ngIf="!locationLoading" name="location-outline"></ion-icon>
+      <ion-spinner *ngIf="locationLoading"></ion-spinner>
+    </ion-fab-button>
+  </ion-fab>
 
-<ion-fab vertical="bottom" horizontal="end" slot="fixed">
-  <ion-fab-button (click)="presentPopover($event)">
-    <ion-icon name="funnel-outline"></ion-icon>
-  </ion-fab-button>
-</ion-fab>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="presentPopover($event)">
+      <ion-icon name="funnel-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

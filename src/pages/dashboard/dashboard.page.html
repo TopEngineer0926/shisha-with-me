@@ -3,17 +3,11 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Dashboard</ion-title>
+    <ion-title>Shisha With Me</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Dashboard</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
   <div class="dot"></div>
   <video
     #videoElm
@@ -24,6 +18,7 @@
     [@visibilityChanged]="visiblityState"
   >
     <source src="/assets/videos/rauch-1.webm" type="video/webm" />
+    <source src="/assets/videos/rauch-1.mp4" type="video/mp4" />
   </video>
 
   <ion-slides *ngIf="loadIcons" #mainSlider class="first" [options]="slideOpts">
@@ -35,6 +30,7 @@
               class="inside-dot"
               [style.backgroundImage]="'url(' + slide.image + ')'"
             ></div>
+            <div class="item-title">title</div>
           </div>
         </ion-slide>
         <ion-slide *ngFor="let children of slide.children">
@@ -43,13 +39,14 @@
               class="inside-dot"
               [style.backgroundImage]="'url(' + children.image + ')'"
             ></div>
+            <div class="item-title">title</div>
           </div>
         </ion-slide>
       </ion-slides>
     </ion-slide>
   </ion-slides>
 
-  <div class="map" (click)="openMap()">
+  <div class="map" (click)="openMapModal()">
     <div class="overlay"></div>
     <google-map #map [center]="center" [zoom]="zoom" [options]="options">
       <map-marker
@@ -84,8 +81,11 @@
   </ion-fab>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="sharePosition()">
+    <!--<ion-fab-button (click)="sharePosition()">
       <ion-icon name="share-outline"></ion-icon>
+    </ion-fab-button>-->
+    <ion-fab-button (click)="openMapModal()">
+      <ion-icon name="map-outline"></ion-icon>
     </ion-fab-button>
 
     <!--<ion-fab-list side="top">
@@ -110,7 +110,7 @@
     </ion-fab-button>
   </ion-fab>-->
 </ion-content>
-
+<!--
 <div class="cupertino-pane-home">
   <app-map *ngIf="cupertino"></app-map>
-</div>
+</div>-->

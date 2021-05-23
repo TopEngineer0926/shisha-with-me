@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {
   CameraPhoto,
-  CameraResultType,
+  Camera,
   CameraSource,
-  Plugins,
-} from '@capacitor/core';
+  CameraResultType,
+} from '@capacitor/camera';
+
 import { AlertController, ModalController } from '@ionic/angular';
-const { Camera } = Plugins;
 
 @Component({
   selector: 'app-profile-edit',

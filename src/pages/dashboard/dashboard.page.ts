@@ -25,7 +25,8 @@ import { MapService } from 'src/common/services/map.service';
 import { ImageSharePage } from '../image-share/image-share.page';
 import { MapPage } from '../map/map.page';
 import { slideOpts } from './slider-config';
-const { Geolocation, Camera, Share } = Plugins;
+import { Share } from '@capacitor/share';
+import { Geolocation } from '@capacitor/geolocation';
 
 @Component({
   selector: 'app-dashboard',

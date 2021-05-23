@@ -1,11 +1,10 @@
-import { WishlistService } from './../common/services/wishlist.service';
 import { AfterViewInit, Component } from '@angular/core';
-import { Capacitor, Plugins, StatusBarStyle } from '@capacitor/core';
+import { Capacitor } from '@capacitor/core';
+import { SplashScreen } from '@capacitor/splash-screen';
 import { TranslateService } from '@ngx-translate/core';
 import { HelperService } from 'src/common/services/helper.service';
 import { get } from 'src/common/services/storage.service';
-
-const { SplashScreen, StatusBar } = Plugins;
+import { WishlistService } from './../common/services/wishlist.service';
 
 @Component({
   selector: 'app-root',
@@ -28,9 +27,7 @@ export class AppComponent implements AfterViewInit {
     const darkMode = await this.helperService.getDarkMode();
     await this.helperService.setDarkMode(darkMode);
 
-    setTimeout(() => {
-      SplashScreen.hide();
-    }, 300);
+    SplashScreen.hide();
 
     this.setLanguage();
   }

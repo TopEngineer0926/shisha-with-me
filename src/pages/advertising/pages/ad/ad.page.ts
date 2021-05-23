@@ -1,12 +1,10 @@
-import { LoadingController } from '@ionic/angular';
-import { WishlistService } from './../../../../common/services/wishlist.service';
-import { HelperService } from './../../../../common/services/helper.service';
-import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Share } from '@capacitor/share';
+import { LoadingController } from '@ionic/angular';
 import { AdService } from '../../services/ad.service';
-import { Plugins } from '@capacitor/core';
-
-const { Share } = Plugins;
+import { HelperService } from './../../../../common/services/helper.service';
+import { WishlistService } from './../../../../common/services/wishlist.service';
 
 @Component({
   selector: 'app-ad',

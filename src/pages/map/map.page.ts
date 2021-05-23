@@ -1,12 +1,6 @@
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { GoogleMap } from '@angular/google-maps';
 import {
-  AfterViewInit,
-  Component,
-  ChangeDetectorRef,
-  ViewChild,
-} from '@angular/core';
-import { Plugins } from '@capacitor/core';
-import {
-  IonRouterOutlet,
   LoadingController,
   ModalController,
   PopoverController,
@@ -14,10 +8,7 @@ import {
 import { MapService } from 'src/common/services/map.service';
 import { MapFilterComponent } from './components/map-filter/map-filter.component';
 import { PlacePage } from './place/place.page';
-const { Geolocation } = Plugins;
-
-import MarkerClusterer from '@google/markerclusterer';
-import { GoogleMap } from '@angular/google-maps';
+import { Geolocation } from '@capacitor/geolocation';
 
 @Component({
   selector: 'app-map',

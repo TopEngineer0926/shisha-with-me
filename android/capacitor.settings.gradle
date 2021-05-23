@@ -4,3 +4,18 @@ project(':capacitor-android').projectDir = new File('../node_modules/@capacitor/
 
 include ':byteowls-capacitor-filesharer'
 project(':byteowls-capacitor-filesharer').projectDir = new File('../node_modules/@byteowls/capacitor-filesharer/android')
+
+include ':capacitor-browser'
+project(':capacitor-browser').projectDir = new File('../node_modules/@capacitor/browser/android')
+
+include ':capacitor-camera'
+project(':capacitor-camera').projectDir = new File('../node_modules/@capacitor/camera/android')
+
+include ':capacitor-share'
+project(':capacitor-share').projectDir = new File('../node_modules/@capacitor/share/android')
+
+include ':capacitor-status-bar'
+project(':capacitor-status-bar').projectDir = new File('../node_modules/@capacitor/status-bar/android')
+
+include ':capacitor-storage'
+project(':capacitor-storage').projectDir = new File('../node_modules/@capacitor/storage/android')

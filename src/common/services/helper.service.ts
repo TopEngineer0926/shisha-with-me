@@ -2,14 +2,14 @@ import { TranslateService } from '@ngx-translate/core';
 import { AlertController } from '@ionic/angular';
 import { Injectable } from '@angular/core';
 
-import { Capacitor, Plugins, StatusBarStyle } from '@capacitor/core';
+import { Capacitor, Plugins } from '@capacitor/core';
 import { get, set } from './storage.service';
 
 import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
 import { DocumentViewerOptions } from '@ionic-native/document-viewer';
 import { environment } from 'src/environments/environment';
-
-const { SplashScreen, StatusBar, Browser } = Plugins;
+import { StatusBar, StatusBarStyle } from '@capacitor/status-bar';
+import { Browser } from '@capacitor/browser';
 
 declare var window: any;
 @Injectable({

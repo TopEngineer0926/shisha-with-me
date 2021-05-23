@@ -11,7 +11,7 @@ import {
 import { CupertinoPane, CupertinoSettings } from 'cupertino-pane';
 import { Plugins } from '@capacitor/core';
 import { environment } from 'src/environments/environment';
-const { Share } = Plugins;
+import { Share } from '@capacitor/share';
 
 @Component({
   selector: 'app-friends-list',

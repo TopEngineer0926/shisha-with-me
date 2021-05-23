@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Plugins } from '@capacitor/core';
+import { ModalController } from '@ionic/angular';
 import {
-  CameraPhoto,
+  Camera,
   CameraResultType,
   CameraSource,
-  Plugins,
-} from '@capacitor/core';
-import { ModalController } from '@ionic/angular';
-
-const { Geolocation, Camera, Share } = Plugins;
+  CameraPhoto,
+} from '@capacitor/camera';
 
 @Component({
   selector: 'app-image-share',

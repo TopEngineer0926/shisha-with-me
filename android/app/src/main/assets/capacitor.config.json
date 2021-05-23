@@ -1,27 +1,27 @@
 {
-  "appId": "de.codext.shishawithme",
-  "appName": "Shisha With Me",
-  "bundledWebRuntime": false,
-  "npmClient": "npm",
-  "webDir": "www",
-  "backgroundColor": "#21252dff",
-  "windowsAndroidStudioPath": "C:\\Users\\Daniel\\AppData\\Local\\JetBrains\\Toolbox\\apps\\AndroidStudio\\ch-0\\192.6392135\\bin\\studio64.exe",
-  "plugins": {
-    "SplashScreen": {
-      "launchAutoHide": false,
-      "showSpinner": true,
-      "androidSpinnerStyle": "small",
-      "iosSpinnerStyle": "small",
-      "spinnerColor": "#ffffff",
-      "backgroundColor": "#21252dff",
-      "splashFullScreen": true,
-      "androidScaleType": "CENTER_CROP",
-      "splashImmersive": false
-    }
-  },
-  "android": {
-    "captureInput": true,
-    "backgroundColor": "#21252dff"
-  },
-  "cordova": {}
+	"appId": "de.codext.shishawithme",
+	"appName": "Shisha With Me",
+	"bundledWebRuntime": false,
+	"npmClient": "npm",
+	"webDir": "www",
+	"backgroundColor": "#21252dff",
+	"windowsAndroidStudioPath": "C:\\Users\\Daniel\\AppData\\Local\\JetBrains\\Toolbox\\apps\\AndroidStudio\\ch-0\\192.6392135\\bin\\studio64.exe",
+	"plugins": {
+		"SplashScreen": {
+			"launchAutoHide": false,
+			"showSpinner": true,
+			"androidSpinnerStyle": "small",
+			"iosSpinnerStyle": "small",
+			"spinnerColor": "#ffffff",
+			"backgroundColor": "#21252dff",
+			"splashFullScreen": true,
+			"androidScaleType": "CENTER_CROP",
+			"splashImmersive": false
+		}
+	},
+	"android": {
+		"captureInput": true,
+		"backgroundColor": "#21252dff"
+	},
+	"cordova": {}
 }

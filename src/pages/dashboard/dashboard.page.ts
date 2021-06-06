@@ -215,10 +215,12 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
     await this.audio.play();
     await video.play();
     video.addEventListener('ended', () => {
-      this.visiblityState = 'hidden';
       setTimeout(() => {
-        video.currentTime = 0;
-      }, 50);
+        this.visiblityState = 'hidden';
+        setTimeout(() => {
+          video.currentTime = 0;
+        }, 300);
+      }, 150);
 
       // video.play();
     });

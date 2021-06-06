@@ -1,3 +1,4 @@
+import { OneSignal } from '@ionic-native/onesignal/ngx';
 import { registerLocaleData } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import localeDe from '@angular/common/locales/de';
@@ -23,6 +24,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'horizontal',
@@ -57,8 +59,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      enableHtml: true,
+      progressBar: true,
+    }),
   ],
   providers: [
+    OneSignal,
     LocalNotifications,
     DocumentViewer,
     {

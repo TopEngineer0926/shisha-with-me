@@ -1,3 +1,4 @@
+import { ReviewsPageModule } from 'src/pages/reviews/reviews.module';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdSavedPageModule } from 'src/pages/ad-saved/ad-saved.module';
@@ -27,6 +28,10 @@ const routes: Routes = [
       {
         path: 'friends',
         loadChildren: () => FriendsListPageModule,
+      },
+      {
+        path: 'reviews',
+        loadChildren: () => ReviewsPageModule,
       },
       {
         path: 'settings',

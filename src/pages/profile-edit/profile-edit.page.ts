@@ -39,6 +39,7 @@ export class ProfileEditPage implements OnInit {
   close() {
     this.modalCtrl.dismiss();
   }
+  addShisha() {}
 
   async change(mode, value) {
     let text, inputType;

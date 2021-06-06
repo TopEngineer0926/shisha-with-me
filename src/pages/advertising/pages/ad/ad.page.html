@@ -30,12 +30,23 @@
       <ion-button (click)="shareAd()" class="share" color="white"
         ><ion-icon name="share-outline"></ion-icon
       ></ion-button>
-      <div class="small">für nur</div>
-      <div class="amount offer">{{ad.offerPrice |currency:'EUR':true}}</div>
-      <div class="small">
-        statt
-        <span class="normal-price">{{ad.price |currency:'EUR':true}}</span>
-      </div>
+      <ng-container
+        *ngIf="!(ad.category?.title == 'Instagram' || ad.category?.title == 'Youtube' || ad.category?.title == 'Spotify') "
+      >
+        <ng-container *ngIf="ad.offerPrice">
+          <div class="small">für nur</div>
+          <div class="amount offer">{{ad.offerPrice |currency:'EUR':true}}</div>
+          <div class="small">
+            statt
+            <span class="normal-price">{{ad.price |currency:'EUR':true}}</span>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="!ad.offerPrice">
+          <span class="amount">{{ad.price |currency:'EUR':true}}</span>
+        </ng-container></ng-container
+      >
+
       <ion-button
         (click)="addOrRemoveFromWishList()"
         class="wishlist"
@@ -45,13 +56,38 @@
       ></ion-button>
     </div>
 
-    <div class="description">
+    <div *ngIf="ad.description" class="description">
       <p>{{ad.description}}</p>
     </div>
 
     <div class="deal">
-      <ion-button expand="block" size="large" (click)="helper.openLink(ad.link)"
+      <ion-button
+        *ngIf="!(ad.category?.title == 'Instagram' || ad.category?.title == 'Youtube' || ad.category?.title == 'Spotify') "
+        expand="block"
+        size="large"
+        (click)="helper.openLink(ad.link)"
         >Zum Deal</ion-button
+      >
+      <ion-button
+        *ngIf="ad.category?.title == 'Instagram'"
+        expand="block"
+        size="large"
+        (click)="helper.openLink(ad.link)"
+        >Zu Instagram</ion-button
+      >
+      <ion-button
+        *ngIf="ad.category?.title == 'Youtube'"
+        expand="block"
+        size="large"
+        (click)="helper.openLink(ad.link)"
+        >Zu Youtube</ion-button
+      >
+      <ion-button
+        *ngIf="ad.category?.title == 'Spotify'"
+        expand="block"
+        size="large"
+        (click)="helper.openLink(ad.link)"
+        >Zu Spotify</ion-button
       >
     </div>
   </div>

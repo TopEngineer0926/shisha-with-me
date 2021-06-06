@@ -1,0 +1,86 @@
+<div class="center">
+  <form class="form-style" #form="ngForm">
+    <ion-item>
+      <ion-input
+        name="firstName"
+        #firstName="ngModel"
+        [(ngModel)]="model.firstName"
+        [ngModelOptions]="{ standalone: true }"
+        type="firstName"
+        required
+        placeholder="Vorname"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input
+        name="lastName"
+        #lastName="ngModel"
+        [(ngModel)]="model.lastName"
+        [ngModelOptions]="{ standalone: true }"
+        type="lastName"
+        required
+        placeholder="Nachname"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input
+        name="email"
+        #email="ngModel"
+        [(ngModel)]="model.email"
+        [ngModelOptions]="{ standalone: true }"
+        type="email"
+        required
+        placeholder="E-Mail Adresse"
+      ></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input
+        [ngClass]="{ error: password.touched && password.invalid }"
+        name="password"
+        [type]="showPassword ? 'text' : 'password'"
+        #password="ngModel"
+        [(ngModel)]="model.password"
+        [ngModelOptions]="{ standalone: true }"
+        required
+        placeholder="Passwort"
+      ></ion-input>
+      <ion-button fill="clear" (click)="showPassword = !showPassword">
+        <ion-icon *ngIf="showPassword" name="eye-outline"></ion-icon>
+        <ion-icon *ngIf="!showPassword" name="eye-off-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+
+    <ion-item class="law">
+      <ion-checkbox
+        slot="start"
+        [(ngModel)]="agbChecked"
+        [ngModelOptions]="{ standalone: true }"
+      ></ion-checkbox>
+
+      <ion-label>
+        <span>
+          Ich habe die
+          <a (click)="helper.openLink('https://codext.de/agb/')"
+            >Allgemeine Geschäftsbedingungen</a
+          >
+          und
+          <a (click)="helper.openLink('https://codext.de/datenschutz/')"
+            >Datenschutzerklärung</a
+          >
+          gelesen und akzeptiere diese.</span
+        >
+      </ion-label>
+    </ion-item>
+
+    <div
+      class="alert alert-danger error-message"
+      [hidden]="!errorStr || !submitted"
+    >
+      {{ 'auth.Login.error.' + errorStr | translate }}
+    </div>
+  </form>
+
+  <ion-button [disabled]="!agbChecked" (click)="register()">
+    {{ 'auth.Register' | translate }}
+  </ion-button>
+</div>

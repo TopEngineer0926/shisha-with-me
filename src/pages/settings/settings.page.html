@@ -16,6 +16,9 @@
     <ion-item button (click)="goToProfile()">
       <ion-label> Mathis Monn </ion-label>
     </ion-item>
+    <ion-item button [routerLink]="'/friends'">
+      <ion-label> Freundschaftsanfragen </ion-label>
+    </ion-item>
 
     <!--<ion-item button [routerLink]="['/history']">
       <ion-label> Verlauf </ion-label>
@@ -28,9 +31,9 @@
     </ion-item></ion-list
   >
 
-  <ion-list-header> Einstellungen </ion-list-header>
+  <!--<ion-list-header> Einstellungen </ion-list-header>
   <ion-list>
-    <!--<ion-item class="language" button (click)="selectLanguage($event)">
+    <ion-item class="language" button (click)="selectLanguage($event)">
       <ion-label> {{'Language' |translate}} </ion-label>
       <span slot="end">
         <img *ngIf="language.code == 'de'" src="./assets/icons/DE.png" />
@@ -38,7 +41,7 @@
       </span>
     </ion-item>-->
 
-    <!-- <ion-item>
+  <!-- <ion-item>
       <ion-label>Dunkelmodus</ion-label>
       <ion-toggle
         slot="end"
@@ -55,8 +58,8 @@
       >
 
       <ion-badge slot="end">{{theme}}</ion-badge>
-    </ion-item> -->
-  </ion-list>
+    </ion-item> 
+  </ion-list>-->
 
   <ion-list-header> {{'Other' |translate}} </ion-list-header>
   <ion-list>

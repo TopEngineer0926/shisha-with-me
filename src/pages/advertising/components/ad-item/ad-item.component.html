@@ -24,5 +24,6 @@
     <p *ngIf="!ad.offerPrice">
       <span class="price">{{ ad.price | currency: 'EUR':true }} </span>
     </p>
+    <p *ngIf="ad.shortDescription">{{ ad.shortDescription }}</p>
   </ion-card-content>
 </ion-card>

@@ -1,0 +1,15 @@
+<form #recoveryForm class="form-style">
+  <ion-item>
+    <ion-input
+      type="text"
+      required
+      [(ngModel)]="email"
+      [ngModelOptions]="{ standalone: true }"
+      placeholder="Email"
+    ></ion-input>
+  </ion-item>
+</form>
+
+<ion-button (click)="newPassword()">
+  {{ 'auth.Reset' | translate }}
+</ion-button>

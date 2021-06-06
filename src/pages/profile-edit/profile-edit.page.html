@@ -91,7 +91,12 @@
     </div>
   </ion-list>
 
-  <ion-list-header class="ion-margin-top">Mein Shisha Setup</ion-list-header>
+  <ion-list-header class="ion-margin-top">Meine Shisha</ion-list-header>
+  <ion-list>
+    <ion-item button (click)="addShisha()">
+      <ion-label> Weitere hinzufügen + </ion-label>
+    </ion-item></ion-list
+  >
   <ion-list class="ion-margin-bottom">
     <ion-item
       lines="none"
@@ -111,7 +116,7 @@
       (click)="change('myShishaHead', profile.myShishaHead)"
     >
       <ion-label>
-        <small>Meine Kopf</small>
+        <small>Mein Kopf</small>
         <h2>{{profile.myShishaHead}}</h2>
         <p></p>
       </ion-label>

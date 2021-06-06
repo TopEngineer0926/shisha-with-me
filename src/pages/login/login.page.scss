@@ -1,3 +1,116 @@
+.agb {
+  .custom-control-label {
+    font-size: 15px;
+    color: #212529;
+    font-weight: 400;
+  }
+}
+
+.divider {
+  display: block;
+  height: 50px;
+}
+
+.light {
+  color: #656e82;
+}
+
+ion-content {
+  --background: #0e0e15;
+  ion-segment {
+    width: 90%;
+    min-width: 300px;
+    max-width: 370px;
+    margin: 0 auto;
+    ion-segment-button:not(.segment-button-checked) {
+      color: #fff;
+    }
+  }
+  .logo {
+    margin: 100px 0 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 80%;
+      max-height: 80px;
+    }
+  }
+
+  .law {
+    a {
+      font-weight: bold;
+    }
+  }
+
+  ::ng-deep {
+    .center {
+      display: flex;
+
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .form-style {
+      margin: 20px auto 50px;
+      width: 90%;
+      min-width: 300px;
+      max-width: 370px;
+      overflow: hidden;
+      border-radius: 5px;
+      background: #222428;
+      ion-item {
+        --background: transparent;
+      }
+      ion-label {
+        white-space: normal;
+      }
+    }
+  }
+}
+
+.social-login {
+  margin-top: 20px;
+  .btn-social {
+    position: relative;
+
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+    i {
+      font-size: 1.3em;
+      text-align: center;
+      width: 40px;
+      margin-left: -10px;
+      margin-right: 10px;
+      border-right: 1px solid rgba(0, 0, 0, 0.2);
+    }
+    span {
+      margin-top: 2px;
+    }
+  }
+
+  .btn-facebook {
+    color: #fff;
+    background-color: #3b5998;
+    border-color: rgba(0, 0, 0, 0.2);
+  }
+  .btn-instagram {
+    color: #fff;
+    background-color: #3f729b;
+    border-color: rgba(0, 0, 0, 0.2);
+  }
+  .btn-linkedin {
+    color: #fff;
+    background-color: #007bb6;
+    border-color: rgba(0, 0, 0, 0.2);
+  }
+}
+
 .spacer {
   display: flex;
   justify-content: space-between;
@@ -61,7 +174,6 @@
     margin-bottom: 10px;
 
     justify-content: flex-start;
-    padding: 0 40px;
 
     span.wrapper {
       text-align: left;

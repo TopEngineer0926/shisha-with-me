@@ -48,6 +48,7 @@ export class AdPage implements OnInit {
     try {
       const data = await this.adService.loadOne(id);
       this.ad = data;
+      console.log('this.ad', this.ad);
     } catch (error) {
     } finally {
       loading.dismiss();

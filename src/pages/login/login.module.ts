@@ -7,14 +7,26 @@ import { IonicModule } from '@ionic/angular';
 import { LoginPageRoutingModule } from './login-routing.module';
 
 import { LoginPage } from './login.page';
+import { AuthNewPasswordComponent } from './components/auth-new-password/auth-new-password.component';
+import { AuthResetCodeComponent } from './components/auth-reset-code/auth-reset-code.component';
+import { RegisterSuccessComponent } from './components/register/components/register-success/register-success.component';
+import { RegisterComponent } from './components/register/register.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    LoginPageRoutingModule
+    LoginPageRoutingModule,
+    TranslateModule,
   ],
-  declarations: [LoginPage]
+  declarations: [
+    LoginPage,
+    RegisterComponent,
+    RegisterSuccessComponent,
+    AuthResetCodeComponent,
+    AuthNewPasswordComponent,
+  ],
 })
 export class LoginPageModule {}

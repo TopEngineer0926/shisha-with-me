@@ -17,19 +17,137 @@
         </div>
       </div>
     </div>
-    <ion-button class="apple" expand="block" (click)="login('apple')">
+
+    <ion-segment
+      mode="ios"
+      [value]="currentTab"
+      (ionChange)="changeTab($event)"
+    >
+      <ion-segment-button mode="ios" value="login">
+        {{ 'Sign in' | translate }}
+      </ion-segment-button>
+      <ion-segment-button mode="ios" value="register">
+        {{ 'Sign up' | translate }}
+      </ion-segment-button>
+    </ion-segment>
+
+    <div class="center" *ngIf="currentTab == 'login' && step == 1">
+      <form class="form-style" #form="ngForm">
+        <ion-item>
+          <ion-input
+            name="email"
+            #email="ngModel"
+            [(ngModel)]="model.email"
+            [ngModelOptions]="{ standalone: true }"
+            inputmode="email"
+            autocomplete="email"
+            required
+            [placeholder]="'Email address' | translate"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input
+            [ngClass]="{ error: password.touched && password.invalid }"
+            name="password"
+            [type]="showPassword ? 'text' : 'password'"
+            #password="ngModel"
+            [(ngModel)]="model.password"
+            [ngModelOptions]="{ standalone: true }"
+            required
+            [placeholder]="'Password' | translate"
+          ></ion-input>
+
+          <ion-button fill="clear" (click)="showPassword = !showPassword">
+            <ion-icon *ngIf="showPassword" name="eye-outline"></ion-icon>
+            <ion-icon *ngIf="!showPassword" name="eye-off-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+
+        <ion-item class="law">
+          <ion-checkbox
+            slot="start"
+            [(ngModel)]="agbChecked"
+            [ngModelOptions]="{ standalone: true }"
+          ></ion-checkbox>
+
+          <ion-label>
+            <span>
+              Ich habe die
+              <a (click)="helper.openLink('https://codext.de/agb/')"
+                >Allgemeine Geschäftsbedingungen</a
+              >
+              und
+              <a (click)="helper.openLink('https://codext.de/datenschutz/')"
+                >Datenschutzerklärung</a
+              >
+              gelesen und akzeptiere diese.</span
+            >
+          </ion-label>
+        </ion-item>
+
+        <div
+          class="alert alert-danger error-message"
+          [hidden]="!errorStr || !submitted"
+        >
+          {{ 'auth.Login.error.' + errorStr | translate }}
+        </div>
+      </form>
+
+      <ion-button [disabled]="!agbChecked" (click)="login()">
+        {{ 'auth.Log In' | translate }}
+      </ion-button>
+
+      <ion-button
+        class="ion-margin-top light"
+        fill="clear"
+        (click)="step = 2; currentTab = 'login'"
+      >
+        {{ 'auth.Forgot pwd?' | translate }}</ion-button
+      >
+      <ion-button class="light" fill="clear" (click)="activateAccount()">
+        {{ 'Activate account' | translate }}
+      </ion-button>
+    </div>
+
+    <div class="center">
+      <app-auth-reset-code
+        class="center"
+        *ngIf="step == 2"
+        (passwordSend)="step = 3"
+      ></app-auth-reset-code>
+      <app-auth-new-password
+        class="center"
+        *ngIf="step == 3"
+        (passwordReset)="step = 1"
+      ></app-auth-new-password>
+
+      <ion-button
+        *ngIf="step == 2 || step == 3"
+        fill="clear"
+        class="ion-margin-top light"
+        (click)="step = 1"
+      >
+        <ion-icon name="arrow-back" slot="start"></ion-icon>{{ 'Back' |
+        translate }}
+      </ion-button>
+    </div>
+    <app-register *ngIf="currentTab == 'register'"></app-register>
+
+    <div class="divider"></div>
+
+    <!--<ion-button class="apple" expand="block" (click)="login('apple')">
       <span class="wrapper"
         ><ion-icon slot="start" name="logo-apple"></ion-icon
         ><span class="text">Login mit Apple</span></span
       >
-    </ion-button>
+    </ion-button>-->
     <!--<ion-button class="snapchat" expand="block" (click)="login('snapchat')">
       <span class="wrapper"
         ><ion-icon slot="start" name="logo-snapchat"></ion-icon
         ><span class="text">Login mit Snapchat</span></span
       >
     </ion-button>-->
-    <ion-button class="facebook" expand="block" (click)="login('facebook')">
+    <!-- <ion-button class="facebook" expand="block" (click)="login('facebook')">
       <span class="wrapper"
         ><ion-icon slot="start" name="logo-facebook"></ion-icon
         ><span class="text">Login mit Facebook</span></span
@@ -52,7 +170,7 @@
         <ion-icon slot="start" name="logo-instagram"></ion-icon>
         <span class="text">Login mit Instagram</span>
       </span>
-    </ion-button>
+    </ion-button>-->
     <!--<div class="info">
       <small>Hinweis</small>
       <p>Der Konsum von Shisha ist Gesundheitsschädlich</p>

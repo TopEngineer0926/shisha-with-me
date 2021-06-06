@@ -142,6 +142,11 @@ const routes: Routes = [
     loadChildren: () => FriendsAddPageModule,
     canActivate: [AuthGuard],
   },
+
+  {
+    path: 'friends',
+    loadChildren: () => FriendsListPageModule,
+  },
 ];
 @NgModule({
   imports: [

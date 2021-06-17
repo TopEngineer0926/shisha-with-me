@@ -42,7 +42,10 @@
       *ngFor="let friend of chatService.chats"
     >
       <ion-avatar slot="start">
-        <img [src]="helper.getImageUrl(friend.image?.url)" />
+        <div
+          class="bg-cover bg-no-repeat h-10 w-10 radius-full"
+          [style.backgroundImage]="'url(' + helper.getImageUrl(friend.image?.url) + ')'"
+        ></div>
       </ion-avatar>
       <ion-label
         ><h2>{{friend.name}}</h2>

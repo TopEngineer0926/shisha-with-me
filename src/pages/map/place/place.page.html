@@ -11,7 +11,11 @@
 
 <ion-content>
   <ion-card>
-    <img *ngIf="place.photos[0]?.getUrl()" [src]="place.photos[0]?.getUrl()" />
+    <div
+      class="bg-cover bg-no-repeat h-52 w-full bg-center"
+      *ngIf="place.photos[0]?.getUrl()"
+      [style.backgroundImage]="'url(' + place.photos[0]?.getUrl() +')'"
+    ></div>
     <ion-card-header>
       <ion-card-subtitle
         ><ion-badge

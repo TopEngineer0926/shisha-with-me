@@ -6,7 +6,12 @@ import {
   CameraResultType,
 } from '@capacitor/camera';
 
-import { AlertController, ModalController } from '@ionic/angular';
+import {
+  AlertController,
+  IonRouterOutlet,
+  ModalController,
+} from '@ionic/angular';
+import { AddEquipmentPage } from '../add-equipment/add-equipment.page';
 
 @Component({
   selector: 'app-profile-edit',
@@ -27,7 +32,7 @@ export class ProfileEditPage implements OnInit {
 
   constructor(
     private alertController: AlertController,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController // private routerOutlet: IonRouterOutlet
   ) {}
 
   ngOnInit() {}
@@ -39,7 +44,17 @@ export class ProfileEditPage implements OnInit {
   close() {
     this.modalCtrl.dismiss();
   }
-  addShisha() {}
+  async addShisha() {
+    const elm = await this.modalCtrl.getTop();
+    const modal = await this.modalCtrl.create({
+      component: AddEquipmentPage,
+      swipeToClose: true,
+      presentingElement: elm,
+      // presentingElement: this.routerOutlet.nativeEl,
+      componentProps: {},
+    });
+    return await modal.present();
+  }
 
   async change(mode, value) {
     let text, inputType;

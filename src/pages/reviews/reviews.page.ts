@@ -6,10 +6,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./reviews.page.scss'],
 })
 export class ReviewsPage implements OnInit {
+  data;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  load() {}
+
+  async doRefresh(event) {
+    await this.load();
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 1000);
   }
-
 }

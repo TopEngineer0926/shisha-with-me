@@ -25,6 +25,7 @@ import { AdPageModule } from 'src/pages/advertising/pages/ad/ad.module';
 import { FriendsAddPageModule } from 'src/pages/friends-add/friends-add.module';
 import { AuthGuard } from 'src/common/guards/auth.guard';
 import { AddEquipmentPageModule } from 'src/pages/add-equipment/add-equipment.module';
+import { IdeaPageModule } from 'src/pages/idea/idea.module';
 const routes: Routes = [
   {
     path: '',
@@ -151,6 +152,10 @@ const routes: Routes = [
   {
     path: 'add-equipment',
     loadChildren: () => AddEquipmentPageModule,
+  },
+  {
+    path: 'idea',
+    loadChildren: () => IdeaPageModule,
   },
 ];
 @NgModule({

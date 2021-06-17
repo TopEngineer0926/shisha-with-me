@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-add-equipment',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-equipment.page.scss'],
 })
 export class AddEquipmentPage implements OnInit {
+  constructor(private modalCtrl: ModalController) {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
+  close() {
+    this.modalCtrl.dismiss();
   }
-
 }

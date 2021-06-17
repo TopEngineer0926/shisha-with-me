@@ -12,6 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { HelperService } from 'src/common/services/helper.service';
 import { get, remove, set } from 'src/common/services/storage.service';
 import { ProfilePage } from '../profile/profile.page';
+import { IdeaPage } from '../idea/idea.page';
 
 @Component({
   selector: 'app-settings',
@@ -144,6 +145,16 @@ export class SettingsPage implements OnInit {
     });
 
     await actionSheetCtrl.present();
+  }
+
+  async openContact() {
+    // const elm = await this.modalCtrl.getTop();
+    const modal = await this.modalCtrl.create({
+      component: IdeaPage,
+      swipeToClose: true,
+      presentingElement: this.routerOutlet.nativeEl,
+    });
+    return await modal.present();
   }
 
   async changeLanguage(selection: { text: string; code: string }) {

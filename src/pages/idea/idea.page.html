@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Kontakt</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="p-5">
+    <ion-radio-group
+      ><ion-list>
+        <ion-item
+          ><ion-label>Frage senden</ion-label>
+          <ion-radio value="cord"></ion-radio
+        ></ion-item>
+        <ion-item
+          ><ion-label>Idee vorschlagen</ion-label>
+          <ion-radio value="cor1d"></ion-radio
+        ></ion-item>
+        <ion-item
+          ><ion-label>Sonstiges </ion-label><ion-radio value="cor2d"></ion-radio
+        ></ion-item> </ion-list
+    ></ion-radio-group>
+    <ion-textarea
+      class="bg-gray-100 bg-opacity-20 mt-5 px-2"
+      autoGrow="true"
+    ></ion-textarea>
+  </div>
+  <div class="px-5">
+    <ion-button (click)="send()">Senden</ion-button>
+  </div>
+</ion-content>

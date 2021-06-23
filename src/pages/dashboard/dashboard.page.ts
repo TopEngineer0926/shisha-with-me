@@ -117,7 +117,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.myPane.destroy();
+    this.myPane?.destroy();
   }
 
   openMap() {

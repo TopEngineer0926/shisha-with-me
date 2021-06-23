@@ -38,7 +38,7 @@ export class FriendsListPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.myPane.destroy();
+    this.myPane?.destroy();
   }
 
   async load() {

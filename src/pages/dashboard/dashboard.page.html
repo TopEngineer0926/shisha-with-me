@@ -21,25 +21,30 @@
     <source src="/assets/videos/rauch-1.mp4" type="video/mp4" />
   </video>
 
-  <ion-slides *ngIf="loadIcons" #mainSlider class="first" [options]="slideOpts">
-    <ion-slide *ngFor="let slide of slides">
+  <ion-slides
+    *ngIf="loadIcons && manufacturers"
+    #mainSlider
+    class="first"
+    [options]="slideOpts"
+  >
+    <ion-slide *ngFor="let slide of manufacturers">
       <ion-slides [options]="slideOptsVert">
         <ion-slide>
           <div class="slide-item" (click)="selectSession()">
             <div
               class="inside-dot"
-              [style.backgroundImage]="'url(' + slide.image + ')'"
+              [style.backgroundImage]="'url(' + helper.getImageUrl(slide.image?.url) + ')'"
             ></div>
-            <div class="item-title">title</div>
+            <div class="item-title">{{slide.name}}</div>
           </div>
         </ion-slide>
-        <ion-slide *ngFor="let children of slide.children">
+        <ion-slide *ngFor="let children of slide.smoke_products">
           <div class="slide-item" (click)="selectSession()">
             <div
               class="inside-dot"
-              [style.backgroundImage]="'url(' + children.image + ')'"
+              [style.backgroundImage]="'url(' + helper.getImageUrl(children.image?.url) + ')'"
             ></div>
-            <div class="item-title">title</div>
+            <div class="item-title">{{children.name}}</div>
           </div>
         </ion-slide>
       </ion-slides>

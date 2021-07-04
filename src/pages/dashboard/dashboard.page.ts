@@ -10,6 +10,7 @@ import {
   Component,
   ElementRef,
   OnDestroy,
+  OnInit,
   ViewChild,
 } from '@angular/core';
 import { Plugins } from '@capacitor/core';
@@ -28,6 +29,8 @@ import { slideOpts } from './slider-config';
 import { Share } from '@capacitor/share';
 import { Geolocation } from '@capacitor/geolocation';
 import { SelectLocationPage } from '../select-location/select-location.page';
+import { HttpClient } from '@angular/common/http';
+import { HelperService } from 'src/common/services/helper.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -42,7 +45,7 @@ import { SelectLocationPage } from '../select-location/select-location.page';
     ]),
   ],
 })
-export class DashboardPage implements AfterViewInit, OnDestroy {
+export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
   audio: HTMLAudioElement;
   @ViewChild('mainSlider') mainSlider: IonSlides;
   @ViewChild('map') map: google.maps.Map;
@@ -58,7 +61,6 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
 
   center: google.maps.LatLngLiteral = { lat: 51.178418, lng: 11 };
   zoom = 6;
-  // markerOptions: google.maps.MarkerOptions = { draggable: false };
   markerPositions: google.maps.LatLngLiteral[] = [];
 
   loadIcons = false;
@@ -68,30 +70,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
     ...slideOpts,
   };
 
-  slides = [
-    {
-      image: 'assets/images/slider/capital-bra.png',
-    },
-    {
-      image: 'assets/images/slider/almassiva.png',
-      children: [
-        { image: 'assets/images/slider/flavor/almassiva.png' },
-        { image: 'assets/images/slider/flavor/almassiva2.png' },
-        { image: 'assets/images/slider/flavor/almassiva3.png' },
-      ],
-    },
-
-    {
-      image: 'assets/images/slider/zomo.png',
-      children: [{ image: 'assets/images/slider/flavor/zomo.png' }],
-    },
-    {
-      image: 'assets/images/slider/bushidu.png',
-    },
-    { image: 'assets/images/slider/holster.png' },
-    { image: 'assets/images/slider/true-passion.png' },
-    { image: 'assets/images/slider/shisha-station.png' },
-  ];
+  manufacturers;
 
   cupertino: boolean = false;
   myPane: CupertinoPane;
@@ -101,10 +80,18 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
     private modalCtrl: ModalController,
     private routerOutlet: IonRouterOutlet,
     private localNotifications: LocalNotifications,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private http: HttpClient,
+    public helper: HelperService
   ) {}
 
-  ngAfterViewInit() {
+  async ngOnInit() {
+    const data = await this.http.get('api/manufacturers').toPromise();
+    console.log('data', data);
+    this.manufacturers = data;
+  }
+
+  async ngAfterViewInit() {
     setTimeout(() => {
       this.loadIcons = true;
       setTimeout(() => {

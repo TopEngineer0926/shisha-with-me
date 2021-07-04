@@ -1,8 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 
 import { Geolocation } from '@capacitor/geolocation';
 
 import { LoadingController, ModalController } from '@ionic/angular';
+import { AuthService } from 'src/common/auth/_services/auth.service';
 import { MapHelperService } from 'src/common/services/map-helper.service';
 
 @Component({
@@ -19,7 +21,9 @@ export class LocationSelectComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private loadingCtrl: LoadingController,
     public mapHelperService: MapHelperService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private http: HttpClient,
+    private authService: AuthService
   ) {}
 
   async ngOnInit() {}
@@ -57,38 +61,13 @@ export class LocationSelectComponent implements OnInit {
           coords.longitude
         );
 
-        /*const marker = new google.maps.Marker({
-          map: this.data.map.googleMap,
-          icon: {
-            path: google.maps.SymbolPath.CIRCLE,
-            scale: 6.5,
-            fillColor: '#0d144d',
-            fillOpacity: 0.9,
-            strokeWeight: 0,
-          },
-          position: center,
-          title: 'Meine Position',
-        });
-
-        const circle = new google.maps.Circle({
-          map: this.data.map.googleMap,
-          radius: this.mapHelperService.radius * 1000 || 16093,
-          fillColor: '#0d144d',
-          fillOpacity: 0.1,
-          strokeColor: '#0d144d',
-          strokeOpacity: 0.4,
-        });
-        circle.bindTo('center', marker, 'position');
-
-        this.data.map.googleMap.setCenter(center);
-        this.data.map.googleMap.setZoom(15);*/
-
         this.mapHelperService.postalCode = '';
         this.mapHelperService.location = response[0];
         this.mapHelperService.postalCode = this.mapHelperService.getField(
           response[0].address_components,
           'postal_code'
         ).short_name;
+
         this.cdr.detectChanges();
       } else {
         window.alert('No results found');
@@ -129,7 +108,16 @@ export class LocationSelectComponent implements OnInit {
 
   async save() {
     this.saveLoading = true;
+    const location = {
+      address: this.mapHelperService.location.formatted_address,
+      lat: this.options.center.lat,
+      lng: this.options.center.lng,
+    };
+    await this.http
+      .put('api/users/' + this.authService.user.id, { location: location })
+      .toPromise();
     await this.mapHelperService.save();
     this.saveLoading = false;
+    this.modalCtrl.dismiss();
   }
 }

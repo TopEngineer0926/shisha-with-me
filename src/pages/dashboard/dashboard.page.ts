@@ -27,6 +27,7 @@ import { MapPage } from '../map/map.page';
 import { slideOpts } from './slider-config';
 import { Share } from '@capacitor/share';
 import { Geolocation } from '@capacitor/geolocation';
+import { SelectLocationPage } from '../select-location/select-location.page';
 
 @Component({
   selector: 'app-dashboard',
@@ -193,20 +194,34 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
       buttons: [
         {
           text: 'Privat',
-          handler: async (blah) => {
+          handler: async () => {
             await this.startSession();
           },
         },
         {
           text: 'Shisha Bar',
           handler: async () => {
-            await this.startSession();
+            // await this.startSession();
+            await this.selectLocation();
           },
         },
       ],
     });
 
     await alert.present();
+  }
+
+  async selectLocation() {
+    const modal = await this.modalCtrl.create({
+      component: SelectLocationPage,
+      swipeToClose: true,
+      presentingElement: this.routerOutlet.nativeEl,
+      componentProps: {},
+    });
+    modal.onDidDismiss().then(async () => {
+      await this.startSession();
+    });
+    return await modal.present();
   }
 
   async startSession() {

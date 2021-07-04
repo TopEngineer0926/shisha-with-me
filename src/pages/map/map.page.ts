@@ -9,6 +9,8 @@ import { MapService } from 'src/common/services/map.service';
 import { MapFilterComponent } from './components/map-filter/map-filter.component';
 import { PlacePage } from './place/place.page';
 import { Geolocation } from '@capacitor/geolocation';
+import { AuthService } from 'src/common/auth/_services/auth.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-map',
@@ -33,7 +35,9 @@ export class MapPage implements AfterViewInit {
     public popoverController: PopoverController,
     private modalCtrl: ModalController,
     // private routerOutlet: IonRouterOutlet,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private authService: AuthService,
+    private http: HttpClient
   ) {}
 
   ngAfterViewInit() {
@@ -50,11 +54,11 @@ export class MapPage implements AfterViewInit {
 
     try {
       google.maps.event.addListener(this.map.googleMap, 'dragend', async () => {
-        await this.loadPlaces(true);
+        // await this.loadPlaces(true);
       });
 
-      await this.getCurrentPosition();
-      await this.loadPlaces();
+      // await this.getCurrentPosition();
+      // await this.loadPlaces();
     } catch (error) {
     } finally {
       loading.dismiss();
@@ -92,6 +96,14 @@ export class MapPage implements AfterViewInit {
         ];
 
         this.zoom = 14;
+
+        const location = {
+          lat: this.options.center.lat,
+          lng: this.options.center.lng,
+        };
+        await this.http
+          .put('api/users/' + this.authService.user.id, { location: location })
+          .toPromise();
       } catch (error) {
       } finally {
         this.locationLoading = false;

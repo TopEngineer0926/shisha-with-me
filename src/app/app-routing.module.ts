@@ -25,6 +25,7 @@ import { AdPageModule } from 'src/pages/advertising/pages/ad/ad.module';
 import { FriendsAddPageModule } from 'src/pages/friends-add/friends-add.module';
 import { IdeaPageModule } from 'src/pages/idea/idea.module';
 import { AuthGuard } from 'src/common/auth/_guards/auth.guard';
+import { SelectLocationPageModule } from 'src/pages/select-location/select-location.module';
 const routes: Routes = [
   {
     path: '',
@@ -151,6 +152,10 @@ const routes: Routes = [
   {
     path: 'idea',
     loadChildren: () => IdeaPageModule,
+  },
+  {
+    path: 'select-location',
+    loadChildren: () => SelectLocationPageModule,
   },
 ];
 @NgModule({

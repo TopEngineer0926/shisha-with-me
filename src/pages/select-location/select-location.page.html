@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Shisha Bar</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar
+      animated="true"
+      placeholder="Name"
+      [(ngModel)]="searchInput"
+      (ionBlur)="search()"
+    ></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list
+    class="p-5"
+    *ngFor="let location of locations"
+    (click)="selectLoaction(location)"
+  >
+    <ion-item>{{location.name}}</ion-item>
+  </ion-list>
+</ion-content>

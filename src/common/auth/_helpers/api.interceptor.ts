@@ -1,20 +1,24 @@
 import {
+  HttpEvent,
   HttpHandler,
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { from } from 'rxjs';
+import { from, Observable } from 'rxjs';
 
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
-  intercept(request: HttpRequest<any>, next: HttpHandler) {
-    return from(this.handle(request, next));
-  }
-
-  async handle(request: HttpRequest<any>, next: HttpHandler) {
-    request = request.clone({ url: request.url });
-    return next.handle(request).toPromise();
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
+    let newReq = req.clone();
+    if (req.url.startsWith('api/')) {
+      const api = `${environment.apiUrl}/${req.url.replace('api/', '')}`;
+      newReq = req.clone({ url: api });
+    }
+    return next.handle(newReq);
   }
 }

@@ -13,11 +13,11 @@
   >
     <ion-slide>
       <div class="wrapper">
-        <h1>Wie ist dein Benutzername?</h1>
+        <h2>Wie ist dein Benutzername?</h2>
         <p>Wie willst du von deinen Freunden gefunden/angzeigt werden?</p>
 
         <form>
-          <ion-item>
+          <ion-item lines="none">
             <ion-input></ion-input>
           </ion-item>
         </form>
@@ -25,7 +25,7 @@
     </ion-slide>
     <ion-slide>
       <div class="wrapper">
-        <h1>Wie willst du gefunden werden?</h1>
+        <h2>Wie willst du gefunden werden?</h2>
         <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
           <ion-item>
             <ion-label>{{'SliderPage.QrCode' | translate}}</ion-label>

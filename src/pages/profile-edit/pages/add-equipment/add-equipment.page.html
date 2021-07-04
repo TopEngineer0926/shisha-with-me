@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Equipment</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="p-5">
+    <div
+      class="
+        flex
+        text-sm text-left text-gray-400
+        bg-gray-800
+        h-12
+        items-center
+        p-4
+        rounded-sm
+      "
+    >
+      <span class="inline-block align-middle"
+        >Hier kannst du weitere Setups hinzufügen.</span
+      >
+    </div>
+  </div>
+
+  <ion-radio-group [(ngModel)]="key"
+    ><ion-list>
+      <ion-item
+        ><ion-label>Shisha</ion-label> <ion-radio value="Shisha"></ion-radio
+      ></ion-item>
+      <ion-item
+        ><ion-label>Kopf</ion-label> <ion-radio value="Kopf"></ion-radio
+      ></ion-item>
+      <ion-item
+        ><ion-label>Molassefänger</ion-label
+        ><ion-radio value="Molassefänger"></ion-radio
+      ></ion-item> </ion-list
+  ></ion-radio-group>
+
+  <form>
+    <ion-list class="mt-5">
+      <ion-item
+        ><ion-input
+          [(ngModel)]="inputValue"
+          placeholder="Modell"
+          [ngModelOptions]="{standalone: true}"
+        ></ion-input
+      ></ion-item>
+    </ion-list>
+  </form>
+  <div class="flex items-center justify-center mt-5">
+    <ion-button (click)="add()">Hinzufügen</ion-button>
+  </div>
+</ion-content>

@@ -23,9 +23,8 @@ import { StartSessionPageModule } from 'src/pages/start-session/start-session.mo
 import { OnBoardingPageModule } from 'src/pages/on-boarding/on-boarding.module';
 import { AdPageModule } from 'src/pages/advertising/pages/ad/ad.module';
 import { FriendsAddPageModule } from 'src/pages/friends-add/friends-add.module';
-import { AuthGuard } from 'src/common/guards/auth.guard';
-import { AddEquipmentPageModule } from 'src/pages/add-equipment/add-equipment.module';
 import { IdeaPageModule } from 'src/pages/idea/idea.module';
+import { AuthGuard } from 'src/common/auth/_guards/auth.guard';
 const routes: Routes = [
   {
     path: '',
@@ -148,10 +147,6 @@ const routes: Routes = [
   {
     path: 'friends',
     loadChildren: () => FriendsListPageModule,
-  },
-  {
-    path: 'add-equipment',
-    loadChildren: () => AddEquipmentPageModule,
   },
   {
     path: 'idea',

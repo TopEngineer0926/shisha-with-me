@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { get, remove, set } from 'src/common/services/storage.service';
 import { environment } from 'src/environments/environment';
 import { User } from '../_models/user';
@@ -19,6 +19,25 @@ export class AuthService {
   ) {}
 
   async login(email: string, password: string) {
+    const loginData = {
+      identifier: email.trim(),
+      password: password.trim(),
+    };
+
+    return this.http
+      .post('api/auth/local', loginData)
+      .pipe(
+        switchMap(async (res: any) => {
+          console.log(res);
+          if (res?.user) {
+            this.user = res.user;
+            await set('userData', { user: res.user, jwt: res.jwt });
+          }
+          return res;
+        })
+      )
+      .toPromise();
+
     /*return await this.apollo
       .query({
         query: loginQuery,
@@ -80,13 +99,15 @@ export class AuthService {
       .toPromise();*/
   }
 
-  async updateUser(user: User) {
+  async updateUser() {
+    const user = await this.http.get('api/users/me').toPromise();
     this.user = user;
 
     const loginData = await get('userData');
     loginData.user = user;
 
     await set('userData', loginData);
+    return user;
   }
 
   async showEmailConfirmAlert(email, backdropDismiss = false) {

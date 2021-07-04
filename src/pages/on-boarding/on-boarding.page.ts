@@ -2,6 +2,7 @@ import { IonSlides, NavController } from '@ionic/angular';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { set } from 'src/common/services/storage.service';
+import { AuthService } from 'src/common/auth/_services/auth.service';
 
 @Component({
   selector: 'app-on-boarding',
@@ -20,10 +21,12 @@ export class OnBoardingPage implements OnInit {
   sliderNum = 0;
   constructor(
     private navCtrl: NavController,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
+    console.log(this.authService.user);
     this.ionicForm = this.formBuilder.group({
       qrCode: [true, [Validators.required]],
       username: [true, [Validators.required]],

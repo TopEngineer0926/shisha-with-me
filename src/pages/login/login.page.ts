@@ -91,8 +91,6 @@ export class LoginPage implements OnInit {
   }
 
   async login() {
-    await this.navCtrl.navigateRoot('/on-boarding');
-    return;
     await this.app.isLoading(true);
 
     if (!this.model.email || !this.model.password) {
@@ -105,38 +103,17 @@ export class LoginPage implements OnInit {
     this.submitted = true;
 
     if (this.form.valid) {
-      console.log('login');
       try {
-        const user: any = await this.authService.login(
+        const data: any = await this.authService.login(
           this.model.email,
           this.model.password
         );
-        console.log('user', user);
-        if (user.data) {
+        console.log('user', data);
+        if (data.user) {
           this.userService.email = this.model.email;
-          await this.userService.updateUser({});
+          this.userService.updateUser({});
           this.toastr.success(this.translate.instant('Login success'));
           this.navCtrl.navigateRoot(['/']);
-        }
-        if (user.errors) {
-          if (
-            user.errors[0].message.toString().includes('Account not activated')
-          ) {
-            this.toastr.warning(
-              this.translate.instant('Account not activated')
-            );
-            return;
-          }
-
-          if (
-            user.errors[0].extensions.code
-              .toString()
-              .includes('UNAUTHENTICATED')
-          ) {
-            this.toastr.warning(
-              this.translate.instant('E-Mail or Password wrong!')
-            );
-          }
         }
       } catch (value) {
         console.log(value);

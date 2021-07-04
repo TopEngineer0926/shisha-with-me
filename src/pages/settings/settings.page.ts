@@ -13,6 +13,7 @@ import { HelperService } from 'src/common/services/helper.service';
 import { get, remove, set } from 'src/common/services/storage.service';
 import { ProfilePage } from '../profile/profile.page';
 import { IdeaPage } from '../idea/idea.page';
+import { AuthService } from 'src/common/auth/_services/auth.service';
 
 @Component({
   selector: 'app-settings',
@@ -35,10 +36,12 @@ export class SettingsPage implements OnInit {
     private routerOutlet: IonRouterOutlet,
     private popoverController: PopoverController,
     private actionSheetController: ActionSheetController,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    public authService: AuthService
   ) {}
 
   async ngOnInit() {
+    await this.authService.updateUser();
     const language = await this.getLang();
     this.language = language;
   }

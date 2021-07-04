@@ -20,26 +20,14 @@ export class UserService {
     }
   }
 
-  async enable2Fa() {
-    return await this.http
-      .get<any>(`${environment.apiUrl}/v1/2fa/generate`, {
-        responseType: 'text' as 'json',
-      })
-      .toPromise();
-  }
-
-  async disable2Fa(code: string) {
-    return await this.http
-      .post<any>(`${environment.apiUrl}/v1/2fa/generate`, {
-        params: { code },
-      })
-      .toPromise();
-  }
-
   async getUser() {
     if (!this.authService.isLoggedIn) {
       return;
     }
+
+    const user = await this.http.get('api​/users​/me').toPromise();
+
+    return user;
     /*
     return await this.apollo
       .query({

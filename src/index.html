@@ -6,7 +6,7 @@
 
     <base href="/" />
 
-    <meta name="color-scheme" content="light dark" />
+    <meta name="color-scheme" content="dark" />
     <meta
       name="viewport"
       content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
@@ -15,43 +15,13 @@
     <meta name="msapplication-tap-highlight" content="no" />
 
     <link rel="icon" type="image/png" href="assets/icon/favicon.png" />
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfBZEEoOwxq0nqGAtU49iNbsC8Lhp88pU&libraries=places"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBejUvNk6GxlamLl2_kq7SXdMWClZUxoJk&libraries=places"></script>
+
     <!-- add to homescreen for ios -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&amp;display=swap"
-      rel="stylesheet"
-    />
+
     <script>
-      function setColorScheme() {
-        const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)')
-          .matches;
-        const isLightMode = window.matchMedia('(prefers-color-scheme: light)')
-          .matches;
-        const isNotSpecified = window.matchMedia(
-          '(prefers-color-scheme: no-preference)'
-        ).matches;
-        const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified;
-
-        window
-          .matchMedia('(prefers-color-scheme: dark)')
-          .addListener((e) => e.matches && activateDarkMode());
-        window
-          .matchMedia('(prefers-color-scheme: light)')
-          .addListener((e) => e.matches && activateLightMode());
-
-        if (isDarkMode) activateDarkMode();
-        if (isLightMode) activateLightMode();
-        if (isNotSpecified || hasNoSupport) {
-          now = new Date();
-          hour = now.getHours();
-          if (hour < 4 || hour >= 16) {
-            // activateDarkMode();
-          }
-        }
-      }
-
       function activateDarkMode() {
         if (document && document.body && document.body.classList) {
           document.body.classList.add('dark');

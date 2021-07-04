@@ -46,12 +46,7 @@ export class RegisterComponent implements OnInit {
   async register() {
     await this.app.isLoading(true);
 
-    if (
-      !this.model.firstName ||
-      !this.model.lastName ||
-      !this.model.email ||
-      !this.model.password
-    ) {
+    if (!this.model.email || !this.model.password) {
       this.submitted = true;
       this.errorStr = 'fill_out_user_password';
 
@@ -63,8 +58,6 @@ export class RegisterComponent implements OnInit {
     if (this.form.valid) {
       try {
         const user: any = await this.authService.createUser(
-          this.model.firstName,
-          this.model.lastName,
           this.model.email,
           this.model.password
         );

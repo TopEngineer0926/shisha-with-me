@@ -21,7 +21,6 @@ export class SelectLocationPage implements OnInit {
       .toPromise();
     console.log('layers', data);
     this.locations = data;
-    this.searchInput = '';
   }
 
   selectLoaction(location) {

@@ -60,6 +60,7 @@
     "cupertino-pane": "^1.2.61",
     "jetifier": "^2.0.0",
     "momentum-slider": "0.0.8",
+    "ngx-stars": "^1.5.1",
     "ngx-swiper-wrapper": "^10.0.0",
     "ngx-toastr": "^14.0.0",
     "ngx-useful-swiper": "^10.0.1",

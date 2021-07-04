@@ -2,28 +2,6 @@
   <form class="form-style" #form="ngForm">
     <ion-item>
       <ion-input
-        name="firstName"
-        #firstName="ngModel"
-        [(ngModel)]="model.firstName"
-        [ngModelOptions]="{ standalone: true }"
-        type="firstName"
-        required
-        placeholder="Vorname"
-      ></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input
-        name="lastName"
-        #lastName="ngModel"
-        [(ngModel)]="model.lastName"
-        [ngModelOptions]="{ standalone: true }"
-        type="lastName"
-        required
-        placeholder="Nachname"
-      ></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input
         name="email"
         #email="ngModel"
         [(ngModel)]="model.email"

@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { GoogleMap } from '@angular/google-maps';
 import {
+  IonRouterOutlet,
   LoadingController,
   ModalController,
   PopoverController,
@@ -11,6 +12,7 @@ import { PlacePage } from './place/place.page';
 import { Geolocation } from '@capacitor/geolocation';
 import { AuthService } from 'src/common/auth/_services/auth.service';
 import { HttpClient } from '@angular/common/http';
+import { ProfilePage } from '../profile/profile.page';
 
 @Component({
   selector: 'app-map',
@@ -30,19 +32,58 @@ export class MapPage implements AfterViewInit {
   // markerOptions: google.maps.MarkerOptions = { draggable: false, icon: };
   markerPositions: google.maps.LatLngLiteral[] = [];
 
+  users;
+  locations;
+
   constructor(
     public mapService: MapService,
     public popoverController: PopoverController,
     private modalCtrl: ModalController,
-    // private routerOutlet: IonRouterOutlet,
+    //private routerOutlet: IonRouterOutlet,
     private loadingCtrl: LoadingController,
     private authService: AuthService,
     private http: HttpClient
   ) {}
 
+  async ngOnInit() {
+    const locationMarker = [];
+
+    const users: any = await this.http.get('api/users').toPromise();
+    console.log('data', users);
+    this.users = users;
+    users.map((location) => {
+      if (location.location) {
+        locationMarker.push({
+          lat: location.location.lat,
+          lng: location.location.lng,
+          id: location.id,
+          type: 'user',
+        });
+      }
+    });
+
+    const locations: any = await this.http.get('api/locations').toPromise();
+    console.log('locations', locations);
+    this.locations = locations;
+
+    locations.map((location) => {
+      if (location.location) {
+        locationMarker.push({
+          lat: location.location.lat,
+          lng: location.location.lng,
+          id: location.id,
+          type: 'location',
+        });
+      }
+    });
+    this.addMarkersForPlaces(locationMarker);
+  }
+
   ngAfterViewInit() {
     this.mapReady();
   }
+
+  loadMarker() {}
 
   close() {
     this.modalCtrl.dismiss();
@@ -112,14 +153,14 @@ export class MapPage implements AfterViewInit {
     });
   }
 
-  async openPlace(place) {
+  async openPlace(id) {
     const elm = await this.modalCtrl.getTop();
     const modal = await this.modalCtrl.create({
       component: PlacePage,
       swipeToClose: true,
       presentingElement: elm, //this.routerOutlet.nativeEl,
       componentProps: {
-        place,
+        placeId: id,
       },
     });
     return await modal.present();
@@ -145,10 +186,7 @@ export class MapPage implements AfterViewInit {
     });
   }
 
-  addMarkersForPlaces(
-    places: google.maps.places.PlaceResult[],
-    doBounds = false
-  ) {
+  addMarkersForPlaces(places: any[], doBounds = false) {
     let markers: google.maps.Marker[] = [];
     if (places.length == 0) {
       return;
@@ -163,39 +201,48 @@ export class MapPage implements AfterViewInit {
     // For each place, get the icon, name and location.
     const bounds = new google.maps.LatLngBounds();
     places.forEach((place) => {
-      if (!place.geometry) {
-        console.log('Returned place contains no geometry');
-        return;
-      }
-      const icon = {
-        url: '/assets/icons/pint-outline.svg',
-        size: new google.maps.Size(71, 71),
-        origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(17, 34),
-        scaledSize: new google.maps.Size(25, 25),
-      };
+      console.log('place', place);
 
-      const marker = new google.maps.Marker({
+      let marker: any = new google.maps.Marker({
         map: this.map.googleMap,
-        icon: icon,
-        title: place.name,
-        position: place.geometry.location,
-      });
 
-      // Create a marker for each place.
+        // title: place.name,
+
+        position: { lat: place.lat, lng: place.lng },
+      });
+      if (place.type == 'location') {
+        const icon = {
+          url: '/assets/icons/pint-outline.svg',
+          size: new google.maps.Size(71, 71),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(17, 34),
+          scaledSize: new google.maps.Size(25, 25),
+        };
+        marker.icon = icon;
+      }
+
+      marker.dataId = place.id;
+      marker.dataType = place.type;
+
       markers.push(marker);
 
       google.maps.event.addListener(marker, 'click', async () => {
-        console.log(place.name, this.map);
-        await this.openPlace(place);
+        console.log(marker);
+        if (marker.dataType == 'location') {
+          await this.openPlace(marker.dataId);
+        }
+        if (marker.dataType == 'user') {
+          await this.openFriend(marker.dataId);
+        }
       });
 
-      if (place.geometry.viewport) {
+      /*if (place.geometry.viewport) {
         // Only geocodes have viewport.
         bounds.union(place.geometry.viewport);
       } else {
         bounds.extend(place.geometry.location);
-      }
+      }*/
+      bounds.extend(place);
     });
     if (!doBounds) {
       this.map.googleMap.fitBounds(bounds);
@@ -204,5 +251,18 @@ export class MapPage implements AfterViewInit {
       imagePath:
         'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
     });*/
+  }
+  async openFriend(id) {
+    const elm = await this.modalCtrl.getTop();
+    const modal = await this.modalCtrl.create({
+      component: ProfilePage,
+
+      swipeToClose: true,
+      presentingElement: elm,
+      componentProps: {
+        id: id,
+      },
+    });
+    return await modal.present();
   }
 }

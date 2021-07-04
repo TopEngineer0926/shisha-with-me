@@ -5,6 +5,7 @@ import {
   LaunchNavigator,
   LaunchNavigatorOptions,
 } from '@ionic-native/launch-navigator/ngx';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-place',
@@ -13,14 +14,29 @@ import {
 })
 export class PlacePage implements OnInit {
   @Input() place: google.maps.places.PlaceResult | any;
+  @Input() placeId: string | number;
+
+  location;
 
   constructor(
     private modalCtrl: ModalController,
-    private helper: HelperService
+    public helper: HelperService,
+    private http: HttpClient
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     console.log(this.place);
+    if (this.placeId) {
+      const location: any = await this.http
+        .get('api/locations/' + this.placeId)
+        .toPromise();
+      console.log('user', location);
+      this.location = location;
+    } else {
+      setTimeout(() => {
+        this.modalCtrl.dismiss();
+      }, 500);
+    }
   }
 
   dismiss() {
@@ -38,7 +54,10 @@ export class PlacePage implements OnInit {
     );*/
     console.log('this.place', this.place);
     this.helper.openLink(
-      'https://www.google.com/maps/place/?q=place_id:' + this.place.place_id
+      'https://www.google.com/maps/place/?q=' +
+        this.location.location.lat +
+        ',' +
+        this.location.location.lng
     );
   }
 }

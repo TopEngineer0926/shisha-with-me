@@ -7,14 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ReviewsPageRoutingModule } from './reviews-routing.module';
 
 import { ReviewsPage } from './reviews.page';
-
+import { NgxStarsModule } from 'ngx-stars';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ReviewsPageRoutingModule
+    ReviewsPageRoutingModule,
+    NgxStarsModule,
   ],
-  declarations: [ReviewsPage]
+  declarations: [ReviewsPage],
 })
 export class ReviewsPageModule {}

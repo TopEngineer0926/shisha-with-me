@@ -14,7 +14,34 @@
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <div class="no-items" *ngIf="!(data?.length > 0)">
+  <div class="no-items" *ngIf="!(sessions?.length > 0)">
     Noch keine Einträge vorhanden
+  </div>
+
+  <div class="mt-5">
+    <ion-card *ngFor="let session of sessions">
+      <ion-card-header
+        ><ion-card-title>{{session.location?.name}}</ion-card-title>
+        <ion-card-subtitle
+          >{{session.start_user?.name}}</ion-card-subtitle
+        ></ion-card-header
+      >
+      <ion-card-content>
+        Shisha Bar: {{session.location?.name}}
+        <ngx-stars
+          [readonly]="false"
+          [size]="2"
+          [color]="'#fff'"
+          [maxStars]="5"
+        ></ngx-stars>
+        Produkt: {{session.smoke_product?.name}}
+        <ngx-stars
+          [readonly]="false"
+          [size]="2"
+          [color]="'#fff'"
+          [maxStars]="5"
+        ></ngx-stars>
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>

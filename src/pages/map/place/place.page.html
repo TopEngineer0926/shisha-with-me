@@ -13,36 +13,35 @@
   <ion-card>
     <div
       class="bg-cover bg-no-repeat h-52 w-full bg-center"
-      *ngIf="place.photos[0]?.getUrl()"
-      [style.backgroundImage]="'url(' + place.photos[0]?.getUrl() +')'"
+      [style.backgroundImage]="'url(' + helper.getImageUrl(location?.images[0]?.url) +')'"
     ></div>
     <ion-card-header>
       <ion-card-subtitle
         ><ion-badge
           color="success"
-          *ngIf="place.business_status == 'OPERATIONAL'"
+          *ngIf="place?.business_status == 'OPERATIONAL'"
           >Geöffnet</ion-badge
         ></ion-card-subtitle
       >
-      <ion-card-title>{{place.name}}</ion-card-title>
+      <ion-card-title>{{location?.name}}</ion-card-title>
     </ion-card-header>
 
     <ion-list lines="none">
       <ion-item>
         <ion-icon slot="start" name="analytics-outline"></ion-icon>
         <ion-label>Rating</ion-label>
-        <ion-badge slot="end">{{place.rating}} </ion-badge>
+        <ion-badge slot="end">{{place?.rating}} </ion-badge>
       </ion-item>
       <ion-item>
         <ion-icon slot="start" name="star-outline"></ion-icon>
         <ion-label>Bewertungen</ion-label>
-        <ion-badge slot="end">{{place.user_ratings_total}}</ion-badge>
+        <ion-badge slot="end">{{place?.user_ratings_total}}</ion-badge>
       </ion-item>
       <ion-item lines="none">
         <ion-icon slot="start" name="home-outline"></ion-icon>
         <ion-label>Adresse</ion-label>
       </ion-item>
-      <ion-item> <ion-badge>{{place.vicinity}}</ion-badge></ion-item>
+      <ion-item> <ion-badge>{{place?.vicinity}}</ion-badge></ion-item>
     </ion-list>
   </ion-card>
 

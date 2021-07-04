@@ -20,6 +20,7 @@ import {
   IonRouterOutlet,
   IonSlides,
   ModalController,
+  ToastController,
 } from '@ionic/angular';
 import { CupertinoPane, CupertinoSettings } from 'cupertino-pane';
 import { MapService } from 'src/common/services/map.service';
@@ -31,6 +32,7 @@ import { Geolocation } from '@capacitor/geolocation';
 import { SelectLocationPage } from '../select-location/select-location.page';
 import { HttpClient } from '@angular/common/http';
 import { HelperService } from 'src/common/services/helper.service';
+import { AuthService } from 'src/common/auth/_services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -82,7 +84,9 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
     private localNotifications: LocalNotifications,
     private alertController: AlertController,
     private http: HttpClient,
-    public helper: HelperService
+    public helper: HelperService,
+    private authService: AuthService,
+    private toastCtrl: ToastController
   ) {}
 
   async ngOnInit() {
@@ -174,7 +178,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
     return await modal.present();
   }
 
-  async selectSession() {
+  async selectSession(children) {
     const alert = await this.alertController.create({
       header: 'Wo wird geraucht?',
       translucent: true,
@@ -182,14 +186,14 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
         {
           text: 'Privat',
           handler: async () => {
-            await this.startSession();
+            await this.startSession(children);
           },
         },
         {
           text: 'Shisha Bar',
           handler: async () => {
             // await this.startSession();
-            await this.selectLocation();
+            await this.selectLocation(children);
           },
         },
       ],
@@ -198,7 +202,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
     await alert.present();
   }
 
-  async selectLocation() {
+  async selectLocation(children) {
     const modal = await this.modalCtrl.create({
       component: SelectLocationPage,
       swipeToClose: true,
@@ -207,13 +211,28 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
     });
     modal.onDidDismiss().then(async (data) => {
       if (data) {
-        await this.startSession();
+        console.log(data);
+        await this.startSession(children, data.data);
       }
     });
     return await modal.present();
   }
 
-  async startSession() {
+  async startSession(smokeProduct, location?) {
+    const data = {
+      start_user: this.authService.user.id.toString(),
+      smoke_product: smokeProduct.id,
+      location: location.id,
+    };
+
+    await this.http.post('api/sessions', data).toPromise();
+    (
+      await this.toastCtrl.create({
+        message: 'Session wurde gestartet',
+        duration: 4000,
+      })
+    ).present();
+
     this.visiblityState = 'shown';
     const video = this.videoElm.nativeElement;
     await this.audio.play();

@@ -62,12 +62,20 @@ export class AuthService {
       .toPromise();*/
   }
 
-  async createUser(
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string
-  ) {
+  async createUser(email: string, password: string) {
+    const data: any = await this.http
+      .post('api/auth/local/register', {
+        username: email.trim(),
+        email: email.trim(),
+        password: password.trim(),
+      })
+      .toPromise();
+    if (data?.user) {
+      this.user = data.user;
+      await set('userData', { user: data.user, jwt: data.jwt });
+    }
+    return data;
+    console.log('data', data);
     /* return await this.apollo
       .mutate({
         mutation: createUserMutation,

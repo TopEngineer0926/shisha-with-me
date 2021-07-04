@@ -12,7 +12,8 @@
       animated="true"
       placeholder="Name"
       [(ngModel)]="searchInput"
-      (ionBlur)="search()"
+      debounce="500"
+      (ionChange)="search()"
     ></ion-searchbar>
   </ion-toolbar>
 </ion-header>

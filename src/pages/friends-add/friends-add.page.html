@@ -3,14 +3,50 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Personen entdecken</ion-title>
+    <ion-title>Freund suchen</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar
+      animated="true"
+      placeholder="E-Mail"
+      [(ngModel)]="searchInput"
+      debounce="500"
+      (ionChange)="search()"
+    ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+  <!-- <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <app-friends-add-list></app-friends-add-list>
+  <app-friends-add-list></app-friends-add-list>-->
+
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Ergebnisse {{users.length}}</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let user of users">
+      <ion-avatar slot="start">
+        <div
+          class="bg-cover bg-no-repeat h-10 w-10 rounded-full"
+          [style.backgroundImage]="'url(' + helper.getImageUrl(user.image?.url) + ')'"
+        ></div>
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ user.name }}</h2>
+        <p></p>
+      </ion-label>
+      <ion-button
+        *ngIf="!user.isFriend"
+        [disabled]="user.loading"
+        slot="end"
+        (click)="sendRequest(user)"
+      >
+        <ion-spinner class="mr-3" *ngIf="user.loading"></ion-spinner>
+        Verbinden
+      </ion-button>
+    </ion-item>
+  </ion-list>
 </ion-content>

@@ -1,8 +1,13 @@
 import { HelperService } from './../../common/services/helper.service';
 import { environment } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { ToastController, LoadingController } from '@ionic/angular';
+import {
+  ToastController,
+  LoadingController,
+  ModalController,
+} from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/common/auth/_services/auth.service';
 
 @Component({
   selector: 'app-friends-add',
@@ -17,38 +22,53 @@ export class FriendsAddPage implements OnInit {
     },
   ];
 
+  users = [];
+  searchInput = '';
+
   constructor(
-    private loadingCtrl: LoadingController,
-    private toastCtrl: ToastController,
+    private modalCtrl: ModalController,
     private http: HttpClient,
-    public helper: HelperService
+    public helper: HelperService,
+    private authService: AuthService,
+    private toastCtrl: ToastController
   ) {}
 
-  async ngOnInit() {
-    await this.load();
+  ngOnInit() {}
+
+  async search() {
+    const data: any = await this.http
+      .get('api/users', { params: { email_contains: this.searchInput } })
+      .toPromise();
+    console.log('layers', data);
+    this.users = data;
+    // this.searchInput = '';
   }
 
-  async load() {
-    const loading = await this.loadingCtrl.create();
-    loading.present();
-    try {
-      const data: any = await this.http
-        .get(`${environment.apiUrl}/friends`)
-        .toPromise();
-      this.friends = data;
-      console.log('data', data);
-    } catch (error) {
-    } finally {
-      loading.dismiss();
-    }
+  async sendRequest(user) {
+    user.loading = true;
+    const data = {
+      fromUid: this.authService.user.id.toString(),
+      fromName: this.authService.user.name,
+      toUid: user.id.toString(),
+      isAccepted: false,
+    };
+
+    await this.http.post('api/friend-requests', data).toPromise();
+    (
+      await this.toastCtrl.create({
+        message: 'Anfrage wurde verschickt',
+        duration: 4000,
+      })
+    ).present();
+    user.isFriend = true;
+    user.loading = false;
   }
 
-  async doRefresh(event) {
-    console.log('Begin async operation');
-    await this.load();
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      event.target.complete();
-    }, 2000);
+  selectLoaction(location) {
+    this.modalCtrl.dismiss(location);
+  }
+
+  close() {
+    this.modalCtrl.dismiss();
   }
 }

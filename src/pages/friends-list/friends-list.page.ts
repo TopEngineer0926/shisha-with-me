@@ -8,6 +8,7 @@ import {
   LoadingController,
   ModalController,
   NavController,
+  ToastController,
 } from '@ionic/angular';
 import { CupertinoPane, CupertinoSettings } from 'cupertino-pane';
 import { Plugins } from '@capacitor/core';
@@ -38,17 +39,17 @@ export class FriendsListPage implements OnInit, OnDestroy {
     private http: HttpClient,
     public helper: HelperService,
     private authService: AuthService,
-    private routerOutlet: IonRouterOutlet
+    private routerOutlet: IonRouterOutlet,
+    private toastCtrl: ToastController
   ) {}
 
   async ngOnInit() {
-    //  await this.load();
     const data = await this.http
       .get('api/friend-requests', {
-        params: { toUid_eq: this.authService.user.id },
+        params: { toUid_eq: this.authService.user.id, isAccepted_eq: false },
       })
       .toPromise();
-    console.log('data, data', data);
+    console.log('data', data);
     this.requests = data;
 
     const users = await this.http.get('api/users').toPromise();
@@ -69,7 +70,21 @@ export class FriendsListPage implements OnInit, OnDestroy {
     return await modal.present();
   }
 
-  connect(friend) {}
+  async connect(request) {
+    request.loading = true;
+    const data = {
+      isAccepted: true,
+    };
+
+    await this.http.put('api/friend-requests/' + request.id, data).toPromise();
+    (
+      await this.toastCtrl.create({
+        message: 'Anfrage wurde angenommen',
+        duration: 4000,
+      })
+    ).present();
+    request.loading = false;
+  }
 
   ngOnDestroy() {
     this.myPane?.destroy();
@@ -93,10 +108,7 @@ export class FriendsListPage implements OnInit, OnDestroy {
   async doRefresh(event) {
     console.log('Begin async operation');
     await this.load();
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      event.target.complete();
-    }, 2000);
+    event.target.complete();
   }
 
   async openFriendAddList() {

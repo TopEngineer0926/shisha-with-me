@@ -61,9 +61,9 @@
 
     <ion-card-content>
       <ngx-qrcode
-        *ngIf="value"
+        *ngIf="user.email"
         [elementType]="elementType"
-        [value]="value"
+        [value]="user.email"
         [width]="200"
         [colorDark]="'#fff'"
         [colorLight]="'#080808'"

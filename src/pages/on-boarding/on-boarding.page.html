@@ -16,9 +16,12 @@
         <h2>Wie ist dein Benutzername?</h2>
         <p>Wie willst du von deinen Freunden gefunden/angzeigt werden?</p>
 
-        <form>
+        <form *ngIf="user">
           <ion-item lines="none">
-            <ion-input></ion-input>
+            <ion-input
+              [(ngModel)]="user.name"
+              [ngModelOptions]="{standalone: true}"
+            ></ion-input>
           </ion-item>
         </form>
       </div>
@@ -74,9 +77,11 @@
     </ion-slide>
     <ion-slide>
       <div class="wrapper">
-        <h1>Freunde hinzufügen</h1>
+        <h2 class="mb-1">Alles bereit</h2>
 
-        <app-friends-add-list></app-friends-add-list>
+        <p>Los geht's</p>
+
+        <!--<app-friends-add-list></app-friends-add-list>-->
       </div>
     </ion-slide>
   </ion-slides>

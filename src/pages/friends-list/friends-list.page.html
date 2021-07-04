@@ -1,5 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>Freunde</ion-title>
     <ion-buttons slot="end">
       <!--<ion-button (click)="createGroup()">
@@ -9,7 +12,7 @@
           color="warning"
         ></ion-icon>
       </ion-button>-->
-      <ion-button (click)="addFriend()">
+      <ion-button (click)="openFriendAddList()">
         <ion-icon
           slot="icon-only"
           name="person-add-outline"
@@ -27,19 +30,28 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+  <!--<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
+  </ion-refresher>-->
 
-  <ion-list>
+  <ion-list *ngIf="requests?.length > 0">
+    <ion-list-header>Anfragen</ion-list-header>
     <ion-item *ngFor="let request of requests">
-      <ion-avatar slot="start">
-        <img [src]="helper.getImageUrl(request.image?.url)" />
+      <ion-avatar slot="start" (click)="openFriend(request)">
+        <div
+          class="bg-cover bg-no-repeat h-10 w-10 rounded-full"
+          [style.backgroundImage]="'url(' + helper.getImageUrl(request.image?.url) + ')'"
+        ></div>
       </ion-avatar>
-      <ion-label>
+      <ion-label (click)="openFriend(request)">
         <h2>{{ request.fromName }}</h2>
       </ion-label>
-      <ion-button slot="end" (click)="connect(request)">
+      <ion-button
+        [disabled]="request.loading"
+        slot="end"
+        (click)="connect(request)"
+      >
+        <ion-spinner class="mr-3" *ngIf="request.loading"></ion-spinner>
         Akzeptieren
       </ion-button>
     </ion-item>

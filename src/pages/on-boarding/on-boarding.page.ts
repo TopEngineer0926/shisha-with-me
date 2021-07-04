@@ -1,8 +1,9 @@
 import { IonSlides, NavController } from '@ionic/angular';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { set } from 'src/common/services/storage.service';
 import { AuthService } from 'src/common/auth/_services/auth.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-on-boarding',
@@ -19,13 +20,16 @@ export class OnBoardingPage implements OnInit {
     allowTouchMove: false,
   };
   sliderNum = 0;
+  user;
   constructor(
     private navCtrl: NavController,
     public formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private http: HttpClient,
+    private cdr: ChangeDetectorRef
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     console.log(this.authService.user);
     this.ionicForm = this.formBuilder.group({
       qrCode: [true, [Validators.required]],
@@ -33,6 +37,19 @@ export class OnBoardingPage implements OnInit {
       telefonnumber: [null],
       instagran: [null],
     });
+
+    await this.loadUser();
+  }
+
+  async loadUser() {
+    const data = await this.http
+      .get('api/users/' + this.authService?.user.id)
+      .toPromise();
+    this.user = data;
+    console.log('this.user', this.user);
+
+    await this.authService.updateUser();
+    this.cdr.detectChanges();
   }
 
   async goTo() {
@@ -46,7 +63,11 @@ export class OnBoardingPage implements OnInit {
     });
   }
 
-  next() {
+  async next() {
+    const user = await this.http
+      .put('api/users/' + this.user.id, this.user)
+      .toPromise();
+    await this.loadUser();
     this.slides.slideNext();
   }
   back() {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-idea',
@@ -6,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./idea.page.scss'],
 })
 export class IdeaPage implements OnInit {
-  constructor() {}
+  constructor(
+    private toastCtrl: ToastController,
+    private modalCtrl: ModalController
+  ) {}
 
   ngOnInit() {}
 
-  send() {}
+  async send() {
+    (
+      await this.toastCtrl.create({
+        message: 'Nachricht wurde verschickt',
+        duration: 4000,
+      })
+    ).present();
+    this.modalCtrl.dismiss();
+  }
 }

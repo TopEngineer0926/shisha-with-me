@@ -218,8 +218,10 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
       presentingElement: this.routerOutlet.nativeEl,
       componentProps: {},
     });
-    modal.onDidDismiss().then(async () => {
-      await this.startSession();
+    modal.onDidDismiss().then(async (data) => {
+      if (data) {
+        await this.startSession();
+      }
     });
     return await modal.present();
   }

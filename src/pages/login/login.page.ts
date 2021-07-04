@@ -6,6 +6,7 @@ import {
   LoadingController,
   NavController,
   ModalController,
+  ToastController,
 } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -49,10 +50,8 @@ export class LoginPage implements OnInit {
   constructor(
     private loadingCtrl: LoadingController,
     private navCtrl: NavController,
-
     private routerOutlet: IonRouterOutlet,
     private modalCtrl: ModalController,
-
     private route: ActivatedRoute,
     private router: Router,
     public helper: HelperService,
@@ -60,8 +59,8 @@ export class LoginPage implements OnInit {
     private events: Events,
     private authService: AuthService,
     private app: AppService,
-    private toastr: ToastrService,
-    private userService: UserService
+    private userService: UserService,
+    private toastCtrl: ToastController
   ) {}
 
   async ngOnInit() {
@@ -112,14 +111,22 @@ export class LoginPage implements OnInit {
         if (data.user) {
           this.userService.email = this.model.email;
           this.userService.updateUser({});
-          this.toastr.success(this.translate.instant('Login success'));
+          (
+            await this.toastCtrl.create({
+              message: this.translate.instant('Login success'),
+              duration: 4000,
+            })
+          ).present();
           this.navCtrl.navigateRoot(['/']);
         }
       } catch (value) {
         console.log(value);
-        this.toastr.warning(
-          this.translate.instant('Cannot login to your Account')
-        );
+        (
+          await this.toastCtrl.create({
+            message: this.translate.instant('Cannot login to your Account'),
+            duration: 4000,
+          })
+        ).present();
       } finally {
         await this.app.isLoading(false);
       }

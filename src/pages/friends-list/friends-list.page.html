@@ -31,25 +31,35 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <div class="no-items" *ngIf="!(chatService?.chats?.length > 0)">
+  <ion-list>
+    <ion-item *ngFor="let request of requests">
+      <ion-avatar slot="start">
+        <img [src]="helper.getImageUrl(request.image?.url)" />
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ request.fromName }}</h2>
+      </ion-label>
+      <ion-button slot="end" (click)="connect(request)">
+        Akzeptieren
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <div class="no-items" *ngIf="!(users?.length > 0)">
     Noch keine Einträge vorhanden
   </div>
 
-  <ion-list>
-    <ion-item
-      button
-      [routerLink]="['/chat', friend.id]"
-      *ngFor="let friend of chatService.chats"
-    >
+  <ion-list class="mt-5">
+    <ion-item button *ngFor="let user of users" (click)="openFriend(user)">
       <ion-avatar slot="start">
         <div
-          class="bg-cover bg-no-repeat h-10 w-10 radius-full"
-          [style.backgroundImage]="'url(' + helper.getImageUrl(friend.image?.url) + ')'"
+          class="bg-cover bg-no-repeat h-10 w-10 rounded-full"
+          [style.backgroundImage]="'url(' + helper.getImageUrl(user.image?.url) + ')'"
         ></div>
       </ion-avatar>
       <ion-label
-        ><h2>{{friend.name}}</h2>
-        <p>{{friend.type}}</p></ion-label
+        ><h2>{{user.name}}</h2>
+        <p>{{user.email}}</p></ion-label
       >
     </ion-item>
   </ion-list>

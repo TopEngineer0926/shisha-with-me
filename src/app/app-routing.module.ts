@@ -133,6 +133,7 @@ const routes: Routes = [
   {
     path: 'on-boarding',
     loadChildren: () => OnBoardingPageModule,
+    canActivate: [AuthGuard],
   },
   {
     path: 'advertising/:id',
@@ -148,6 +149,7 @@ const routes: Routes = [
   {
     path: 'friends',
     loadChildren: () => FriendsListPageModule,
+    canActivate: [AuthGuard],
   },
   {
     path: 'idea',

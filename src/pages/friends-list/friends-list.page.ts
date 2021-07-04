@@ -4,6 +4,7 @@ import { ChatService } from './../../common/services/chat.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {
   AlertController,
+  IonRouterOutlet,
   LoadingController,
   ModalController,
   NavController,
@@ -12,6 +13,8 @@ import { CupertinoPane, CupertinoSettings } from 'cupertino-pane';
 import { Plugins } from '@capacitor/core';
 import { environment } from 'src/environments/environment';
 import { Share } from '@capacitor/share';
+import { AuthService } from 'src/common/auth/_services/auth.service';
+import { ProfilePage } from '../profile/profile.page';
 
 @Component({
   selector: 'app-friends-list',
@@ -23,19 +26,50 @@ export class FriendsListPage implements OnInit, OnDestroy {
   value = 'Mathis';
   myPane: CupertinoPane;
 
+  requests;
+  users;
+
   constructor(
     private navCtrl: NavController,
     private alertController: AlertController,
     public chatService: ChatService,
-    public modalController: ModalController,
+    public modalCtrl: ModalController,
     private loadingCtrl: LoadingController,
     private http: HttpClient,
-    public helper: HelperService
+    public helper: HelperService,
+    private authService: AuthService,
+    private routerOutlet: IonRouterOutlet
   ) {}
 
   async ngOnInit() {
-    await this.load();
+    //  await this.load();
+    const data = await this.http
+      .get('api/friend-requests', {
+        params: { toUid_eq: this.authService.user.id },
+      })
+      .toPromise();
+    console.log('data, data', data);
+    this.requests = data;
+
+    const users = await this.http.get('api/users').toPromise();
+    console.log('users', data);
+    this.users = users;
   }
+
+  async openFriend(user) {
+    const modal = await this.modalCtrl.create({
+      component: ProfilePage,
+
+      swipeToClose: true,
+      presentingElement: this.routerOutlet.nativeEl,
+      componentProps: {
+        id: user.id,
+      },
+    });
+    return await modal.present();
+  }
+
+  connect(friend) {}
 
   ngOnDestroy() {
     this.myPane?.destroy();

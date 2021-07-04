@@ -6,6 +6,8 @@ import {
   ModalController,
 } from '@ionic/angular';
 import { MapService } from 'src/common/services/map.service';
+import { HttpClient } from '@angular/common/http';
+import { HelperService } from 'src/common/services/helper.service';
 
 @Component({
   selector: 'app-profile',
@@ -35,18 +37,25 @@ export class ProfilePage implements OnInit {
     public mapService: MapService,
     private toastCtrl: ToastController,
     private chatService: ChatService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private http: HttpClient,
+    public helper: HelperService
   ) {}
 
   close() {
     this.modalCtrl.dismiss();
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     if (this.id) {
-      this.user = this.chatService.friends.find(
-        (friend) => friend.id == this.id
-      );
+      const user: any = await this.http.get('api/users/' + this.id).toPromise();
+      console.log('user', user);
+      this.user = user;
+      if (user.location) {
+        this.center = { lat: user.location.lat, lng: user.location.lng };
+        this.markers.push({ lat: user.location.lat, lng: user.location.lng });
+        this.zoom = 15;
+      }
     } else {
       setTimeout(() => {
         this.modalCtrl.dismiss();

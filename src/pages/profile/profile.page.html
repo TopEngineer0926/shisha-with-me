@@ -15,7 +15,7 @@
 <ion-content [fullscreen]="true">
   <div
     class="user-image"
-    [style.backgroundImage]="'url(' +  user?.image + ')'"
+    [style.backgroundImage]="'url(' +  helper.getImageUrl(user.image?.url) + ')'"
   ></div>
   <ion-card>
     <ion-card-header>
@@ -23,10 +23,14 @@
       <ion-card-title>{{user.name}}</ion-card-title>
     </ion-card-header>
 
-    <ion-card-content>
-      This is content, without any paragraph or header tags, within an
-      ion-card-content element.
-    </ion-card-content>
+    <ion-list>
+      <ion-item *ngFor="let setup of user.setups">
+        <ion-label>
+          <small>{{setup.key}}</small>
+          <h2>{{setup.value}}</h2></ion-label
+        >
+      </ion-item>
+    </ion-list>
   </ion-card>
 
   <ion-card>
@@ -76,6 +80,10 @@
     </ion-card-header>
 
     <google-map #map [center]="center" [zoom]="zoom" [options]="options">
+      <map-marker
+        *ngFor="let marker of markers"
+        [position]="marker"
+      ></map-marker>
     </google-map>
     <!--<agm-map
       [latitude]="lat"
@@ -87,7 +95,7 @@
     </agm-map>-->
   </ion-card>
 
-  <ion-card>
+  <!--<ion-card>
     <ion-card-header>
       <ion-card-subtitle>Andere</ion-card-subtitle>
     </ion-card-header>
@@ -98,5 +106,5 @@
         <ion-toggle slot="end"></ion-toggle>
       </ion-item>
     </ion-card-content>
-  </ion-card>
+  </ion-card>-->
 </ion-content>

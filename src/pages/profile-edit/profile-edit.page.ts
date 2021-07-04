@@ -15,6 +15,7 @@ import { AuthService } from 'src/common/auth/_services/auth.service';
 import { HelperService } from 'src/common/services/helper.service';
 import { UploadService } from 'src/common/services/upload.service';
 import { AddEquipmentPage } from './pages/add-equipment/add-equipment.page';
+import { LocationSelectComponent } from './pages/location-select/location-select.component';
 
 @Component({
   selector: 'app-profile-edit',
@@ -75,6 +76,21 @@ export class ProfileEditPage implements OnInit {
   close() {
     this.modalCtrl.dismiss();
   }
+
+  async locationEdit() {
+    const elm = await this.modalCtrl.getTop();
+    const modal = await this.modalCtrl.create({
+      component: LocationSelectComponent,
+      swipeToClose: true,
+      presentingElement: elm,
+      componentProps: {},
+    });
+    modal.onDidDismiss().then(async () => {
+      await this.loadUser();
+    });
+    return await modal.present();
+  }
+
   async addShisha() {
     const elm = await this.modalCtrl.getTop();
     const modal = await this.modalCtrl.create({

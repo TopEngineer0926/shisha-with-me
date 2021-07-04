@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mein Standort</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button
+    [disabled]="locationLoading"
+    class="creedle-btn mt-8"
+    (click)="getCurrentPosition()"
+  >
+    <ion-spinner *ngIf="locationLoading" class="mr-3"></ion-spinner>
+    Meinen Standort verwenden
+  </ion-button>
+
+  <div class="flex mt-6 flex-col">
+    <div class="flex">
+      <input
+        class="creedle-btn w-full"
+        placeholder="PLZ"
+        [(ngModel)]="mapHelperService.postalCode"
+        min="5"
+        max="5"
+        type="tel"
+      />
+      <button
+        (click)="findLocation()"
+        [disabled]="mapHelperService.postalCode.length !== 5"
+        class="creedle-btn btn-custom"
+      >
+        <ion-icon name="search-outline"></ion-icon>
+      </button>
+    </div>
+
+    <div class="mb-5 mt-2">
+      {{ mapHelperService.location?.formatted_address }}
+    </div>
+  </div>
+
+  <div class="flex items-center justify-center mt-8">
+    <ion-button [disabled]="saveLoading" (click)="save()">
+      <ion-spinner *ngIf="saveLoading" class="mr-3"></ion-spinner>Speichern
+    </ion-button>
+  </div>
+</ion-content>

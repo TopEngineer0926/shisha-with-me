@@ -3,6 +3,16 @@ ion-content {
   --overflow: hidden;
 }
 
+ion-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img {
+    height: 41px;
+    margin: 5px auto 0;
+  }
+}
+
 video {
   width: 100vw;
   position: fixed;

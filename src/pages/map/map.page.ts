@@ -48,8 +48,8 @@ export class MapPage implements AfterViewInit {
   async ngOnInit() {
     const locationMarker = [];
 
-    const users: any = await this.http.get('api/users').toPromise();
-    console.log('data', users);
+    const users: any = await this.http.get('api/friends/friends').toPromise();
+    console.log('users', users);
     this.users = users;
     users.map((location) => {
       if (location.location) {

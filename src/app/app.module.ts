@@ -50,6 +50,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserAnimationsModule,
     HttpClientModule,
     TranslateModule.forRoot({
+      defaultLanguage: 'de',
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,

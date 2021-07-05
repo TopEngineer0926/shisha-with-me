@@ -16,7 +16,7 @@ import { environment } from 'src/environments/environment';
 import { Share } from '@capacitor/share';
 import { AuthService } from 'src/common/auth/_services/auth.service';
 import { ProfilePage } from '../profile/profile.page';
-
+import * as qs from 'qs';
 @Component({
   selector: 'app-friends-list',
   templateUrl: './friends-list.page.html',
@@ -29,6 +29,7 @@ export class FriendsListPage implements OnInit, OnDestroy {
 
   requests;
   users;
+  friends;
 
   constructor(
     private navCtrl: NavController,
@@ -44,27 +45,76 @@ export class FriendsListPage implements OnInit, OnDestroy {
   ) {}
 
   async ngOnInit() {
+    await this.loadData();
+  }
+
+  async loadData() {
+    const queryOne = qs.stringify({
+      _where: {
+        _or: [
+          { oneUid_eq: this.authService.user.id },
+          { twoUid_eq: this.authService.user.id },
+        ],
+        isAccepted: false,
+      },
+    });
+
     const data = await this.http
-      .get('api/friend-requests', {
-        params: { toUid_eq: this.authService.user.id, isAccepted_eq: false },
-      })
+      .get('api/friends' + '?' + queryOne)
       .toPromise();
     console.log('data', data);
     this.requests = data;
 
-    const users = await this.http.get('api/users').toPromise();
-    console.log('users', data);
-    this.users = users;
+    const query = qs.stringify({
+      _where: {
+        _or: [
+          { oneUid_eq: this.authService.user.id },
+          { twoUid_eq: this.authService.user.id },
+        ],
+        isAccepted: true,
+      },
+    });
+
+    const friends = await this.http
+      .get('api/friends' + '?' + query)
+      .toPromise();
+
+    console.log('friends', friends);
+    this.friends = friends;
   }
 
-  async openFriend(user) {
+  loadField(request, type) {
+    if (type == 'id') {
+      if (this.authService.user.id == request.oneUid) {
+        return request.twoUid;
+      } else {
+        return request.oneUid;
+      }
+    }
+    if (type == 'name') {
+      if (this.authService.user.id == request.oneUid) {
+        return request.twoName;
+      } else {
+        return request.oneName;
+      }
+    }
+    if (type == 'image') {
+      if (this.authService.user.id == request.oneUid) {
+        return request.twoImage;
+      } else {
+        return request.oneImage;
+      }
+    }
+  }
+
+  async openFriend(id) {
     const modal = await this.modalCtrl.create({
       component: ProfilePage,
 
       swipeToClose: true,
       presentingElement: this.routerOutlet.nativeEl,
       componentProps: {
-        id: user.id,
+        id: id,
       },
     });
     return await modal.present();
@@ -76,13 +126,14 @@ export class FriendsListPage implements OnInit, OnDestroy {
       isAccepted: true,
     };
 
-    await this.http.put('api/friend-requests/' + request.id, data).toPromise();
+    await this.http.put('api/friends/' + request.id, data).toPromise();
     (
       await this.toastCtrl.create({
         message: 'Anfrage wurde angenommen',
         duration: 4000,
       })
     ).present();
+    await this.loadData();
     request.loading = false;
   }
 

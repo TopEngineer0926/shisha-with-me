@@ -1,6 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import {
+  AlertController,
+  NavController,
+  ToastController,
+} from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/common/auth/_services/auth.service';
@@ -38,7 +42,9 @@ export class RegisterComponent implements OnInit {
     private translate: TranslateService,
     private alertCtrl: AlertController,
     private events: Events,
-    public helper: HelperService
+    public helper: HelperService,
+    private toastCtrl: ToastController,
+    private navCtrl: NavController
   ) {}
 
   ngOnInit() {}
@@ -57,50 +63,26 @@ export class RegisterComponent implements OnInit {
 
     if (this.form.valid) {
       try {
-        const user: any = await this.authService.createUser(
+        const data: any = await this.authService.createUser(
           this.model.email,
           this.model.password
         );
-        console.log('user', user);
-        if (user.data) {
-          await this.app.isLoading(false);
-
-          await set('emailAuth', user.data.createUser.email);
-
-          await this.authService.showEmailConfirmAlert(
-            user.data.createUser.email
-          );
-
-          const alert = await this.alertCtrl.create({
-            header: 'Account aktiviert!',
-            translucent: true,
-            backdropDismiss: false,
-            message:
-              'Ihr Account ist nun aktiviert. Bitte melden Sie sich nun an.',
-            buttons: [
-              {
-                text: 'Anmelden',
-                handler: async () => {
-                  this.events.publish('goto:login');
-                },
-              },
-            ],
-          });
-          await alert.present();
-        }
-
-        if (user.errors) {
-          console.log(user.errors);
-          if (user.errors[0].extensions.exception.status == 409) {
-            this.toastr.warning(this.translate.instant('E-Mail already taken'));
-          }
+        console.log('user', data);
+        if (data.user) {
+          (
+            await this.toastCtrl.create({
+              message: 'Erfolgreich!',
+              duration: 4000,
+            })
+          ).present();
+          this.navCtrl.navigateRoot(['/on-boarding']);
         }
 
         //await this.router.navigateByUrl('/');
       } catch (value) {
         console.log(value);
         this.toastr.error('Error');
-        this.errorStr = value.error.error;
+        this.errorStr = value.error?.message[0]?.messages[0]?.message;
       } finally {
         await this.app.isLoading(false);
       }

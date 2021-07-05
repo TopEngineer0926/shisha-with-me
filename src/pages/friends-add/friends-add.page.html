@@ -23,7 +23,7 @@
 
   <app-friends-add-list></app-friends-add-list>-->
 
-  <ion-list>
+  <ion-list lines="none">
     <ion-list-header>
       <ion-label>Ergebnisse {{users.length}}</ion-label>
     </ion-list-header>
@@ -36,7 +36,7 @@
       </ion-avatar>
       <ion-label>
         <h2>{{ user.name }}</h2>
-        <p></p>
+        <p>{{ user.email }}</p>
       </ion-label>
       <ion-button
         *ngIf="!user.isFriend"

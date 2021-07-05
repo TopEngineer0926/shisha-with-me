@@ -226,6 +226,7 @@ export class ProfileEditPage implements OnInit {
             this.user.image = {};
           }
           this.user.image = uploaded.body[0];
+          await this.loadUser();
           this.cdr.detectChanges();
           console.log('uploaded', uploaded);
         } catch (error) {

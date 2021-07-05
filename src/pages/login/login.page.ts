@@ -109,8 +109,6 @@ export class LoginPage implements OnInit {
         );
         console.log('user', data);
         if (data.user) {
-          this.userService.email = this.model.email;
-          this.userService.updateUser({});
           (
             await this.toastCtrl.create({
               message: this.translate.instant('Login success'),

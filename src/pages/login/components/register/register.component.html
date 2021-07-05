@@ -28,7 +28,7 @@
       </ion-button>
     </ion-item>
 
-    <ion-item class="law">
+    <ion-item class="law" lines="none">
       <ion-checkbox
         slot="start"
         [(ngModel)]="agbChecked"
@@ -50,11 +50,8 @@
       </ion-label>
     </ion-item>
 
-    <div
-      class="alert alert-danger error-message"
-      [hidden]="!errorStr || !submitted"
-    >
-      {{ 'auth.Login.error.' + errorStr | translate }}
+    <div class="p-3 error-message" [hidden]="!errorStr || !submitted">
+      {{ errorStr | translate }}
     </div>
   </form>
 

@@ -64,6 +64,7 @@
     "ngx-swiper-wrapper": "^10.0.0",
     "ngx-toastr": "^14.0.0",
     "ngx-useful-swiper": "^10.0.1",
+    "qs": "^6.7.0",
     "rxjs": "~7.1.0",
     "swiper": "^6.7.5",
     "tslib": "^2.3.0",

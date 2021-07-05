@@ -37,29 +37,6 @@ export class AuthService {
         })
       )
       .toPromise();
-
-    /*return await this.apollo
-      .query({
-        query: loginQuery,
-        variables: {
-          loginUser: {
-            email: email.trim(),
-            password: password.trim(),
-          },
-        },
-      })
-      .pipe(
-        map(async (res: any) => {
-          console.log(res);
-          if (res?.data?.login) {
-            const login = res.data.login;
-            this.user = login.user;
-            await set('userData', { user: login.user, jwt: login.token });
-          }
-          return res;
-        })
-      )
-      .toPromise();*/
   }
 
   async createUser(email: string, password: string) {
@@ -75,42 +52,12 @@ export class AuthService {
       await set('userData', { user: data.user, jwt: data.jwt });
     }
     return data;
-    console.log('data', data);
-    /* return await this.apollo
-      .mutate({
-        mutation: createUserMutation,
-        variables: {
-          createUserInput: {
-            firstName,
-            lastName,
-            email: email.trim(),
-            password: password.trim(),
-          },
-        },
-      })
-      .pipe(
-        map((res: any) => {
-          console.log(res);
-          /*
-          if (res?.data?.create) {
-            const login = res.data.login;
-            localStorage.setItem(
-              'userData',
-              JSON.stringify({ user: login.user, jwt: login.token })
-            );
-          }
-          return res;
-
-          return res;
-        })
-      )
-      .toPromise();*/
   }
 
   async updateUser() {
-    const user = await this.http.get('api/users/me').toPromise();
+    const userMe: any = await this.http.get('api/users/me').toPromise();
+    const user = await this.http.get('api/users/' + userMe.id).toPromise();
     this.user = user;
-
     const loginData = await get('userData');
     loginData.user = user;
 

@@ -34,35 +34,60 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>-->
 
-  <ion-list *ngIf="requests?.length > 0">
+  <ion-list lines="none">
     <ion-list-header>Anfragen</ion-list-header>
-    <ion-item *ngFor="let request of requests">
-      <ion-avatar slot="start" (click)="openFriend(request)">
-        <div
-          class="bg-cover bg-no-repeat h-10 w-10 rounded-full"
-          [style.backgroundImage]="'url(' + helper.getImageUrl(request.image?.url) + ')'"
-        ></div>
-      </ion-avatar>
-      <ion-label (click)="openFriend(request)">
-        <h2>{{ request.fromName }}</h2>
-      </ion-label>
-      <ion-button
-        [disabled]="request.loading"
-        slot="end"
-        (click)="connect(request)"
-      >
-        <ion-spinner class="mr-3" *ngIf="request.loading"></ion-spinner>
-        Akzeptieren
-      </ion-button>
-    </ion-item>
+    <div class="no-items" *ngIf="!(requests?.length > 0)">
+      Noch keine Einträge vorhanden
+    </div>
+    <ng-container *ngIf="requests?.length > 0">
+      <ion-item *ngFor="let request of requests">
+        <ion-avatar slot="start" (click)="openFriend(loadField(request, 'id'))">
+          <div
+            class="bg-cover bg-no-repeat h-10 w-10 rounded-full"
+            [style.backgroundImage]="'url(' + helper.getImageUrl(loadField(request, 'image')?.url) + ')'"
+          ></div>
+        </ion-avatar>
+        <ion-label (click)="openFriend(request)">
+          <h2>{{ loadField(request, 'name') }}</h2>
+        </ion-label>
+        <ion-button
+          [disabled]="request.loading"
+          slot="end"
+          (click)="connect(request)"
+        >
+          <ion-spinner class="mr-3" *ngIf="request.loading"></ion-spinner>
+          Akzeptieren
+        </ion-button>
+      </ion-item></ng-container
+    >
   </ion-list>
 
-  <div class="no-items" *ngIf="!(users?.length > 0)">
-    Noch keine Einträge vorhanden
-  </div>
+  <ion-list class="mt-5" lines="none">
+    <ion-list-header>Freunde</ion-list-header>
 
-  <ion-list class="mt-5">
-    <ion-item button *ngFor="let user of users" (click)="openFriend(user)">
+    <div class="no-items" *ngIf="!(friends?.length > 0)">
+      Noch keine Einträge vorhanden
+    </div>
+    <ng-container *ngIf="friends?.length > 0">
+      <ion-item
+        *ngFor="let request of friends"
+        (click)="openFriend(loadField(request, 'id'))"
+        button
+      >
+        <ion-avatar slot="start">
+          <div
+            class="bg-cover bg-no-repeat h-10 w-10 rounded-full"
+            [style.backgroundImage]="'url(' + helper.getImageUrl(loadField(request, 'image')?.url) + ')'"
+          ></div>
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ loadField(request, 'name') }}</h2>
+          <p>{{ loadField(request, 'email') }}</p>
+        </ion-label>
+      </ion-item></ng-container
+    >
+
+    <!--<ion-item button *ngFor="let user of users" (click)="openFriend(user)">
       <ion-avatar slot="start">
         <div
           class="bg-cover bg-no-repeat h-10 w-10 rounded-full"
@@ -74,6 +99,10 @@
         <p>{{user.email}}</p></ion-label
       >
     </ion-item>
+
+    <div class="no-items" *ngIf="!(users?.length > 0)">
+      Noch keine Einträge vorhanden
+    </div>-->
   </ion-list>
 
   <!--<ion-fab

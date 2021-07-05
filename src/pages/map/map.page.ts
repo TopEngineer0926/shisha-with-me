@@ -205,21 +205,18 @@ export class MapPage implements AfterViewInit {
 
       let marker: any = new google.maps.Marker({
         map: this.map.googleMap,
-
-        // title: place.name,
-
-        position: { lat: place.lat, lng: place.lng },
-      });
-      if (place.type == 'location') {
-        const icon = {
-          url: '/assets/icons/pint-outline.svg',
+        icon: {
+          url:
+            place.type == 'location'
+              ? '/assets/icons/pint-outline.svg'
+              : '/assets/icons/person-circle-outline.svg',
           size: new google.maps.Size(71, 71),
           origin: new google.maps.Point(0, 0),
           anchor: new google.maps.Point(17, 34),
           scaledSize: new google.maps.Size(25, 25),
-        };
-        marker.icon = icon;
-      }
+        },
+        position: { lat: place.lat, lng: place.lng },
+      });
 
       marker.dataId = place.id;
       marker.dataType = place.type;

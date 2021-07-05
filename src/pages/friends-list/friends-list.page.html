@@ -36,7 +36,7 @@
 
   <ion-list lines="none">
     <ion-list-header>Anfragen</ion-list-header>
-    <div class="no-items" *ngIf="!(requests?.length > 0)">
+    <div class="no-items pb-5" *ngIf="!(requests?.length > 0)">
       Noch keine Einträge vorhanden
     </div>
     <ng-container *ngIf="requests?.length > 0">
@@ -65,7 +65,7 @@
   <ion-list class="mt-5" lines="none">
     <ion-list-header>Freunde</ion-list-header>
 
-    <div class="no-items" *ngIf="!(friends?.length > 0)">
+    <div class="no-items pb-5" *ngIf="!(friends?.length > 0)">
       Noch keine Einträge vorhanden
     </div>
     <ng-container *ngIf="friends?.length > 0">

@@ -43,14 +43,18 @@ ion-slides {
     }
   }
 }
+ion-slides ion-slide.swiper-slide-active {
+  z-index: 1;
+}
 .slide-item {
   display: flex;
   align-items: center;
   justify-content: center;
-
   flex-direction: column;
   height: 200px;
   width: 200px;
+  // margin-bottom: 40px;
+
   .item-title {
     margin-top: -25px;
     background: rgb(0 0 0 / 58%);

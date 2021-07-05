@@ -62,28 +62,28 @@
 
     <div class="deal">
       <ion-button
-        *ngIf="!(ad.category?.title == 'Instagram' || ad.category?.title == 'Youtube' || ad.category?.title == 'Spotify') "
+        *ngIf="!(ad.category?.type == 'Instagram' || ad.category?.type == 'Youtube' || ad.category?.type == 'Spotify') "
         expand="block"
         size="large"
         (click)="helper.openLink(ad.link)"
         >Zum Deal</ion-button
       >
       <ion-button
-        *ngIf="ad.category?.title == 'Instagram'"
+        *ngIf="ad.category?.type == 'Instagram'"
         expand="block"
         size="large"
         (click)="helper.openLink(ad.link)"
         >Zu Instagram</ion-button
       >
       <ion-button
-        *ngIf="ad.category?.title == 'Youtube'"
+        *ngIf="ad.category?.type == 'Youtube'"
         expand="block"
         size="large"
         (click)="helper.openLink(ad.link)"
         >Zu Youtube</ion-button
       >
       <ion-button
-        *ngIf="ad.category?.title == 'Spotify'"
+        *ngIf="ad.category?.type == 'Spotify'"
         expand="block"
         size="large"
         (click)="helper.openLink(ad.link)"

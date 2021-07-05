@@ -39,7 +39,10 @@
           </div>
         </ion-slide>
         <ion-slide *ngFor="let children of slide.smoke_products">
-          <div class="slide-item" (click)="selectSession(children, 'product')">
+          <div
+            class="slide-item inner-slide"
+            (click)="selectSession(children, 'product')"
+          >
             <div
               class="inside-dot"
               [style.backgroundImage]="'url(' + helper.getImageUrl(children.image?.url) + ')'"

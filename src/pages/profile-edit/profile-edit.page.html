@@ -46,6 +46,18 @@
     <ion-item
       lines="none"
       button
+      (click)="change('username', user.customUsername)"
+    >
+      <ion-label>
+        <small>Benutzername</small>
+        <h2>{{user.customUsername}}</h2>
+        <p></p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item
+      lines="none"
+      button
       (click)="change('phoneNumber', user.phoneNumber)"
     >
       <ion-label>

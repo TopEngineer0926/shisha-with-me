@@ -10,6 +10,7 @@ import {
   AlertController,
   LoadingController,
   ModalController,
+  ToastController,
 } from '@ionic/angular';
 import { AuthService } from 'src/common/auth/_services/auth.service';
 import { HelperService } from 'src/common/services/helper.service';
@@ -25,15 +26,6 @@ import { LocationSelectComponent } from './pages/location-select/location-select
 export class ProfileEditPage implements OnInit {
   image: CameraPhoto | any = { webPath: '/assets/mathis.png' };
 
-  profile = {
-    name: 'Mathis Monn',
-    phoneNumber: '+49 1516 1018772',
-    sessionDuration: 120,
-    myShisha: 'INVI Tesseract',
-    myShishaHead: 'KS APPO BlACK-Edition',
-    myMolassesCatcher: 'Smokezilla Molassefänger Diamond 18/7 Clear',
-  };
-
   user: any = {};
 
   constructor(
@@ -44,7 +36,8 @@ export class ProfileEditPage implements OnInit {
     public helper: HelperService,
     private loadingCtrl: LoadingController,
     private upload: UploadService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private toastCtrl: ToastController
   ) {}
 
   async ngOnInit() {
@@ -117,6 +110,10 @@ export class ProfileEditPage implements OnInit {
         text = 'Telefonnummer';
         inputType = 'tel';
         break;
+      case 'username':
+        text = 'Benutzername';
+        inputType = 'string';
+        break;
     }
     const alert = await this.alertController.create({
       header: 'Ändern',
@@ -144,18 +141,28 @@ export class ProfileEditPage implements OnInit {
             console.log(data);
             let update: any = {};
             if (mode == 'name') {
-              this.profile.name = data.name;
               update.name = data.name;
             }
             if (mode == 'phoneNumber') {
-              this.profile.phoneNumber = data.name;
               update.phoneNumber = data.name;
             }
+            if (mode == 'username') {
+              update.customUsername = data.name;
+            }
 
-            const user = await this.http
-              .put('api/users/' + this.user.id, update)
-              .toPromise();
-            await this.loadUser();
+            try {
+              const user: any = await this.http
+                .put('api/users/' + this.user.id, update)
+                .toPromise();
+              await this.loadUser();
+            } catch (error) {
+              (
+                await this.toastCtrl.create({
+                  message: 'Benutzername bereits vorhanden',
+                  duration: 4000,
+                })
+              ).present();
+            }
           },
         },
       ],

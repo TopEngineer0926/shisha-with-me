@@ -21,20 +21,22 @@
   <div class="mt-5">
     <ion-card *ngFor="let session of sessions">
       <ion-card-header
-        ><ion-card-title>{{session.location?.name}}</ion-card-title>
+        ><ion-card-title>{{session.location?.name || 'Privat'}}</ion-card-title>
         <ion-card-subtitle
           >{{session.start_user?.name}}</ion-card-subtitle
         ></ion-card-header
       >
       <ion-card-content>
-        Shisha Bar: {{session.location?.name}}
-        <ngx-stars
-          [readonly]="false"
-          [size]="2"
-          [color]="'#fff'"
-          [maxStars]="5"
-        ></ngx-stars>
-        Produkt: {{session.smoke_product?.name}}
+        <ng-container *ngIf="session.location?.name">
+          Shisha Bar: {{session.location?.name}}
+          <ngx-stars
+            [readonly]="false"
+            [size]="2"
+            [color]="'#fff'"
+            [maxStars]="5"
+          ></ngx-stars
+        ></ng-container>
+        Produkt: {{session.smoke_product?.name || session.manufacturer?.name}}
         <ngx-stars
           [readonly]="false"
           [size]="2"

@@ -178,7 +178,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
     return await modal.present();
   }
 
-  async selectSession(children) {
+  async selectSession(product, type) {
     const alert = await this.alertController.create({
       header: 'Wo wird geraucht?',
       translucent: true,
@@ -186,14 +186,14 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
         {
           text: 'Privat',
           handler: async () => {
-            await this.startSession(children);
+            await this.startSession(product, type);
           },
         },
         {
           text: 'Shisha Bar',
           handler: async () => {
             // await this.startSession();
-            await this.selectLocation(children);
+            await this.selectLocation(product, type);
           },
         },
       ],
@@ -202,7 +202,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
     await alert.present();
   }
 
-  async selectLocation(children) {
+  async selectLocation(product, type) {
     const modal = await this.modalCtrl.create({
       component: SelectLocationPage,
       swipeToClose: true,
@@ -212,18 +212,24 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
     modal.onDidDismiss().then(async (data) => {
       if (data) {
         console.log(data);
-        await this.startSession(children, data.data);
+        await this.startSession(product, type, data.data);
       }
     });
     return await modal.present();
   }
 
-  async startSession(smokeProduct, location?) {
-    const data = {
+  async startSession(smokeProduct, type, location?) {
+    let data: any = {
       start_user: this.authService.user.id.toString(),
-      smoke_product: smokeProduct.id,
-      location: location.id,
     };
+    if (location) {
+      data.location = location.id;
+    }
+    if (type == 'product') {
+      data.smoke_product = smokeProduct.id;
+    } else {
+      data.manufacturer = smokeProduct.id;
+    }
 
     await this.http.post('api/sessions', data).toPromise();
     (

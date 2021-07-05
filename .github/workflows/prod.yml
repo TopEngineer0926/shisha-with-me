@@ -8,7 +8,7 @@ on:
 jobs:
   apk:
     name: Generate APK
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v1
@@ -16,10 +16,10 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-      - name: Use Node.js 12.8
+      - name: Use Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: 12.8
+          node-version: 14
       - name: Install dependencies
         run: npm install
       - name: 🙌 Build

@@ -14,12 +14,26 @@
     <ion-slide>
       <div class="wrapper">
         <h2>Wie ist dein Benutzername?</h2>
-        <p>Wie willst du von deinen Freunden gefunden/angzeigt werden?</p>
+        <p>Wie willst du von deinen Freunden gefunden werden?</p>
 
         <form *ngIf="user">
           <ion-item lines="none">
             <ion-input
               [(ngModel)]="user.customUsername"
+              [ngModelOptions]="{standalone: true}"
+            ></ion-input>
+          </ion-item>
+        </form>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="wrapper">
+        <h2>Wie ist dein Anzeigename?</h2>
+
+        <form *ngIf="user">
+          <ion-item lines="none">
+            <ion-input
+              [(ngModel)]="user.name"
               [ngModelOptions]="{standalone: true}"
             ></ion-input>
           </ion-item>
@@ -34,7 +48,6 @@
             <ion-label>{{'SliderPage.QrCode' | translate}}</ion-label>
             <ion-checkbox formControlName="qrCode" slot="end"></ion-checkbox>
           </ion-item>
-          <!-- Error messages -->
           <ion-text
             color="danger"
             class="error"
@@ -94,7 +107,7 @@
       <ion-button *ngIf="sliderNum != 0" (click)="back()"
         >{{'SliderPage.Back' | translate}}</ion-button
       >
-      <ion-button *ngIf="(sliderNum < 1); else elseIf1" (click)="next()"
+      <ion-button *ngIf="(sliderNum < 3); else elseIf1" (click)="next()"
         >{{'SliderPage.Continue' | translate}}</ion-button
       >
       <ng-template #elseIf1>

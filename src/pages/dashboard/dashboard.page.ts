@@ -143,41 +143,6 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
     await modal.present();
   }
 
-  async getCurrentPosition() {
-    this.locationLoading = true;
-    try {
-      const coordinates = await Geolocation.getCurrentPosition();
-      this.center = {
-        lat: coordinates.coords.latitude,
-        lng: coordinates.coords.longitude,
-      };
-
-      this.markerPositions = [
-        {
-          lat: coordinates.coords.latitude,
-          lng: coordinates.coords.longitude,
-        },
-      ];
-
-      this.zoom = 12;
-    } catch (error) {
-    } finally {
-      setTimeout(() => {
-        this.locationLoading = false;
-      }, 1000);
-    }
-  }
-
-  async openImageModal() {
-    const modal = await this.modalCtrl.create({
-      component: ImageSharePage,
-      swipeToClose: true,
-      presentingElement: this.routerOutlet.nativeEl,
-      componentProps: {},
-    });
-    return await modal.present();
-  }
-
   async selectSession(product, type) {
     const alert = await this.alertController.create({
       header: 'Wo wird geraucht?',
@@ -231,7 +196,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
       data.manufacturer = smokeProduct.id;
     }
 
-    await this.http.post('api/sessions', data).toPromise();
+    await this.http.post('api/sessions/start', data).toPromise();
     (
       await this.toastCtrl.create({
         message: 'Session wurde gestartet',
@@ -253,15 +218,6 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
 
       // video.play();
     });
-    /*
-    const alert = await this.alertCtrl.create({
-      header: 'Session gestartet!',
-      buttons: ['Ok'],
-      translucent: true,
-      backdropDismiss: true,
-    });
-
-    await alert.present();*/
 
     setTimeout(() => {
       this.localNotifications.schedule({
@@ -300,4 +256,15 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
       dialogTitle: 'Teile deinen Standort',
     });
   }
+
+  /*
+  async openImageModal() {
+    const modal = await this.modalCtrl.create({
+      component: ImageSharePage,
+      swipeToClose: true,
+      presentingElement: this.routerOutlet.nativeEl,
+      componentProps: {},
+    });
+    return await modal.present();
+  }*/
 }

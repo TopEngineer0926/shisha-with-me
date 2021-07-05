@@ -131,7 +131,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'on-boarding',
+    path: 'onboarding',
     loadChildren: () => OnBoardingPageModule,
     canActivate: [AuthGuard],
   },

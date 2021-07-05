@@ -75,7 +75,7 @@ export class RegisterComponent implements OnInit {
               duration: 4000,
             })
           ).present();
-          this.navCtrl.navigateRoot(['/on-boarding']);
+          this.navCtrl.navigateRoot(['/onboarding']);
         }
 
         //await this.router.navigateByUrl('/');

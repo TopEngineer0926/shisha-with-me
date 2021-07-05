@@ -173,7 +173,7 @@ export class LoginPage implements OnInit {
 
     setTimeout(async () => {
       // await this.navCtrl.navigateRoot('/tabs/home');
-      await this.navCtrl.navigateRoot('/on-boarding');
+      await this.navCtrl.navigateRoot('/onboarding');
       loading.dismiss();
     }, 2500);
   }*/

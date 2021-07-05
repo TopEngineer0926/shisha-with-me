@@ -1,4 +1,4 @@
-import { IonSlides, NavController } from '@ionic/angular';
+import { IonSlides, NavController, ToastController } from '@ionic/angular';
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { set } from 'src/common/services/storage.service';
@@ -26,7 +26,8 @@ export class OnBoardingPage implements OnInit {
     public formBuilder: FormBuilder,
     private authService: AuthService,
     private http: HttpClient,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private toastCtrl: ToastController
   ) {}
 
   async ngOnInit() {
@@ -64,11 +65,20 @@ export class OnBoardingPage implements OnInit {
   }
 
   async next() {
-    const user = await this.http
-      .put('api/users/' + this.user.id, this.user)
-      .toPromise();
-    await this.loadUser();
-    this.slides.slideNext();
+    try {
+      const user: any = await this.http
+        .put('api/users/' + this.user.id, this.user)
+        .toPromise();
+      await this.loadUser();
+      this.slides.slideNext();
+    } catch (error) {
+      (
+        await this.toastCtrl.create({
+          message: 'Benutzername bereits vorhanden',
+          duration: 4000,
+        })
+      ).present();
+    }
   }
   back() {
     this.slides.slidePrev();

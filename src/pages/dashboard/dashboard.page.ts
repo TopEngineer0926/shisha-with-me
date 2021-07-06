@@ -33,6 +33,7 @@ import { SelectLocationPage } from '../select-location/select-location.page';
 import { HttpClient } from '@angular/common/http';
 import { HelperService } from 'src/common/services/helper.service';
 import { AuthService } from 'src/common/auth/_services/auth.service';
+import { Platform } from '@angular/cdk/platform';
 
 @Component({
   selector: 'app-dashboard',
@@ -86,7 +87,8 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
     private http: HttpClient,
     public helper: HelperService,
     private authService: AuthService,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    public platform: Platform
   ) {}
 
   async ngOnInit() {
@@ -220,7 +222,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
       // video.play();
     });
 
-    setTimeout(() => {
+    /*setTimeout(() => {
       this.localNotifications.schedule({
         id: 1,
         text: '💨 Frankenstraße 20, 74562 Wolpertshausen, Deutschland',
@@ -233,7 +235,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
           { id: '2', title: 'Leg nochmal Kohle auf. Ich bin unterwegs!' },
         ],
       });
-    }, 2000);
+    }, 2000);*/
 
     /*
     const modal = await this.modalCtrl.create({

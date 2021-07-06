@@ -19,7 +19,11 @@
     onloadedmetadata="this.muted = true"
     [@visibilityChanged]="visiblityState"
   >
-    <source src="/assets/videos/rauch-1.webm" type="video/webm" />
+    <source
+      src="/assets/videos/rauch-1.webm"
+      type="video/webm"
+      *ngIf="!platform.SAFARI"
+    />
     <source src="/assets/videos/rauch-1.mp4" type="video/mp4" />
   </video>
 

@@ -30,6 +30,7 @@
         <ng-container *ngIf="session.location?.name">
           Shisha Bar: {{session.location?.name}}
           <ngx-stars
+            [wholeStars]="true"
             [readonly]="false"
             [size]="2"
             [color]="'#fff'"
@@ -38,6 +39,7 @@
         ></ng-container>
         Produkt: {{session.smoke_product?.name || session.manufacturer?.name}}
         <ngx-stars
+          [wholeStars]="true"
           [readonly]="false"
           [size]="2"
           [color]="'#fff'"

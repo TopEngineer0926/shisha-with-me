@@ -75,6 +75,18 @@
       </ion-label>
     </ion-item>
 
+    <ion-item
+      lines="none"
+      button
+      (click)="change('telegramUsername', user.telegramUsername)"
+    >
+      <ion-label>
+        <small>Telegram Benutzername</small>
+        <h2>{{user.telegramUsername}}</h2>
+        <p></p>
+      </ion-label>
+    </ion-item>
+
     <!-- <ion-item lines="none">
       <ion-label>
         <small>Sitzungsdauer</small>

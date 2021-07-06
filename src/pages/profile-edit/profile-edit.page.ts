@@ -106,6 +106,10 @@ export class ProfileEditPage implements OnInit {
         text = 'Anzeigename';
         inputType = 'text';
         break;
+      case 'telegramUsername':
+        text = 'Benutzername';
+        inputType = 'text';
+        break;
       case 'phoneNumber':
         text = 'Telefonnummer';
         inputType = 'tel';
@@ -148,6 +152,9 @@ export class ProfileEditPage implements OnInit {
             }
             if (mode == 'username') {
               update.customUsername = data.name;
+            }
+            if (mode == 'telegramUsername') {
+              update.telegramUsername = data.name;
             }
 
             try {
@@ -198,7 +205,7 @@ export class ProfileEditPage implements OnInit {
       const fileInput = document.createElement('input');
       fileInput.type = 'file';
       fileInput.accept = 'image/*';
-      fileInput.multiple = true;
+      fileInput.multiple = false;
       const fileSelectPromise = new Promise((resolve, reject) => {
         fileInput.onchange = resolve;
         fileInput.oncancel = reject;

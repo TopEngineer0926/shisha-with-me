@@ -34,6 +34,11 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'message',
+    loadChildren: () => SendMessagePageModule,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'tabs',
     loadChildren: () => TabsPageModule,
     canActivate: [AuthGuard],
@@ -159,10 +164,6 @@ const routes: Routes = [
   {
     path: 'select-location',
     loadChildren: () => SelectLocationPageModule,
-  },
-  {
-    path: 'message',
-    loadChildren: () => SendMessagePageModule,
   },
 ];
 @NgModule({

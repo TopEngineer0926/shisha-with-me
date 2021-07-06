@@ -28,6 +28,31 @@
     </ion-slide>
     <ion-slide>
       <div class="wrapper">
+        <h2>Push</h2>
+        <p>
+          Um die App richtig zu verwenden musst du dir Telegram runterladen um
+          Push Notifications zu empfangen. Setze in Telegram einen Benutzername
+          und trage diesen hier ein.
+        </p>
+        <ion-button
+          size="small"
+          (click)="helper.openLink('https://t.me/shishawithme_bot')"
+          >Bot öffnen</ion-button
+        >
+
+        <form *ngIf="user">
+          <ion-item lines="none">
+            <ion-input
+              [(ngModel)]="user.telegramUsername"
+              placeholder="Telegram Benutzername"
+              [ngModelOptions]="{standalone: true}"
+            ></ion-input>
+          </ion-item>
+        </form>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="wrapper">
         <h2>Wie ist dein Anzeigename?</h2>
 
         <form *ngIf="user">
@@ -107,7 +132,7 @@
       <ion-button *ngIf="sliderNum != 0" (click)="back()"
         >{{'SliderPage.Back' | translate}}</ion-button
       >
-      <ion-button *ngIf="(sliderNum < 3); else elseIf1" (click)="next()"
+      <ion-button *ngIf="(sliderNum < 4); else elseIf1" (click)="next()"
         >{{'SliderPage.Continue' | translate}}</ion-button
       >
       <ng-template #elseIf1>

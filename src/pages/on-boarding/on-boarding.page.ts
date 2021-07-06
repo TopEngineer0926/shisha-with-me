@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { set } from 'src/common/services/storage.service';
 import { AuthService } from 'src/common/auth/_services/auth.service';
 import { HttpClient } from '@angular/common/http';
+import { HelperService } from 'src/common/services/helper.service';
 
 @Component({
   selector: 'app-on-boarding',
@@ -27,7 +28,8 @@ export class OnBoardingPage implements OnInit {
     private authService: AuthService,
     private http: HttpClient,
     private cdr: ChangeDetectorRef,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    public helper: HelperService
   ) {}
 
   async ngOnInit() {

@@ -4,19 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PlacePageRoutingModule } from './place-routing.module';
+import { SendMessagePageRoutingModule } from './send-message-routing.module';
 
-import { PlacePage } from './place.page';
-import { NgxStarsModule } from 'ngx-stars';
+import { SendMessagePage } from './send-message.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    NgxStarsModule,
-    PlacePageRoutingModule,
+    SendMessagePageRoutingModule
   ],
-  declarations: [PlacePage],
+  declarations: [SendMessagePage]
 })
-export class PlacePageModule {}
+export class SendMessagePageModule {}

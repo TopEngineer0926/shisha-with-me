@@ -26,6 +26,7 @@ import { FriendsAddPageModule } from 'src/pages/friends-add/friends-add.module';
 import { IdeaPageModule } from 'src/pages/idea/idea.module';
 import { AuthGuard } from 'src/common/auth/_guards/auth.guard';
 import { SelectLocationPageModule } from 'src/pages/select-location/select-location.module';
+import { SendMessagePageModule } from 'src/pages/send-message/send-message.module';
 const routes: Routes = [
   {
     path: '',
@@ -158,6 +159,10 @@ const routes: Routes = [
   {
     path: 'select-location',
     loadChildren: () => SelectLocationPageModule,
+  },
+  {
+    path: 'message',
+    loadChildren: () => SendMessagePageModule,
   },
 ];
 @NgModule({

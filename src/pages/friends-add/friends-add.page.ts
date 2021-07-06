@@ -49,7 +49,8 @@ export class FriendsAddPage implements OnInit {
     const data: any = await this.http
       .get('api/users' + '?' + query)
       .toPromise();
-    console.log('layers', data);
+    const friends = await this.http.get('api/friends/friends').toPromise();
+    console.log('layers', data, friends);
     this.users = data;
     // this.searchInput = '';
   }
@@ -91,7 +92,6 @@ export class FriendsAddPage implements OnInit {
       twoUid: user.id.toString(),
       twoImage: user.image,
       twoName: user.name,
-
       isAccepted: false,
     };
 

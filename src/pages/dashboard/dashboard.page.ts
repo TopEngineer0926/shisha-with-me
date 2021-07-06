@@ -175,8 +175,9 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
       componentProps: {},
     });
     modal.onDidDismiss().then(async (data) => {
-      if (data) {
+      if (data?.data) {
         console.log(data);
+
         await this.startSession(product, type, data.data);
       }
     });

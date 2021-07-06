@@ -63,10 +63,12 @@ export class ProfilePage implements OnInit {
     }
   }
 
-  async sendMessage() {
+  async sendMessage(message) {
+    const body = { toUserId: this.id, message };
+    await this.http.post('api/sessions/message', body).toPromise();
     const toast = await this.toastCtrl.create({
       duration: 3000,
-      message: 'Nachricht wird versendet .. ',
+      message: 'Nachricht wurde versendet ...',
     });
     toast.present();
   }

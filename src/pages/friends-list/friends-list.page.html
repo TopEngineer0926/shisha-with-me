@@ -71,18 +71,18 @@
     <ng-container *ngIf="friends?.length > 0">
       <ion-item
         *ngFor="let request of friends"
-        (click)="openFriend(loadField(request, 'id'))"
+        (click)="openFriend(request.id)"
         button
       >
         <ion-avatar slot="start">
           <div
             class="bg-cover bg-no-repeat h-10 w-10 rounded-full"
-            [style.backgroundImage]="'url(' + helper.getImageUrl(loadField(request, 'image')?.url) + ')'"
+            [style.backgroundImage]="'url(' + helper.getImageUrl(request.image?.url) + ')'"
           ></div>
         </ion-avatar>
         <ion-label>
-          <h2>{{ loadField(request, 'name') }}</h2>
-          <p>{{ loadField(request, 'email') }}</p>
+          <h2>{{ request.name }}</h2>
+          <p>{{ request.customUsername }}</p>
         </ion-label>
       </ion-item></ng-container
     >

@@ -65,7 +65,7 @@ export class FriendsListPage implements OnInit, OnDestroy {
     console.log('data', data);
     this.requests = data;
 
-    const query = qs.stringify({
+    /*const query = qs.stringify({
       _where: {
         _or: [
           { oneUid_eq: this.authService.user.id },
@@ -73,11 +73,9 @@ export class FriendsListPage implements OnInit, OnDestroy {
         ],
         isAccepted: true,
       },
-    });
+    });*/
 
-    const friends = await this.http
-      .get('api/friends' + '?' + query)
-      .toPromise();
+    const friends = await this.http.get('api/friends/friends').toPromise();
 
     console.log('friends', friends);
     this.friends = friends;

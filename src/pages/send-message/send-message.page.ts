@@ -21,7 +21,10 @@ export class SendMessagePage implements OnInit {
     console.log('data', data);
 
     if (data.message && data.toUserId) {
-      const body = { toUserId: data.toUserId, message: data.message };
+      const body = {
+        toUserId: data.toUserId,
+        message: decodeURIComponent(data.message),
+      };
       await this.http.post('api/sessions/message', body).toPromise();
     }
 

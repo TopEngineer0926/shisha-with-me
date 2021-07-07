@@ -1,4 +1,5 @@
 import { AfterViewInit, Component } from '@angular/core';
+import { SwUpdate } from '@angular/service-worker';
 import { Capacitor } from '@capacitor/core';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { TranslateService } from '@ngx-translate/core';
@@ -12,11 +13,18 @@ import { WishlistService } from './../common/services/wishlist.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements AfterViewInit {
+  updateChecked = false;
+  updateAvailable = false;
   constructor(
     private helperService: HelperService,
     private translate: TranslateService,
-    private wishlist: WishlistService
+    private wishlist: WishlistService,
+    private updates: SwUpdate
   ) {}
+
+  get waitingForUpdates() {
+    return !this.updateChecked || this.updateAvailable;
+  }
 
   async ngAfterViewInit() {
     await this.wishlist.loadWishlist();
@@ -30,6 +38,20 @@ export class AppComponent implements AfterViewInit {
     SplashScreen.hide();
 
     this.setLanguage();
+    await this.initPush();
+  }
+
+  async initPush() {
+    this.updates.available.subscribe(() => {
+      this.updateAvailable = true;
+      window.location.reload();
+    });
+    if (this.updates.isEnabled) {
+      await this.updates.checkForUpdate();
+    } else {
+      console.log('Service worker updates are disabled.');
+    }
+    this.updateChecked = true;
   }
 
   async setLanguage() {

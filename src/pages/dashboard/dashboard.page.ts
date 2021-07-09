@@ -91,13 +91,13 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
     public platform: Platform
   ) {}
 
-  async ngOnInit() {
+  async ngOnInit() {}
+
+  async ngAfterViewInit() {
     const data = await this.http.get('api/manufacturers').toPromise();
     console.log('data', data);
     this.manufacturers = data;
-  }
-
-  async ngAfterViewInit() {
+    this.mainSlider?.update();
     setTimeout(() => {
       this.loadIcons = true;
       setTimeout(() => {

@@ -27,6 +27,39 @@
     <source src="/assets/videos/rauch-1.mp4" type="video/mp4" />
   </video>
 
+  <!--<swiper [slidesPerView]="4" [spaceBetween]="30" [centeredSlides]="true">
+    <ng-template swiperSlide *ngFor="let slide of manufacturers">
+      <swiper
+        [direction]="'vertical'"
+        [slidesPerView]="4"
+        [spaceBetween]="30"
+        [centeredSlides]="true"
+      >
+        <ng-template swiperSlide>
+          <div class="slide-item" (click)="selectSession(slide, 'manufactur')">
+            <div
+              class="inside-dot"
+              [style.backgroundImage]="'url(' + helper.getImageUrl(slide.image?.url) + ')'"
+            ></div>
+            <div class="item-title">{{slide.name}}</div>
+          </div>
+        </ng-template>
+        <ng-template swiperSlide *ngFor="let children of slide.smoke_products">
+          <div
+            class="slide-item inner-slide"
+            (click)="selectSession(children, 'product')"
+          >
+            <div
+              class="inside-dot"
+              [style.backgroundImage]="'url(' + helper.getImageUrl(children.image?.url) + ')'"
+            ></div>
+            <div class="item-title">{{children.name}}</div>
+          </div>
+        </ng-template></swiper
+      >
+    </ng-template>
+  </swiper>-->
+
   <ion-slides
     *ngIf="loadIcons && manufacturers"
     #mainSlider

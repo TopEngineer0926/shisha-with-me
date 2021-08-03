@@ -54,10 +54,7 @@ export class PlacePage implements OnInit {
     );*/
     console.log('this.place', this.place);
     this.helper.openLink(
-      'https://www.google.com/maps/place/?q=' +
-        this.location.location.lat +
-        ',' +
-        this.location.location.lng
+      `https://www.google.com/maps/place/?q=${this.location?.name} ${this.location?.location?.address}`
     );
   }
 }

@@ -19,7 +19,7 @@
       für nur
       <span class="offer">{{ ad.offerPrice | currency: 'EUR':true }}</span>
       statt
-      <span class="price">{{ ad.price | currency: 'EUR':true }}</span>
+      <span class="offer-price">{{ ad.price | currency: 'EUR':true }}</span>
     </p>
     <p *ngIf="!ad.offerPrice">
       <span class="price">{{ ad.price | currency: 'EUR':true }} </span>

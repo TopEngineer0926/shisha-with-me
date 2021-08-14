@@ -208,7 +208,7 @@ export class MapPage implements AfterViewInit {
         icon: {
           url:
             place.type == 'location'
-              ? '/assets/icons/pint-outline.svg'
+              ? '/assets/icons/shisha.png'
               : '/assets/icons/person-circle-outline.svg',
           size: new google.maps.Size(71, 71),
           origin: new google.maps.Point(0, 0),

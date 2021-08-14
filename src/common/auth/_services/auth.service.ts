@@ -25,7 +25,7 @@ export class AuthService {
     };
 
     return this.http
-      .post('api/auth/local', loginData)
+      .post(`${environment.apiUrl}/auth/local`, loginData)
       .pipe(
         switchMap(async (res: any) => {
           console.log(res);

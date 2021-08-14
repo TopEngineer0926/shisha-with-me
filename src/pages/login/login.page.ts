@@ -16,7 +16,7 @@ import { UserService } from 'src/common/auth/_services/user.service';
 import { AppService } from 'src/common/services/app.service';
 import { Events } from 'src/common/services/event.service';
 import { HelperService } from 'src/common/services/helper.service';
-import { get } from 'src/common/services/storage.service';
+import { get, remove } from 'src/common/services/storage.service';
 import { environment } from 'src/environments/environment';
 import { AgeValidationPage } from '../age-validation/age-validation.page';
 
@@ -64,6 +64,7 @@ export class LoginPage implements OnInit {
   ) {}
 
   async ngOnInit() {
+    await remove('userData');
     const queryParams = this.route.snapshot.queryParams;
 
     this.returnUrl = queryParams.returnUrl || '/';

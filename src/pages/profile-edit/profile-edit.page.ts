@@ -181,16 +181,43 @@ export class ProfileEditPage implements OnInit {
   async takePicture() {
     const image = await Camera.getPhoto({
       source: CameraSource.Prompt,
-      quality: 90,
+      quality: 80,
       allowEditing: true,
       resultType: CameraResultType.Uri,
       promptLabelHeader: '',
       promptLabelCancel: 'Abbrechen',
-      promptLabelPhoto: 'Foto aufnehmen',
-      promptLabelPicture: 'Foto auswählen',
+      promptLabelPhoto: 'Foto auswählen',
+      promptLabelPicture: 'Foto aufnehmen',
     });
 
     this.image = image;
+    console.log('this.image ', this.image);
+
+    const formData = new FormData();
+    console.log('this.user.id', this.user.id);
+
+    /*formData.append('files', {
+      uri: image.path,
+      name: 'image.jpg',
+      type: 'image/jpeg',
+    });
+    formData.append('ref', 'user');
+    formData.append('refId', this.user.id);
+    formData.append('source', 'users-permissions');
+    formData.append('field', 'image');*/
+
+    try {
+      const uploaded: any = await this.upload.uploadFile(formData);
+      if (!this.user.image) {
+        this.user.image = {};
+      }
+      this.user.image = uploaded.body[0];
+      await this.loadUser();
+      this.cdr.detectChanges();
+      console.log('uploaded', uploaded);
+    } catch (error) {
+    } finally {
+    }
   }
 
   async changePicture($event: MouseEvent): Promise<void> {

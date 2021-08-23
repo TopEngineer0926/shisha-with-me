@@ -21,7 +21,7 @@
       class="image"
       [style.backgroundImage]="'url(' + helper.getImageUrl(user?.image?.url) + ')'"
     >
-      <ion-fab-button (click)="changePicture($event)"
+      <ion-fab-button (click)="takePicture()"
         ><ion-icon name="camera-outline"></ion-icon
       ></ion-fab-button>
     </div>

@@ -1,0 +1,57 @@
+<ion-content class="ion-text-center">
+  <div class="wrapper">
+    <div>
+      <div class="title">
+        <div>
+          <strong>Willkommen</strong><br />
+          <div class="border-box">
+            <span class="small-font"> in der Community von</span><br />
+            <span class="app-name"> SHISHA WITH ME</span>
+          </div>
+        </div>
+      </div>
+      <div class="ion-margin-top year-input">
+        <h3>Altersüberprüfung</h3>
+        <p>
+          <b>Achtung:</b> um diese App zu nutzen, müssen Sie
+          <b>mindestens 18 Jahre alt</b> sein.<br /><br />
+        </p>
+        <div class="buttons">
+          <b>Sind Sie 18 Jahre alt oder älter?</b>
+          <br /><br />
+
+          <ion-button style="margin-right: 30px" color="white" 
+            >Ja</ion-button
+          >
+          <ion-button
+            fill="outline"
+            color="white"
+            (click)="helperService.openLink('https://www.rauchfrei-info.de/')"
+            >Nein</ion-button
+          >
+        </div>
+      </div>
+    </div>
+
+    <!--<div class="wrapper">
+      <div>
+        <div class="title">
+          <div class="logo"></div>
+        </div>
+      </div>
+    </div>-->
+
+    <div class="small">
+      <!--<p>
+        Indem du diese Seite besuchst, stimmst du unseren Nutzungsbedinungen und
+        unserer Datenschutzrichtlinie zu. Bitte teile keine Informationen dieser
+        Seite mit Minderjährigen.
+      </p>-->
+
+      © 2020 Shisha With Me <br />Alle Reche vorbehalten <br /><a
+        (click)="helperService.openLink('https://www.rauchfrei-info.de/')"
+        >Verantwortungsvoll genießen</a
+      >
+    </div>
+  </div>
+</ion-content>

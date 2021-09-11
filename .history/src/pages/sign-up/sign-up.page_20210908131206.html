@@ -1,0 +1,58 @@
+<ion-content class="ion-text-center">
+  <div class="main-d ion-padding">
+ <div class="img-l">
+   <img src="assets/images/t.png">
+ </div>
+
+ <div>
+   <h1 class="h1-font ion-text-left ">Willkommen bei
+    Shisha With Me.</h1>
+    <p class="p-font ion-text-left ">
+      Benachrichtige deine Freunde wenn du eine Shisha rauchst, so dass sie sich dir anschließen können.
+    </p>
+ </div>
+
+ <!-- Default Segment -->
+<ion-segment  mode="ios"
+[value]="currentTab">
+  <ion-segment-button value="E-Mail">
+    <ion-label>E-Mail</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="Telefon">
+    <ion-label>Telefon</ion-label>
+  </ion-segment-button>
+</ion-segment>
+
+<div class="center" *ngIf="currentTab == 'E-Mail'">
+  <ion-button class="btn-h ion-margin-bottom" color="danger" expand="block">
+    Registrieren
+   </ion-button>
+</div>
+
+<div class="center" *ngIf="currentTab == 'Telefon'">
+  <ion-button class="btn-h ion-margin-bottom" color="danger" expand="block">
+    Registrieren
+   </ion-button>
+</div>
+
+
+ <div class="ion-padding-top">
+   <ion-button class="btn-h ion-margin-bottom" color="danger" expand="block">
+    Mit E-Mail / Telefon anmelden
+   </ion-button>
+   <ion-button class="btn-h" expand="block">
+     Mit Apple anmelden
+   </ion-button>
+ </div>
+ <div class="ion-margin">
+   <p>
+    Bereits einen Account?
+    <u>
+      Einloggen
+     </u>
+   </p>
+  
+ </div>
+</div>
+
+</ion-content>

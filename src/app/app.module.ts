@@ -51,6 +51,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserModule,
     IonicModule.forRoot({
       backButtonText: '',
+      mode: 'ios',
     }),
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', {

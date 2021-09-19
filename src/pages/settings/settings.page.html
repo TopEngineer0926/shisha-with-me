@@ -13,19 +13,19 @@
 
   <ion-list-header> <ion-label>Allgemein</ion-label> </ion-list-header>
   <ion-list>
-    <ion-item button (click)="goToProfile()">
+    <ion-item class="mb-3" button (click)="goToProfile()">
       <ion-label> {{authService.user?.name}} </ion-label>
     </ion-item>
-    <ion-item button [routerLink]="'/friends'">
+    <ion-item class="mb-3" button [routerLink]="'/friends'">
       <ion-label> Freunde </ion-label>
     </ion-item>
 
-    <!--<ion-item button [routerLink]="['/history']">
+    <!--<ion-item class="mb-3"  button [routerLink]="['/history']">
       <ion-label> Verlauf </ion-label>
     </ion-item>-->
   </ion-list>
   <ion-list class="ion-margin-top"
-    ><ion-item class="no-smoke" button (click)="goToNoSmoke()">
+    ><ion-item class="mb-3" class="no-smoke" button (click)="goToNoSmoke()">
       <img loading="lazy" slot="start" src="/assets/rauchfrei.png" />
       <!--<ion-label>Gesundheit</ion-label>-->
     </ion-item></ion-list
@@ -33,7 +33,7 @@
 
   <!--<ion-list-header> Einstellungen </ion-list-header>
   <ion-list>
-    <ion-item class="language" button (click)="selectLanguage($event)">
+    <ion-item class="mb-3"  class="language" button (click)="selectLanguage($event)">
       <ion-label> {{'Language' |translate}} </ion-label>
       <span slot="end">
         <img loading="lazy" *ngIf="language.code == 'de'" src="./assets/icons/DE.png" />
@@ -41,7 +41,7 @@
       </span>
     </ion-item>-->
 
-  <!-- <ion-item>
+  <!-- <ion-item class="mb-3" >
       <ion-label>Dunkelmodus</ion-label>
       <ion-toggle
         slot="end"
@@ -51,7 +51,7 @@
       </ion-toggle>
     </ion-item>
 
-    <ion-item (click)="selectThemeNew()" button>
+    <ion-item class="mb-3"  (click)="selectThemeNew()" button>
       <ion-label
         ><h2>Theme</h2>
         <p>Personalisiere die Farben deiner App</p></ion-label
@@ -63,23 +63,28 @@
 
   <ion-list-header> {{'Other' |translate}} </ion-list-header>
   <ion-list>
-    <!--<ion-item button (click)="helper.openLink('https://codext.de/kontakt/')">
+    <!--<ion-item class="mb-3"  button (click)="helper.openLink('https://codext.de/kontakt/')">
       <ion-label> Frage senden </ion-label>
     </ion-item>-->
-    <ion-item button (click)="openContact()">
+    <ion-item class="mb-3" button (click)="openContact()">
       <ion-label> Kontakt </ion-label>
     </ion-item>
-    <ion-item button (click)="helper.openLink('https://codext.de/impressum/')">
+    <ion-item
+      class="mb-3"
+      button
+      (click)="helper.openLink('https://codext.de/impressum/')"
+    >
       <ion-label> {{'Imprint' |translate}} </ion-label>
     </ion-item>
     <ion-item
+      class="mb-3"
       button
       (click)="helper.openLink('https://codext.de/datenschutz/')"
     >
       <ion-label> {{'Privacy' |translate}} </ion-label>
     </ion-item>
 
-    <ion-item button [routerLink]="'/onboarding'">
+    <ion-item class="mb-3" button [routerLink]="'/onboarding'">
       <ion-label> On-Boarding </ion-label>
     </ion-item>
   </ion-list>

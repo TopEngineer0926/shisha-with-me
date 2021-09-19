@@ -20,6 +20,7 @@
         items-center
         p-4
         rounded-sm
+        overflow-hidden
       "
     >
       <span class="inline-block align-middle"
@@ -28,23 +29,23 @@
     </div>
   </div>
 
-  <ion-radio-group [(ngModel)]="key"
+  <ion-radio-group class="block px-5" [(ngModel)]="key"
     ><ion-list>
-      <ion-item
+      <ion-item class="mb-3"
         ><ion-label>Shisha</ion-label> <ion-radio value="Shisha"></ion-radio
       ></ion-item>
-      <ion-item
+      <ion-item class="mb-3"
         ><ion-label>Kopf</ion-label> <ion-radio value="Kopf"></ion-radio
       ></ion-item>
-      <ion-item
+      <ion-item class="mb-3"
         ><ion-label>Molassefänger</ion-label
         ><ion-radio value="Molassefänger"></ion-radio
       ></ion-item> </ion-list
   ></ion-radio-group>
 
   <form>
-    <ion-list class="mt-5">
-      <ion-item
+    <ion-list class="mt-5 px-5">
+      <ion-item class="mb-3"
         ><ion-input
           [(ngModel)]="inputValue"
           placeholder="Modell"

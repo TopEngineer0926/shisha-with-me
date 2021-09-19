@@ -23,4 +23,8 @@ export class IdeaPage implements OnInit {
     ).present();
     this.modalCtrl.dismiss();
   }
+
+  close() {
+    this.modalCtrl.dismiss();
+  }
 }

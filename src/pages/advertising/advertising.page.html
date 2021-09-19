@@ -17,6 +17,7 @@
   <ion-segment
     mode="md"
     class="mt-10"
+    color="secondary"
     *ngIf="selectedCategory"
     scrollable
     [value]="selectedCategory"
@@ -45,7 +46,7 @@
     </ion-slides>
   </div>-->
 
-  <div class="p-5">
+  <div class="p-3">
     <app-ad-item *ngFor="let ad of ads" [ad]="ad"></app-ad-item>
   </div>
 </ion-content>

@@ -7,6 +7,7 @@ import {
   NavController,
   ModalController,
   ToastController,
+  AlertController,
 } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -60,7 +61,8 @@ export class LoginPage implements OnInit {
     private authService: AuthService,
     private app: AppService,
     private userService: UserService,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private alertCtrl: AlertController
   ) {}
 
   async ngOnInit() {
@@ -77,8 +79,6 @@ export class LoginPage implements OnInit {
     // this.events.subscribe('goto:login', () => {
     //   this.currentTab = 'login';
     // });
-
-    // await this.openAgeValidation();
   }
 
   async activateAccount() {
@@ -133,7 +133,30 @@ export class LoginPage implements OnInit {
   }
 
   async openAgeValidation() {
-    const modal = await this.modalCtrl.create({
+    const alert = await this.alertCtrl.create({
+      header: 'Altersprüfung 18+',
+      message:
+        'Für die Nutzung der App musst du mindestens 18 Jahre und älter sein. Bist du 18 Jahre oder älter?',
+      translucent: true,
+      buttons: [
+        {
+          text: 'Ja',
+          role: 'Ja',
+          cssClass: 'secondary',
+          handler: () => {
+            this.navCtrl.navigateForward('login');
+          },
+        },
+        {
+          text: 'Nein',
+          handler: async () => {
+            await this.openAgeValidation();
+          },
+        },
+      ],
+    });
+    await alert.present();
+    /*const modal = await this.modalCtrl.create({
       component: AgeValidationPage,
       cssClass: 'transparent-background',
       swipeToClose: false,
@@ -141,7 +164,7 @@ export class LoginPage implements OnInit {
       presentingElement: this.routerOutlet.nativeEl,
       componentProps: {},
     });
-    return await modal.present();
+    return await modal.present();*/
   }
 
   /*async login(

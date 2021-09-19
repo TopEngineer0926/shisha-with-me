@@ -1,22 +1,18 @@
 <ion-content>
-  <div class="btn-container">
+  <div class="btn-container p-5 px-8">
     <div
       class="logo bg-contain bg-center bg-no-repeat"
       [style.backgroundImage]="'url(assets/images/logo-light.svg)'"
     ></div>
-    <!-- <div class="spacer">
-      <div class="title">
-        <div class="logo"></div>
-        <div>
-          <strong>Deine APP</strong><br />
-          <span> WENN ES UM</span><br />
-          <span> SHISHA</span><br />
-          <span> GEHT</span>
-        </div>
-      </div>
-    </div>-->
+
+    <h1 class="text-4xl">Willkommen bei Shisha with me.</h1>
+    <p class="text-base">
+      Benachrichtige deine Freunde wenn du eine Shisha rauchst, so dass sie sich
+      dir anschließen können.
+    </p>
 
     <ion-segment
+      class="w-full my-3 mt-5"
       mode="ios"
       [value]="currentTab"
       (ionChange)="changeTab($event)"
@@ -30,7 +26,7 @@
     </ion-segment>
 
     <div class="center" *ngIf="currentTab == 'login' && step == 1">
-      <form class="form-style" #form="ngForm">
+      <form class="w-full" #form="ngForm">
         <ion-item>
           <ion-input
             name="email"
@@ -43,7 +39,7 @@
             [placeholder]="'Email address' | translate"
           ></ion-input>
         </ion-item>
-        <ion-item>
+        <ion-item class="mt-3">
           <ion-input
             [ngClass]="{ error: password.touched && password.invalid }"
             name="password"
@@ -61,28 +57,6 @@
           </ion-button>
         </ion-item>
 
-        <ion-item class="law" lines="none">
-          <ion-checkbox
-            slot="start"
-            [(ngModel)]="agbChecked"
-            [ngModelOptions]="{ standalone: true }"
-          ></ion-checkbox>
-
-          <ion-label>
-            <span>
-              Ich habe die
-              <a (click)="helper.openLink('https://codext.de/agb/')"
-                >Allgemeine Geschäftsbedingungen</a
-              >
-              und
-              <a (click)="helper.openLink('https://codext.de/datenschutz/')"
-                >Datenschutzerklärung</a
-              >
-              gelesen und akzeptiere diese.</span
-            >
-          </ion-label>
-        </ion-item>
-
         <div
           class="alert alert-danger error-message"
           [hidden]="!errorStr || !submitted"
@@ -91,7 +65,7 @@
         </div>
       </form>
 
-      <ion-button [disabled]="!agbChecked" (click)="login()">
+      <ion-button class="w-full mt-7 bg-red" (click)="login()">
         {{ 'auth.Log In' | translate }}
       </ion-button>
 
@@ -130,48 +104,9 @@
       </ion-button>
     </div>
     <app-register *ngIf="currentTab == 'register'"></app-register>
-
-    <div class="divider"></div>
-
-    <!--<ion-button class="apple" expand="block" (click)="login('apple')">
-      <span class="wrapper"
-        ><ion-icon slot="start" name="logo-apple"></ion-icon
-        ><span class="text">Login mit Apple</span></span
-      >
-    </ion-button>-->
-    <!--<ion-button class="snapchat" expand="block" (click)="login('snapchat')">
-      <span class="wrapper"
-        ><ion-icon slot="start" name="logo-snapchat"></ion-icon
-        ><span class="text">Login mit Snapchat</span></span
-      >
-    </ion-button>-->
-    <!-- <ion-button class="facebook" expand="block" (click)="login('facebook')">
-      <span class="wrapper"
-        ><ion-icon slot="start" name="logo-facebook"></ion-icon
-        ><span class="text">Login mit Facebook</span></span
-      >
-    </ion-button>
-    <ion-button class="google" expand="block" (click)="login('google')">
-      <span class="wrapper">
-        <img loading="lazy" src="assets/icons/Google__G__Logo.svg" />
-        <span class="text">Login mit Google</span></span
-      >
-    </ion-button>
-    <ion-button class="phone" expand="block" (click)="login('phone')">
-      <span class="wrapper">
-        <ion-icon slot="start" name="call"></ion-icon>
-        <span class="text">Login mit Telefonnummer</span>
-      </span>
-    </ion-button>
-    <ion-button class="instagram" expand="block" (click)="login('instagram')">
-      <span class="wrapper">
-        <ion-icon slot="start" name="logo-instagram"></ion-icon>
-        <span class="text">Login mit Instagram</span>
-      </span>
-    </ion-button>-->
-    <!--<div class="info">
-      <small>Hinweis</small>
-      <p>Der Konsum von Shisha ist Gesundheitsschädlich</p>
-    </div>-->
+    <ion-note class="text-sm mt-5">
+      Ich habe die Allgemeine Geschäftsbedingung und Datenschutzerklärung
+      gelesen und akzeptiere diese.
+    </ion-note>
   </div>
 </ion-content>

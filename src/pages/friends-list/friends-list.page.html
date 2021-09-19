@@ -39,8 +39,8 @@
     <div class="no-items pb-5" *ngIf="!(requests?.length > 0)">
       Noch keine Einträge vorhanden
     </div>
-    <ng-container *ngIf="requests?.length > 0">
-      <ion-item *ngFor="let request of requests">
+    <div class="px-5" *ngIf="requests?.length > 0">
+      <ion-item class="mb-3" *ngFor="let request of requests">
         <ion-avatar slot="start" (click)="openFriend(loadField(request, 'id'))">
           <div
             class="bg-cover bg-no-repeat h-10 w-10 rounded-full"
@@ -58,8 +58,8 @@
           <ion-spinner class="mr-3" *ngIf="request.loading"></ion-spinner>
           Akzeptieren
         </ion-button>
-      </ion-item></ng-container
-    >
+      </ion-item>
+    </div>
   </ion-list>
 
   <ion-list class="mt-5" lines="none">
@@ -68,8 +68,9 @@
     <div class="no-items pb-5" *ngIf="!(friends?.length > 0)">
       Noch keine Einträge vorhanden
     </div>
-    <ng-container *ngIf="friends?.length > 0">
+    <div class="px-5" *ngIf="friends?.length > 0">
       <ion-item
+        class="mb-3"
         *ngFor="let request of friends"
         (click)="openFriend(request.id)"
         button
@@ -84,10 +85,10 @@
           <h2>{{ request.name }}</h2>
           <p>{{ request.customUsername }}</p>
         </ion-label>
-      </ion-item></ng-container
-    >
+      </ion-item>
+    </div>
 
-    <!--<ion-item button *ngFor="let user of users" (click)="openFriend(user)">
+    <!--<ion-item class="mb-3"  button *ngFor="let user of users" (click)="openFriend(user)">
       <ion-avatar slot="start">
         <div
           class="bg-cover bg-no-repeat h-10 w-10 rounded-full"
@@ -148,27 +149,27 @@
     </ngx-qrcode>
 
     <ion-list lines="none">
-      <!--<ion-item button (click)="openFriendAddList()">
+      <!--<ion-item class="mb-3"  button (click)="openFriendAddList()">
         <ion-icon slot="start" name="person-add-outline"></ion-icon>
         <ion-label>Freunde finden</ion-label>
       </ion-item>
 
-      <ion-item button>
+      <ion-item class="mb-3"  button>
         <ion-icon slot="start" name="wifi-outline"></ion-icon>
         <ion-label>In der Nähe suchen</ion-label>
       </ion-item>-->
 
-      <ion-item button>
+      <ion-item class="mb-3" button>
         <ion-icon slot="start" name="qr-code-outline"></ion-icon>
         <ion-label>QR-Code Scannen</ion-label>
       </ion-item>
 
-      <!--<ion-item button>
+      <!--<ion-item class="mb-3"  button>
         <ion-icon slot="start" name="call-outline"></ion-icon>
         <ion-label>Aus Telefonbuch hinzufügen</ion-label>
       </ion-item>
 
-      <ion-item button (click)="SocialSharing()">
+      <ion-item class="mb-3"  button (click)="SocialSharing()">
         <ion-icon slot="start" name="share-social-outline"></ion-icon>
         <ion-label>Freunde einladen</ion-label>
       </ion-item>-->

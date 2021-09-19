@@ -13,6 +13,7 @@ import { Geolocation } from '@capacitor/geolocation';
 import { AuthService } from 'src/common/auth/_services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { ProfilePage } from '../profile/profile.page';
+import { Share } from '@capacitor/share';
 
 @Component({
   selector: 'app-map',
@@ -36,7 +37,7 @@ export class MapPage implements AfterViewInit {
 
   users;
   locations;
-  currentTab: 'login' | 'register' = 'login';
+  currentTab: 'map' | 'friends' = 'map';
 
   constructor(
     public mapService: MapService,
@@ -49,6 +50,15 @@ export class MapPage implements AfterViewInit {
   ) {}
   changeTab(ev) {
     this.currentTab = ev.detail.value;
+  }
+
+  async share() {
+    await Share.share({
+      title: 'Shisha With Me',
+      text: `Lade dir jetzt Shisha With Me.`,
+      url: 'https://shishawithme.com/',
+      dialogTitle: 'Teile die App mit Freunden',
+    });
   }
 
   async ngOnInit() {

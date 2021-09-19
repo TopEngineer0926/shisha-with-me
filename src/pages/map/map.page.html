@@ -18,8 +18,8 @@
       [value]="currentTab"
       (ionChange)="changeTab($event)"
     >
-      <ion-segment-button mode="ios" value="login"> Karte </ion-segment-button>
-      <ion-segment-button mode="ios" value="register">
+      <ion-segment-button mode="ios" value="map"> Karte </ion-segment-button>
+      <ion-segment-button mode="ios" value="friends">
         Freunde
       </ion-segment-button>
     </ion-segment>
@@ -28,13 +28,22 @@
   <!--<ion-button fill="none" class="close" (click)="close()">
     <ion-icon name="close-circle-outline"></ion-icon>
   </ion-button>-->
-  <div class="map">
+  <div [hidden]="!(currentTab == 'map')" class="map">
     <google-map [center]="center" [zoom]="zoom" [options]="options">
       <map-marker
         *ngFor="let markerPosition of markerPositions"
         [position]="markerPosition"
       ></map-marker>
     </google-map>
+  </div>
+  <div *ngIf="currentTab == 'friends'" class="p-5">
+    Freunde
+
+    <div class="py-5">
+      <ion-button color="primary" expand="block" (click)="share()"
+        >Teile die App mit Freunden</ion-button
+      >
+    </div>
   </div>
 
   <ion-fab vertical="bottom" horizontal="start" slot="fixed">

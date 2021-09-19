@@ -49,6 +49,12 @@ ion-segment-button[mode='ios'] {
   }
 }
 
+ion-avatar {
+  > div {
+    background: #1f2937;
+  }
+}
+
 .no-items {
   margin-top: 30px;
   opacity: 0.7;

@@ -22,67 +22,73 @@ export class AgeValidationPage implements OnInit {
     private modalCtrl: ModalController,
     public helperService: HelperService,
     public alertController: AlertController,
-    private nav: NavController,
-    private router: Router
+    private nav: NavController
   ) {}
 
- async ngOnInit() {
-      const alert = await this.alertController.create({
-        cssClass: 'my-custom-class',
-        header: 'Altersprüfung 18+',
-        message: 'Für die Nutzung der App musst du mindestens 18 Jahre und älter sein. Bist du 18 Jahre oder älter?',
-        buttons: [
-          {
-            text: 'Ja',
-            role: 'Ja',
-            cssClass: 'secondary',
-            handler: (blah) => {
-              this.nav.navigateForward('login');
-            }
-          }, {
-            text: 'Nein',
-            handler: () => {
-              this.router.navigate(['/login'])
-              console.log('Confirm Okay');
-            }
-          }
-        ]
-      });
-      await alert.present();
+  async ngOnInit() {
+    const alert = await this.alertController.create({
+      header: 'Altersprüfung 18+',
+      message:
+        'Für die Nutzung der App musst du mindestens 18 Jahre und älter sein. Bist du 18 Jahre oder älter?',
+      translucent: true,
+      buttons: [
+        {
+          text: 'Ja',
+          role: 'Ja',
+          cssClass: 'secondary',
+          handler: () => {
+            this.nav.navigateForward('login');
+          },
+        },
+        {
+          text: 'Nein',
+          handler: async () => {
+            const alert = await this.alertCtrl.create({
+              header: 'Kein Zutritt!',
+              message: 'Die App ist nur für Personen ab 18 Jahren geeignet.',
+
+              translucent: true,
+              backdropDismiss: false,
+            });
+          },
+        },
+      ],
+    });
+    await alert.present();
   }
 
-  signup(){
+  signup() {
     this.nav.navigateForward('/sign-up');
   }
 
-  //  close() {
-  //   this.nav.navigateForward('idea');
-  //  }
+  close() {
+    this.nav.navigateForward('idea');
+  }
 
-  // async validate() {
-  //   const date = new Date(this.year, 1, 1);
-  //   const age = this._calculateAge(date);
-  //   if (age < 18) {
-  //     const alert = await this.alertCtrl.create({
-  //       header: 'Kein Zutritt!',
-  //       message: 'Die App ist nur für Personen ab 18 Jahren geeignet.',
+  async validate() {
+    const date = new Date(this.year, 1, 1);
+    const age = this._calculateAge(date);
+    if (age < 18) {
+      const alert = await this.alertCtrl.create({
+        header: 'Kein Zutritt!',
+        message: 'Die App ist nur für Personen ab 18 Jahren geeignet.',
 
-  //       translucent: true,
-  //       backdropDismiss: false,
-  //     });
+        translucent: true,
+        backdropDismiss: false,
+      });
 
-  //     await alert.present();
-  //   } else {
-  //     const toast = await this.toastCtrl.create({
-  //       message: 'Vielen Dank für deine Verifizierung',
-  //     });
-  //     this.modalCtrl.dismiss();
-  //   }
-  // }
+      await alert.present();
+    } else {
+      const toast = await this.toastCtrl.create({
+        message: 'Vielen Dank für deine Verifizierung',
+      });
+      this.modalCtrl.dismiss();
+    }
+  }
 
-  // _calculateAge(birthday) {
-  //   const ageDifMs = Date.now() - birthday.getTime();
-  //   const ageDate = new Date(ageDifMs);
-  //   return Math.abs(ageDate.getUTCFullYear() - 1970);
-  // }
+  _calculateAge(birthday) {
+    const ageDifMs = Date.now() - birthday.getTime();
+    const ageDate = new Date(ageDifMs);
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+  }
 }

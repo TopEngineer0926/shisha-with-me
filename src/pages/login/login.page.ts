@@ -78,7 +78,7 @@ export class LoginPage implements OnInit {
     //   this.currentTab = 'login';
     // });
 
-    await this.openAgeValidation();
+    // await this.openAgeValidation();
   }
 
   async activateAccount() {

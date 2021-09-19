@@ -18,11 +18,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import {
-  SwiperConfigInterface,
-  SwiperModule,
-  SWIPER_CONFIG,
-} from 'ngx-swiper-wrapper';
+
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,11 +27,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { ApiInterceptor } from 'src/common/auth/_helpers/api.interceptor';
 import { JwtInterceptor } from 'src/common/auth/_helpers/jwt.interceptor';
-
-const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
-  direction: 'horizontal',
-  slidesPerView: 'auto',
-};
 
 registerLocaleData(localeDe, 'de', localeDeExtra);
 
@@ -62,7 +53,6 @@ export function HttpLoaderFactory(http: HttpClient) {
       backButtonText: '',
     }),
     AppRoutingModule,
-    SwiperModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),
@@ -76,10 +66,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     OneSignal,
     LocalNotifications,
     DocumentViewer,
-    {
-      provide: SWIPER_CONFIG,
-      useValue: DEFAULT_SWIPER_CONFIG,
-    },
     LaunchNavigator,
     StatusBar,
     SplashScreen,

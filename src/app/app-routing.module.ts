@@ -27,11 +27,12 @@ import { IdeaPageModule } from 'src/pages/idea/idea.module';
 import { AuthGuard } from 'src/common/auth/_guards/auth.guard';
 import { SelectLocationPageModule } from 'src/pages/select-location/select-location.module';
 import { SendMessagePageModule } from 'src/pages/send-message/send-message.module';
+import { WelcomePageModule } from 'src/pages/welcome/welcome.module';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'age-validation',
-    pathMatch: 'full'
+    redirectTo: '/tabs/home',
+    pathMatch: 'full',
   },
   {
     path: 'message',
@@ -39,8 +40,9 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: '',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+    path: 'tabs',
+    loadChildren: () => TabsPageModule,
+    canActivate: [AuthGuard],
   },
   {
     path: 'walkthrough',
@@ -48,11 +50,15 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('../pages/login/login.module').then(m => m.LoginPageModule)
+    loadChildren: () =>
+      import('../pages/login/login.module').then((m) => m.LoginPageModule),
   },
   {
     path: 'age-validation',
-    loadChildren: () => import('../pages/age-validation/age-validation.module').then(m => m.AgeValidationPageModule)
+    loadChildren: () =>
+      import('../pages/age-validation/age-validation.module').then(
+        (m) => m.AgeValidationPageModule
+      ),
   },
   {
     path: 'dashboard',
@@ -129,7 +135,7 @@ const routes: Routes = [
     loadChildren: () => AddictionMotivationPageModule,
     canActivate: [AuthGuard],
   },
- 
+
   {
     path: 'start-session',
     loadChildren: () => StartSessionPageModule,
@@ -166,16 +172,13 @@ const routes: Routes = [
   },
   {
     path: 'sign-up',
-    loadChildren: () => import('../pages/sign-up/sign-up.module').then( m => m.SignUpPageModule)
+    loadChildren: () =>
+      import('../pages/sign-up/sign-up.module').then((m) => m.SignUpPageModule),
   },
-
- 
-
-  
-  
-
- 
-
+  {
+    path: 'welcome',
+    loadChildren: () => WelcomePageModule,
+  },
 ];
 @NgModule({
   imports: [

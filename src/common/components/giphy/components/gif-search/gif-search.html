@@ -12,7 +12,7 @@
         *ngFor="let gif of gifs"
         (mousedown)="$event.preventDefault(); select(gif)"
       >
-        <img [src]="gif.images.fixed_height_small.url" alt="" />
+        <img loading="lazy" [src]="gif.images.fixed_height_small.url" alt="" />
       </div>
     </div>
   </div>

@@ -49,7 +49,7 @@
     >
       <div class="chat-item-content" [class.date-visible]="item.info">
         <div class="chat-avatar" *ngIf="!item.myMessage">
-          <img [src]="helper.getImageUrl(chatNew?.image?.url)" />
+          <img loading="lazy" [src]="helper.getImageUrl(chatNew?.image?.url)" />
         </div>
         <div
           class="chat-item-bubble"

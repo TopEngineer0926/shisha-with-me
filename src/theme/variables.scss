@@ -10,7 +10,7 @@
   --card-border-radius: 3px;
   --card-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.35);
   --contrast: #ffffff;
-  --contrastSwap: #000;
+  --contrastSwap: #03111e;
   /*
   --ion-color-primary: #b2ccd3;
   --ion-color-primary-rgb: 244, 169, 66;
@@ -144,20 +144,21 @@ body {
   }
 }
 body.dark {
-  --contrast: #000000;
+  --contrast: #03111e;
   --contrastSwap: #fff;
   --chatBodyBg: #fff;
   --chatBodyColor: #333;
   ion-content {
-    --background: #000;
+    --background: #03111e;
   }
   ion-list {
-    border-top: 1px solid #333;
-    border-bottom: 1px solid #333;
+    border-top: 1px solid #03111e;
+    border-bottom: 1px solid #03111e;
+    --background: #03111e;
 
     ion-item {
-      --background: #1c1c1e;
-      --border-color: #333;
+      --background: #03111e;
+      --border-color: #03111e;
     }
   }
   --ion-color-primary: #b2ccd3;
@@ -195,7 +196,7 @@ body.dark {
   --ion-color-warning-shade: #e0bb2e;
   --ion-color-warning-tint: #ffd948;
 
-  --ion-color-danger: #EB5469;
+  --ion-color-danger: #eb5469;
   --ion-color-danger-rgb: 209, 51, 43;
   --ion-color-danger-contrast: #ffffff;
   --ion-color-danger-contrast-rgb: 255, 255, 255;
@@ -230,8 +231,8 @@ body.dark {
  */
 
 .ios body.dark {
-  --ion-background-color: #000000;
-  --ion-background-color-rgb: 0, 0, 0;
+  --ion-background-color: #03111e;
+  --ion-background-color-rgb: 3, 17, 30;
 
   --ion-text-color: #ffffff;
   --ion-text-color-rgb: 255, 255, 255;

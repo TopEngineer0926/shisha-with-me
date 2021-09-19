@@ -26,7 +26,7 @@
   </ion-list>
   <ion-list class="ion-margin-top"
     ><ion-item class="no-smoke" button (click)="goToNoSmoke()">
-      <img slot="start" src="/assets/rauchfrei.png" />
+      <img loading="lazy" slot="start" src="/assets/rauchfrei.png" />
       <!--<ion-label>Gesundheit</ion-label>-->
     </ion-item></ion-list
   >
@@ -36,8 +36,8 @@
     <ion-item class="language" button (click)="selectLanguage($event)">
       <ion-label> {{'Language' |translate}} </ion-label>
       <span slot="end">
-        <img *ngIf="language.code == 'de'" src="./assets/icons/DE.png" />
-        <img *ngIf="language.code == 'en'" src="./assets/icons/US.png" />
+        <img loading="lazy" *ngIf="language.code == 'de'" src="./assets/icons/DE.png" />
+        <img loading="lazy" *ngIf="language.code == 'en'" src="./assets/icons/US.png" />
       </span>
     </ion-item>-->
 

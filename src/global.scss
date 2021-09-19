@@ -11,6 +11,18 @@
 
 @import './assets/fonts/stylesheet.css';
 
+ion-button.btn-secondary {
+  --background: transparent;
+  border: 2px solid #fff;
+  border-radius: 15px;
+  --color: #fff;
+
+  --ion-toolbar-background: #fff;
+  .button-inner {
+    color: #fff;
+  }
+}
+
 ion-searchbar,
 ion-item {
   --background: #2b3441 !important;

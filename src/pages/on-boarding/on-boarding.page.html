@@ -23,7 +23,7 @@
       </form>
     </ion-slide>
     <ion-slide>
-      <h2>Push</h2>
+      <h2 class="text-4xl">Push</h2>
       <p>
         Um die App richtig zu verwenden musst du dir Telegram runterladen um
         Push Notifications zu empfangen. Setze in Telegram einen Benutzername
@@ -46,7 +46,7 @@
       </form>
     </ion-slide>
     <ion-slide>
-      <h2>Wie ist dein Anzeigename?</h2>
+      <h2 class="text-4xl">Wie ist dein Anzeigename?</h2>
 
       <form class="w-full" *ngIf="user">
         <ion-item lines="none">
@@ -58,7 +58,7 @@
       </form>
     </ion-slide>
     <ion-slide>
-      <h2>Wie willst du gefunden werden?</h2>
+      <h2 class="text-4xl">Wie willst du gefunden werden?</h2>
       <form
         class="w-full"
         [formGroup]="ionicForm"
@@ -109,7 +109,7 @@
       </form>
     </ion-slide>
     <ion-slide>
-      <h2 class="mb-1">Alles bereit</h2>
+      <h2 class="mb-1 text-4xls">Alles bereit</h2>
 
       <p>Los geht's</p>
 
@@ -122,7 +122,7 @@
   <ion-toolbar>
     <div>
       <div *ngIf="sliderNum == 0"></div>
-      <ion-button color="primary" *ngIf="sliderNum != 0" (click)="back()"
+      <ion-button class="btn-secondary" *ngIf="sliderNum != 0" (click)="back()"
         >{{'SliderPage.Back' | translate}}</ion-button
       >
       <ion-button

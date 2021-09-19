@@ -128,6 +128,8 @@ export class FriendsListPage implements OnInit, OnDestroy {
     (
       await this.toastCtrl.create({
         message: 'Anfrage wurde angenommen',
+        translucent: true,
+      position: 'top',
         duration: 4000,
       })
     ).present();

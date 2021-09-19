@@ -77,6 +77,8 @@ export class OnBoardingPage implements OnInit {
       (
         await this.toastCtrl.create({
           message: 'Benutzername bereits vorhanden',
+          translucent: true,
+          position: 'top',
           duration: 4000,
         })
       ).present();

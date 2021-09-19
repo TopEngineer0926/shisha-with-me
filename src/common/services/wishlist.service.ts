@@ -46,6 +46,7 @@ export class WishlistService {
     const toast = await this.toastCtrl.create({
       message: 'Eintrag gespeichert',
       translucent: true,
+      position: 'top',
       duration: 3000,
       buttons: [
         {
@@ -67,6 +68,7 @@ export class WishlistService {
     const toast = await this.toastCtrl.create({
       message: 'Eintrag entfernt',
       translucent: true,
+      position: 'top',
       duration: 3000,
       buttons: [
         {

@@ -72,6 +72,8 @@ export class RegisterComponent implements OnInit {
           (
             await this.toastCtrl.create({
               message: 'Erfolgreich!',
+              translucent: true,
+              position: 'top',
               duration: 4000,
             })
           ).present();

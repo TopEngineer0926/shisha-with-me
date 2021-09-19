@@ -69,6 +69,8 @@ export class ProfilePage implements OnInit {
     const toast = await this.toastCtrl.create({
       duration: 3000,
       message: 'Nachricht wurde versendet ...',
+      translucent: true,
+      position: 'top',
     });
     toast.present();
   }

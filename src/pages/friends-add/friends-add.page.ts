@@ -75,6 +75,8 @@ export class FriendsAddPage implements OnInit {
       (
         await this.toastCtrl.create({
           message: 'Anfrage bereits verschickt',
+          translucent: true,
+          position: 'top',
           duration: 4000,
         })
       ).present();
@@ -99,6 +101,8 @@ export class FriendsAddPage implements OnInit {
     (
       await this.toastCtrl.create({
         message: 'Anfrage wurde verschickt',
+        translucent: true,
+        position: 'top',
         duration: 4000,
       })
     ).present();

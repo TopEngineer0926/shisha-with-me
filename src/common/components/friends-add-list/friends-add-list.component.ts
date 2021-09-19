@@ -49,6 +49,7 @@ export class FriendsAddListComponent implements OnInit {
     const toast = await this.toastCtrl.create({
       message: 'Anfrage gesendet',
       translucent: true,
+      position: 'top',
       duration: 3000,
       buttons: [
         {

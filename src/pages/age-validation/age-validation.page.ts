@@ -81,6 +81,8 @@ export class AgeValidationPage implements OnInit {
     } else {
       const toast = await this.toastCtrl.create({
         message: 'Vielen Dank für deine Verifizierung',
+        translucent: true,
+      position: 'top',
       });
       this.modalCtrl.dismiss();
     }

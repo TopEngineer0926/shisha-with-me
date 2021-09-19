@@ -18,6 +18,8 @@ export class IdeaPage implements OnInit {
     (
       await this.toastCtrl.create({
         message: 'Nachricht wurde verschickt',
+        translucent: true,
+      position: 'top',
         duration: 4000,
       })
     ).present();

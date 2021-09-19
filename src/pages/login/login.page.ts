@@ -113,6 +113,8 @@ export class LoginPage implements OnInit {
           (
             await this.toastCtrl.create({
               message: this.translate.instant('Login success'),
+              translucent: true,
+              position: 'top',
               duration: 4000,
             })
           ).present();
@@ -123,6 +125,8 @@ export class LoginPage implements OnInit {
         (
           await this.toastCtrl.create({
             message: this.translate.instant('Cannot login to your Account'),
+            translucent: true,
+            position: 'top',
             duration: 4000,
           })
         ).present();

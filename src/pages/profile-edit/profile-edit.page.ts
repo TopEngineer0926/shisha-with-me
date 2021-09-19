@@ -166,6 +166,8 @@ export class ProfileEditPage implements OnInit {
               (
                 await this.toastCtrl.create({
                   message: 'Benutzername bereits vorhanden',
+                  translucent: true,
+      position: 'top',
                   duration: 4000,
                 })
               ).present();

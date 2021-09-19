@@ -11,6 +11,10 @@
 
 @import './assets/fonts/stylesheet.css';
 
+ion-refresher {
+  z-index: 1;
+}
+
 ion-button.btn-secondary {
   --background: transparent;
   border: 2px solid #fff;

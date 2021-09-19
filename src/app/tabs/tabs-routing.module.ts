@@ -7,6 +7,7 @@ import { FriendsListPageModule } from 'src/pages/friends-list/friends-list.modul
 import { MapPageModule } from 'src/pages/map/map.module';
 import { SettingsPageModule } from 'src/pages/settings/settings.module';
 import { TabsPage } from './tabs.page';
+import { AdvertisingPageModule } from 'src/pages/advertising/advertising.module';
 
 const routes: Routes = [
   {
@@ -28,6 +29,10 @@ const routes: Routes = [
       {
         path: 'friends',
         loadChildren: () => FriendsListPageModule,
+      },
+      {
+        path: 'advertising',
+        loadChildren: () => AdvertisingPageModule,
       },
       {
         path: 'reviews',

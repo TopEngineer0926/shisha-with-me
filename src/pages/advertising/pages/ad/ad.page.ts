@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Share } from '@capacitor/share';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
 import { AdService } from '../../services/ad.service';
 import { HelperService } from './../../../../common/services/helper.service';
 import { WishlistService } from './../../../../common/services/wishlist.service';
@@ -12,6 +12,7 @@ import { WishlistService } from './../../../../common/services/wishlist.service'
   styleUrls: ['./ad.page.scss'],
 })
 export class AdPage implements OnInit {
+  @Input() id: number | string;
   ad: any;
   isInWishList: boolean = false;
   constructor(
@@ -19,11 +20,12 @@ export class AdPage implements OnInit {
     public adService: AdService,
     public helper: HelperService,
     public wishlist: WishlistService,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private modalCtrl: ModalController,
   ) {}
 
   async ngOnInit() {
-    const id = this.route.snapshot.params.id;
+    const id = this.route.snapshot.params.id || this.id;
     // this.ad = this.adService.ads[id - 1];
     await this.load(id);
 
@@ -31,6 +33,10 @@ export class AdPage implements OnInit {
     console.log(this.wishlist.wishlist);
     this.isInWishList = !!(await this.wishlist.isInWishList(this.ad));
     console.log(this.isInWishList);
+  }
+
+  close() {
+    this.modalCtrl.dismiss();
   }
 
   async shareAd() {

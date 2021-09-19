@@ -1,4 +1,5 @@
-<ion-card [routerLink]="['/advertising', ad.id]" button>
+<!--[routerLink]="['/advertising', ad.id]"-->
+<ion-card (click)="openAd()" button>
   <div class="image-wrapper">
     <div
       class="image-background"

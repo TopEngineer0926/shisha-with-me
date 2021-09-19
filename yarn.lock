@@ -1400,12 +1400,12 @@
     tslib "^2.0.3"
     ws "^7.0.1"
 
-"@ionic/angular@^5.8.0":
-  version "5.8.0"
-  resolved "https://registry.yarnpkg.com/@ionic/angular/-/angular-5.8.0.tgz#21bd95e896384b1b0514c069ff14543f8a66df90"
-  integrity sha512-VZCzeIe+D1mNv1aTdRpFv6DWeAsyhnaoGnsiUER//J0EFTB024aIbRlnfWj++f75seZ7q/+hfrHIcsQgq6XCeg==
+"@ionic/angular@^6.0.0-beta.6":
+  version "6.0.0-beta.6"
+  resolved "https://registry.yarnpkg.com/@ionic/angular/-/angular-6.0.0-beta.6.tgz#c8b08ad69b9be7f62a79ca752028eea5189a8412"
+  integrity sha512-NY+P9Cg2q6PXidTD2y5HIGeuvkSVLPbLTTjDklXVQYtyAj4q95Fi+vDvb9+h6b5e6Gi+Rsd+IRFrdsXMZCdfig==
   dependencies:
-    "@ionic/core" "5.8.0"
+    "@ionic/core" "6.0.0-beta.6"
     tslib "^1.9.3"
 
 "@ionic/cli-framework-output@^2.2.1":
@@ -1417,13 +1417,13 @@
     debug "^4.0.0"
     tslib "^2.0.1"
 
-"@ionic/core@5.8.0":
-  version "5.8.0"
-  resolved "https://registry.yarnpkg.com/@ionic/core/-/core-5.8.0.tgz#a238249d174d4c6d7ef3639da45fcfaa446bcbd5"
-  integrity sha512-rzjAgS5pJgy/Ggtq1lgogl6thiEMMusnm96D6RsVLa4nxYrHIt9Oua062uIYrf0LdasqatekSxIqcU5Fl9YKEg==
+"@ionic/core@6.0.0-beta.6":
+  version "6.0.0-beta.6"
+  resolved "https://registry.yarnpkg.com/@ionic/core/-/core-6.0.0-beta.6.tgz#6b5303a9e9c5b85b33818b9240aa6074a425bb4a"
+  integrity sha512-AvZevAf++g0bdBoiqNl38A2i2XKIDMa4c8EDNtrCiHaro2phqv/5q2zvS2XszL67FuRi8rP8EmWSmF/NKO/FQw==
   dependencies:
-    "@stencil/core" "^2.4.0"
-    ionicons "^5.5.3"
+    "@stencil/core" "^2.6.0"
+    ionicons "^5.5.1"
     tslib "^2.1.0"
 
 "@ionic/pwa-elements@^3.0.2":
@@ -1697,7 +1697,7 @@
     "@sentry/types" "6.12.0"
     tslib "^1.9.3"
 
-"@stencil/core@^2.4.0", "@stencil/core@^2.5.0":
+"@stencil/core@^2.5.0", "@stencil/core@^2.6.0":
   version "2.8.1"
   resolved "https://registry.yarnpkg.com/@stencil/core/-/core-2.8.1.tgz#21b15c115d9a5e2f56379774fcbd9bc947bf336f"
   integrity sha512-iv9J6oLO/lv7/aO45M05yw3pp1J7olY400vlOZgdMVs3s5zHfalY1ZPYM0KyqU4+7DZuadKYbd0aQZ/g2PInZw==
@@ -5045,7 +5045,7 @@ internal-ip@^4.3.0:
     default-gateway "^4.2.0"
     ipaddr.js "^1.9.0"
 
-ionicons@^5.5.3:
+ionicons@^5.5.1:
   version "5.5.3"
   resolved "https://registry.yarnpkg.com/ionicons/-/ionicons-5.5.3.tgz#33cfc4c8a590ac45895f2b10309ef4586ed244c1"
   integrity sha512-L71djrMi8pAad66tpwdnO1vwcyluCFvehzxU1PpH1k/HpYBZhZ5IaYhqXipmqUvu5aEbd4cbRguYyI5Fd4bxTw==

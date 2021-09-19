@@ -1,16 +1,21 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>
-      <img loading="lazy" src="assets/images/logo-light.svg" />
-    </ion-title>
+    <ion-title>Home</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div class="dot"></div>
+  <ion-header collapse="condense" class="ion-no-border">
+    <ion-toolbar>
+      <ion-title size="large">Home</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="p-3">
+    <ion-searchbar placeholder="Suche..."></ion-searchbar>
+  </div>
+
+  <!--<div class="dot"></div>-->
   <video
     #videoElm
     muted
@@ -93,7 +98,7 @@
     </ion-slide>
   </ion-slides>
 
-  <div class="map" (click)="openMapModal()">
+  <!--<div class="map" (click)="openMapModal()">
     <div class="overlay"></div>
     <google-map #map [center]="center" [zoom]="zoom" [options]="options">
       <map-marker
@@ -101,21 +106,8 @@
         [position]="markerPosition"
       ></map-marker>
     </google-map>
-    <!--<agm-map
-      [latitude]="lat"
-      [longitude]="lng"
-      [zoom]="zoom"
-      [disableDefaultUI]="true"
-      [styles]="mapService.getStyles()"
-    >
-      <agm-marker
-        *ngFor="let marker of markers"
-        [latitude]="marker.lat"
-        [longitude]="marker.lng"
-      ></agm-marker>
-    </agm-map>-->
-  </div>
-
+  </div>-->
+  <!--
   <ion-fab
     vertical="bottom"
     horizontal="start"
@@ -125,17 +117,18 @@
     <ion-fab-button>
       <ion-icon name="cart-outline"></ion-icon>
     </ion-fab-button>
-  </ion-fab>
+  </ion-fab>-->
 
+  <!--
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <!--<ion-fab-button (click)="sharePosition()">
+    <ion-fab-button (click)="sharePosition()">
       <ion-icon name="share-outline"></ion-icon>
-    </ion-fab-button>-->
+    </ion-fab-button>
     <ion-fab-button (click)="openMapModal()">
       <ion-icon name="map-outline"></ion-icon>
     </ion-fab-button>
 
-    <!--<ion-fab-list side="top">
+    <ion-fab-list side="top">
       <ion-fab-button (click)="sharePosition()" data-desc="Position teilen"
         ><ion-icon name="share-outline"></ion-icon
       ></ion-fab-button>
@@ -148,8 +141,8 @@
         <ion-icon *ngIf="!locationLoading" name="location-outline"></ion-icon>
         <ion-spinner *ngIf="locationLoading"></ion-spinner>
       </ion-fab-button>
-    </ion-fab-list>-->
-  </ion-fab>
+    </ion-fab-list>
+  </ion-fab>-->
 
   <!--<ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button>

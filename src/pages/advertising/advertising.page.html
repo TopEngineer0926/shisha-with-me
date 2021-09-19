@@ -1,37 +1,37 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Angebote</ion-title>
-  </ion-toolbar>
-  <ion-toolbar>
-    <ion-segment
-      mode="md"
-      *ngIf="selectedCategory"
-      scrollable
-      [value]="selectedCategory"
-      (ionChange)="segmentChanged($event)"
-    >
-      <ion-segment-button *ngFor="let category of data" [value]="category">
-        <ion-label>{{category.title}}</ion-label>
-      </ion-segment-button>
-    </ion-segment>
+    <ion-title>Shop</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!--<ion-header collapse="condense">
+  <ion-header collapse="condense" class="ion-no-border">
     <ion-toolbar>
-      <ion-title size="large">Werbung</ion-title>
+      <ion-title size="large">Shop</ion-title>
     </ion-toolbar>
-  </ion-header>-->
+  </ion-header>
+
+  <ion-segment
+    mode="md"
+    class="mt-10"
+    *ngIf="selectedCategory"
+    scrollable
+    [value]="selectedCategory"
+    (ionChange)="segmentChanged($event)"
+  >
+    <ion-segment-button *ngFor="let category of data" [value]="category">
+      <ion-label>{{category.title}}</ion-label>
+    </ion-segment-button>
+  </ion-segment>
 
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <div class="swipe-area">
+  <!--<div class="swipe-area">
     <ion-slides slidesPerView="auto">
       <ion-slide *ngFor="let topDeal of topDeals">
         <div [routerLink]="['/advertising', topDeal.id]">
@@ -43,8 +43,10 @@
         </div>
       </ion-slide>
     </ion-slides>
-  </div>
+  </div>-->
 
-  <app-ad-item *ngFor="let ad of ads" [ad]="ad"></app-ad-item>
+  <div class="p-5">
+    <app-ad-item *ngFor="let ad of ads" [ad]="ad"></app-ad-item>
+  </div>
 </ion-content>
 <ion-footer> </ion-footer>

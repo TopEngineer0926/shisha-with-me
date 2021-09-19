@@ -1,7 +1,19 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Karte</ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content [fullscreen]="true">
-  <ion-button fill="none" class="close" (click)="close()">
+  <ion-header collapse="condense" class="ion-no-border">
+    <ion-toolbar>
+      <ion-title size="large">Karte</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!--<ion-button fill="none" class="close" (click)="close()">
     <ion-icon name="close-circle-outline"></ion-icon>
-  </ion-button>
+  </ion-button>-->
   <div class="map">
     <google-map [center]="center" [zoom]="zoom" [options]="options">
       <map-marker

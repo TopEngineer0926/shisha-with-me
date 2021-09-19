@@ -157,6 +157,7 @@ small {
 .ios {
   ion-toolbar {
     background: var(--contrast);
+    --background: var(--contrast);
   }
 
   ion-refresher {

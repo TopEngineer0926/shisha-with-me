@@ -4,7 +4,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content
+  [fullscreen]="true"
+  [style.--overflow]="searchTerm ? 'scroll' : 'hidden'"
+>
   <ion-header collapse="condense" class="ion-no-border">
     <ion-toolbar>
       <ion-title size="large">Home</ion-title>
@@ -13,7 +16,9 @@
 
   <div class="p-3">
     <ion-searchbar
+      class="z-10"
       [(ngModel)]="searchTerm"
+      (ngModelChange)="search()"
       placeholder="Suche..."
     ></ion-searchbar>
   </div>
@@ -68,7 +73,30 @@
     </ng-template>
   </swiper>-->
 
-  <div *ngIf="searchTerm" class="p-5">search results</div>
+  <div *ngIf="searchTerm" class="p-5">
+    <div *ngFor="let slide of sorted">
+      <ng-container *ngIf="slide.smoke_products?.length > 0">
+        <div class="py-3 font-bold">{{slide.name}}</div>
+        <div class="grid grid-cols-2 gap-4 mb-3">
+          <div
+            class="bg-white rounded-2xl"
+            *ngFor="let children of slide.smoke_products"
+          >
+            <img
+              loading="lazy"
+              class="mx-auto object-contain h-28"
+              [src]="helper.getImageUrl(children.image?.formats?.medium?.url ||children.image?.url)"
+            />
+            <div class="text-center text-black py-2">{{children.name}}</div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <div *ngIf="smokeProducts(sorted)" class="py-5 text-white">
+      Keine Ergebnisse
+    </div>
+  </div>
 
   <ion-slides
     [hidden]="searchTerm"

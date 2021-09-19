@@ -75,6 +75,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
   };
 
   manufacturers;
+  sorted;
 
   searchTerm;
 
@@ -100,6 +101,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
     const data = await this.http.get('api/manufacturers').toPromise();
     console.log('data', data);
     this.manufacturers = data;
+    this.sorted = [...this.manufacturers];
     this.mainSlider?.update();
     setTimeout(() => {
       this.loadIcons = true;
@@ -125,6 +127,29 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
       sliders[prevIndex]?.slideTo(0);
       // console.log('this.subSliders[prevIndex]', sliders[prevIndex], prevIndex);
     });
+  }
+
+  search() {
+    if (this.searchTerm == '') {
+      this.sorted = [...this.manufacturers];
+      return;
+    }
+    const searched = this.manufacturers.map((element) => {
+      return {
+        ...element,
+        smoke_products: element.smoke_products.filter((subElement) =>
+          subElement.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+        ),
+      };
+    });
+    this.sorted = [...searched];
+  }
+
+  smokeProducts(sorted) {
+    let show = sorted.some((item) => {
+      return item.smoke_products?.length > 0;
+    });
+    return !show;
   }
 
   ngOnDestroy() {

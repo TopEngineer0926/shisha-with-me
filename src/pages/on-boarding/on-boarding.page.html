@@ -12,8 +12,8 @@
         Wie willst du von deinen Freunden gefunden werden?
       </p>
 
-      <form class="w-full" *ngIf="user" class="mt-5">
-        <ion-item lines="none">
+      <form *ngIf="user" class="mt-5 w-full">
+        <ion-item class="w-full" lines="none">
           <ion-input
             class="w-full"
             [(ngModel)]="user.customUsername"

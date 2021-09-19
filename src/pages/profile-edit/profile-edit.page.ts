@@ -245,7 +245,7 @@ export class ProfileEditPage implements OnInit {
     }
 
     if (files?.length > 0) {
-      const loading = await this.loadingCtrl.create();
+      const loading = await this.loadingCtrl.create({ translucent: true });
       loading.present();
       for (const file of Array.from(files)) {
         // const uploadData = await this.upload.transfer(file, 'file');

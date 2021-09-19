@@ -21,7 +21,7 @@ export class AdPage implements OnInit {
     public helper: HelperService,
     public wishlist: WishlistService,
     private loadingCtrl: LoadingController,
-    private modalCtrl: ModalController,
+    private modalCtrl: ModalController
   ) {}
 
   async ngOnInit() {
@@ -49,7 +49,7 @@ export class AdPage implements OnInit {
   }
 
   async load(id) {
-    const loading = await this.loadingCtrl.create();
+    const loading = await this.loadingCtrl.create({ translucent: true });
     loading.present();
     try {
       const data = await this.adService.loadOne(id);

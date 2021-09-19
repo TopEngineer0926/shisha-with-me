@@ -42,18 +42,18 @@
           <ng-container *ngIf="ad.offerPrice">
             <div class="small">für nur</div>
             <div class="amount offer">
-              {{ad.offerPrice |currency:'EUR':true}}
+              {{ad.offerPrice |currency:'EUR':'symbol'}}
             </div>
             <div class="small">
               statt
               <span class="normal-price"
-                >{{ad.price |currency:'EUR':true}}</span
+                >{{ad.price |currency:'EUR':'symbol'}}</span
               >
             </div>
           </ng-container>
 
           <ng-container *ngIf="!ad.offerPrice">
-            <span class="amount">{{ad.price |currency:'EUR':true}}</span>
+            <span class="amount">{{ad.price |currency:'EUR':'symbol'}}</span>
           </ng-container></ng-container
         >
 

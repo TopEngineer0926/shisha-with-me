@@ -35,7 +35,7 @@ export class AdvertisingPage implements OnInit {
   }
 
   async load() {
-    const loading = await this.loadingCtrl.create();
+    const loading = await this.loadingCtrl.create({ translucent: true });
     loading.present();
     try {
       const data = await this.adService.load();

@@ -62,6 +62,8 @@ export class MapPage implements AfterViewInit {
   }
 
   async ngOnInit() {
+    const loading = await this.loadingCtrl.create({ translucent: true });
+    loading.present();
     const locationMarker = [];
 
     const users: any = await this.http.get('api/friends/friends').toPromise();
@@ -93,6 +95,7 @@ export class MapPage implements AfterViewInit {
       }
     });
     this.addMarkersForPlaces(locationMarker);
+    await loading.dismiss();
   }
 
   ngAfterViewInit() {
@@ -106,7 +109,7 @@ export class MapPage implements AfterViewInit {
   }
 
   async mapReady() {
-    const loading = await this.loadingCtrl.create();
+    const loading = await this.loadingCtrl.create({ translucent: true });
     loading.present();
 
     try {
@@ -133,7 +136,7 @@ export class MapPage implements AfterViewInit {
   }
 
   async getCurrentPosition() {
-    return new Promise(async (resolve) => {
+    return new Promise(async (resolve, reject) => {
       this.locationLoading = true;
       try {
         const coordinates = await Geolocation.getCurrentPosition({
@@ -162,6 +165,8 @@ export class MapPage implements AfterViewInit {
           .put('api/users/' + this.authService.user.id, { location: location })
           .toPromise();
       } catch (error) {
+        console.log('error', error);
+        reject(error);
       } finally {
         this.locationLoading = false;
         resolve(true);

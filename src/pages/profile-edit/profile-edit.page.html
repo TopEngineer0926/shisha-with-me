@@ -151,12 +151,19 @@
   >
 
   <ion-list class="mb-10 px-5">
-    <ion-item class="mb-3" *ngFor="let setup of user.setups">
-      <ion-label>
-        <small>{{setup.key}}</small>
-        <h2>{{setup.value}}</h2></ion-label
-      >
-    </ion-item>
+    <ion-item-sliding *ngFor="let setup of user.setups" class="mb-3">
+      <ion-item>
+        <ion-label>
+          <small>{{setup.key}}</small>
+          <h2>{{setup.value}}</h2></ion-label
+        >
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option color="danger" expandable (click)="delete(setup)">
+          Löschen
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
   <!--<ion-list>
     <ion-item class="mb-3" 

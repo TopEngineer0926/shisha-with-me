@@ -277,4 +277,11 @@ export class ProfileEditPage implements OnInit {
       }
     }
   }
+
+  async delete(setup) {
+    const setups = this.user.setups.filter((_setup) => _setup != setup);
+
+    await this.http.put('api/users/' + this.user.id, { setups }).toPromise();
+    this.user.setups = setups;
+  }
 }

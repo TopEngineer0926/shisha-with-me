@@ -26,6 +26,8 @@ export class MapPage implements AfterViewInit {
   options: google.maps.MapOptions = {
     disableDefaultUI: true,
     styles: this.mapService.getStyles(),
+    minZoom: 5,
+    maxZoom: 14,
   };
   center: google.maps.LatLngLiteral = { lat: 51.178418, lng: 9.95 };
   zoom = 6;
@@ -34,6 +36,7 @@ export class MapPage implements AfterViewInit {
 
   users;
   locations;
+  currentTab: 'login' | 'register' = 'login';
 
   constructor(
     public mapService: MapService,
@@ -44,6 +47,9 @@ export class MapPage implements AfterViewInit {
     private authService: AuthService,
     private http: HttpClient
   ) {}
+  changeTab(ev) {
+    this.currentTab = ev.detail.value;
+  }
 
   async ngOnInit() {
     const locationMarker = [];

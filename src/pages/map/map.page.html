@@ -5,11 +5,25 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <div class="background-gradient"></div>
   <ion-header collapse="condense" class="ion-no-border">
     <ion-toolbar>
       <ion-title size="large">Karte</ion-title>
     </ion-toolbar>
   </ion-header>
+  <div class="z-10 p-5">
+    <ion-segment
+      class="z-10"
+      mode="ios"
+      [value]="currentTab"
+      (ionChange)="changeTab($event)"
+    >
+      <ion-segment-button mode="ios" value="login"> Karte </ion-segment-button>
+      <ion-segment-button mode="ios" value="register">
+        Freunde
+      </ion-segment-button>
+    </ion-segment>
+  </div>
 
   <!--<ion-button fill="none" class="close" (click)="close()">
     <ion-icon name="close-circle-outline"></ion-icon>

@@ -12,138 +12,140 @@
     (ionSlideDidChange)="slideChange()"
   >
     <ion-slide>
-      <div class="wrapper">
-        <h2>Wie ist dein Benutzername?</h2>
-        <p>Wie willst du von deinen Freunden gefunden werden?</p>
+      <h2 class="text-4xl">Wie ist dein Benutzername?</h2>
+      <p class="text-base">
+        Wie willst du von deinen Freunden gefunden werden?
+      </p>
 
-        <form *ngIf="user">
-          <ion-item lines="none">
-            <ion-input
-              [(ngModel)]="user.customUsername"
-              [ngModelOptions]="{standalone: true}"
-            ></ion-input>
-          </ion-item>
-        </form>
-      </div>
+      <form class="w-full" *ngIf="user" class="mt-5">
+        <ion-item lines="none">
+          <ion-input
+            class="w-full"
+            [(ngModel)]="user.customUsername"
+            [ngModelOptions]="{standalone: true}"
+          ></ion-input>
+        </ion-item>
+      </form>
     </ion-slide>
     <ion-slide>
-      <div class="wrapper">
-        <h2>Push</h2>
-        <p>
-          Um die App richtig zu verwenden musst du dir Telegram runterladen um
-          Push Notifications zu empfangen. Setze in Telegram einen Benutzername
-          und trage diesen hier ein.
-        </p>
-        <ion-button
-          size="small"
-          (click)="helper.openLink('https://t.me/shishawithme_bot')"
-          >Bot öffnen</ion-button
+      <h2>Push</h2>
+      <p>
+        Um die App richtig zu verwenden musst du dir Telegram runterladen um
+        Push Notifications zu empfangen. Setze in Telegram einen Benutzername
+        und trage diesen hier ein.
+      </p>
+      <ion-button
+        size="small"
+        (click)="helper.openLink('https://t.me/shishawithme_bot')"
+        >Bot öffnen</ion-button
+      >
+
+      <form class="w-full" *ngIf="user">
+        <ion-item lines="none">
+          <ion-input
+            [(ngModel)]="user.telegramUsername"
+            placeholder="Telegram Benutzername"
+            [ngModelOptions]="{standalone: true}"
+          ></ion-input>
+        </ion-item>
+      </form>
+    </ion-slide>
+    <ion-slide>
+      <h2>Wie ist dein Anzeigename?</h2>
+
+      <form class="w-full" *ngIf="user">
+        <ion-item lines="none">
+          <ion-input
+            [(ngModel)]="user.name"
+            [ngModelOptions]="{standalone: true}"
+          ></ion-input>
+        </ion-item>
+      </form>
+    </ion-slide>
+    <ion-slide>
+      <h2>Wie willst du gefunden werden?</h2>
+      <form
+        class="w-full"
+        [formGroup]="ionicForm"
+        (ngSubmit)="submitForm()"
+        novalidate
+      >
+        <ion-item>
+          <ion-label>{{'SliderPage.QrCode' | translate}}</ion-label>
+          <ion-checkbox formControlName="qrCode" slot="end"></ion-checkbox>
+        </ion-item>
+        <ion-text
+          color="danger"
+          class="error"
+          *ngIf="isSubmitted && errorControl.qrCode.errors?.required"
         >
+          <p class="ion-no-margin ion-margin-horizontal">
+            {{'SliderPage.QrCode' | translate}} Code ist erforderlich.
+          </p>
+        </ion-text>
 
-        <form *ngIf="user">
-          <ion-item lines="none">
-            <ion-input
-              [(ngModel)]="user.telegramUsername"
-              placeholder="Telegram Benutzername"
-              [ngModelOptions]="{standalone: true}"
-            ></ion-input>
-          </ion-item>
-        </form>
-      </div>
+        <ion-item>
+          <ion-label>{{'SliderPage.Benutzername' | translate}}</ion-label>
+          <ion-checkbox formControlName="username" slot="end"></ion-checkbox>
+        </ion-item>
+        <!-- Error messages -->
+        <ion-text
+          color="danger"
+          class="error"
+          *ngIf="isSubmitted && errorControl.username.errors?.required"
+        >
+          <p class="ion-no-margin ion-margin-horizontal">
+            {{'SliderPage.Benutzername' | translate}} ist erforderlich.
+          </p>
+        </ion-text>
+
+        <ion-item>
+          <ion-label>{{'SliderPage.Telefonnumber' | translate}}</ion-label>
+          <ion-checkbox
+            formControlName="telefonnumber"
+            slot="end"
+          ></ion-checkbox>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>{{'SliderPage.Instagran' | translate}}</ion-label>
+          <ion-checkbox formControlName="instagran" slot="end"></ion-checkbox>
+        </ion-item>
+      </form>
     </ion-slide>
     <ion-slide>
-      <div class="wrapper">
-        <h2>Wie ist dein Anzeigename?</h2>
+      <h2 class="mb-1">Alles bereit</h2>
 
-        <form *ngIf="user">
-          <ion-item lines="none">
-            <ion-input
-              [(ngModel)]="user.name"
-              [ngModelOptions]="{standalone: true}"
-            ></ion-input>
-          </ion-item>
-        </form>
-      </div>
-    </ion-slide>
-    <ion-slide>
-      <div class="wrapper">
-        <h2>Wie willst du gefunden werden?</h2>
-        <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
-          <ion-item>
-            <ion-label>{{'SliderPage.QrCode' | translate}}</ion-label>
-            <ion-checkbox formControlName="qrCode" slot="end"></ion-checkbox>
-          </ion-item>
-          <ion-text
-            color="danger"
-            class="error"
-            *ngIf="isSubmitted && errorControl.qrCode.errors?.required"
-          >
-            <p class="ion-no-margin ion-margin-horizontal">
-              {{'SliderPage.QrCode' | translate}} Code ist erforderlich.
-            </p>
-          </ion-text>
+      <p>Los geht's</p>
 
-          <ion-item>
-            <ion-label>{{'SliderPage.Benutzername' | translate}}</ion-label>
-            <ion-checkbox formControlName="username" slot="end"></ion-checkbox>
-          </ion-item>
-          <!-- Error messages -->
-          <ion-text
-            color="danger"
-            class="error"
-            *ngIf="isSubmitted && errorControl.username.errors?.required"
-          >
-            <p class="ion-no-margin ion-margin-horizontal">
-              {{'SliderPage.Benutzername' | translate}} ist erforderlich.
-            </p>
-          </ion-text>
-
-          <ion-item>
-            <ion-label>{{'SliderPage.Telefonnumber' | translate}}</ion-label>
-            <ion-checkbox
-              formControlName="telefonnumber"
-              slot="end"
-            ></ion-checkbox>
-          </ion-item>
-
-          <ion-item>
-            <ion-label>{{'SliderPage.Instagran' | translate}}</ion-label>
-            <ion-checkbox formControlName="instagran" slot="end"></ion-checkbox>
-          </ion-item>
-        </form>
-      </div>
-    </ion-slide>
-    <ion-slide>
-      <div class="wrapper">
-        <h2 class="mb-1">Alles bereit</h2>
-
-        <p>Los geht's</p>
-
-        <!--<app-friends-add-list></app-friends-add-list>-->
-      </div>
+      <!--<app-friends-add-list></app-friends-add-list>-->
     </ion-slide>
   </ion-slides>
 </ion-content>
 
-<ion-footer>
+<ion-footer class="ion-no-border">
   <ion-toolbar>
     <div>
       <div *ngIf="sliderNum == 0"></div>
-      <ion-button *ngIf="sliderNum != 0" (click)="back()"
+      <ion-button color="primary" *ngIf="sliderNum != 0" (click)="back()"
         >{{'SliderPage.Back' | translate}}</ion-button
       >
-      <ion-button *ngIf="(sliderNum < 4); else elseIf1" (click)="next()"
+      <ion-button
+        color="primary"
+        *ngIf="(sliderNum < 4); else elseIf1"
+        (click)="next()"
         >{{'SliderPage.Continue' | translate}}</ion-button
       >
       <ng-template #elseIf1>
         <ion-button
+          color="primary"
           *ngIf="(sliderNum === 1) else elseIf2"
           (click)="submitForm()"
           >{{'SliderPage.Continue' | translate}}</ion-button
         >
       </ng-template>
       <ng-template #elseIf2>
-        <ion-button (click)="goTo()"
+        <ion-button color="primary" (click)="goTo()"
           >{{'SliderPage.Start' | translate}}</ion-button
         >
       </ng-template>

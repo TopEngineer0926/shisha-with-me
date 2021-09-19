@@ -20,18 +20,20 @@ ion-item {
 
   --color: #809fb8 !important;
   --icon-color: #809fb8 !important;
+  --border-style: unset !important;
 }
-
 ion-segment {
   padding: 0 2px;
 }
-ion-segment-button {
+ion-segment-button[mode='ios'] {
   --background-checked: #384455;
   --indicator-color: transparent !important;
-  --padding-bottom: 15px;
-  --padding-top: 15px;
-  border: 5px solid #14212d;
-  border-radius: 10px;
+  &.custom-padding {
+    --padding-bottom: 15px;
+    --padding-top: 15px;
+    border: 5px solid #14212d;
+    border-radius: 10px;
+  }
 }
 
 .no-items {

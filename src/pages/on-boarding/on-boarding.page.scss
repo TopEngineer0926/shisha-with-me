@@ -1,7 +1,11 @@
 ion-slides {
   height: 100%;
   ion-slide {
-    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: left;
+    padding: 40px 20px;
     .wrapper {
       padding: 20px;
       background: #333;
@@ -20,6 +24,25 @@ ion-slides {
     }
   }
 }
+::ng-deep {
+  .swiper-pagination {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    padding: 20px;
+
+    bottom: unset !important;
+    .swiper-pagination-bullet-active {
+      background: #fff !important;
+      opacity: 1 !important;
+    }
+    .swiper-pagination-bullet {
+      background: #fff !important;
+      opacity: 0.5;
+    }
+  }
+}
 
 .error {
   font-size: 0.8em;
@@ -30,5 +53,8 @@ ion-toolbar {
   > div {
     display: flex;
     justify-content: space-between;
+  }
+  ion-button {
+    color: #fff;
   }
 }

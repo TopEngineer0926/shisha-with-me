@@ -154,19 +154,19 @@ body.dark {
   ion-list {
     border-top: 1px solid #03111e;
     border-bottom: 1px solid #03111e;
-    --background: #03111e;
+    background: #03111e;
 
     ion-item {
       --background: #03111e;
       --border-color: #03111e;
     }
   }
-  --ion-color-primary: #b2ccd3;
-  --ion-color-primary-rgb: 244, 169, 66;
-  --ion-color-primary-contrast: #000;
-  --ion-color-primary-contrast-rgb: 0, 0, 0;
-  --ion-color-primary-shade: #acd5e0;
-  --ion-color-primary-tint: #acbdc2;
+  --ion-color-primary: #eb5469;
+  --ion-color-primary-rgb: 235, 84, 105;
+  --ion-color-primary-contrast: #fff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #cf4a5c;
+  --ion-color-primary-tint: #ed6578;
 
   --ion-color-secondary: #50c8ff;
   --ion-color-secondary-rgb: 80, 200, 255;

@@ -2,7 +2,7 @@
   "name": "Shisha With Me",
   "short_name": "Shisha With Me",
   "theme_color": "#EA5469",
-  "background_color": "#000000",
+  "background_color": "#03111e",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",

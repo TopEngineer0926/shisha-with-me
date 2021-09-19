@@ -5,15 +5,20 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+import { Platform } from '@angular/cdk/platform';
+import { HttpClient } from '@angular/common/http';
 import {
   AfterViewInit,
   Component,
   ElementRef,
   OnDestroy,
   OnInit,
+  QueryList,
   ViewChild,
+  ViewChildren,
 } from '@angular/core';
-import { Plugins } from '@capacitor/core';
+import { Geolocation } from '@capacitor/geolocation';
+import { Share } from '@capacitor/share';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import {
   AlertController,
@@ -23,17 +28,12 @@ import {
   ToastController,
 } from '@ionic/angular';
 import { CupertinoPane, CupertinoSettings } from 'cupertino-pane';
-import { MapService } from 'src/common/services/map.service';
-import { ImageSharePage } from '../image-share/image-share.page';
-import { MapPage } from '../map/map.page';
-import { slideOpts } from './slider-config';
-import { Share } from '@capacitor/share';
-import { Geolocation } from '@capacitor/geolocation';
-import { SelectLocationPage } from '../select-location/select-location.page';
-import { HttpClient } from '@angular/common/http';
-import { HelperService } from 'src/common/services/helper.service';
 import { AuthService } from 'src/common/auth/_services/auth.service';
-import { Platform } from '@angular/cdk/platform';
+import { HelperService } from 'src/common/services/helper.service';
+import { MapService } from 'src/common/services/map.service';
+import { MapPage } from '../map/map.page';
+import { SelectLocationPage } from '../select-location/select-location.page';
+import { slideOpts } from './slider-config';
 
 @Component({
   selector: 'app-dashboard',
@@ -53,6 +53,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
   @ViewChild('mainSlider') mainSlider: IonSlides;
   @ViewChild('map') map: google.maps.Map;
   @ViewChild('videoElm') videoElm: ElementRef<HTMLVideoElement>;
+  @ViewChildren('subSlider') subSliders: QueryList<IonSlides>;
   slideOpts = slideOpts;
   locationLoading: boolean = false;
   visiblityState = 'hidden';
@@ -74,6 +75,8 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
   };
 
   manufacturers;
+
+  searchTerm;
 
   cupertino: boolean = false;
   myPane: CupertinoPane;
@@ -101,13 +104,27 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
     setTimeout(() => {
       this.loadIcons = true;
       setTimeout(() => {
-        this.mainSlider.slideTo(1);
-        google.maps.event.trigger(this.map, 'resize');
+        // this.mainSlider.slideTo(0);
+        // google.maps.event.trigger(this.map, 'resize');
       }, 100);
     }, 200);
 
     this.audio = new Audio('assets/sounds/Shisha_Sound.mp3');
     this.audio.loop = false;
+
+    this.mainSlider.ionSlideDidChange.subscribe(async (ev) => {
+      // console.log('change', ev);
+      //this.mainSlider.slideTo(0);
+      const prevIndex = await this.mainSlider.getPreviousIndex();
+      const sliders = [];
+
+      this.subSliders.forEach((slider) => {
+        sliders.push(slider);
+      });
+
+      sliders[prevIndex]?.slideTo(0);
+      // console.log('this.subSliders[prevIndex]', sliders[prevIndex], prevIndex);
+    });
   }
 
   ngOnDestroy() {

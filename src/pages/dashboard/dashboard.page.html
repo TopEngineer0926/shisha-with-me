@@ -12,7 +12,10 @@
   </ion-header>
 
   <div class="p-3">
-    <ion-searchbar placeholder="Suche..."></ion-searchbar>
+    <ion-searchbar
+      [(ngModel)]="searchTerm"
+      placeholder="Suche..."
+    ></ion-searchbar>
   </div>
 
   <!--<div class="dot"></div>-->
@@ -65,14 +68,16 @@
     </ng-template>
   </swiper>-->
 
+  <div *ngIf="searchTerm" class="p-5">search results</div>
+
   <ion-slides
-    *ngIf="loadIcons && manufacturers"
+    [hidden]="searchTerm"
     #mainSlider
     class="first"
     [options]="slideOpts"
   >
     <ion-slide *ngFor="let slide of manufacturers">
-      <ion-slides [options]="slideOptsVert">
+      <ion-slides #subSlider [options]="slideOptsVert">
         <ion-slide>
           <div class="slide-item" (click)="selectSession(slide, 'manufactur')">
             <div

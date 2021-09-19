@@ -1,9 +1,6 @@
 name: PWA Deploy
 
-on:
-  create:
-    tags:
-      - '*'
+on: [push]
 
 jobs:
   build:

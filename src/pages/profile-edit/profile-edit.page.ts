@@ -167,7 +167,7 @@ export class ProfileEditPage implements OnInit {
                 await this.toastCtrl.create({
                   message: 'Benutzername bereits vorhanden',
                   translucent: true,
-      position: 'top',
+                  position: 'top',
                   duration: 4000,
                 })
               ).present();
@@ -237,7 +237,6 @@ export class ProfileEditPage implements OnInit {
       fileInput.multiple = false;
       const fileSelectPromise = new Promise((resolve, reject) => {
         fileInput.onchange = resolve;
-        fileInput.oncancel = reject;
       });
       fileInput.click();
       try {

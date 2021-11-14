@@ -149,7 +149,7 @@ ion-button.bg-red {
 .btn-container {
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: flex-end;
   min-width: 250px;
   height: 100%;
   color: var(--contrastSwap);

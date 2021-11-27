@@ -34,7 +34,8 @@ import { MapService } from 'src/common/services/map.service';
 import { MapPage } from '../map/map.page';
 import { SelectLocationPage } from '../select-location/select-location.page';
 import { slideOpts } from './slider-config';
-
+import { filter, pairwise } from 'rxjs/operators';
+import { Router, RoutesRecognized } from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
@@ -48,7 +49,7 @@ import { slideOpts } from './slider-config';
     ]),
   ],
 })
-export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
+export class DashboardPage implements AfterViewInit, OnDestroy, OnInit  {
   audio: HTMLAudioElement;
   @ViewChild('mainSlider') mainSlider: IonSlides;
   @ViewChild('map') map: google.maps.Map;
@@ -92,10 +93,37 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
     public helper: HelperService,
     private authService: AuthService,
     private toastCtrl: ToastController,
-    public platform: Platform
-  ) {}
+    public platform: Platform,
+    private router: Router
+  ) { }
 
-  async ngOnInit() {}
+  async showSmoke() {
+    this.visiblityState = 'shown';
+    const video = this.videoElm.nativeElement;
+    // await this.audio.play();
+    await video.play();
+    console.log(this.visiblityState)
+    video.addEventListener('ended', () => {
+      setTimeout(() => {
+        this.visiblityState = 'hidden';
+        setTimeout(() => {
+          video.currentTime = 0;
+        }, 300);
+      }, 150);
+    });
+  }
+
+  async ngOnInit() { }
+  
+  async ionViewDidEnter() {
+    this.router.events.pipe(filter((evt: any) => evt instanceof RoutesRecognized), pairwise()).subscribe((events: RoutesRecognized[]) => {
+      const prevURL = events[0].urlAfterRedirects;
+      if (prevURL === '/onboarding') {
+        this.showSmoke();
+        console.log('Showing smoke from onboarding');
+      }
+    });
+  }
 
   async ngAfterViewInit() {
     const data = await this.http.get('api/manufacturers').toPromise();
@@ -251,20 +279,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
       })
     ).present();
 
-    this.visiblityState = 'shown';
-    const video = this.videoElm.nativeElement;
-    await this.audio.play();
-    await video.play();
-    video.addEventListener('ended', () => {
-      setTimeout(() => {
-        this.visiblityState = 'hidden';
-        setTimeout(() => {
-          video.currentTime = 0;
-        }, 300);
-      }, 150);
-
-      // video.play();
-    });
+    this.showSmoke();
 
     /*setTimeout(() => {
       this.localNotifications.schedule({

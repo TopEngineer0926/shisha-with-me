@@ -57,7 +57,9 @@ export class OnBoardingPage implements OnInit {
 
   async goTo() {
     await set('loggedIn', true);
-    await this.navCtrl.navigateRoot('/tabs/home');
+    await this.navCtrl.navigateRoot('/tabs/home', {
+      queryParams: { playSmoke: true },
+    });
   }
 
   slideChange() {

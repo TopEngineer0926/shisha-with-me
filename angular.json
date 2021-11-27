@@ -91,8 +91,7 @@
             "production": {
               "browserTarget": "app:build:production"
             },
-            "ci": {
-            },
+            "ci": {},
             "development": {
               "browserTarget": "app:build:development"
             }
@@ -182,7 +181,10 @@
   },
   "cli": {
     "analytics": "252ac348-ccc0-4af4-b8f3-0cf2c05c82f1",
-    "defaultCollection": "@ionic/angular-toolkit"
+    "defaultCollection": "@ionic/angular-toolkit",
+    "cache": {
+      "enabled": false
+    }
   },
   "schematics": {
     "@ionic/angular-toolkit:component": {

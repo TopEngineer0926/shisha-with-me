@@ -35,7 +35,12 @@ import { MapPage } from '../map/map.page';
 import { SelectLocationPage } from '../select-location/select-location.page';
 import { slideOpts } from './slider-config';
 import { filter, pairwise } from 'rxjs/operators';
-import { Router, RoutesRecognized } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Router,
+  RoutesRecognized,
+} from '@angular/router';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
@@ -94,7 +99,8 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
     private authService: AuthService,
     private toastCtrl: ToastController,
     public platform: Platform,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   async showSmoke() {
@@ -114,26 +120,12 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
 
   async ngOnInit() {}
 
-  async ionViewDidEnter() {
-    this.showSmoke();
-    setInterval(() => {
-      this.showSmoke();
-    }, 5000);
-    this.router.events
-      .pipe(
-        filter((evt: any) => evt instanceof RoutesRecognized),
-        pairwise()
-      )
-      .subscribe((events: RoutesRecognized[]) => {
-        const prevURL = events[0].urlAfterRedirects;
-        if (prevURL === '/onboarding') {
-          this.showSmoke();
-          console.log('Showing smoke from onboarding');
-        }
-      });
-  }
-
   async ngAfterViewInit() {
+    const playSmoke = this.route.snapshot.queryParamMap.get('playSmoke');
+    if (playSmoke) {
+      this.showSmoke();
+    }
+
     const data = await this.http.get('api/manufacturers').toPromise();
     console.log('data', data);
     this.manufacturers = data;

@@ -182,7 +182,7 @@ export class ProfileEditPage implements OnInit {
 
   async takePicture() {
     const image = await Camera.getPhoto({
-      source: CameraSource.Prompt,
+      source: CameraSource.Photos,
       quality: 80,
       allowEditing: true,
       resultType: CameraResultType.Uri,

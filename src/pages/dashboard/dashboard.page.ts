@@ -49,7 +49,7 @@ import { Router, RoutesRecognized } from '@angular/router';
     ]),
   ],
 })
-export class DashboardPage implements AfterViewInit, OnDestroy, OnInit  {
+export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
   audio: HTMLAudioElement;
   @ViewChild('mainSlider') mainSlider: IonSlides;
   @ViewChild('map') map: google.maps.Map;
@@ -95,34 +95,42 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit  {
     private toastCtrl: ToastController,
     public platform: Platform,
     private router: Router
-  ) { }
+  ) {}
 
   async showSmoke() {
     this.visiblityState = 'shown';
     const video = this.videoElm.nativeElement;
-    // await this.audio.play();
     await video.play();
-    console.log(this.visiblityState)
+    console.log(this.visiblityState);
     video.addEventListener('ended', () => {
       setTimeout(() => {
         this.visiblityState = 'hidden';
         setTimeout(() => {
-          video.currentTime = 0;
+          video.load();
         }, 300);
       }, 150);
     });
   }
 
-  async ngOnInit() { }
-  
+  async ngOnInit() {}
+
   async ionViewDidEnter() {
-    this.router.events.pipe(filter((evt: any) => evt instanceof RoutesRecognized), pairwise()).subscribe((events: RoutesRecognized[]) => {
-      const prevURL = events[0].urlAfterRedirects;
-      if (prevURL === '/onboarding') {
-        this.showSmoke();
-        console.log('Showing smoke from onboarding');
-      }
-    });
+    this.showSmoke();
+    setInterval(() => {
+      this.showSmoke();
+    }, 5000);
+    this.router.events
+      .pipe(
+        filter((evt: any) => evt instanceof RoutesRecognized),
+        pairwise()
+      )
+      .subscribe((events: RoutesRecognized[]) => {
+        const prevURL = events[0].urlAfterRedirects;
+        if (prevURL === '/onboarding') {
+          this.showSmoke();
+          console.log('Showing smoke from onboarding');
+        }
+      });
   }
 
   async ngAfterViewInit() {

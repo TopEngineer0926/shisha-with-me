@@ -256,6 +256,67 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
     return await modal.present();
   }
 
+  async openTelegramModal() {
+
+    return new Promise(async (resolve, reject) => {
+      const alert = await this.alertController.create({
+        header: 'Hinterlege Telegram um es mit deinen Freunden zu teilen',
+        translucent: true,
+        inputs: [
+          {
+            value: '',
+            name: 'name',
+            type: 'text',
+            placeholder: 'Telegram Benutzername',
+          },
+        ],
+        buttons: [
+          {
+            text: 'Abbrechen',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: () => {
+              console.log('Confirm Cancel');
+            },
+          },
+          {
+            text: 'Speichern',
+            handler: async (data) => {
+              const update = {
+                telegramUsername: data.name
+              }
+
+              try {
+                await this.http
+                  .put('api/users/' + this.authService.user.id, update)
+                  .toPromise();
+                
+                
+                resolve(true);
+              } catch (error) {
+                (
+                  await this.toastCtrl.create({
+                    message: 'Benutzername bereits vorhanden',
+                    translucent: true,
+                    position: 'top',
+                    duration: 4000,
+                  })
+                ).present();
+              }
+            },
+          },
+        ],
+      });
+
+      alert.onDidDismiss().then(() => {
+        resolve(false);
+      })
+
+      await alert.present();      
+    })
+
+  }
+
   async startSession(smokeProduct, type, location?) {
     let data: any = {
       start_user: this.authService.user.id.toString(),
@@ -269,7 +330,16 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
       data.manufacturer = smokeProduct.id;
     }
 
+    // show telegram modal on first session if no telegram is set
+    const telegramUsername = this.authService.user.telegramUsername;
+    const sessionAmount = this.authService.user.sessions.length;
+    if (!telegramUsername && sessionAmount === 0) {
+      const hasSetANewName = await this.openTelegramModal();
+    }
+
+
     await this.http.post('api/sessions/start', data).toPromise();
+
     (
       await this.toastCtrl.create({
         message: 'Session wurde gestartet',

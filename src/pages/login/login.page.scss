@@ -14,8 +14,9 @@ ion-content {
     }
   }
   .logo {
-    height: 50px;
-    width: 100px;
+    height: 95px;
+    width: 100%;
+    margin-bottom: 5vh;
   }
 
   .law {
@@ -119,8 +120,7 @@ ion-button.bg-red {
 .title {
   //  text-shadow: 0px 0 0px #F78A1C, 0 0 0px #F78A1C, 0 0 0px #F78A1C !important;
   .logo {
-    width: 100px;
-    height: 100px;
+    width: 100%;
     background: #333;
     margin-bottom: 30px;
   }
@@ -157,8 +157,6 @@ ion-button.bg-red {
   ion-button {
     display: flex;
     align-items: center;
-    // justify-content: center;
-    font-weight: bold;
     margin-bottom: 10px;
 
     justify-content: flex-start;

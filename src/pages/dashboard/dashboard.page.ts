@@ -257,10 +257,10 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
   }
 
   async openTelegramModal() {
-
     return new Promise(async (resolve, reject) => {
       const alert = await this.alertController.create({
-        header: 'Hinterlege Telegram um es mit deinen Freunden zu teilen',
+        header: 'Benachrichtige deine Freunde über Telegram',
+        message: 'Bitte gib deinen Telegram Benutzernamen ein',
         translucent: true,
         inputs: [
           {
@@ -271,16 +271,8 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
           },
         ],
         buttons: [
-          {
-            text: 'Ohne fortfahren',
-            role: 'cancel',
-            cssClass: 'secondary',
-            handler: () => {
-              console.log('Confirm Cancel');
-            },
-          },
-          {
-            text: 'Speichern',
+                    {
+            text: 'Hinzufügen',
             handler: async (data) => {
               const update = {
                 telegramUsername: data.name
@@ -305,12 +297,18 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
               }
             },
           },
+          {
+            text: 'Mehr Infos',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: () => {
+              console.log('Confirm Cancel');
+              resolve(false);
+            },
+          },
         ],
       });
 
-      alert.onDidDismiss().then(() => {
-        resolve(false);
-      })
 
       await alert.present();      
     })
@@ -332,24 +330,37 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
 
     // show telegram modal on first session if no telegram is set
     const telegramUsername = this.authService.user.telegramUsername;
-    const sessionAmount = this.authService.user.sessions.length;
-    if (!telegramUsername && sessionAmount === 0) {
+    if (!telegramUsername) {
       const hasSetANewName = await this.openTelegramModal();
+
+      if (hasSetANewName) {
+        await this.http.post('api/sessions/start', data).toPromise();
+
+        (
+          await this.toastCtrl.create({
+            message: 'Session wurde gestartet',
+            translucent: true,
+            position: 'top',
+            duration: 4000,
+          })
+        ).present();
+
+        this.showSmoke();        
+      }
+    } else {
+        await this.http.post('api/sessions/start', data).toPromise();
+
+        (
+          await this.toastCtrl.create({
+            message: 'Session wurde gestartet',
+            translucent: true,
+            position: 'top',
+            duration: 4000,
+          })
+        ).present();
+
+        this.showSmoke();  
     }
-
-
-    await this.http.post('api/sessions/start', data).toPromise();
-
-    (
-      await this.toastCtrl.create({
-        message: 'Session wurde gestartet',
-        translucent: true,
-        position: 'top',
-        duration: 4000,
-      })
-    ).present();
-
-    this.showSmoke();
 
     /*setTimeout(() => {
       this.localNotifications.schedule({

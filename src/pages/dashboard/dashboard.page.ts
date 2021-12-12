@@ -272,7 +272,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
         ],
         buttons: [
           {
-            text: 'Abbrechen',
+            text: 'Ohne fortfahren',
             role: 'cancel',
             cssClass: 'secondary',
             handler: () => {

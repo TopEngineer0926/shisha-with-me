@@ -7,7 +7,7 @@
     (ionSlideDidChange)="slideChange()"
   >
     <ion-slide>
-      <h2 class="text-4xl mb-5">Wie ist dein Benutzername?</h2>
+      <h2 class="text-4xl mb-5">Wähle deinen Benutzernamen</h2>
       <p class="text-base">
         Wie willst du von deinen Freunden gefunden werden?
       </p>
@@ -16,12 +16,14 @@
         <ion-item class="w-full" lines="none">
           <ion-input
             class="w-full"
+            placeholder="Benutzername"
             [(ngModel)]="user.customUsername"
             [ngModelOptions]="{standalone: true}"
           ></ion-input>
         </ion-item>
       </form>
     </ion-slide>
+    <!--
     <ion-slide>
       <h2 class="text-4xl mb-5">Push</h2>
       <p>
@@ -45,6 +47,8 @@
         </ion-item>
       </form>
     </ion-slide>
+  -->
+  <!---
     <ion-slide>
       <h2 class="text-4xl mb-5">Wie ist dein Anzeigename?</h2>
 
@@ -57,15 +61,17 @@
         </ion-item>
       </form>
     </ion-slide>
+  -->
     <ion-slide>
       <h2 class="text-4xl mb-5">Wie willst du gefunden werden?</h2>
+      <p class="text-base">Teile uns mit wie dich deine Freunde finden sollen.</p>
       <form
-        class="w-full"
+        class="w-full mt-5"
         [formGroup]="ionicForm"
         (ngSubmit)="submitForm()"
         novalidate
       >
-        <ion-item>
+        <ion-item class="mb-2">
           <ion-label>{{'SliderPage.QrCode' | translate}}</ion-label>
           <ion-checkbox formControlName="qrCode" slot="end"></ion-checkbox>
         </ion-item>
@@ -79,7 +85,7 @@
           </p>
         </ion-text>
 
-        <ion-item>
+        <ion-item class="mb-8">
           <ion-label>{{'SliderPage.Benutzername' | translate}}</ion-label>
           <ion-checkbox formControlName="username" slot="end"></ion-checkbox>
         </ion-item>
@@ -94,7 +100,7 @@
           </p>
         </ion-text>
 
-        <ion-item>
+        <ion-item class="mb-2">
           <ion-label>{{'SliderPage.Telefonnumber' | translate}}</ion-label>
           <ion-checkbox
             formControlName="telefonnumber"
@@ -109,11 +115,21 @@
       </form>
     </ion-slide>
     <ion-slide>
-      <h2 class="text-4xl mb-5">Alles bereit</h2>
+      <h2 class="text-4xl mb-5">Ortungsdienste aktivieren</h2>
+      <p class="text-base">
+        Damit deine Freunde sehen können wo du Shisha rauchst, musst du deine Ortungsdienste freigeben.
+      </p>
 
-      <p>Los geht's</p>
-
-      <!--<app-friends-add-list></app-friends-add-list>-->
+      <form *ngIf="user" class="mt-5 w-full">
+        <ion-item class="w-full" lines="none">
+          <ion-input
+            class="w-full"
+            placeholder="Benutzername"
+            [(ngModel)]="user.customUsername"
+            [ngModelOptions]="{standalone: true}"
+          ></ion-input>
+        </ion-item>
+      </form>
     </ion-slide>
   </ion-slides>
 </ion-content>
@@ -127,6 +143,7 @@
       >
       <ion-button
         color="primary"
+        class="w-full mb-5"
         *ngIf="(sliderNum < 4); else elseIf1"
         (click)="next()"
         >{{'SliderPage.Continue' | translate}}</ion-button

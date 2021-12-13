@@ -96,6 +96,7 @@ export class LoginPage implements OnInit {
     if (!this.model.email || !this.model.password) {
       this.submitted = true;
       this.errorStr = 'fill_out_user_password';
+      await this.app.isLoading(false);
 
       return;
     }

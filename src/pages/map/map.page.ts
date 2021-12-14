@@ -129,7 +129,6 @@ export class MapPage implements AfterViewInit, OnInit {
     if (!this.mapFilterForm.value.shishaBar) filteredMarkers = filteredMarkers.filter((location) => location.type !== 'shisha_bar');
     if (!this.mapFilterForm.value.shishaShop) filteredMarkers = filteredMarkers.filter((location) => location.type !== 'shisha_shop');
     
-    console.log(filteredMarkers);
     this.addMarkersForPlaces(filteredMarkers);
   }
 
@@ -275,7 +274,7 @@ export class MapPage implements AfterViewInit, OnInit {
 
       google.maps.event.addListener(marker, 'click', async () => {
         console.log(marker);
-        if (marker.dataType == 'location') {
+        if (marker.dataType == 'shisha_bar' || marker.datatype == 'shisha_shop') {
           await this.openPlace(marker.dataId);
         }
         if (marker.dataType == 'user') {

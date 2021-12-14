@@ -17,6 +17,7 @@ import { Share } from '@capacitor/share';
 import { SheetState } from 'ion-bottom-sheet';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { OnInit } from '@angular/core';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-map',
@@ -43,6 +44,7 @@ export class MapPage implements AfterViewInit, OnInit {
   currentTab: 'map' | 'friends' = 'map';
   showFilterSheet = SheetState.Bottom;
   mapFilterForm: FormGroup;
+  locationMarker = [];
 
   constructor(
     public mapService: MapService,
@@ -79,14 +81,14 @@ export class MapPage implements AfterViewInit, OnInit {
     });
     const loading = await this.loadingCtrl.create({ translucent: true });
     loading.present();
-    const locationMarker = [];
+    this.locationMarker = [];
 
     const users: any = await this.http.get('api/friends/friends').toPromise();
     console.log('users', users);
     this.users = users;
     users.map((location) => {
       if (location.location) {
-        locationMarker.push({
+        this.locationMarker.push({
           lat: location.location.lat,
           lng: location.location.lng,
           id: location.id,
@@ -101,15 +103,16 @@ export class MapPage implements AfterViewInit, OnInit {
 
     locations.map((location) => {
       if (location.location) {
-        locationMarker.push({
+        console.log(location);
+        this.locationMarker.push({
           lat: location.location.lat,
           lng: location.location.lng,
           id: location.id,
-          type: 'location',
+          type: location.type,
         });
       }
     });
-    this.addMarkersForPlaces(locationMarker);
+    this.addMarkersForPlaces(this.locationMarker);
     await loading.dismiss();
   }
 
@@ -117,7 +120,18 @@ export class MapPage implements AfterViewInit, OnInit {
     this.mapReady();
   }
 
-  loadMarker() {}
+  loadMarker() { }
+  
+  filterMarkers() {
+    let filteredMarkers = this.locationMarker;
+  
+    if (!this.mapFilterForm.value.friends) filteredMarkers = filteredMarkers.filter((location) => location.type !== 'friends');
+    if (!this.mapFilterForm.value.shishaBar) filteredMarkers = filteredMarkers.filter((location) => location.type !== 'shisha_bar');
+    if (!this.mapFilterForm.value.shishaShop) filteredMarkers = filteredMarkers.filter((location) => location.type !== 'shisha_shop');
+    
+    console.log(filteredMarkers);
+    this.addMarkersForPlaces(filteredMarkers);
+  }
 
   close() {
     this.modalCtrl.dismiss();
@@ -243,7 +257,7 @@ export class MapPage implements AfterViewInit, OnInit {
         map: this.map.googleMap,
         icon: {
           url:
-            place.type == 'location'
+            (place.type == 'shisha_bar' || place.type == 'shisha_shop')
               ? '/assets/icons/shisha.png'
               : '/assets/icons/person-circle-outline.svg',
           size: new google.maps.Size(71, 71),

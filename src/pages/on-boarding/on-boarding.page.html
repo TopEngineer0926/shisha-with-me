@@ -120,16 +120,25 @@
         Damit deine Freunde sehen können wo du Shisha rauchst, musst du deine Ortungsdienste freigeben.
       </p>
 
-      <form *ngIf="user" class="mt-5 w-full">
-        <ion-item class="w-full" lines="none">
-          <ion-input
-            class="w-full"
-            placeholder="Benutzername"
-            [(ngModel)]="user.customUsername"
-            [ngModelOptions]="{standalone: true}"
-          ></ion-input>
-        </ion-item>
-      </form>
+
+
+      <p class="text-base mt-12">
+        Ortungsdienste - Safari
+        <img loading="lazy" src="assets/safari_tracking.svg" />
+      </p>
+
+      <p class="text-base mt-4">
+        Safari - Standort
+        <img loading="lazy" src="assets/safari_tracking.svg" />
+      </p>
+    </ion-slide>
+
+    <ion-slide>
+      <div class="w-full h-full text-center flex flex-col justify-center content-center items-center">
+        <img style="width: 150px;" loading="lazy" src="assets/check_animation.gif" />
+        <h2 class="text-4xl mb-5 text-center">Du bist bereit.</h2>
+      </div>
+      
     </ion-slide>
   </ion-slides>
 </ion-content>
@@ -138,29 +147,32 @@
   <ion-toolbar>
     <div>
       <div *ngIf="sliderNum == 0"></div>
-      <ion-button class="btn-secondary" *ngIf="sliderNum != 0" (click)="back()"
+
+      <ion-button *ngIf="sliderNum == 1 || sliderNum == 2" class="btn-secondary" (click)="back()"
         >{{'SliderPage.Back' | translate}}</ion-button
       >
       <ion-button
         color="primary"
         class="w-full mb-5"
-        *ngIf="(sliderNum < 4); else elseIf1"
+        *ngIf="sliderNum < 3"
         (click)="next()"
         >{{'SliderPage.Continue' | translate}}</ion-button
       >
-      <ng-template #elseIf1>
+      
+      <div *ngIf="sliderNum == 3" class="flex flex-col w-full">
         <ion-button
-          color="primary"
-          *ngIf="(sliderNum === 1) else elseIf2"
-          (click)="submitForm()"
-          >{{'SliderPage.Continue' | translate}}</ion-button
+          class="btn-secondary w-full mb-2"
+          >{{'SliderPage.InviteFriends' | translate}}</ion-button
         >
-      </ng-template>
-      <ng-template #elseIf2>
-        <ion-button color="primary" (click)="goTo()"
+        <ion-button
+        class="w-full mb-5"
+          color="primary"
+          (click)="goTo()"
           >{{'SliderPage.Start' | translate}}</ion-button
         >
-      </ng-template>
+
+      </div>
+
     </div>
   </ion-toolbar>
 </ion-footer>

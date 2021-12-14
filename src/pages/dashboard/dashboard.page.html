@@ -1,6 +1,8 @@
 <ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
-    <ion-title>Home</ion-title>
+    <div class="flex flex-col items-center pt-4">
+      <img src="assets/images/logo-light.svg" class="w-20">
+    </div>
   </ion-toolbar>
 </ion-header>
 
@@ -8,15 +10,9 @@
   [fullscreen]="true"
   [style.--overflow]="searchTerm ? 'scroll' : 'hidden'"
 >
-  <ion-header collapse="condense" class="ion-no-border">
-    <ion-toolbar>
-      <ion-title size="large">Home</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div class="p-3">
+  <div class="p-3 px-6 flex justify-center h-20">
     <ion-searchbar
-      class="z-10"
+      class="z-10 h-5/6"
       [(ngModel)]="searchTerm"
       (ngModelChange)="search()"
       placeholder="Suche..."

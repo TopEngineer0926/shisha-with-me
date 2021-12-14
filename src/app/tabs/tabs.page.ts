@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { filter } from 'rxjs/operators';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-tabs',
@@ -7,6 +9,15 @@ import { Component } from '@angular/core';
 })
 export class TabsPage {
 
-  constructor() {}
+  currentRoute = '';
+
+  constructor(private router: Router) {
+    router.events.pipe(
+    filter(event => event instanceof NavigationEnd)
+)
+    .subscribe((event: NavigationEnd) => {
+      this.currentRoute = event.url;
+    });
+  }
 
 }

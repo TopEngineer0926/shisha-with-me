@@ -1,17 +1,16 @@
-<ion-tabs>
+<ion-tabs #tabs>
   <ion-tab-bar slot="bottom" class="tabs">
     <ion-tab-button tab="home">
-      <ion-icon name="home-outline"></ion-icon>
-      <!--<ion-label>Home</ion-label>-->
+      <ion-icon name="{{currentRoute.startsWith('/tabs/home') ? 'home' : 'home-outline'}}"></ion-icon>
     </ion-tab-button>
 
     <ion-tab-button tab="map">
-      <ion-icon name="map-outline"></ion-icon>
+      <ion-icon name="{{currentRoute.startsWith('/tabs/map') ? 'map' : 'map-outline'}}"></ion-icon>
       <!--<ion-label>Wunschliste</ion-label>-->
     </ion-tab-button>
 
     <ion-tab-button tab="advertising">
-      <ion-icon name="cart-outline"></ion-icon>
+      <ion-icon name="{{currentRoute.startsWith('/tabs/advertising') ? 'cart' : 'cart-outline'}}"></ion-icon>
       <!--<ion-label>Wunschliste</ion-label>-->
     </ion-tab-button>
 
@@ -31,7 +30,7 @@
     </ion-tab-button>-->
 
     <ion-tab-button tab="settings">
-      <ion-icon name="cog"></ion-icon>
+      <ion-icon name="{{currentRoute.startsWith('/tabs/settings') ? 'cog' : 'cog-outline'}}"></ion-icon>
       <!--<ion-label>Einstellungen</ion-label>-->
     </ion-tab-button>
   </ion-tab-bar>

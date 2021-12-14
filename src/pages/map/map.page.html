@@ -1,19 +1,17 @@
 <ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
-    <ion-title>Karte</ion-title>
+    <div class="flex justify-center h-16 text-3xl pt-4">
+      <div *ngIf="currentTab == 'map'">Karte</div>
+      <div *ngIf="currentTab == 'friends'">Freunde</div>
+    </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="relative">
   <div class="background-gradient"></div>
-  <ion-header collapse="condense" class="ion-no-border">
-    <ion-toolbar>
-      <ion-title size="large">Karte</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <div class="z-10 p-5">
+  <div class="z-10 pt-2 px-8">
     <ion-segment
-      class="z-10"
+      class="z-10 h-10"
       mode="ios"
       [value]="currentTab"
       (ionChange)="changeTab($event)"
@@ -38,13 +36,13 @@
   </div>
   <div *ngIf="currentTab == 'friends'" class="p-5">
     Freunde
-
-    <div class="py-5">
-      <ion-button color="primary" expand="block" (click)="share()"
-        >Teile die App mit Freunden</ion-button
-      >
-    </div>
   </div>
+
+  <div class="absolute bottom-20 flex px-8 w-full justify-center">
+    <ion-button [hidden]="!(currentTab == 'map')" color="primary" class="w-full font-normal">Filtern</ion-button>
+    <ion-button [hidden]="!(currentTab == 'friends')" color="primary" class="w-full font-normal" (click)="share()">Teile die App mit Freunden</ion-button>
+  </div>
+  <!--
   <ion-fab
     *ngIf="currentTab == 'map'"
     vertical="bottom"
@@ -56,6 +54,7 @@
       <ion-spinner *ngIf="locationLoading"></ion-spinner>
     </ion-fab-button>
   </ion-fab>
+-->
   <!--<ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="presentPopover($event)">
       <ion-icon name="funnel-outline"></ion-icon>

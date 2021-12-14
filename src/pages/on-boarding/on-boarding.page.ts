@@ -5,6 +5,7 @@ import { set } from 'src/common/services/storage.service';
 import { AuthService } from 'src/common/auth/_services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { HelperService } from 'src/common/services/helper.service';
+import { Share } from '@capacitor/share';
 
 @Component({
   selector: 'app-on-boarding',
@@ -42,6 +43,15 @@ export class OnBoardingPage implements OnInit {
     });
 
     await this.loadUser();
+  }
+
+  async share() {
+    await Share.share({
+      title: 'Shisha With Me',
+      text: `Lade dir jetzt Shisha With Me.`,
+      url: 'https://shishawithme.com/',
+      dialogTitle: 'Teile die App mit Freunden',
+    });
   }
 
   async loadUser() {

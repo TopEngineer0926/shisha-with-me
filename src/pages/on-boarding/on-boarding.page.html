@@ -161,6 +161,7 @@
       
       <div *ngIf="sliderNum == 3" class="flex flex-col w-full">
         <ion-button
+        (click)="share()"
           class="btn-secondary w-full mb-2"
           >{{'SliderPage.InviteFriends' | translate}}</ion-button
         >

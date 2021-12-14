@@ -63,8 +63,8 @@
 </ion-content>
 
 
-
-<ion-bottom-sheet 
+    <ion-bottom-sheet 
+    [hidden]="!(currentTab == 'map')"
     [(state)]="showFilterSheet" 
     [dockedHeight]="400"
     [hideSeparator]="true"

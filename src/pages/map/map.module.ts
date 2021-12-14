@@ -7,6 +7,7 @@ import { MapFilterComponent } from './components/map-filter/map-filter.component
 import { MapPageRoutingModule } from './map-routing.module';
 import { MapPage } from './map.page';
 import { IonBottomSheetModule } from 'ion-bottom-sheet';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   imports: [
     GoogleMapsModule,
@@ -14,7 +15,8 @@ import { IonBottomSheetModule } from 'ion-bottom-sheet';
     FormsModule,
     IonicModule,
     MapPageRoutingModule,
-    IonBottomSheetModule
+    IonBottomSheetModule,
+    ReactiveFormsModule
   ],
   declarations: [MapPage, MapFilterComponent],
   exports: [MapPage],

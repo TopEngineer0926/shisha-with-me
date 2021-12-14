@@ -332,3 +332,14 @@ ion-list[lines='none'] {
   font-weight: bold;
   color: var(--ion-color-friends) !important;
 }
+
+
+#ibs-container {
+  background-color: #03111E !important;
+
+  #drag-icon {
+    height: 4px !important;
+    width: 70px !important;
+    margin-top: 5px !important;
+  }
+}

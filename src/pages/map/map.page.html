@@ -39,7 +39,7 @@
   </div>
 
   <div class="absolute bottom-20 flex px-8 w-full justify-center">
-    <ion-button [hidden]="!(currentTab == 'map')" color="primary" class="w-full font-normal">Filtern</ion-button>
+    <ion-button [hidden]="!(currentTab == 'map')" color="primary" class="w-full font-normal" (click)="openFilterSheet()">Filtern</ion-button>
     <ion-button [hidden]="!(currentTab == 'friends')" color="primary" class="w-full font-normal" (click)="share()">Teile die App mit Freunden</ion-button>
   </div>
   <!--
@@ -61,3 +61,40 @@
     </ion-fab-button>
   </ion-fab>-->
 </ion-content>
+
+
+
+<ion-bottom-sheet 
+    [(state)]="showFilterSheet" 
+    [dockedHeight]="400"
+    [hideSeparator]="true"
+    [hideTitle]="true"
+    [hideCloseButton]="true"
+  >
+  <div class="px-8">
+    Filter
+      <form
+        class="w-full"
+        [formGroup]="mapFilterForm"
+        novalidate
+      >
+        <ion-item class="my-2">
+          <ion-label>Freunde</ion-label>
+          <ion-checkbox formControlName="friends" slot="end"></ion-checkbox>
+        </ion-item>
+
+        <ion-item class="mb-2">
+          <ion-label>Shisha Shop</ion-label>
+          <ion-checkbox formControlName="shishaShop" slot="end"></ion-checkbox>
+        </ion-item>
+
+        <ion-item class="mb-4">
+          <ion-label>Shisha Bar</ion-label>
+          <ion-checkbox formControlName="shishaBar" slot="end"></ion-checkbox>
+        </ion-item>
+      </form>
+  
+    <ion-button color="primary" class="w-full font-normal">Filtern</ion-button>
+  </div>
+
+</ion-bottom-sheet>

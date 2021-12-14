@@ -14,13 +14,16 @@ import { AuthService } from 'src/common/auth/_services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { ProfilePage } from '../profile/profile.page';
 import { Share } from '@capacitor/share';
+import { SheetState } from 'ion-bottom-sheet';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.page.html',
   styleUrls: ['./map.page.scss'],
 })
-export class MapPage implements AfterViewInit {
+export class MapPage implements AfterViewInit, OnInit {
   @ViewChild(GoogleMap) map: GoogleMap;
   locationLoading: boolean = false;
   infowindow: google.maps.InfoWindow;
@@ -38,6 +41,8 @@ export class MapPage implements AfterViewInit {
   users;
   locations;
   currentTab: 'map' | 'friends' = 'map';
+  showFilterSheet = SheetState.Bottom;
+  mapFilterForm: FormGroup;
 
   constructor(
     public mapService: MapService,
@@ -46,10 +51,15 @@ export class MapPage implements AfterViewInit {
     //private routerOutlet: IonRouterOutlet,
     private loadingCtrl: LoadingController,
     private authService: AuthService,
-    private http: HttpClient
+    private http: HttpClient,
+    public formBuilder: FormBuilder,
   ) {}
   changeTab(ev) {
     this.currentTab = ev.detail.value;
+  }
+
+  openFilterSheet() {
+    this.showFilterSheet = SheetState.Docked;
   }
 
   async share() {
@@ -62,6 +72,11 @@ export class MapPage implements AfterViewInit {
   }
 
   async ngOnInit() {
+    this.mapFilterForm = this.formBuilder.group({
+      friends: [true],
+      shishaShop: [true],
+      shishaBar: [true],
+    });
     const loading = await this.loadingCtrl.create({ translucent: true });
     loading.present();
     const locationMarker = [];

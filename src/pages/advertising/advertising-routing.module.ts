@@ -1,13 +1,18 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
 
-import { AdvertisingPage } from './advertising.page';
+import { AdvertisingPage } from "./advertising.page";
+import { AdPageModule } from "./pages/ad/ad.module";
 
 const routes: Routes = [
   {
-    path: '',
-    component: AdvertisingPage
-  }
+    path: "",
+    component: AdvertisingPage,
+  },
+  {
+    path: ":id",
+    loadChildren: () => AdPageModule,
+  },
 ];
 
 @NgModule({

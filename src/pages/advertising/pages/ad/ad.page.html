@@ -1,124 +1,50 @@
-<!--
-
-<ion-header>
-  <ion-toolbar class="bg-transparent">
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-button (click)="close()">
-        <ion-icon name="close"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
--->
-
 <ion-content fullscreen>
-  <ng-container *ngIf="ad">
-    <div class="relative h-96 w-full bg-contain bg-white bg-no-repeat bg-center" [style.backgroundImage]="'url(' + helper.getImageUrl(ad.image?.url) + ')'">
-      <div class="absolute left-4 top-4 w-10 h-10 bg-green-200">
-        <ion-back-button class="bg-green-600"></ion-back-button>
+  <ng-container *ngIf="ad" class="relative">
+    <ion-header>
+      <ion-toolbar class="ad-toolbar">
+        <ion-buttons slot="start">
+          <ion-back-button defaultHref="tabs/advertising" color="light"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+          <ion-button (click)="shareAd()" color="transparent">
+            <ion-icon color="light" name="share-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+    <div class="ad-image absolute top-0 w-full bg-contain bg-white bg-no-repeat bg-center" [style.backgroundImage]="'url(' + helper.getImageUrl(ad.image?.url) + ')'"></div>
+
+    <div class="ad-container absolute w-full px-6 z-50">
+      <div class="h-full flex flex-col justify-between">
+        <div>
+          <div class="flex flex-row items-center">
+            <h2 class="text-lg">{{ ad.title }}</h2>
+            <ion-button (click)="addOrRemoveFromWishList()" class="wishlist px-0 mx-0" color="transparent">
+              <ion-icon *ngIf="!isInWishList" name="heart-outline"></ion-icon>
+              <ion-icon *ngIf="isInWishList" name="heart"></ion-icon>
+            </ion-button>
+          </div>
+
+
+          <div *ngIf="ad.description" class="mt-4 text-xs">
+            <p>{{ad.description}}</p>
+          </div>
+        </div>
+        <div class="pb-4">
+          <p *ngIf="ad.offerPrice" class="flex text-center justify-center text-gray-400">
+            für nur
+            <span class="offer mx-1">{{ ad.offerPrice | currency: "EUR":"symbol" }}</span>
+            statt
+            <span class="offer-price mx-1">{{ ad.price | currency: "EUR":"symbol" }}</span>
+          </p>
+
+          <ion-button *ngIf="!(ad.category?.title == 'Instagram' || ad.category?.title == 'Youtube' || ad.category?.title == 'Spotify')" (click)="helper.openLink(ad.link)" class="w-full font-normal mt-4">Zum Deal</ion-button>
+          <ion-button *ngIf="ad.category?.title == 'Instagram'" (click)="helper.openLink(ad.link)" class="w-full font-normal mt-4">Zu Instagram</ion-button>
+          <ion-button *ngIf="ad.category?.title == 'Youtube'" (click)="helper.openLink(ad.link)" class="w-full font-normal mt-4">Zu Youtube</ion-button>
+          <ion-button *ngIf="ad.category?.title == 'Spotify'" (click)="helper.openLink(ad.link)" class="w-full font-normal mt-4">Zu Spotify</ion-button>
+        </div>
       </div>
     </div>
   </ng-container>
 </ion-content>
-
-<ion-modal mode="ios" class="modal-over-bottom-nav" [isOpen]="true" [breakpoints]="[0.6]" [initialBreakpoint]="0.6">
-  <ng-template>
-    <div class="px-8 h-full">HELLO WORLD</div>
-  </ng-template>
-</ion-modal>
-
-<!--
-<ion-content fullscreen>
-  <ng-container *ngIf="ad">
-
-    <div class="image-wrapper">
-      <div
-        class="image-background"
-        [style.backgroundImage]="'url(' + helper.getImageUrl(ad.image?.url) + ')'"
-      ></div>
-
-      <div
-        class="image"
-        [style.backgroundImage]="'url(' + helper.getImageUrl(ad.image?.url) + ')'"
-      ></div>
-    </div>
-
-    <div class="main-content">
-      <h1>{{ad.title}}</h1>
-
-      <div class="price">
-        <ion-button (click)="shareAd()" class="share" color="white"
-          ><ion-icon name="share-outline"></ion-icon
-        ></ion-button>
-        <ng-container
-          *ngIf="!(ad.category?.title == 'Instagram' || ad.category?.title == 'Youtube' || ad.category?.title == 'Spotify') "
-        >
-          <ng-container *ngIf="ad.offerPrice">
-            <div class="small">für nur</div>
-            <div class="amount offer">
-              {{ad.offerPrice |currency:'EUR':'symbol'}}
-            </div>
-            <div class="small">
-              statt
-              <span class="normal-price"
-                >{{ad.price |currency:'EUR':'symbol'}}</span
-              >
-            </div>
-          </ng-container>
-
-          <ng-container *ngIf="!ad.offerPrice">
-            <span class="amount">{{ad.price |currency:'EUR':'symbol'}}</span>
-          </ng-container></ng-container
-        >
-
-        <ion-button
-          (click)="addOrRemoveFromWishList()"
-          class="wishlist"
-          color="white"
-          ><ion-icon *ngIf="!isInWishList" name="heart-outline"></ion-icon>
-          <ion-icon *ngIf="isInWishList" name="heart"></ion-icon
-        ></ion-button>
-      </div>
-
-      <div *ngIf="ad.description" class="description">
-        <p>{{ad.description}}</p>
-      </div>
-
-      <div class="deal">
-        <ion-button
-          *ngIf="!(ad.category?.title == 'Instagram' || ad.category?.title == 'Youtube' || ad.category?.title == 'Spotify') "
-          expand="block"
-          size="large"
-          (click)="helper.openLink(ad.link)"
-          >Zum Deal</ion-button
-        >
-        <ion-button
-          *ngIf="ad.category?.title == 'Instagram'"
-          expand="block"
-          size="large"
-          (click)="helper.openLink(ad.link)"
-          >Zu Instagram</ion-button
-        >
-        <ion-button
-          *ngIf="ad.category?.title == 'Youtube'"
-          expand="block"
-          size="large"
-          (click)="helper.openLink(ad.link)"
-          >Zu Youtube</ion-button
-        >
-        <ion-button
-          *ngIf="ad.category?.title == 'Spotify'"
-          expand="block"
-          size="large"
-          (click)="helper.openLink(ad.link)"
-          >Zu Spotify</ion-button
-        >
-      </div>
-    </div></ng-container
-  >
-</ion-content>
-
--->

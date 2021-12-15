@@ -1,23 +1,22 @@
 <!--[routerLink]="['/advertising', ad.id]"-->
-<ion-card [routerLink]="['/advertising', ad.id]" button>
+<ion-card [routerLink]="['/tabs/advertising', ad.id]" button routerDirection="forward">
   <div class="flex flex-row h-36">
-    <div class="w-36 bg-no-repeat bg-cover" [style.backgroundImage]="'url(' + helper.getImageUrl(ad.image?.url) + ')'">
-
-    </div>
+    <div class="w-36 bg-no-repeat bg-cover" [style.backgroundImage]="'url(' + helper.getImageUrl(ad.image?.url) + ')'"></div>
     <div class="flex flex-col justify-center px-4 w-full">
       <div class="text-base text-white">{{ ad.title }}</div>
       <div class="mt-8 text-xs">
         <p *ngIf="ad.offerPrice">
-          für nur
-          <span class="offer">{{ ad.offerPrice | currency: 'EUR':'symbol' }}</span>
+          für nur 
+          <span class="offer">{{ ad.offerPrice | currency: "EUR":"symbol" }}</span>
           statt
-          <span class="offer-price">{{ ad.price | currency: 'EUR':'symbol' }}</span>
+          <span class="offer-price">{{ ad.price | currency: "EUR":"symbol" }}</span>
         </p>
         <p *ngIf="!ad.offerPrice">
-          <span class="price">{{ ad.price | currency: 'EUR':'symbol' }} </span>
+          <span class="price">{{ ad.price | currency: "EUR":"symbol" }} </span>
         </p>
         <p *ngIf="ad.shortDescription">{{ ad.shortDescription }}</p>
       </div>
     </div>
   </div>
 </ion-card>
+

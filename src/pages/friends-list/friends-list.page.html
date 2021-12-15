@@ -1,17 +1,7 @@
+<!--
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>Freunde</ion-title>
     <ion-buttons slot="end">
-      <!--<ion-button (click)="createGroup()">
-        <ion-icon
-          slot="icon-only"
-          name="people-outline"
-          color="warning"
-        ></ion-icon>
-      </ion-button>-->
       <ion-button (click)="openFriendAddList()">
         <ion-icon
           slot="icon-only"
@@ -21,74 +11,47 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-</ion-header>
+</ion-header>  
+-->
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Freunde</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-list *ngIf="requests && requests.length > 0" lines="none">
+  <ion-list-header>Anfragen</ion-list-header>
+  <div class="no-items pb-5" *ngIf="!(requests?.length > 0)">
+    Noch keine Einträge vorhanden
+  </div>
+  <div class="px-5" *ngIf="requests?.length > 0">
+    <ion-item class="mb-3" *ngFor="let request of requests">
+      <ion-avatar slot="start" (click)="openFriend(loadField(request, 'id'))">
+        <div class="bg-cover bg-no-repeat h-10 w-10 rounded-full" [style.backgroundImage]="'url(' + helper.getImageUrl(loadField(request, 'image')?.url) + ')'"></div>
+      </ion-avatar>
+      <ion-label (click)="openFriend(request)">
+        <h2>{{ loadField(request, 'name') }}</h2>
+      </ion-label>
+      <ion-button [disabled]="request.loading" slot="end" (click)="connect(request)">
+        <ion-spinner class="mr-3" *ngIf="request.loading"></ion-spinner>
+        Akzeptieren
+      </ion-button>
+    </ion-item>
+  </div>
+</ion-list>
 
-  <!--<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>-->
+<ion-list lines="none">
+  <div class="no-items pb-5" *ngIf="!(friends?.length > 0)">
+    Noch keine Einträge vorhanden
+  </div>
+  <div class="px-5" *ngIf="friends?.length > 0">
+    <ion-item class="mb-3" *ngFor="let request of friends" (click)="openFriend(request.id)" button>
+      <ion-avatar slot="start">
+        <div class="bg-cover bg-no-repeat h-10 w-10 rounded-full" [style.backgroundImage]="'url(' + helper.getImageUrl(request.image?.url) + ')'"></div>
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ request.name }}</h2>
+        <p>{{ request.customUsername }}</p>
+      </ion-label>
+    </ion-item>
+  </div>
 
-  <ion-list lines="none">
-    <ion-list-header>Anfragen</ion-list-header>
-    <div class="no-items pb-5" *ngIf="!(requests?.length > 0)">
-      Noch keine Einträge vorhanden
-    </div>
-    <div class="px-5" *ngIf="requests?.length > 0">
-      <ion-item class="mb-3" *ngFor="let request of requests">
-        <ion-avatar slot="start" (click)="openFriend(loadField(request, 'id'))">
-          <div
-            class="bg-cover bg-no-repeat h-10 w-10 rounded-full"
-            [style.backgroundImage]="'url(' + helper.getImageUrl(loadField(request, 'image')?.url) + ')'"
-          ></div>
-        </ion-avatar>
-        <ion-label (click)="openFriend(request)">
-          <h2>{{ loadField(request, 'name') }}</h2>
-        </ion-label>
-        <ion-button
-          [disabled]="request.loading"
-          slot="end"
-          (click)="connect(request)"
-        >
-          <ion-spinner class="mr-3" *ngIf="request.loading"></ion-spinner>
-          Akzeptieren
-        </ion-button>
-      </ion-item>
-    </div>
-  </ion-list>
-
-  <ion-list class="mt-5" lines="none">
-    <ion-list-header>Freunde</ion-list-header>
-
-    <div class="no-items pb-5" *ngIf="!(friends?.length > 0)">
-      Noch keine Einträge vorhanden
-    </div>
-    <div class="px-5" *ngIf="friends?.length > 0">
-      <ion-item
-        class="mb-3"
-        *ngFor="let request of friends"
-        (click)="openFriend(request.id)"
-        button
-      >
-        <ion-avatar slot="start">
-          <div
-            class="bg-cover bg-no-repeat h-10 w-10 rounded-full"
-            [style.backgroundImage]="'url(' + helper.getImageUrl(request.image?.url) + ')'"
-          ></div>
-        </ion-avatar>
-        <ion-label>
-          <h2>{{ request.name }}</h2>
-          <p>{{ request.customUsername }}</p>
-        </ion-label>
-      </ion-item>
-    </div>
-
-    <!--<ion-item class="mb-3"  button *ngFor="let user of users" (click)="openFriend(user)">
+  <!--<ion-item class="mb-3"  button *ngFor="let user of users" (click)="openFriend(user)">
       <ion-avatar slot="start">
         <div
           class="bg-cover bg-no-repeat h-10 w-10 rounded-full"
@@ -104,9 +67,9 @@
     <div class="no-items" *ngIf="!(users?.length > 0)">
       Noch keine Einträge vorhanden
     </div>-->
-  </ion-list>
+</ion-list>
 
-  <!--<ion-fab
+<!--<ion-fab
     vertical="bottom"
     horizontal="end"
     slot="fixed"
@@ -117,7 +80,7 @@
     </ion-fab-button>
   </ion-fab>-->
 
-  <!--<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+<!--<ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button>
       <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
     </ion-fab-button>
@@ -131,21 +94,11 @@
       ></ion-fab-button>
     </ion-fab-list>
   </ion-fab>-->
-</ion-content>
 
 <div class="cupertino-pane">
   <div class="center">
     <h3>Mein Code</h3>
-    <ngx-qrcode
-      *ngIf="value"
-      [elementType]="elementType"
-      [value]="value"
-      [width]="200"
-      [colorDark]="'#fff'"
-      [colorLight]="'#080808'"
-      cssClass="center"
-      errorCorrectionLevel="L"
-    >
+    <ngx-qrcode *ngIf="value" [elementType]="elementType" [value]="value" [width]="200" [colorDark]="'#fff'" [colorLight]="'#080808'" cssClass="center" errorCorrectionLevel="L">
     </ngx-qrcode>
 
     <ion-list lines="none">

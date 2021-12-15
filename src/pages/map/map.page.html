@@ -23,7 +23,9 @@
       <map-marker *ngFor="let markerPosition of markerPositions" [position]="markerPosition"></map-marker>
     </google-map>
   </div>
-  <div *ngIf="currentTab == 'friends'" class="p-5">Freunde</div>
+  <div [hidden]="!(currentTab == 'friends')" class="p-5">
+    <app-friends-list></app-friends-list>
+  </div>
 
   <div class="absolute bottom-20 flex px-8 w-full justify-center">
     <ion-button [hidden]="!(currentTab == 'map')" color="primary" class="w-full font-normal" (click)="openFilterSheet()">Filtern</ion-button>

@@ -1,5 +1,7 @@
-<ion-header translucent="true">
-  <ion-toolbar>
+<!--
+
+<ion-header>
+  <ion-toolbar class="bg-transparent">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -10,13 +12,28 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+-->
 
 <ion-content fullscreen>
   <ng-container *ngIf="ad">
-    <!--<div
-    class="header-image"
-    [ngStyle]="{'background-image': 'url(' + ad.image + ')'}"
-  ></div>-->
+    <div class="relative h-96 w-full bg-contain bg-white bg-no-repeat bg-center" [style.backgroundImage]="'url(' + helper.getImageUrl(ad.image?.url) + ')'">
+      <div class="absolute left-4 top-4 w-10 h-10 bg-green-200">
+        <ion-back-button class="bg-green-600"></ion-back-button>
+      </div>
+    </div>
+  </ng-container>
+</ion-content>
+
+<ion-modal mode="ios" class="modal-over-bottom-nav" [isOpen]="true" [breakpoints]="[0.6]" [initialBreakpoint]="0.6">
+  <ng-template>
+    <div class="px-8 h-full">HELLO WORLD</div>
+  </ng-template>
+</ion-modal>
+
+<!--
+<ion-content fullscreen>
+  <ng-container *ngIf="ad">
+
     <div class="image-wrapper">
       <div
         class="image-background"
@@ -103,3 +120,5 @@
     </div></ng-container
   >
 </ion-content>
+
+-->

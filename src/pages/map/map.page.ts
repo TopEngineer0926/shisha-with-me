@@ -1,28 +1,23 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { GoogleMap } from '@angular/google-maps';
-import {
-  IonRouterOutlet,
-  LoadingController,
-  ModalController,
-  PopoverController,
-} from '@ionic/angular';
-import { MapService } from 'src/common/services/map.service';
-import { MapFilterComponent } from './components/map-filter/map-filter.component';
-import { PlacePage } from './place/place.page';
-import { Geolocation } from '@capacitor/geolocation';
-import { AuthService } from 'src/common/auth/_services/auth.service';
-import { HttpClient } from '@angular/common/http';
-import { ProfilePage } from '../profile/profile.page';
-import { Share } from '@capacitor/share';
-import { SheetState } from 'ion-bottom-sheet';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { OnInit } from '@angular/core';
-import { filter } from 'rxjs';
+import { AfterViewInit, Component, ViewChild } from "@angular/core";
+import { GoogleMap } from "@angular/google-maps";
+import { IonRouterOutlet, LoadingController, ModalController, PopoverController } from "@ionic/angular";
+import { MapService } from "src/common/services/map.service";
+import { MapFilterComponent } from "./components/map-filter/map-filter.component";
+import { PlacePage } from "./place/place.page";
+import { Geolocation } from "@capacitor/geolocation";
+import { AuthService } from "src/common/auth/_services/auth.service";
+import { HttpClient } from "@angular/common/http";
+import { ProfilePage } from "../profile/profile.page";
+import { Share } from "@capacitor/share";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { OnInit } from "@angular/core";
+import { filter } from "rxjs";
+import { Event, NavigationStart, Router } from "@angular/router";
 
 @Component({
-  selector: 'app-map',
-  templateUrl: './map.page.html',
-  styleUrls: ['./map.page.scss'],
+  selector: "app-map",
+  templateUrl: "./map.page.html",
+  styleUrls: ["./map.page.scss"],
 })
 export class MapPage implements AfterViewInit, OnInit {
   @ViewChild(GoogleMap) map: GoogleMap;
@@ -41,8 +36,8 @@ export class MapPage implements AfterViewInit, OnInit {
 
   users;
   locations;
-  currentTab: 'map' | 'friends' = 'map';
-  showFilterSheet = SheetState.Bottom;
+  currentTab: "map" | "friends" = "map";
+  showFilterSheet = false;
   mapFilterForm: FormGroup;
   locationMarker = [];
 
@@ -50,26 +45,34 @@ export class MapPage implements AfterViewInit, OnInit {
     public mapService: MapService,
     public popoverController: PopoverController,
     private modalCtrl: ModalController,
+    private router: Router,
     //private routerOutlet: IonRouterOutlet,
     private loadingCtrl: LoadingController,
     private authService: AuthService,
     private http: HttpClient,
-    public formBuilder: FormBuilder,
-  ) {}
+    public formBuilder: FormBuilder
+  ) {
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationStart) {
+        this.modalCtrl.dismiss();
+      }
+    });
+  }
+
   changeTab(ev) {
     this.currentTab = ev.detail.value;
   }
 
   openFilterSheet() {
-    this.showFilterSheet = SheetState.Docked;
+    this.showFilterSheet = true;
   }
 
   async share() {
     await Share.share({
-      title: 'Shisha With Me',
+      title: "Shisha With Me",
       text: `Lade dir jetzt Shisha With Me.`,
-      url: 'https://shishawithme.com/',
-      dialogTitle: 'Teile die App mit Freunden',
+      url: "https://shishawithme.com/",
+      dialogTitle: "Teile die App mit Freunden",
     });
   }
 
@@ -83,8 +86,8 @@ export class MapPage implements AfterViewInit, OnInit {
     loading.present();
     this.locationMarker = [];
 
-    const users: any = await this.http.get('api/friends/friends').toPromise();
-    console.log('users', users);
+    const users: any = await this.http.get("api/friends/friends").toPromise();
+    console.log("users", users);
     this.users = users;
     users.map((location) => {
       if (location.location) {
@@ -92,13 +95,13 @@ export class MapPage implements AfterViewInit, OnInit {
           lat: location.location.lat,
           lng: location.location.lng,
           id: location.id,
-          type: 'user',
+          type: "user",
         });
       }
     });
 
-    const locations: any = await this.http.get('api/locations').toPromise();
-    console.log('locations', locations);
+    const locations: any = await this.http.get("api/locations").toPromise();
+    console.log("locations", locations);
     this.locations = locations;
 
     locations.map((location) => {
@@ -120,15 +123,15 @@ export class MapPage implements AfterViewInit, OnInit {
     this.mapReady();
   }
 
-  loadMarker() { }
-  
+  loadMarker() {}
+
   filterMarkers() {
     let filteredMarkers = this.locationMarker;
-  
-    if (!this.mapFilterForm.value.friends) filteredMarkers = filteredMarkers.filter((location) => location.type !== 'friends');
-    if (!this.mapFilterForm.value.shishaBar) filteredMarkers = filteredMarkers.filter((location) => location.type !== 'shisha_bar');
-    if (!this.mapFilterForm.value.shishaShop) filteredMarkers = filteredMarkers.filter((location) => location.type !== 'shisha_shop');
-    
+
+    if (!this.mapFilterForm.value.friends) filteredMarkers = filteredMarkers.filter((location) => location.type !== "friends");
+    if (!this.mapFilterForm.value.shishaBar) filteredMarkers = filteredMarkers.filter((location) => location.type !== "shisha_bar");
+    if (!this.mapFilterForm.value.shishaShop) filteredMarkers = filteredMarkers.filter((location) => location.type !== "shisha_shop");
+
     this.addMarkersForPlaces(filteredMarkers);
   }
 
@@ -141,7 +144,7 @@ export class MapPage implements AfterViewInit, OnInit {
     loading.present();
 
     try {
-      google.maps.event.addListener(this.map.googleMap, 'dragend', async () => {
+      google.maps.event.addListener(this.map.googleMap, "dragend", async () => {
         // await this.loadPlaces(true);
       });
 
@@ -189,11 +192,9 @@ export class MapPage implements AfterViewInit, OnInit {
           lat: this.options.center.lat,
           lng: this.options.center.lng,
         };
-        await this.http
-          .put('api/users/' + this.authService.user.id, { location: location })
-          .toPromise();
+        await this.http.put("api/users/" + this.authService.user.id, { location: location }).toPromise();
       } catch (error) {
-        console.log('error', error);
+        console.log("error", error);
         reject(error);
       } finally {
         this.locationLoading = false;
@@ -216,18 +217,18 @@ export class MapPage implements AfterViewInit, OnInit {
   }
 
   loadPlaces(doBounds = false) {
-    console.log('loadPlaces', this.options, this.map);
+    console.log("loadPlaces", this.options, this.map);
 
     const request: any = {
-      keyword: 'shisha',
-      fields: ['name', 'geometry'],
+      keyword: "shisha",
+      fields: ["name", "geometry"],
       location: this.map.googleMap.getCenter(), //{ lat: this.center.lat, lng: this.center.lng },
       radius: 50000,
     };
 
     const service = new google.maps.places.PlacesService(this.map.googleMap);
     service.nearbySearch(request, (results, status) => {
-      console.log('service');
+      console.log("service");
       console.log(results, status);
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         this.addMarkersForPlaces(results, doBounds);
@@ -241,24 +242,13 @@ export class MapPage implements AfterViewInit, OnInit {
       return;
     }
 
-    // Clear out the old markers.
-    markers.forEach((marker) => {
-      marker?.setMap(null);
-    });
-    markers = [];
-
     // For each place, get the icon, name and location.
     const bounds = new google.maps.LatLngBounds();
     places.forEach((place) => {
-      console.log('place', place);
-
       let marker: any = new google.maps.Marker({
         map: this.map.googleMap,
         icon: {
-          url:
-            (place.type == 'shisha_bar' || place.type == 'shisha_shop')
-              ? '/assets/icons/shisha.png'
-              : '/assets/icons/person-circle-outline.svg',
+          url: place.type == "shisha_bar" || place.type == "shisha_shop" ? "/assets/icons/shisha.png" : "/assets/icons/person-circle-outline.svg",
           size: new google.maps.Size(71, 71),
           origin: new google.maps.Point(0, 0),
           anchor: new google.maps.Point(17, 34),
@@ -272,12 +262,12 @@ export class MapPage implements AfterViewInit, OnInit {
 
       markers.push(marker);
 
-      google.maps.event.addListener(marker, 'click', async () => {
+      google.maps.event.addListener(marker, "click", async () => {
         console.log(marker);
-        if (marker.dataType == 'shisha_bar' || marker.datatype == 'shisha_shop') {
+        if (marker.dataType == "shisha_bar" || marker.datatype == "shisha_shop") {
           await this.openPlace(marker.dataId);
         }
-        if (marker.dataType == 'user') {
+        if (marker.dataType == "user") {
           await this.openFriend(marker.dataId);
         }
       });

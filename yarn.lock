@@ -4577,11 +4577,6 @@ graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.4, 
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.8.tgz#e412b8d33f5e006593cbd3cee6df9f2cebbe802a"
   integrity sha512-qkIilPUYcNhJpd33n0GBXTB1MMPp14TxEsEs0pTrsSVucApsYzW5V+Q8Qxhik6KU3evy+qkAAowTByymK0avdg==
 
-hammerjs@^2.0.8:
-  version "2.0.8"
-  resolved "https://registry.yarnpkg.com/hammerjs/-/hammerjs-2.0.8.tgz#04ef77862cff2bb79d30f7692095930222bf60f1"
-  integrity sha1-BO93hiz/K7edMPdpIJWTAiK/YPE=
-
 handle-thing@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/handle-thing/-/handle-thing-2.0.1.tgz#857f79ce359580c340d43081cc648970d0bb234e"
@@ -4972,11 +4967,6 @@ internal-ip@^6.2.0:
     ipaddr.js "^1.9.1"
     is-ip "^3.1.0"
     p-event "^4.2.0"
-
-ion-bottom-sheet@^2.0.6:
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/ion-bottom-sheet/-/ion-bottom-sheet-2.0.6.tgz#fd28a8ff7a38608186f4573de8ad1d501d59c583"
-  integrity sha512-nN8DlWaekqvBPAWbq1mA4oEAxcbsMfj7KoVGWV/bh1ig5JPiZZVPMVeHGGWsIqqlMSGdSj/bnWsPajrWDTkdiQ==
 
 ionicons@^5.5.1:
   version "5.5.3"

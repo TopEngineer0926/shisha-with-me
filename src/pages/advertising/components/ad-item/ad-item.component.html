@@ -1,5 +1,5 @@
 <!--[routerLink]="['/advertising', ad.id]"-->
-<ion-card (click)="openAd()" button>
+<ion-card [routerLink]="['/advertising', ad.id]" button>
   <div class="flex flex-row h-36">
     <div class="w-36 bg-no-repeat bg-cover" [style.backgroundImage]="'url(' + helper.getImageUrl(ad.image?.url) + ')'">
 

@@ -1,15 +1,15 @@
-@import '~@ionic/angular/css/core.css';
-@import '~@ionic/angular/css/normalize.css';
-@import '~@ionic/angular/css/structure.css';
-@import '~@ionic/angular/css/typography.css';
-@import '~@ionic/angular/css/display.css';
-@import '~@ionic/angular/css/padding.css';
-@import '~@ionic/angular/css/float-elements.css';
-@import '~@ionic/angular/css/text-alignment.css';
-@import '~@ionic/angular/css/text-transformation.css';
-@import '~@ionic/angular/css/flex-utils.css';
+@import "~@ionic/angular/css/core.css";
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import "~@ionic/angular/css/display.css";
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
 
-@import './assets/fonts/stylesheet.css';
+@import "./assets/fonts/stylesheet.css";
 
 ion-refresher {
   z-index: 1;
@@ -42,7 +42,7 @@ ion-textarea {
 ion-segment {
   padding: 0 2px;
 }
-ion-segment-button[mode='ios'] {
+ion-segment-button[mode="ios"] {
   --background-checked: #384455;
   --indicator-color: transparent !important;
   &.custom-padding {
@@ -82,7 +82,7 @@ small {
   background-position: center;
 
   &::before {
-    content: '';
+    content: "";
     display: block;
     height: 100%;
     width: 100%;
@@ -110,7 +110,7 @@ small {
   line-height: 1.176;
   font-weight: 300;
   padding-bottom: 4.5px;
-  font-family: 'neoneonregular';
+  font-family: "neoneonregular";
 }
 
 .overlay {
@@ -133,14 +133,7 @@ small {
     rgba(244, 246, 249, 0.013) 91.9%,
     rgba(244, 246, 249, 0) 100%
   );*/
-  background: linear-gradient(
-    180deg,
-    rgba(244, 246, 249, 0) 0%,
-    rgba(244, 246, 249, 1) 30%,
-    rgba(244, 246, 249, 1) 50%,
-    rgba(244, 246, 249, 1) 70%,
-    rgba(244, 246, 249, 0) 100%
-  );
+  background: linear-gradient(180deg, rgba(244, 246, 249, 0) 0%, rgba(244, 246, 249, 1) 30%, rgba(244, 246, 249, 1) 50%, rgba(244, 246, 249, 1) 70%, rgba(244, 246, 249, 0) 100%);
 }
 
 .dark {
@@ -176,14 +169,7 @@ small {
       transparent 100%
     );*/
 
-    background: linear-gradient(
-      0deg,
-      rgba(41, 43, 43, 0) 0%,
-      rgba(41, 43, 43, 1) 30%,
-      rgba(41, 43, 43, 1) 50%,
-      rgba(41, 43, 43, 1) 70%,
-      rgba(41, 43, 43, 0) 100%
-    );
+    background: linear-gradient(0deg, rgba(41, 43, 43, 0) 0%, rgba(41, 43, 43, 1) 30%, rgba(41, 43, 43, 1) 50%, rgba(41, 43, 43, 1) 70%, rgba(41, 43, 43, 0) 100%);
   }
 }
 
@@ -263,7 +249,7 @@ ion-tabs {
     margin-left: -5px;
   }
 
-  ion-list[header='ios'] {
+  ion-list[header="ios"] {
     margin-top: 0;
   }
 
@@ -302,10 +288,9 @@ ion-fab-button[data-desc]::after {
   padding: 9px;
   border-radius: 15px;
   color: var(--ion-color-dark);
-  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
-    0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
 }
-ion-list[lines='none'] {
+ion-list[lines="none"] {
   border: none !important;
 }
 
@@ -333,13 +318,16 @@ ion-list[lines='none'] {
   color: var(--ion-color-friends) !important;
 }
 
-
 #ibs-container {
-  background-color: #03111E !important;
+  background-color: #03111e !important;
 
   #drag-icon {
     height: 4px !important;
     width: 70px !important;
     margin-top: 5px !important;
   }
+}
+
+ion-modal.modal-over-bottom-nav {
+  margin-bottom: 60px !important;
 }

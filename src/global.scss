@@ -331,3 +331,9 @@ ion-list[lines="none"] {
 ion-modal.modal-over-bottom-nav {
   margin-bottom: 60px !important;
 }
+
+.smoke-start-modal {
+  ion-backdrop {
+    background-color: green !important;
+  }
+}

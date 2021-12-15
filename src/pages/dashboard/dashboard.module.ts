@@ -10,6 +10,8 @@ import { DashboardPageRoutingModule } from './dashboard-routing.module';
 
 import { DashboardPage } from './dashboard.page';
 import { SwiperModule } from 'swiper/angular';
+import { StartSessionPageModule } from '../start-session/start-session.module';
+import { StartSessionModalComponent } from './components/start-session-modal/start-session-modal.component';
 
 @NgModule({
   imports: [
@@ -21,5 +23,6 @@ import { SwiperModule } from 'swiper/angular';
     GoogleMapsModule,
   ],
   declarations: [DashboardPage],
+  exports: []
 })
 export class DashboardPageModule {}

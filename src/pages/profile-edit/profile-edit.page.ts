@@ -32,7 +32,7 @@ export class ProfileEditPage implements OnInit {
     private alertController: AlertController,
     private modalCtrl: ModalController,
     private http: HttpClient,
-    private authService: AuthService,
+    public authService: AuthService,
     public helper: HelperService,
     private loadingCtrl: LoadingController,
     private upload: UploadService,

@@ -1,21 +1,18 @@
-<ion-header [translucent]="true" class="ion-no-border">
+<ion-header collapse="condense" class="ion-no-border">
   <ion-toolbar>
-    <ion-title>Einstellungen</ion-title>
+    <div class="flex justify-center h-16 text-3xl pt-4">
+      Einstellungen
+    </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense" class="ion-no-border">
-    <ion-toolbar>
-      <ion-title size="large">Einstellungen</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
+<ion-content [fullscreen]="true">
   <ion-list-header>
     <ion-label>Allgemein</ion-label>
   </ion-list-header>
   <ion-list>
-    <ion-item class="mb-3" button (click)="goToProfile()">
+    <ion-item class="mb-3" button routerLink="/tabs/settings/profile" routerDirection="forward">
       <ion-label> {{authService.user?.name || 'Profil' }} </ion-label>
     </ion-item>
     <!--

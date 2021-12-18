@@ -13,16 +13,27 @@ export class AdvertisingPage implements OnInit {
   ads: any;
   topDeals: any;
   selectedCategory: any;
+  searchTerm = ""
+  sorted
 
   constructor(
     public helper: HelperService,
     public adService: AdService,
     private loadingCtrl: LoadingController,
     private nav: NavController
-  ) {}
+  ) { }
 
   async ngOnInit() {
     this.load();
+  }
+
+  search() {
+    if (this.searchTerm == '') {
+      this.sorted = [...this.ads];
+      return;
+    }
+
+    this.sorted = this.ads.filter((element) => element.title.toLowerCase().includes(this.searchTerm.toLowerCase()))
   }
 
   async doRefresh(event) {
@@ -44,6 +55,8 @@ export class AdvertisingPage implements OnInit {
       this.selectedCategory = this.data[0];
       this.topDeals = this.ads.filter((ad) => ad.topDeal == true);
 
+      this.sorted = this.ads
+
       console.log('data', data);
     } catch (error) {
     } finally {
@@ -56,6 +69,8 @@ export class AdvertisingPage implements OnInit {
     this.ads = $event.detail?.value?.ads;
 
     this.topDeals = this.ads.filter((ad) => ad.topDeal == true);
+
+    this.search()
 
     console.log($event, this.data, this.ads);
   }

@@ -1,7 +1,7 @@
 <ion-content [fullscreen]="true">
 
   <ion-header collapse="condense" class="ion-no-border">
-    <ion-toolbar class="pt-4">
+    <ion-toolbar class="pt-4 h-16">
       <ion-buttons slot="start">
         <ion-back-button defaultHref="tabs/settings/profile" color="dark"></ion-back-button>
       </ion-buttons>
@@ -9,7 +9,22 @@
     </ion-toolbar>
   </ion-header>
 
+
+  <div class="px-7 mt-10">
+    <ion-label>Benutzername ändern</ion-label>
+    <ion-item class="mt-1 mb-4">
+      <ion-input [(ngModel)]="model.username"></ion-input>
+    </ion-item>
+    <ion-label>Passwort ändern</ion-label>
+    <ion-item class="mt-1 mb-4">
+      <ion-input type="password" [(ngModel)]="model.password"></ion-input>
+    </ion-item>
+    <ion-label>Telegram Benutzername</ion-label>
+    <ion-item class="mt-1">
+      <ion-input [(ngModel)]="model.telegram"></ion-input>
+    </ion-item>
+  </div>
   <div slot="fixed" class="bottom-4 w-full px-8">
-    <ion-button color="primary" class="w-full font-normal">Speichern</ion-button>
+    <ion-button (click)="save()" color="primary" class="w-full font-normal">Speichern</ion-button>
   </div>
 </ion-content>

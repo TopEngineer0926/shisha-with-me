@@ -3,6 +3,7 @@ type Image = {
     name: string;
     alternativeText: string;
     caption: string;
+    url: string;
 }
 
 type SmokeProduct = {

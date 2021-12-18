@@ -22,7 +22,7 @@ import { StartSessionModalComponent } from './components/start-session-modal/sta
     SwiperModule,
     GoogleMapsModule,
   ],
-  declarations: [DashboardPage],
-  exports: []
+  declarations: [DashboardPage, StartSessionModalComponent],
+  exports: [IonicModule]
 })
 export class DashboardPageModule {}

@@ -103,7 +103,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
     public platform: Platform,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   async showSmoke() {
     this.visiblityState = 'shown';
@@ -120,7 +120,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
     });
   }
 
-  async ngOnInit() {}
+  async ngOnInit() { }
 
   async ngAfterViewInit() {
     const playSmoke = this.route.snapshot.queryParamMap.get('playSmoke');
@@ -251,27 +251,15 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
         product,
         type
       }
-    })
+    });
 
-    return await modal.present();
+    await modal.present();
+
+    const result = await modal.onWillDismiss();
+
+    if (result.data && result.data.showSmoke) { this.showSmoke(); }
   }
 
-  async selectLocation(product, type) {
-    const modal = await this.modalCtrl.create({
-      component: SelectLocationPage,
-      swipeToClose: true,
-      presentingElement: this.routerOutlet.nativeEl,
-      componentProps: {},
-    });
-    modal.onDidDismiss().then(async (data) => {
-      if (data?.data) {
-        console.log(data);
-
-        await this.startSession(product, type, data.data);
-      }
-    });
-    return await modal.present();
-  }
 
   async openTelegramModal() {
     return new Promise(async (resolve, reject) => {
@@ -288,7 +276,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
           },
         ],
         buttons: [
-                    {
+          {
             text: 'Hinzufügen',
             handler: async (data) => {
               const update = {
@@ -299,8 +287,8 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
                 await this.http
                   .put('api/users/' + this.authService.user.id, update)
                   .toPromise();
-                
-                
+
+
                 resolve(true);
               } catch (error) {
                 (
@@ -327,81 +315,9 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
       });
 
 
-      await alert.present();      
+      await alert.present();
     })
 
-  }
-
-  async startSession(smokeProduct, type, location?) {
-    let data: any = {
-      start_user: this.authService.user.id.toString(),
-    };
-    if (location) {
-      data.location = location.id;
-    }
-    if (type == 'product') {
-      data.smoke_product = smokeProduct.id;
-    } else {
-      data.manufacturer = smokeProduct.id;
-    }
-
-    // show telegram modal on first session if no telegram is set
-    const telegramUsername = this.authService.user.telegramUsername;
-    if (!telegramUsername) {
-      const hasSetANewName = await this.openTelegramModal();
-
-      if (hasSetANewName) {
-        await this.http.post('api/sessions/start', data).toPromise();
-
-        (
-          await this.toastCtrl.create({
-            message: 'Session wurde gestartet',
-            translucent: true,
-            position: 'top',
-            duration: 4000,
-          })
-        ).present();
-
-        this.showSmoke();        
-      }
-    } else {
-        await this.http.post('api/sessions/start', data).toPromise();
-
-        (
-          await this.toastCtrl.create({
-            message: 'Session wurde gestartet',
-            translucent: true,
-            position: 'top',
-            duration: 4000,
-          })
-        ).present();
-
-        this.showSmoke();  
-    }
-
-    /*setTimeout(() => {
-      this.localNotifications.schedule({
-        id: 1,
-        text: '💨 Frankenstraße 20, 74562 Wolpertshausen, Deutschland',
-        title: 'Mathis raucht eine Shisha',
-        attachments: [
-          `https://maps.googleapis.com/maps/api/staticmap?center=Wolpertshausen&zoom=13&size=300x200&maptype=roadmap&key=AIzaSyDfBZEEoOwxq0nqGAtU49iNbsC8Lhp88pU`,
-        ],
-        actions: [
-          { id: '1', title: 'Guter Rauch!' },
-          { id: '2', title: 'Leg nochmal Kohle auf. Ich bin unterwegs!' },
-        ],
-      });
-    }, 2000);*/
-
-    /*
-    const modal = await this.modalCtrl.create({
-      component: StartSessionPage,
-      swipeToClose: true,
-      presentingElement: this.routerOutlet.nativeEl,
-      componentProps: {},
-    });
-    return await modal.present();*/
   }
 
   async sharePosition() {

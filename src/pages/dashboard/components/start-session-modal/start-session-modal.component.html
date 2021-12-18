@@ -1,3 +1,14 @@
 <div class="mt-4 px-8">
   Wo rauchst du?
+
+  <ion-button color="primary" class="w-full font-normal mt-2" (click)="startSession(product, type)">Privat</ion-button>
+
+  <ion-button color="primary" class="w-full font-normal mt-4" (click)="selectLocation()">Shisha Bar</ion-button>
+
+  <div class="mt-8 text-lg">{{ product.name }}</div>
+
+
+  <div class="mt-10">
+    <img loading="lazy" class="mx-auto object-contain h-28" [src]="helper.getImageUrl(product.image.url)" />
+  </div>
 </div>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Manufacturer } from 'src/common/types';
 
 @Component({
   selector: 'app-start-session-modal',
@@ -6,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./start-session-modal.component.scss'],
 })
 export class StartSessionModalComponent implements OnInit {
+  @Input() product: Manufacturer;
+  @Input() type: string;
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('A', this.product);
+    console.log('B', this.type);
+  }
 
 }

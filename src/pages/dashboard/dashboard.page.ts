@@ -42,6 +42,7 @@ import {
   RoutesRecognized,
 } from '@angular/router';
 import { StartSessionModalComponent } from './components/start-session-modal/start-session-modal.component';
+import { Manufacturer } from 'src/common/types';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
@@ -216,7 +217,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
     await modal.present();
   }
 
-  async selectSession(product, type) {
+  async selectSession(product: Manufacturer, type: string) {
     /*
     const alert = await this.alertController.create({
       header: 'Wo wird geraucht?',
@@ -245,7 +246,11 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
       breakpoints: [0.0, 0.5, 0.7],
       initialBreakpoint: 0.5,
       swipeToClose: true,
-      cssClass: 'smoke-start-modal'
+      cssClass: 'smoke-start-modal',
+      componentProps: {
+        product,
+        type
+      }
     })
 
     return await modal.present();

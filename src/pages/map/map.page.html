@@ -27,7 +27,7 @@
     <app-friends-list></app-friends-list>
   </div>
 
-  <div class="absolute bottom-20 flex px-8 w-full justify-center">
+  <div slot="fixed" class="bottom-4 w-full px-8">
     <ion-button [hidden]="!(currentTab == 'map')" color="primary" class="w-full font-normal" (click)="openFilterSheet()">Filtern</ion-button>
     <ion-button [hidden]="!(currentTab == 'friends')" color="primary" class="w-full font-normal" (click)="share()">Teile die App mit Freunden</ion-button>
   </div>

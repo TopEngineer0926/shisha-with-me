@@ -8,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ad-saved.page.scss'],
 })
 export class AdSavedPage implements OnInit {
-  constructor(public adService: AdService, public wishlist: WishlistService) {}
+  constructor(public adService: AdService, public wishlist: WishlistService) { }
 
   async ngOnInit() {
+    console.log('INITING');
     await this.wishlist.loadWishlist();
   }
 

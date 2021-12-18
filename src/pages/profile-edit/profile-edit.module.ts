@@ -9,6 +9,7 @@ import { ProfileEditPageRoutingModule } from './profile-edit-routing.module';
 import { ProfileEditPage } from './profile-edit.page';
 import { AddEquipmentPageModule } from './pages/add-equipment/add-equipment.module';
 import { LocationSelectComponent } from './pages/location-select/location-select.component';
+import { EditProfileComponent } from './pages/edit-profile/edit-profile.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,6 @@ import { LocationSelectComponent } from './pages/location-select/location-select
     ProfileEditPageRoutingModule,
     AddEquipmentPageModule,
   ],
-  declarations: [ProfileEditPage, LocationSelectComponent],
+  declarations: [ProfileEditPage, LocationSelectComponent, EditProfileComponent],
 })
-export class ProfileEditPageModule {}
+export class ProfileEditPageModule { }

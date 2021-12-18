@@ -14,7 +14,7 @@ export class WishlistService {
     private toastCtrl: ToastController,
     private authService: AuthService,
     private http: HttpClient
-  ) {}
+  ) { }
 
   async loadWishlist() {
     // this.wishlist = await get('wishlist');
@@ -32,6 +32,7 @@ export class WishlistService {
   }
 
   async isInWishList(adItem) {
+    if (!adItem) return false
     return this.wishlist?.find((_adItem) => _adItem.id == adItem.id);
   }
 

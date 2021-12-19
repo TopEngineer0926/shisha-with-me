@@ -1,11 +1,8 @@
-<ion-header class="ion-no-border"><ion-toolbar></ion-toolbar></ion-header>
+<ion-header class="ion-no-border">
+  <ion-toolbar></ion-toolbar>
+</ion-header>
 <ion-content>
-  <ion-slides
-    #mySlider
-    pager="true"
-    [options]="slideOpts"
-    (ionSlideDidChange)="slideChange()"
-  >
+  <ion-slides #mySlider pager="true" [options]="slideOpts" (ionSlideDidChange)="slideChange()">
     <ion-slide>
       <h2 class="text-4xl mb-5">Wähle deinen Benutzernamen</h2>
       <p class="text-base">
@@ -14,12 +11,8 @@
 
       <form *ngIf="user" class="mt-5 w-full">
         <ion-item class="w-full" lines="none">
-          <ion-input
-            class="w-full"
-            placeholder="Benutzername"
-            [(ngModel)]="user.customUsername"
-            [ngModelOptions]="{standalone: true}"
-          ></ion-input>
+          <ion-input class="w-full" placeholder="Benutzername" [(ngModel)]="user.customUsername" [ngModelOptions]="{standalone: true}"></ion-input>
+          <ion-icon name="create-outline"></ion-icon>
         </ion-item>
       </form>
     </ion-slide>
@@ -48,7 +41,7 @@
       </form>
     </ion-slide>
   -->
-  <!---
+    <!---
     <ion-slide>
       <h2 class="text-4xl mb-5">Wie ist dein Anzeigename?</h2>
 
@@ -65,21 +58,12 @@
     <ion-slide>
       <h2 class="text-4xl mb-5">Wie willst du gefunden werden?</h2>
       <p class="text-base">Teile uns mit wie dich deine Freunde finden sollen.</p>
-      <form
-        class="w-full mt-5"
-        [formGroup]="ionicForm"
-        (ngSubmit)="submitForm()"
-        novalidate
-      >
+      <form class="w-full mt-5" [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
         <ion-item class="mb-2">
           <ion-label>{{'SliderPage.QrCode' | translate}}</ion-label>
           <ion-checkbox formControlName="qrCode" slot="end"></ion-checkbox>
         </ion-item>
-        <ion-text
-          color="danger"
-          class="error"
-          *ngIf="isSubmitted && errorControl.qrCode.errors?.required"
-        >
+        <ion-text color="danger" class="error" *ngIf="isSubmitted && errorControl.qrCode.errors?.required">
           <p class="ion-no-margin ion-margin-horizontal">
             {{'SliderPage.QrCode' | translate}} Code ist erforderlich.
           </p>
@@ -90,11 +74,7 @@
           <ion-checkbox formControlName="username" slot="end"></ion-checkbox>
         </ion-item>
         <!-- Error messages -->
-        <ion-text
-          color="danger"
-          class="error"
-          *ngIf="isSubmitted && errorControl.username.errors?.required"
-        >
+        <ion-text color="danger" class="error" *ngIf="isSubmitted && errorControl.username.errors?.required">
           <p class="ion-no-margin ion-margin-horizontal">
             {{'SliderPage.Benutzername' | translate}} ist erforderlich.
           </p>
@@ -102,10 +82,7 @@
 
         <ion-item class="mb-2">
           <ion-label>{{'SliderPage.Telefonnumber' | translate}}</ion-label>
-          <ion-checkbox
-            formControlName="telefonnumber"
-            slot="end"
-          ></ion-checkbox>
+          <ion-checkbox formControlName="telefonnumber" slot="end"></ion-checkbox>
         </ion-item>
 
         <ion-item>
@@ -138,7 +115,7 @@
         <img style="width: 150px;" loading="lazy" src="assets/check_animation.gif" />
         <h2 class="text-4xl mb-5 text-center">Du bist bereit.</h2>
       </div>
-      
+
     </ion-slide>
   </ion-slides>
 </ion-content>
@@ -148,29 +125,12 @@
     <div>
       <div *ngIf="sliderNum == 0"></div>
 
-      <ion-button *ngIf="sliderNum == 1 || sliderNum == 2" class="btn-secondary" (click)="back()"
-        >{{'SliderPage.Back' | translate}}</ion-button
-      >
-      <ion-button
-        color="primary"
-        class="w-full mb-5"
-        *ngIf="sliderNum < 3"
-        (click)="next()"
-        >{{'SliderPage.Continue' | translate}}</ion-button
-      >
-      
+      <ion-button *ngIf="sliderNum == 1 || sliderNum == 2" class="btn-secondary" (click)="back()">{{'SliderPage.Back' | translate}}</ion-button>
+      <ion-button color="primary" class="w-full mb-5" *ngIf="sliderNum < 3" (click)="next()">{{'SliderPage.Continue' | translate}}</ion-button>
+
       <div *ngIf="sliderNum == 3" class="flex flex-col w-full">
-        <ion-button
-        (click)="share()"
-          class="btn-secondary w-full mb-2"
-          >{{'SliderPage.InviteFriends' | translate}}</ion-button
-        >
-        <ion-button
-        class="w-full mb-5"
-          color="primary"
-          (click)="goTo()"
-          >{{'SliderPage.Start' | translate}}</ion-button
-        >
+        <ion-button (click)="share()" class="btn-secondary w-full mb-2">{{'SliderPage.InviteFriends' | translate}}</ion-button>
+        <ion-button class="w-full mb-5" color="primary" (click)="goTo()">{{'SliderPage.Start' | translate}}</ion-button>
 
       </div>
 

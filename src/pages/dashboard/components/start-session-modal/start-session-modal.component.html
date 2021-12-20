@@ -8,7 +8,10 @@
   <div class="mt-8 text-lg">{{ product.name }}</div>
 
 
-  <div class="mt-10">
-    <img loading="lazy" class="mx-auto object-contain h-28" [src]="helper.getImageUrl(product.image.url)" />
+  <div class="mt-10 flex flex-row justify-between">
+    <div>
+      {{ product.description || "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis distinctio possimus non temporibus odit mollitia enim ab inventore ea, reiciendis et facere quisquam laudantium tenetur eligendi suscipit aspernatur illo unde!" }}
+    </div>
+    <img loading="lazy" class="mx-auto object-contain h-28 rounded-full" [src]="helper.getImageUrl(product.image.url)" />
   </div>
 </div>

@@ -22,7 +22,8 @@ type Manufacturer = {
     image: Image
     name: string;
     published_at: string;
-    smoke_products: SmokeProduct[]
+    smoke_products: SmokeProduct[];
+    description: string;
 }
 
 export { SmokeProduct, Manufacturer }

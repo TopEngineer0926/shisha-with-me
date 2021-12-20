@@ -18,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: 'wishlist',
-    component: AdSavedPage
+    loadChildren: () => AdSavedPageModule
   }
 ];
 

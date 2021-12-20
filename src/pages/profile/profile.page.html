@@ -13,22 +13,17 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div
-    class="user-image"
-    [style.backgroundImage]="'url(' +  helper.getImageUrl(user.image?.url) + ')'"
-  ></div>
+  <div class="user-image" [style.backgroundImage]="'url(' +  helper.getImageUrl(user.image?.url) + ')'"></div>
   <ion-card>
-    <ion-card-header>
-      <ion-card-subtitle>Benutzerprofil</ion-card-subtitle>
-      <ion-card-title>{{user.name}}</ion-card-title>
-    </ion-card-header>
-
     <ion-list>
-      <ion-item *ngFor="let setup of user.setups">
+      <ion-item class="mb-5">
+        <ion-label>{{ user.name }}</ion-label>
+      </ion-item>
+      <ion-item *ngFor="let setup of user.setups" class="my-3">
         <ion-label>
           <small>{{setup.key}}</small>
-          <h2>{{setup.value}}</h2></ion-label
-        >
+          <h2>{{setup.value}}</h2>
+        </ion-label>
       </ion-item>
     </ion-list>
   </ion-card>
@@ -43,10 +38,7 @@
         <ion-icon name="chatbubbles-outline"></ion-icon>
         <ion-label>Guten Rauch! 💨</ion-label>
       </ion-chip>
-      <ion-chip
-        color="secondary"
-        (click)="sendMessage('Kann ich mitrauchen? 🙋‍♂️')"
-      >
+      <ion-chip color="secondary" (click)="sendMessage('Kann ich mitrauchen? 🙋‍♂️')">
         <ion-icon name="chatbubbles-outline"></ion-icon>
         <ion-label>Kann ich mitrauchen? 🙋‍♂️</ion-label>
       </ion-chip>
@@ -63,16 +55,7 @@
     </ion-card-header>
 
     <ion-card-content>
-      <ngx-qrcode
-        *ngIf="user.email"
-        [elementType]="elementType"
-        [value]="user.email"
-        [width]="200"
-        [colorDark]="'#fff'"
-        [colorLight]="'#080808'"
-        cssClass="center"
-        errorCorrectionLevel="L"
-      >
+      <ngx-qrcode *ngIf="user.email" [elementType]="elementType" [value]="user.email" [width]="200" [colorDark]="'#fff'" [colorLight]="'#080808'" cssClass="center" errorCorrectionLevel="L">
       </ngx-qrcode>
     </ion-card-content>
   </ion-card>
@@ -83,10 +66,7 @@
     </ion-card-header>
 
     <google-map #map [center]="center" [zoom]="zoom" [options]="options">
-      <map-marker
-        *ngFor="let marker of markers"
-        [position]="marker"
-      ></map-marker>
+      <map-marker *ngFor="let marker of markers" [position]="marker"></map-marker>
     </google-map>
     <!--<agm-map
       [latitude]="lat"

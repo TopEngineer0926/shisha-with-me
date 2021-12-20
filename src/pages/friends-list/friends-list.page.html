@@ -39,13 +39,17 @@
   Du hast noch keine Freunde
 </div>
 <div *ngIf="friends?.length > 0" class="px-4 pt-4">
-  <div class="mb-3 flex flex-row items-center" *ngFor="let friend of friends" (click)="openFriend(request.id)">
+  <div class="mb-3 flex flex-row items-center" *ngFor="let friend of friends" (click)="openFriend(friend.id)">
     <ion-avatar slot="start">
       <div class="bg-cover bg-no-repeat h-14 w-14 rounded-full" [style.backgroundImage]="'url(' + helper.getImageUrl(friend.image?.url) + ')'"></div>
     </ion-avatar>
     <div class="flex flex-col ml-6 justify-center">
-      <h2 class="text-white text-lg mb-0 font-normal">{{ friend.name }}</h2>
-      <p style="color: #969696" class="text-sm">{{ friend.customUsername }}</p>
+      <h2 class="text-white text-lg mb-0 font-normal">{{ friend.customUsername || friend.name }}</h2>
+      <p style="color: #969696" class="text-sm">{{ friend.location }}</p>
+    </div>
+
+    <div [hidden]="!friend.session" class="ml-auto flex-col justify-center flex">
+      <ion-icon size="large" name="barcode-outline"></ion-icon>
     </div>
   </div>
 

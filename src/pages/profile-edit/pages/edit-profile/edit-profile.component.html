@@ -22,8 +22,18 @@
       <ion-icon name="create-outline"></ion-icon>
     </ion-item>
     <ion-label>Telegram Benutzername</ion-label>
-    <ion-item class="mt-1">
+    <ion-item class="mt-1 mb-4">
       <ion-input [(ngModel)]="model.telegram"></ion-input>
+      <ion-icon name="create-outline"></ion-icon>
+    </ion-item>
+    <ion-label>Instagram Benutzername</ion-label>
+    <ion-item class="mt-1 mb-4">
+      <ion-input [(ngModel)]="model.social.instagram"></ion-input>
+      <ion-icon name="create-outline"></ion-icon>
+    </ion-item>
+    <ion-label>Telefonnummer</ion-label>
+    <ion-item class="mt-1">
+      <ion-input type="tel" [(ngModel)]="model.phone"></ion-input>
       <ion-icon name="create-outline"></ion-icon>
     </ion-item>
   </div>

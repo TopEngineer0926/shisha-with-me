@@ -25,6 +25,7 @@ export class FriendsAddPage implements OnInit {
 
   users = [];
   searchInput = '';
+  searchForProperty = 'customUsername';
 
   constructor(
     private modalCtrl: ModalController,
@@ -32,15 +33,23 @@ export class FriendsAddPage implements OnInit {
     public helper: HelperService,
     private authService: AuthService,
     private toastCtrl: ToastController
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
+
+  segmentChanged(ev) {
+    this.searchForProperty = ev.detail.value;
+    this.search()
+  }
 
   async search() {
+    const filterObject = {}
+
+    filterObject[this.searchForProperty + '_contains'] = this.searchInput;
     const query = qs.stringify({
       _where: {
         _and: [
-          { email_contains: this.searchInput },
+          filterObject,
           { id_ne: this.authService.user.id },
         ],
       },

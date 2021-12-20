@@ -1,3 +1,4 @@
+<!--
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -14,6 +15,17 @@
       (ionChange)="search()"
     ></ion-searchbar>
   </ion-toolbar>
+</ion-header>  
+-->
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/map"></ion-back-button>
+    </ion-buttons>
+    <div class="flex h-16 text-3xl pt-4 justify-center">
+      Hinzufügen
+    </div>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
@@ -23,30 +35,43 @@
 
   <app-friends-add-list></app-friends-add-list>-->
 
-  <ion-list lines="none">
-    <ion-list-header>
-      <ion-label>Ergebnisse {{users.length}}</ion-label>
-    </ion-list-header>
+  <div class="mt-4 px-6">
+    <ion-searchbar animated="true" placeholder="Freunde suchen" [(ngModel)]="searchInput" debounce="500" (ionChange)="search()"></ion-searchbar>
+
+    <ion-segment (ionChange)="segmentChanged($event)" class="mt-4" [value]="searchForProperty">
+      <ion-segment-button value="customUsername">
+        <ion-label>Name</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="instagram">
+        <ion-label>Instagram</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="phoneNumber">
+        <ion-label>Telefon</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+
+  <ion-list lines="none" class="mt-7 px-6">
     <ion-item *ngFor="let user of users">
       <ion-avatar slot="start">
-        <div
-          class="bg-cover bg-no-repeat h-10 w-10 rounded-full"
-          [style.backgroundImage]="'url(' + helper.getImageUrl(user.image?.url) + ')'"
-        ></div>
+        <div class="bg-cover bg-no-repeat h-10 w-10 rounded-full" [style.backgroundImage]="'url(' + helper.getImageUrl(user.image?.url) + ')'"></div>
       </ion-avatar>
       <ion-label>
         <h2>{{ user.name }}</h2>
         <p>{{ user.email }}</p>
       </ion-label>
-      <ion-button
-        *ngIf="!user.isFriend"
-        [disabled]="user.loading"
-        slot="end"
-        (click)="sendRequest(user)"
-      >
+      <ion-button *ngIf="!user.isFriend" [disabled]="user.loading" slot="end" (click)="sendRequest(user)">
         <ion-spinner class="mr-3" *ngIf="user.loading"></ion-spinner>
         Verbinden
       </ion-button>
     </ion-item>
   </ion-list>
+
+  <!--
+    <div slot="fixed" class="bottom-4 w-full px-8">
+      <ion-button color="primary" class="w-full font-normal" disabled>Freund hinzufügen</ion-button>
+    </div>    
+  -->
+
 </ion-content>

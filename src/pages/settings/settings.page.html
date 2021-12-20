@@ -26,9 +26,9 @@
       <ion-label> Verlauf </ion-label>
     </ion-item>-->
   </ion-list>
-  <ion-list class="ion-margin-top">
+  <ion-list>
     <ion-item class="mb-3" class="no-smoke" button (click)="goToNoSmoke()">
-      <img loading="lazy" slot="start" src="/assets/rauchfrei.png" />
+      <img style="height: 45.5px" loading="lazy" slot="start" src="/assets/rauchfrei.png" />
       <!--<ion-label>Gesundheit</ion-label>-->
     </ion-item>
   </ion-list>
@@ -63,7 +63,7 @@
     </ion-item> 
   </ion-list>-->
 
-  <ion-list-header> {{'Other' |translate}} </ion-list-header>
+  <ion-list-header class="mt-4"> {{'Other' |translate}} </ion-list-header>
   <ion-list>
     <!--<ion-item class="mb-3"  button (click)="helper.openLink('https://codext.de/kontakt/')">
       <ion-label> Frage senden </ion-label>
@@ -77,11 +77,13 @@
     <ion-item class="mb-3" button (click)="helper.openLink('https://codext.de/datenschutz/')">
       <ion-label> {{'Privacy' |translate}} </ion-label>
     </ion-item>
-
-    <ion-item class="mb-3" button [routerLink]="'/onboarding'">
-      <ion-label> On-Boarding </ion-label>
-    </ion-item>
   </ion-list>
+
+  <div class="text-center mt-4">
+    <ion-label> Mein QR Code </ion-label>
+  </div>
+  <!--<ngx-qrcode *ngIf="user.email" [elementType]="elementType" [value]="user.email" [width]="200" [colorDark]="'#fff'" [colorLight]="'#080808'" cssClass="center" errorCorrectionLevel="L"></ngx-qrcode> -->
+
 
   <div class="logout">
     <ion-button (click)="logout()" color="danger" fill="outline" size="small">Abmelden</ion-button>

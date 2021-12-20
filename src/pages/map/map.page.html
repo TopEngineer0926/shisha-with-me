@@ -1,9 +1,19 @@
 <ion-content [fullscreen]="true" class="relative">
   <ion-header [translucent]="true" class="ion-no-border">
     <ion-toolbar>
-      <div class="flex justify-center h-16 text-3xl pt-4">
+
+      <div class="flex h-16 text-3xl pt-4 justify-between">
+        <div style="visibility: hidden;">
+          <ion-button class="wishlist px-0 mx-0" color="transparent">
+            <ion-icon name="heart-outline"></ion-icon>
+          </ion-button>
+        </div>
         <div *ngIf="currentTab == 'map'">Karte</div>
         <div *ngIf="currentTab == 'friends'">Freunde</div>
+
+        <ion-button class="px-0 mx-0" color="transparent" size="small" routerLink="/tabs/map/friends-add" routerDirection="forward">
+          <ion-icon [hidden]="currentTab !== 'friends'" class="h-6 w-6" name="add"></ion-icon>
+        </ion-button>
       </div>
     </ion-toolbar>
   </ion-header>

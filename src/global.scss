@@ -39,6 +39,13 @@ ion-textarea {
   --icon-color: #809fb8 !important;
   --border-style: unset !important;
 }
+
+ion-item.transparent-item {
+  --background: transparent !important;
+  background: transparent !important;
+  border: none !important;
+}
+
 ion-segment {
   padding: 0 2px;
 }

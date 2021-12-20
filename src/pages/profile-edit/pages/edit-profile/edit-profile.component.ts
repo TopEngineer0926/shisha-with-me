@@ -19,10 +19,20 @@ export class EditProfileComponent implements OnInit {
     username: string;
     password: string;
     telegram: string;
+    phone: string;
+    social: {
+      instagram: string;
+      snapchat: string;
+    }
   } = {
       username: '',
       password: '',
-      telegram: ''
+      telegram: '',
+      phone: '',
+      social: {
+        instagram: '',
+        snapchat: ''
+      }
     }
 
   user: any
@@ -41,8 +51,11 @@ export class EditProfileComponent implements OnInit {
 
   async ngOnInit() {
     await this.loadUser()
+    console.log(this.user);
     this.model.username = this.user.customUsername
     this.model.telegram = this.user.telegramUsername
+    this.model.phone = this.user.phoneNumber
+    if (this.user.social) this.model.social = this.user.social
   }
 
   async loadUser() {
@@ -62,6 +75,8 @@ export class EditProfileComponent implements OnInit {
     if (this.model.password) update.password = this.model.password
     if (this.model.telegram != this.user.telegramUsername) update.telegramUsername = this.model.telegram
     if (this.model.username != this.user.customUsername) update.customUsername = this.model.username
+    if (this.model.phone !== this.user.phoneNumber) update.phoneNumber = this.model.phone
+    if (!this.user.social || this.model.social.instagram !== this.user.social.instagram) update.social = this.model.social
 
 
     try {

@@ -20,7 +20,7 @@
     Noch keine Einträge vorhanden
   </div>
   <div class="px-5" *ngIf="requests?.length > 0">
-    <ion-item class="mb-3" *ngFor="let request of requests">
+    <ion-item class="mb-3 py-2" *ngFor="let request of requests">
       <ion-avatar slot="start" (click)="openFriend(loadField(request, 'id'))">
         <div class="bg-cover bg-no-repeat h-10 w-10 rounded-full" [style.backgroundImage]="'url(' + helper.getImageUrl(loadField(request, 'image')?.url) + ')'"></div>
       </ion-avatar>
@@ -35,20 +35,18 @@
   </div>
 </ion-list>
 
-<ion-list lines="none">
-  <div class="no-items pb-5" *ngIf="!(friends?.length > 0)">
-    Noch keine Einträge vorhanden
-  </div>
-  <div class="px-5" *ngIf="friends?.length > 0">
-    <ion-item class="mb-3" *ngFor="let request of friends" (click)="openFriend(request.id)" button>
-      <ion-avatar slot="start">
-        <div class="bg-cover bg-no-repeat h-10 w-10 rounded-full" [style.backgroundImage]="'url(' + helper.getImageUrl(request.image?.url) + ')'"></div>
-      </ion-avatar>
-      <ion-label>
-        <h2>{{ request.name }}</h2>
-        <p>{{ request.customUsername }}</p>
-      </ion-label>
-    </ion-item>
+<div class="no-items pb-5" *ngIf="!(friends?.length > 0)">
+  Du hast noch keine Freunde
+</div>
+<div *ngIf="friends?.length > 0" class="px-4 pt-4">
+  <div class="mb-3 flex flex-row items-center" *ngFor="let friend of friends" (click)="openFriend(request.id)">
+    <ion-avatar slot="start">
+      <div class="bg-cover bg-no-repeat h-14 w-14 rounded-full" [style.backgroundImage]="'url(' + helper.getImageUrl(friend.image?.url) + ')'"></div>
+    </ion-avatar>
+    <div class="flex flex-col ml-6 justify-center">
+      <h2 class="text-white text-lg mb-0 font-normal">{{ friend.name }}</h2>
+      <p style="color: #969696" class="text-sm">{{ friend.customUsername }}</p>
+    </div>
   </div>
 
   <!--<ion-item class="mb-3"  button *ngFor="let user of users" (click)="openFriend(user)">
@@ -67,9 +65,8 @@
     <div class="no-items" *ngIf="!(users?.length > 0)">
       Noch keine Einträge vorhanden
     </div>-->
-</ion-list>
 
-<!--<ion-fab
+  <!--<ion-fab
     vertical="bottom"
     horizontal="end"
     slot="fixed"
@@ -80,7 +77,7 @@
     </ion-fab-button>
   </ion-fab>-->
 
-<!--<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <!--<ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button>
       <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
     </ion-fab-button>
@@ -95,14 +92,14 @@
     </ion-fab-list>
   </ion-fab>-->
 
-<div class="cupertino-pane">
-  <div class="center">
-    <h3>Mein Code</h3>
-    <ngx-qrcode *ngIf="value" [elementType]="elementType" [value]="value" [width]="200" [colorDark]="'#fff'" [colorLight]="'#080808'" cssClass="center" errorCorrectionLevel="L">
-    </ngx-qrcode>
+  <div class="cupertino-pane">
+    <div class="center">
+      <h3>Mein Code</h3>
+      <ngx-qrcode *ngIf="value" [elementType]="elementType" [value]="value" [width]="200" [colorDark]="'#fff'" [colorLight]="'#080808'" cssClass="center" errorCorrectionLevel="L">
+      </ngx-qrcode>
 
-    <ion-list lines="none">
-      <!--<ion-item class="mb-3"  button (click)="openFriendAddList()">
+      <ion-list lines="none">
+        <!--<ion-item class="mb-3"  button (click)="openFriendAddList()">
         <ion-icon slot="start" name="person-add-outline"></ion-icon>
         <ion-label>Freunde finden</ion-label>
       </ion-item>
@@ -112,12 +109,12 @@
         <ion-label>In der Nähe suchen</ion-label>
       </ion-item>-->
 
-      <ion-item class="mb-3" button>
-        <ion-icon slot="start" name="qr-code-outline"></ion-icon>
-        <ion-label>QR-Code Scannen</ion-label>
-      </ion-item>
+        <ion-item class="mb-3" button>
+          <ion-icon slot="start" name="qr-code-outline"></ion-icon>
+          <ion-label>QR-Code Scannen</ion-label>
+        </ion-item>
 
-      <!--<ion-item class="mb-3"  button>
+        <!--<ion-item class="mb-3"  button>
         <ion-icon slot="start" name="call-outline"></ion-icon>
         <ion-label>Aus Telefonbuch hinzufügen</ion-label>
       </ion-item>
@@ -126,6 +123,6 @@
         <ion-icon slot="start" name="share-social-outline"></ion-icon>
         <ion-label>Freunde einladen</ion-label>
       </ion-item>-->
-    </ion-list>
+      </ion-list>
+    </div>
   </div>
-</div>

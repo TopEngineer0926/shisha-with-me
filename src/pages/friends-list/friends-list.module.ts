@@ -16,6 +16,6 @@ import { FriendsListPage } from './friends-list.page';
     NgxQRCodeModule,
     ProfilePageModule,
   ],
-  declarations: [FriendsListPage],
+  declarations: [],
 })
-export class FriendsListPageModule {}
+export class FriendsListPageModule { }

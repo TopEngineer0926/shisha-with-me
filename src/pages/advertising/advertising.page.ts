@@ -27,6 +27,17 @@ export class AdvertisingPage implements OnInit {
     this.load();
   }
 
+  setTab(category) {
+    console.log('category', category);
+    this.selectedCategory = category;
+    this.ads = category?.ads;
+
+    this.topDeals = this.ads.filter((ad) => ad.topDeal == true);
+
+    this.search()
+
+  }
+
   search() {
     if (this.searchTerm == '') {
       this.sorted = [...this.ads];

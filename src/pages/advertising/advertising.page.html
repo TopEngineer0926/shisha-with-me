@@ -3,17 +3,15 @@
 
   <ion-header collapse="condense" class="ion-no-border">
     <ion-toolbar>
-      <div class="flex h-16 text-3xl pt-4 justify-between">
-        <div style="visibility: hidden;">
-          <ion-button class="wishlist px-0 mx-0" color="transparent">
-            <ion-icon name="heart-outline"></ion-icon>
+      <div class="grid grid-cols-3 h-16 text-3xl pt-4 justify-between">
+        <div></div>
+        <div class="flex justify-center items-center">Shop</div>
+
+        <div class="flex justify-center items-center">
+          <ion-button class="px-0 mx-0" color="transparent" size="small" routerLink="/tabs/advertising/wishlist" routerDirection="forward">
+            <ion-icon class="h-6 w-6" name="heart-outline"></ion-icon>
           </ion-button>
         </div>
-        <div class="text-3xl">Shop</div>
-
-        <ion-button class="px-0 mx-0" color="transparent" size="small" routerLink="/tabs/advertising/wishlist" routerDirection="forward">
-          <ion-icon class="h-6 w-6" name="heart-outline"></ion-icon>
-        </ion-button>
       </div>
     </ion-toolbar>
   </ion-header>
@@ -23,11 +21,17 @@
     <ion-searchbar class="z-10 h-5/6" [(ngModel)]="searchTerm" (ngModelChange)="search()" placeholder="Suche..."></ion-searchbar>
   </div>
 
-  <ion-segment mode="ios" class="mt-10" *ngIf="selectedCategory" class="ml-6 mt-4" scrollable [value]="selectedCategory" (ionChange)="segmentChanged($event)">
+ <!-- <ion-segment mode="ios" class="mt-10" *ngIf="selectedCategory" class="ml-6 mt-4" scrollable [value]="selectedCategory" (ionChange)="segmentChanged($event)">
     <ion-segment-button *ngFor="let category of data" [value]="category" class="bg-transparent" class="pr-3">
       <ion-label>{{category.title}}</ion-label>
     </ion-segment-button>
-  </ion-segment>
+  </ion-segment>-->
+
+  <div class="px-6 pt-5">
+    <div class="overflow-x-auto flex">
+      <div class="pr-5 py-5 cursor-pointer"  style="color: #809FB8" [class.opacity-50]="category.id !== selectedCategory.id" *ngFor="let category of data" (click)="setTab(category)"> {{category.title}}</div>
+    </div>
+  </div>
 
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>

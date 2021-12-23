@@ -2,19 +2,19 @@
   <ion-header [translucent]="true" class="ion-no-border">
     <ion-toolbar>
 
-      <div class="grid grid-cols-3 h-16 text-3xl pt-4 ">
+      <div class="grid grid-cols-3 h-16 text-3xl pt-4 px-6">
         <div>
 
         </div>
      
-        <div class="flex justify-end items-center">
+        <div class="flex justify-center items-center">
           <div *ngIf="currentTab == 'friends'">Freunde</div>
           <div *ngIf="currentTab == 'map'">Karte</div>
         </div>
 
-        <ion-button class="px-0 mx-0" color="transparent" size="small" routerLink="/tabs/map/friends-add" routerDirection="forward">
-          <ion-icon [hidden]="currentTab !== 'friends'" class="h-6 w-6" name="add"></ion-icon>
-        </ion-button>
+       <div class="flex items-center justify-end"> <ion-button class="px-0 mx-0" color="transparent" size="small" routerLink="/tabs/map/friends-add" routerDirection="forward">
+        <ion-icon [hidden]="currentTab !== 'friends'" class="h-6 w-6" name="add"></ion-icon>
+      </ion-button></div>
       </div>
     </ion-toolbar>
   </ion-header>

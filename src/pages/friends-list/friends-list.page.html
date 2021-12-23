@@ -38,7 +38,7 @@
 <div class="no-items pb-5" *ngIf="!(friends?.length > 0)">
   Du hast noch keine Freunde
 </div>
-<div *ngIf="friends?.length > 0" class="px-4 pt-4">
+<div *ngIf="friends?.length > 0" class="px-4 pt-4 cursor-pointer">
   <div class="mb-3 flex flex-row items-center" *ngFor="let friend of friends" (click)="openFriend(friend.id)">
     <ion-avatar slot="start">
       <div class="bg-cover bg-no-repeat h-14 w-14 rounded-full" [style.backgroundImage]="'url(' + helper.getImageUrl(friend.image?.url) + ')'"></div>

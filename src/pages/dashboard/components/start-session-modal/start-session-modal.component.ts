@@ -46,10 +46,11 @@ export class StartSessionModalComponent implements OnInit {
   }
 
   async selectLocation() {
+    const elm = await this.modalCtrl.getTop();
     const modal = await this.modalCtrl.create({
       component: SelectLocationPage,
       swipeToClose: true,
-      // presentingElement: this.routerOutlet.nativeEl,
+      presentingElement: elm,
       componentProps: {},
     });
     modal.onDidDismiss().then(async (data) => {

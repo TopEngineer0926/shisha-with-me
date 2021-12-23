@@ -7793,6 +7793,13 @@ neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
+ng-lazyload-image@^9.1.0:
+  version "9.1.0"
+  resolved "https://registry.yarnpkg.com/ng-lazyload-image/-/ng-lazyload-image-9.1.0.tgz#2f887b85ef5829565a0fc875a66f568d7c3e2b32"
+  integrity sha512-ZdfCXMTaehfzxcSRRThpz9YZbEA+8LPA086Od6JiylrGj0yNM7Aq830A1x6NE/M8o2VuVq93emH9m8T6SFBHlA==
+  dependencies:
+    tslib "^2.0.0"
+
 ngx-stars@^1.5.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/ngx-stars/-/ngx-stars-1.5.1.tgz#819c7a8889cacdcfbc60482d45916d48fc6a9b1a"

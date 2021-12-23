@@ -18,7 +18,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -49,6 +49,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
     }),
     BrowserModule,
+    LazyLoadImageModule,
     IonicModule.forRoot({
       backButtonText: '',
       mode: 'ios',
@@ -81,4 +82,4 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

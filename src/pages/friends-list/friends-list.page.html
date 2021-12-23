@@ -45,7 +45,7 @@
     </ion-avatar>
     <div class="flex flex-col ml-6 justify-center">
       <h2 class="text-white text-lg mb-0 font-normal">{{ friend.customUsername || friend.name }}</h2>
-      <p style="color: #969696" class="text-sm">{{ friend.location }}</p>
+      <p style="color: #969696" class="text-sm">{{ friend.location ? friend.location.address : '' }}</p>
     </div>
 
     <div [hidden]="!friend.session" class="ml-auto flex-col justify-center flex">

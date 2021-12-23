@@ -15,7 +15,7 @@
       class="bg-cover bg-no-repeat h-52 w-full bg-center"
       [style.backgroundImage]="'url(' + helper.getImageUrl(location?.images[0]?.url) +')'"
     ></div>
-    <ion-card-header>
+    <ion-card-header >
       <ion-card-subtitle
         ><ion-badge
           color="success"
@@ -26,18 +26,23 @@
       <ion-card-title>{{location?.name}}</ion-card-title>
     </ion-card-header>
 
+  
+  </ion-card>
+
+  <div class="" style="
+  padding: 15px;">
     <ion-list lines="none">
       <ion-item *ngIf="location?.rating">
         <ion-icon slot="start" name="analytics-outline"></ion-icon>
         <ion-label>Rating</ion-label>
-        <ngx-stars
+        <div class="flex h-full items-center mt-2"><ngx-stars
           [wholeStars]="true"
           [readonly]="true"
           [size]="2"
           [color]="'#fff'"
           [maxStars]="5"
           [initialStars]="location?.rating"
-        ></ngx-stars>
+        ></ngx-stars></div>
       </ion-item>
       <!--<ion-item>
         <ion-icon slot="start" name="star-outline"></ion-icon>
@@ -52,7 +57,7 @@
         <ion-badge>{{location?.location?.address}}</ion-badge></ion-item
       >
     </ion-list>
-  </ion-card>
+  </div>
 
   <ion-fab
     *ngIf="location?.location?.lat"

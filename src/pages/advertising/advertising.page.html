@@ -3,11 +3,11 @@
 
   <ion-header collapse="condense" class="ion-no-border">
     <ion-toolbar>
-      <div class="grid grid-cols-3 h-16 text-3xl pt-4 justify-between">
+      <div class="grid grid-cols-3 h-16 text-3xl pt-4 justify-between px-4">
         <div></div>
         <div class="flex justify-center items-center">Shop</div>
 
-        <div class="flex justify-center items-center">
+        <div class="flex justify-end items-center">
           <ion-button class="px-0 mx-0" color="transparent" size="small" routerLink="/tabs/advertising/wishlist" routerDirection="forward">
             <ion-icon class="h-6 w-6" name="heart-outline"></ion-icon>
           </ion-button>
@@ -29,7 +29,7 @@
 
   <div class="px-6 pt-5">
     <div class="overflow-x-auto flex">
-      <div class="pr-5 py-5 cursor-pointer"  style="color: #809FB8" [class.opacity-50]="category.id !== selectedCategory.id" *ngFor="let category of data" (click)="setTab(category)"> {{category.title}}</div>
+      <div class="pr-5 py-5 pb-0 cursor-pointer"  style="color: #809FB8" [class.opacity-50]="category.id !== selectedCategory.id" *ngFor="let category of data" (click)="setTab(category)"> {{category.title}}</div>
     </div>
   </div>
 
@@ -51,7 +51,7 @@
     </ion-slides>
   </div>-->
 
-  <div class="p-3">
+  <div class="p-3 pt-0">
     <app-ad-item *ngFor="let ad of sorted" [ad]="ad"></app-ad-item>
   </div>
 </ion-content>

@@ -1,3 +1,4 @@
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { ThemeSelectorComponent } from './components/theme-selector/theme-selector.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -17,6 +18,7 @@ import { TranslateModule } from '@ngx-translate/core';
     FormsModule,
     IonicModule,
     SettingsPageRoutingModule,
+    NgxQRCodeModule
   ],
   declarations: [SettingsPage, ThemeSelectorComponent],
 })

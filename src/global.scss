@@ -11,6 +11,20 @@
 
 @import "./assets/fonts/stylesheet.css";
 
+
+.ng-lazyloaded {
+  animation: fadein 0.4s;
+}
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
 ion-refresher {
   z-index: 1;
 }

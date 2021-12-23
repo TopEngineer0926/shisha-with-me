@@ -82,8 +82,10 @@
   <div class="text-center mt-4">
     <ion-label> Mein QR Code </ion-label>
   </div>
-  <!--<ngx-qrcode *ngIf="user.email" [elementType]="elementType" [value]="user.email" [width]="200" [colorDark]="'#fff'" [colorLight]="'#080808'" cssClass="center" errorCorrectionLevel="L"></ngx-qrcode> -->
+ <div class="flex items-center justify-center w-full-width">
+  <ngx-qrcode *ngIf="authService.user.email"   [value]="authService.user.email" [width]="200" [colorDark]="'#fff'" [colorLight]="'#03111d'" cssClass="center" errorCorrectionLevel="L"></ngx-qrcode> 
 
+ </div>
 
   <div class="logout">
     <ion-button (click)="logout()" color="danger" fill="outline" size="small">Abmelden</ion-button>

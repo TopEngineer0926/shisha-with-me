@@ -13,6 +13,7 @@ import { SwiperModule } from 'swiper/angular';
 import { StartSessionPageModule } from '../start-session/start-session.module';
 import { StartSessionModalComponent } from './components/start-session-modal/start-session-modal.component';
 
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 @NgModule({
   imports: [
     CommonModule,
@@ -21,6 +22,7 @@ import { StartSessionModalComponent } from './components/start-session-modal/sta
     DashboardPageRoutingModule,
     SwiperModule,
     GoogleMapsModule,
+    LazyLoadImageModule
   ],
   declarations: [DashboardPage, StartSessionModalComponent],
   exports: [IonicModule]

@@ -73,13 +73,13 @@
       <ion-slides #subSlider [options]="slideOptsVert">
         <ion-slide>
           <div class="slide-item" (click)="selectSession(slide, 'manufactur')">
-            <div class="inside-dot" [style.backgroundImage]="'url(' + helper.getImageUrl(slide.image?.formats?.medium?.url || slide.image?.url) + ')'"></div>
+            <div class="inside-dot" [lazyLoad]="helper.getImageUrl(slide.image?.formats?.small?.url || slide.image?.url)"></div>
             <div class="item-title">{{slide.name}}</div>
           </div>
         </ion-slide>
         <ion-slide *ngFor="let children of slide.smoke_products">
           <div class="slide-item inner-slide" (click)="selectSession(children, 'product')">
-            <div class="inside-dot" [style.backgroundImage]="'url(' + helper.getImageUrl(children.image?.formats?.medium?.url ||children.image?.url) + ')'"></div>
+            <div class="inside-dot" [lazyLoad]="helper.getImageUrl(children.image?.formats?.small?.url ||children.image?.url)"></div>
             <div class="item-title">{{children.name}}</div>
           </div>
         </ion-slide>

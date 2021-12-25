@@ -33,23 +33,48 @@ video {
 
 ion-slides.first {
   // margin: 25px 0 10px 0;
-  height: 275px;
+  height: 300px;
+
+  // height: calc(100vh - 200px);
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: visible !important;
+
+  margin-top: -30px;
+
+
+  ion-slide.first-slide {
+    opacity: 0.5;
+    .slide-item-manufactur {
+      transition: all ease-in-out 0.3s;
+      transform: scale(0.4);
+    }
+    &.swiper-slide-active {
+      opacity: 1;
+      .slide-item-manufactur {
+       transform: scale(1)!important;
+      }
+      
+    }
+  }
 }
 
-ion-slides {
+ion-slides.inner-slides {
   z-index: 5;
   overflow: visible !important;
   ion-slide {
     opacity: 0.5;
-    transform: scale(0.6);
-    transition: all ease-in-out 0.3s;
+    .slide-item {
+       transform: scale(0.6);
+      transition: all ease-in-out 0.3s;
+    }
     &.swiper-slide-active {
       opacity: 1;
-
-      transform: scale(1);
+      .slide-item {
+       transform: scale(0.8);
+      }
+      
     }
   }
 }

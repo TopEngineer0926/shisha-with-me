@@ -357,3 +357,12 @@ ion-modal.modal-over-bottom-nav {
 ion-input {
   caret-color: white;
 }
+
+ion-searchbar {
+  ion-icon {
+    right: 5px; left: unset!important;
+  }
+  input {
+    padding-left: 9px!important;
+  }
+}

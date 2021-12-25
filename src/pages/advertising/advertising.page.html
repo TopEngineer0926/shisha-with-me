@@ -29,7 +29,7 @@
 
   <div class="px-6 pt-5">
     <div class="overflow-x-auto flex">
-      <div class="pr-5 py-5 pb-0 cursor-pointer"  style="color: #809FB8" [class.opacity-50]="category.id !== selectedCategory.id" *ngFor="let category of data" (click)="setTab(category)"> {{category.title}}</div>
+      <div class="pr-5 py-5 pb-2 cursor-pointer"  style="color: #809FB8" [class.opacity-50]="category.id !== selectedCategory.id" *ngFor="let category of data" (click)="setTab(category)"> {{category.title}}</div>
     </div>
   </div>
 

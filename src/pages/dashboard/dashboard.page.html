@@ -69,10 +69,10 @@
   </div>
 
   <ion-slides [hidden]="searchTerm" #mainSlider class="first" [options]="slideOpts">
-    <ion-slide *ngFor="let slide of manufacturers">
-      <ion-slides #subSlider [options]="slideOptsVert">
-        <ion-slide>
-          <div class="slide-item" (click)="selectSession(slide, 'manufactur')">
+    <ion-slide class="first-slide" *ngFor="let slide of manufacturers">
+      <ion-slides class="inner-slides" #subSlider [options]="slideOptsVert">
+        <ion-slide class="manufactur">
+          <div class="slide-item slide-item-manufactur" (click)="selectSession(slide, 'manufactur')">
             <div class="inside-dot" [lazyLoad]="helper.getImageUrl(slide.image?.formats?.small?.url || slide.image?.url)"></div>
             <div class="item-title">{{slide.name}}</div>
           </div>

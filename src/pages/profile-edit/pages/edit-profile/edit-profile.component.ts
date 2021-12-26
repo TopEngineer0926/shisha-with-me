@@ -3,7 +3,7 @@ import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 
 import { Geolocation } from '@capacitor/geolocation';
 
-import { LoadingController, ModalController, ToastController } from '@ionic/angular';
+import { LoadingController, ModalController, NavController, ToastController } from '@ionic/angular';
 import { AuthService } from 'src/common/auth/_services/auth.service';
 import { MapHelperService } from 'src/common/services/map-helper.service';
 
@@ -46,7 +46,8 @@ export class EditProfileComponent implements OnInit {
     private modalCtrl: ModalController,
     private http: HttpClient,
     private toastCtrl: ToastController,
-    private authService: AuthService
+    private authService: AuthService, 
+    private navCtrl: NavController
   ) { }
 
   async ngOnInit() {
@@ -90,6 +91,7 @@ export class EditProfileComponent implements OnInit {
           duration: 4000
         })
       ).present()
+      this.navCtrl.back();
     } catch (error) {
       (
         await this.toastCtrl.create({

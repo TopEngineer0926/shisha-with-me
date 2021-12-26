@@ -23,7 +23,7 @@
 
 
     <div class="flex flex-row items-center my-12">
-      <div (click)="changePicture($event)" class="w-28 h-28 object-cover bg-gray-600 rounded-full" [style.backgroundImage]="'url(' + helper.getImageUrl(user?.image?.url) + ')'"></div>
+      <img (click)="changePicture($event)" class="w-28 h-28 object-cover bg-gray-600 rounded-full" [src]="helper.getImageUrl(user?.image?.formats?.small?.url || user?.image?.url)">
       <div class="flex-col justify-center ml-4">
         <div class="text-lg">{{authService.user?.name || 'Profil' }}</div>
         <ion-button fill="outline" size="small" color="dark" routerLink="/tabs/settings/profile/edit" routerDirection="forward">bearbeiten</ion-button>

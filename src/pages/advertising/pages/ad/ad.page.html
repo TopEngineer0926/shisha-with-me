@@ -16,7 +16,7 @@
     <div class="ad-image absolute top-0 w-full bg-contain bg-white bg-no-repeat bg-center" [style.backgroundImage]="'url(' + helper.getImageUrl(ad.image?.url) + ')'"></div>
 
     <div class="ad-container absolute w-full px-6 z-50">
-      <div class="h-full flex flex-col justify-between">
+      <div class="h-full flex flex-col">
         <div>
           <div class="flex flex-row items-center">
             <h2 class="text-lg">{{ ad.title }}</h2>
@@ -31,7 +31,7 @@
             <p>{{ad.description}}</p>
           </div>
         </div>
-        <div class="pb-4">
+        <div class="pb-4 mt-3">
           <p *ngIf="ad.offerPrice" class="flex text-center justify-center text-gray-400">
             für nur
             <span class="offer mx-1">{{ ad.offerPrice | currency: "EUR":"symbol" }}</span>
@@ -41,7 +41,7 @@
 
           <ion-button *ngIf="!(ad.category?.title === 'Instagram' || ad.category?.title === 'Youtube' || ad.category?.title === 'Spotify')" (click)="helper.openLink(ad.link)" class="w-full font-normal mt-4">Jetzt zum Deal</ion-button>
           <ion-button *ngIf="ad.category?.title === 'Instagram'" (click)="helper.openLink(ad.link)" class="w-full font-normal mt-4">Zu Instagram</ion-button>
-          <ion-button *ngIf="ad.category?.title === 'Youtube'" (click)="helper.openLink(ad.link)" class="w-full font-normal mt-4">Zu Youtube</ion-button>
+          <ion-button *ngIf="ad.category?.title === 'Youtube'" (click)="helper.openLink(ad.link)" class="w-full font-normal mt-4">Zu YouTube</ion-button>
           <ion-button *ngIf="ad.category?.title === 'Spotify'" (click)="helper.openLink(ad.link)" class="w-full font-normal mt-4">Zu Spotify</ion-button>
         </div>
       </div>

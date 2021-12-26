@@ -39,9 +39,9 @@
             <span class="offer-price mx-1">{{ ad.price | currency: "EUR":"symbol" }}</span>
           </p>
 
-          <ion-button *ngIf="!(ad.category?.title === 'Instagram' || ad.category?.title === 'Youtube' || ad.category?.title === 'Spotify')" (touchstart)="helper.openLink(ad.link)" class="w-full font-normal mt-4">Jetzt zum Deal</ion-button>
+          <ion-button *ngIf="!(ad.category?.title === 'Instagram' || ad.category?.title === 'YouTube' || ad.category?.title === 'Spotify')" (touchstart)="helper.openLink(ad.link)" class="w-full font-normal mt-4">Jetzt zum Deal</ion-button>
           <ion-button *ngIf="ad.category?.title === 'Instagram'" (touchstart)="helper.openLink(ad.link)" class="w-full font-normal mt-4">Zu Instagram</ion-button>
-          <ion-button *ngIf="ad.category?.title === 'Youtube'" (touchstart)="helper.openLink(ad.link)" class="w-full font-normal mt-4">Zu YouTube</ion-button>
+          <ion-button *ngIf="ad.category?.title === 'YouTube'" (touchstart)="helper.openLink(ad.link)" class="w-full font-normal mt-4">Zu YouTube</ion-button>
           <ion-button *ngIf="ad.category?.title === 'Spotify'" (touchstart)="helper.openLink(ad.link)" class="w-full font-normal mt-4">Zu Spotify</ion-button>
         </div>
       </div>

@@ -95,6 +95,7 @@ ion-slides ion-slide.swiper-slide-active {
     background: rgb(0 0 0 / 58%);
     padding: 3px 19px;
     border-radius: 10px;
+    z-index: 10;
   }
   .inside-dot {
     display: block;

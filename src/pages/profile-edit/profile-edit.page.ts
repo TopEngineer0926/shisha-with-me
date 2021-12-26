@@ -236,9 +236,11 @@ export class ProfileEditPage implements OnInit {
       const fileSelectPromise = new Promise((resolve, reject) => {
         fileInput.onchange = resolve;
       });
+      document.body.appendChild(fileInput);
       fileInput.click();
       try {
         await fileSelectPromise;
+        document.body.removeChild(fileInput)
         files = fileInput.files;
       } catch (e) {}
     }
@@ -247,8 +249,6 @@ export class ProfileEditPage implements OnInit {
       const loading = await this.loadingCtrl.create({ translucent: true });
       loading.present();
       for (const file of Array.from(files)) {
-        // const uploadData = await this.upload.transfer(file, 'file');
-        console.log(file);
 
         const files = [];
         files.push(file);

@@ -60,6 +60,17 @@ ion-slides.first {
   }
 }
 
+ion-slides {
+  ion-slide.product-slide {
+    &.swiper-slide-active {
+      div.slide-item {
+       transform: scale(0.9);
+      }
+      
+    }
+  }
+}
+
 ion-slides.inner-slides {
   z-index: 5;
   overflow: visible !important;

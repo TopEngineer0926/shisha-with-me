@@ -77,7 +77,7 @@
             <div class="item-title">{{slide.name}}</div>
           </div>
         </ion-slide>
-        <ion-slide *ngFor="let children of slide.smoke_products">
+        <ion-slide class="product-slide" *ngFor="let children of slide.smoke_products">
           <div class="slide-item inner-slide" (click)="selectSession(children, 'product')">
             <div class="inside-dot" [lazyLoad]="helper.getImageUrl(children.image?.formats?.small?.url ||children.image?.url)"></div>
             <div class="item-title">{{children.name}}</div>

@@ -17,7 +17,9 @@
 
     <div class="ad-container absolute w-full px-6 z-50">
       <div class="h-full flex flex-col">
+        
         <div>
+
           <div class="flex flex-row items-center">
             <h2 class="text-lg">{{ ad.title }}</h2>
             <ion-button (click)="addOrRemoveFromWishList()" class="wishlist px-0 mx-0 ml-auto" color="transparent">
@@ -27,24 +29,30 @@
           </div>
 
 
+          <div class="pb-2 mt-3">
+            <p *ngIf="ad.offerPrice" class="flex text-center justify-center text-gray-400">
+              für nur
+              <span class="offer mx-1">{{ ad.offerPrice | currency: "EUR":"symbol" }}</span>
+              statt
+              <span class="offer-price mx-1">{{ ad.price | currency: "EUR":"symbol" }}</span>
+            </p>
+  
+          </div>
           <div *ngIf="ad.description" class="mt-4 text-xs">
             <p>{{ad.description}}</p>
           </div>
         </div>
-        <div class="pb-4 mt-3">
-          <p *ngIf="ad.offerPrice" class="flex text-center justify-center text-gray-400">
-            für nur
-            <span class="offer mx-1">{{ ad.offerPrice | currency: "EUR":"symbol" }}</span>
-            statt
-            <span class="offer-price mx-1">{{ ad.price | currency: "EUR":"symbol" }}</span>
-          </p>
-
-          <ion-button *ngIf="!(ad.category?.title === 'Instagram' || ad.category?.title === 'YouTube' || ad.category?.title === 'Spotify')" (touchend)="helper.openLink(ad.link)" class="w-full font-normal mt-4">Jetzt zum Deal</ion-button>
-          <ion-button *ngIf="ad.category?.title === 'Instagram'" (touchend)="helper.openLink(ad.link)" class="w-full font-normal mt-4">Zu Instagram</ion-button>
-          <ion-button *ngIf="ad.category?.title === 'YouTube'" (touchend)="helper.openLink(ad.link)" class="w-full font-normal mt-4">Zu YouTube</ion-button>
-          <ion-button *ngIf="ad.category?.title === 'Spotify'" (touchend)="helper.openLink(ad.link)" class="w-full font-normal mt-4">Zu Spotify</ion-button>
-        </div>
+       
       </div>
     </div>
   </ng-container>
 </ion-content>
+
+<ion-footer *ngIf="ad" style="  
+padding: 0 15px 5px;">
+  <ion-button *ngIf="!(ad.category?.title === 'Instagram' || ad.category?.title === 'YouTube' || ad.category?.title === 'Spotify')" (touchend)="helper.openLink(ad.link)" class="w-full font-normal mt-4">Jetzt zum Deal</ion-button>
+  <ion-button *ngIf="ad.category?.title === 'Instagram'" (touchend)="helper.openLink(ad.link)" class="w-full font-normal mt-4">Zu Instagram</ion-button>
+  <ion-button *ngIf="ad.category?.title === 'YouTube'" (touchend)="helper.openLink(ad.link)" class="w-full font-normal mt-4">Zu YouTube</ion-button>
+  <ion-button *ngIf="ad.category?.title === 'Spotify'" (touchend)="helper.openLink(ad.link)" class="w-full font-normal mt-4">Zu Spotify</ion-button>
+
+</ion-footer>

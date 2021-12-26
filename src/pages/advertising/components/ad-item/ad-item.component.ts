@@ -34,7 +34,8 @@ export class AdItemComponent implements OnInit {
   }
 
   open() {
-    this.modalCtrl?.dismiss()
+    if(this.modalOpen)
+      this.modalCtrl?.dismiss()
     setTimeout(() =>{
       this.navCtrl.navigateForward(['/tabs/advertising', this.ad.id])
     }, this.modalCtrl ? 200 : 0)

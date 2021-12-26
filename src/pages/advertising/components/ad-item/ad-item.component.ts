@@ -1,6 +1,6 @@
 import { HelperService } from './../../../../common/services/helper.service';
 import { Component, Input, OnInit } from '@angular/core';
-import { IonRouterOutlet, ModalController } from '@ionic/angular';
+import { IonRouterOutlet, ModalController, NavController } from '@ionic/angular';
 import { AdPage } from '../../pages/ad/ad.page';
 
 @Component({
@@ -10,23 +10,34 @@ import { AdPage } from '../../pages/ad/ad.page';
 })
 export class AdItemComponent implements OnInit {
   @Input() ad: any;
+  @Input() modalOpen: boolean = false;
   constructor(
     public helper: HelperService,
     private modalCtrl: ModalController,
-    private routerOutlet: IonRouterOutlet
+    private navCtrl: NavController
+    // private routerOutlet: IonRouterOutlet
   ) {}
 
   ngOnInit() {}
 
   async openAd() {
+    const elm = await this.modalCtrl.getTop();
     const modal = await this.modalCtrl.create({
       component: AdPage,
       swipeToClose: true,
-      presentingElement: this.routerOutlet.nativeEl,
+      presentingElement: elm,
       componentProps: {
         id: this.ad.id,
       },
     });
     return await modal.present();
+  }
+
+  open() {
+    this.modalCtrl?.dismiss()
+    setTimeout(() =>{
+      this.navCtrl.navigateForward(['/tabs/advertising', this.ad.id])
+    }, this.modalCtrl ? 200 : 0)
+    
   }
 }

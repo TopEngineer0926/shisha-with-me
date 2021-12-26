@@ -1,6 +1,7 @@
 import { WishlistService } from './../../common/services/wishlist.service';
 import { AdService } from './../advertising/services/ad.service';
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-ad-saved',
@@ -8,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ad-saved.page.scss'],
 })
 export class AdSavedPage implements OnInit {
-  constructor(public adService: AdService, public wishlist: WishlistService) { }
+  constructor(public adService: AdService, public wishlist: WishlistService, private modalCtrl: ModalController) { }
+
+  close() {
+    this.modalCtrl.dismiss();
+  }
 
   async ngOnInit() {
     console.log('INITING');

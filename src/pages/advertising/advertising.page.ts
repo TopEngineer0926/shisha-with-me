@@ -1,7 +1,8 @@
-import { AdService } from './services/ad.service';
-import { HelperService } from './../../common/services/helper.service';
 import { Component, OnInit } from '@angular/core';
-import { LoadingController, NavController } from '@ionic/angular';
+import { IonRouterOutlet, LoadingController, ModalController, NavController } from '@ionic/angular';
+import { AdSavedPage } from '../ad-saved/ad-saved.page';
+import { HelperService } from './../../common/services/helper.service';
+import { AdService } from './services/ad.service';
 
 @Component({
   selector: 'app-advertising',
@@ -20,7 +21,8 @@ export class AdvertisingPage implements OnInit {
     public helper: HelperService,
     public adService: AdService,
     private loadingCtrl: LoadingController,
-    private nav: NavController
+    private nav: NavController, private modalCtrl: ModalController,
+    private routerOutlet: IonRouterOutlet,
   ) { }
 
   async ngOnInit() {
@@ -36,6 +38,16 @@ export class AdvertisingPage implements OnInit {
 
     this.search()
 
+  }
+
+  async wishListPage() {
+    // const elm = await this.modalCtrl.getTop();
+    const modal = await this.modalCtrl.create({
+      component: AdSavedPage,
+      swipeToClose: true,
+      presentingElement: this.routerOutlet.nativeEl,
+    });
+    return await modal.present();
   }
 
   search() {

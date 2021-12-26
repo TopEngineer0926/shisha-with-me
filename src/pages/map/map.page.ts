@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ViewChild } from "@angular/core";
 import { GoogleMap } from "@angular/google-maps";
-import { IonRouterOutlet, LoadingController, ModalController, PopoverController } from "@ionic/angular";
+import { IonModal, IonRouterOutlet, LoadingController, ModalController, PopoverController } from "@ionic/angular";
 import { MapService } from "src/common/services/map.service";
 import { MapFilterComponent } from "./components/map-filter/map-filter.component";
 import { PlacePage } from "./place/place.page";
@@ -21,6 +21,7 @@ import { Event, NavigationStart, Router } from "@angular/router";
 })
 export class MapPage implements AfterViewInit, OnInit {
   @ViewChild(GoogleMap) map: GoogleMap;
+  @ViewChild(IonModal) filterModal: IonModal;
   locationLoading: boolean = false;
   infowindow: google.maps.InfoWindow;
   options: google.maps.MapOptions = {
@@ -40,6 +41,7 @@ export class MapPage implements AfterViewInit, OnInit {
   showFilterSheet = false;
   mapFilterForm: FormGroup;
   locationMarker = [];
+  markers: google.maps.Marker[] = [];
 
   constructor(
     public mapService: MapService,
@@ -128,11 +130,13 @@ export class MapPage implements AfterViewInit, OnInit {
   filterMarkers() {
     let filteredMarkers = this.locationMarker;
 
-    if (!this.mapFilterForm.value.friends) filteredMarkers = filteredMarkers.filter((location) => location.type !== "friends");
+    if (!this.mapFilterForm.value.friends) filteredMarkers = filteredMarkers.filter((location) => location.type !== "user");
     if (!this.mapFilterForm.value.shishaBar) filteredMarkers = filteredMarkers.filter((location) => location.type !== "shisha_bar");
     if (!this.mapFilterForm.value.shishaShop) filteredMarkers = filteredMarkers.filter((location) => location.type !== "shisha_shop");
 
-    this.addMarkersForPlaces(filteredMarkers);
+    console.log('filteredMarkers', filteredMarkers);
+    this.addMarkersForPlaces(filteredMarkers, true);
+    this.filterModal?.dismiss();
   }
 
   close() {
@@ -248,7 +252,13 @@ export class MapPage implements AfterViewInit, OnInit {
   }
 
   addMarkersForPlaces(places: any[], doBounds = false) {
-    let markers: google.maps.Marker[] = [];
+    if(this.markers.length> 0) {
+      this.markers.forEach((marker)=> {
+        marker.setMap(null);
+      })
+      this.markers = [];
+    }
+    
     if (places.length == 0) {
       return;
     }
@@ -271,7 +281,7 @@ export class MapPage implements AfterViewInit, OnInit {
       marker.dataId = place.id;
       marker.dataType = place.type;
 
-      markers.push(marker);
+      this.markers.push(marker);
 
       google.maps.event.addListener(marker, "click", async () => {
         console.log(marker);

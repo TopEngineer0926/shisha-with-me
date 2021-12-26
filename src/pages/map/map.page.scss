@@ -61,3 +61,17 @@ ion-content {
   pointer-events: none;
   z-index: 1;
 }
+.filter-wrapper {
+  ion-item {
+    --padding-start: 0;
+   
+  }
+  img {
+    height: 22px;
+    margin-left: 10px;
+    margin-right: 10px;
+    object-fit: contain;
+    width: 22px;
+  }
+  
+}

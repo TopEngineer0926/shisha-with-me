@@ -13,7 +13,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div class="user-image" [style.backgroundImage]="'url(' +  helper.getImageUrl(user.image?.url) + ')'"></div>
+  <div class="user-image" [style.backgroundImage]="'url(' +  helper.getImageUrl(user.image?.formats?.medium?.url || user.image?.url) + ')'"></div>
   <ion-card>
     <ion-list>
       <ion-item class="mb-5">

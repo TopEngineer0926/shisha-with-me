@@ -4,7 +4,7 @@
   </ion-list-header>
   <ion-item *ngFor="let friend of friends">
     <ion-avatar slot="start">
-      <img loading="lazy" [src]="helper.getImageUrl(friend.image?.url)" />
+      <img loading="lazy" [src]="helper.getImageUrl(friend.image?.formats?.small?.url || friend.image?.url)" />
     </ion-avatar>
     <ion-label>
       <h2>{{ friend.name }}</h2>

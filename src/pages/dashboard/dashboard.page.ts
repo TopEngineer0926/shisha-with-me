@@ -24,6 +24,7 @@ import {
   AlertController,
   IonRouterOutlet,
   IonSlides,
+  LoadingController,
   ModalController,
   ToastController,
 } from '@ionic/angular';
@@ -94,15 +95,14 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
     public mapService: MapService,
     private modalCtrl: ModalController,
     private routerOutlet: IonRouterOutlet,
-    private localNotifications: LocalNotifications,
     private alertController: AlertController,
     private http: HttpClient,
     public helper: HelperService,
     private authService: AuthService,
     private toastCtrl: ToastController,
     public platform: Platform,
-    private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute, 
+    private loadingCtrl: LoadingController
   ) { }
 
   async showSmoke() {
@@ -123,40 +123,43 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
   async ngOnInit() { }
 
   async ngAfterViewInit() {
-    const playSmoke = this.route.snapshot.queryParamMap.get('playSmoke');
-    if (playSmoke) {
-      this.showSmoke();
+    const loading = await this.loadingCtrl.create({translucent: true});
+    loading.present()
+    try {
+      const playSmoke = this.route.snapshot.queryParamMap.get('playSmoke');
+      if (playSmoke) {
+        this.showSmoke();
+      }
+
+      const data = await this.http.get('api/manufacturers').toPromise();
+      console.log('data', data);
+      this.manufacturers = data;
+      this.sorted = [...this.manufacturers];
+      this.mainSlider?.update();
+      
+
+      this.audio = new Audio('assets/sounds/Shisha_Sound.mp3');
+      this.audio.loop = false;
+
+      this.mainSlider.ionSlideDidChange.subscribe(async (ev) => {
+        // console.log('change', ev);
+        //this.mainSlider.slideTo(0);
+        const prevIndex = await this.mainSlider.getPreviousIndex();
+        const sliders = [];
+
+        this.subSliders.forEach((slider) => {
+          sliders.push(slider);
+        });
+
+        sliders[prevIndex]?.slideTo(0);
+        // console.log('this.subSliders[prevIndex]', sliders[prevIndex], prevIndex);
+      });
+    } catch (error) {
+      
     }
 
-    const data = await this.http.get('api/manufacturers').toPromise();
-    console.log('data', data);
-    this.manufacturers = data;
-    this.sorted = [...this.manufacturers];
-    this.mainSlider?.update();
-    setTimeout(() => {
-      this.loadIcons = true;
-      setTimeout(() => {
-        // this.mainSlider.slideTo(0);
-        // google.maps.event.trigger(this.map, 'resize');
-      }, 100);
-    }, 200);
 
-    this.audio = new Audio('assets/sounds/Shisha_Sound.mp3');
-    this.audio.loop = false;
-
-    this.mainSlider.ionSlideDidChange.subscribe(async (ev) => {
-      // console.log('change', ev);
-      //this.mainSlider.slideTo(0);
-      const prevIndex = await this.mainSlider.getPreviousIndex();
-      const sliders = [];
-
-      this.subSliders.forEach((slider) => {
-        sliders.push(slider);
-      });
-
-      sliders[prevIndex]?.slideTo(0);
-      // console.log('this.subSliders[prevIndex]', sliders[prevIndex], prevIndex);
-    });
+    loading.dismiss();
   }
 
   search() {
@@ -218,6 +221,17 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
   }
 
   async selectSession(product: Manufacturer, type: string) {
+    if(type=='manufactur') {
+      (
+        await this.toastCtrl.create({
+          message: 'Wähle eine Sorte aus zum Starten',
+          translucent: true,
+          position: 'top',
+          duration: 4000,
+        })
+      ).present();
+      return;
+    }
     /*
     const alert = await this.alertController.create({
       header: 'Wo wird geraucht?',

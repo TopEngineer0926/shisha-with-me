@@ -12,7 +12,9 @@
       animated="true"
       placeholder="Name"
       [(ngModel)]="searchInput"
-      debounce="500"
+      showCancelButton="never"
+      clearIcon=""
+      debounce="300"
       (ionChange)="search()"
     ></ion-searchbar>
   </ion-toolbar>

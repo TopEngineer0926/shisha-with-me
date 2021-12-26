@@ -181,10 +181,10 @@ export class ProfileEditPage implements OnInit {
   }
 
   async takePicture() {
-    const image = await Camera.getPhoto({
+    /*const image = await Camera.getPhoto({
       source: CameraSource.Photos,
       quality: 80,
-      allowEditing: true,
+      allowEditing: false,
       resultType: CameraResultType.Uri,
       promptLabelHeader: '',
       promptLabelCancel: 'Abbrechen',
@@ -192,14 +192,12 @@ export class ProfileEditPage implements OnInit {
       promptLabelPicture: 'Foto aufnehmen',
     });
 
-    this.image = image;
-    console.log('this.image ', this.image);
+    this.image = image;*/
 
     const formData = new FormData();
-    console.log('this.user.id', this.user.id);
 
     /*formData.append('files', {
-      uri: image.path,
+      uri: '',
       name: 'image.jpg',
       type: 'image/jpeg',
     });

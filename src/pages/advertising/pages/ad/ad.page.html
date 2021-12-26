@@ -39,10 +39,10 @@
             <span class="offer-price mx-1">{{ ad.price | currency: "EUR":"symbol" }}</span>
           </p>
 
-          <ion-button *ngIf="!(ad.category?.title === 'Instagram' || ad.category?.title === 'YouTube' || ad.category?.title === 'Spotify')" (tap)="helper.openLink(ad.link)" class="w-full font-normal mt-4">Jetzt zum Deal</ion-button>
-          <ion-button *ngIf="ad.category?.title === 'Instagram'" (tap)="helper.openLink(ad.link)" class="w-full font-normal mt-4">Zu Instagram</ion-button>
-          <ion-button *ngIf="ad.category?.title === 'YouTube'" (tap)="helper.openLink(ad.link)" class="w-full font-normal mt-4">Zu YouTube</ion-button>
-          <ion-button *ngIf="ad.category?.title === 'Spotify'" (tap)="helper.openLink(ad.link)" class="w-full font-normal mt-4">Zu Spotify</ion-button>
+          <ion-button *ngIf="!(ad.category?.title === 'Instagram' || ad.category?.title === 'YouTube' || ad.category?.title === 'Spotify')" (touchend)="helper.openLink(ad.link)" class="w-full font-normal mt-4">Jetzt zum Deal</ion-button>
+          <ion-button *ngIf="ad.category?.title === 'Instagram'" (touchend)="helper.openLink(ad.link)" class="w-full font-normal mt-4">Zu Instagram</ion-button>
+          <ion-button *ngIf="ad.category?.title === 'YouTube'" (touchend)="helper.openLink(ad.link)" class="w-full font-normal mt-4">Zu YouTube</ion-button>
+          <ion-button *ngIf="ad.category?.title === 'Spotify'" (touchend)="helper.openLink(ad.link)" class="w-full font-normal mt-4">Zu Spotify</ion-button>
         </div>
       </div>
     </div>

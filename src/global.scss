@@ -229,6 +229,7 @@ ion-item {
 ion-button,
 button {
   text-transform: none !important;
+  pointer-events: all;
   &.bold {
     font-weight: bold !important;
   }

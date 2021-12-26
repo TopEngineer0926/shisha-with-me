@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
-import { AlertController, IonSlides, ModalController, Platform, ToastController } from '@ionic/angular';
+import { AlertController, IonSlides, LoadingController, ModalController, Platform, ToastController } from '@ionic/angular';
 import { AuthService } from 'src/common/auth/_services/auth.service';
 import { HelperService } from 'src/common/services/helper.service';
 import { MapService } from 'src/common/services/map.service';
@@ -39,7 +39,8 @@ export class StartSessionModalComponent implements OnInit {
     private toastCtrl: ToastController,
     public platform: Platform,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute, 
+    private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
     console.log('A', this.product);
@@ -124,24 +125,44 @@ export class StartSessionModalComponent implements OnInit {
   }
 
   async startSession(smokeProduct, type, location?) {
-    let data: any = {
-      start_user: this.authService.user.id.toString(),
-    };
-    if (location) {
-      data.location = location.id;
-    }
-    if (type == 'product') {
-      data.smoke_product = smokeProduct.id;
-    } else {
-      data.manufacturer = smokeProduct.id;
-    }
+    const loading = await this.loadingCtrl.create({ translucent: true });
+    loading.present();
 
-    // show telegram modal on first session if no telegram is set
-    const telegramUsername = this.authService.user.telegramUsername;
-    if (!telegramUsername) {
-      const hasSetANewName = await this.openTelegramModal();
+    try {
+      let data: any = {
+        start_user: this.authService.user.id.toString(),
+      };
+      if (location) {
+        data.location = location.id;
+      }
+      if (type == 'product') {
+        data.smoke_product = smokeProduct.id;
+      } else {
+        data.manufacturer = smokeProduct.id;
+      }
 
-      if (hasSetANewName) {
+      // show telegram modal on first session if no telegram is set
+      const telegramUsername = this.authService.user.telegramUsername;
+      if (!telegramUsername) {
+        const hasSetANewName = await this.openTelegramModal();
+
+        if (hasSetANewName) {
+          await this.http.post('api/sessions/start', data).toPromise();
+
+          (
+            await this.toastCtrl.create({
+              message: 'Session wurde gestartet',
+              translucent: true,
+              position: 'top',
+              duration: 4000,
+            })
+          ).present();
+
+          this.modalCtrl.dismiss({
+            showSmoke: true
+          })
+        }
+      } else {
         await this.http.post('api/sessions/start', data).toPromise();
 
         (
@@ -157,23 +178,12 @@ export class StartSessionModalComponent implements OnInit {
           showSmoke: true
         })
       }
-    } else {
-      await this.http.post('api/sessions/start', data).toPromise();
 
-      (
-        await this.toastCtrl.create({
-          message: 'Session wurde gestartet',
-          translucent: true,
-          position: 'top',
-          duration: 4000,
-        })
-      ).present();
-
-      this.modalCtrl.dismiss({
-        showSmoke: true
-      })
+    } catch (error) {
+      
+    } finally {
+      loading.dismiss();
     }
-
     /*setTimeout(() => {
       this.localNotifications.schedule({
         id: 1,

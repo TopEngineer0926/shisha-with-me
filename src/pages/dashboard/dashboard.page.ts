@@ -3,7 +3,7 @@ import {
   state,
   style,
   transition,
-  trigger,
+  trigger
 } from '@angular/animations';
 import { Platform } from '@angular/cdk/platform';
 import { HttpClient } from '@angular/common/http';
@@ -15,36 +15,30 @@ import {
   OnInit,
   QueryList,
   ViewChild,
-  ViewChildren,
+  ViewChildren
 } from '@angular/core';
+import {
+  ActivatedRoute
+} from '@angular/router';
 import { Geolocation } from '@capacitor/geolocation';
 import { Share } from '@capacitor/share';
-import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import {
   AlertController,
   IonRouterOutlet,
   IonSlides,
   LoadingController,
   ModalController,
-  ToastController,
+  ToastController
 } from '@ionic/angular';
 import { CupertinoPane, CupertinoSettings } from 'cupertino-pane';
+import { lastValueFrom } from 'rxjs/internal/lastValueFrom';
 import { AuthService } from 'src/common/auth/_services/auth.service';
 import { HelperService } from 'src/common/services/helper.service';
 import { MapService } from 'src/common/services/map.service';
-import { MapPage } from '../map/map.page';
-import { SelectLocationPage } from '../select-location/select-location.page';
-import { slideOpts } from './slider-config';
-import { filter, pairwise } from 'rxjs/operators';
-import {
-  ActivatedRoute,
-  NavigationEnd,
-  Router,
-  RoutesRecognized,
-} from '@angular/router';
-import { StartSessionModalComponent } from './components/start-session-modal/start-session-modal.component';
 import { Manufacturer } from 'src/common/types';
-import { lastValueFrom } from 'rxjs/internal/lastValueFrom';
+import { MapPage } from '../map/map.page';
+import { StartSessionModalComponent } from './components/start-session-modal/start-session-modal.component';
+import { slideOpts } from './slider-config';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',

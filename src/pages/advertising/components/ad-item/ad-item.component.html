@@ -1,7 +1,7 @@
 <!--[routerLink]="['/advertising', ad.id]"-->
 <ion-card (click)="open()" button routerDirection="forward">
   <div class="flex flex-row h-36">
-    <div class="w-36 bg-no-repeat bg-cover" [style.backgroundImage]="'url(' + helper.getImageUrl(ad.image?.url) + ')'"></div>
+    <div class="w-36 bg-no-repeat bg-cover" [style.backgroundImage]="'url(' + helper.getImageUrl(ad.image?.formats?.small?.url || ad?.image?.url) + ')'"></div>
     <div class="flex flex-col justify-center px-4 w-full">
       <div class="text-base text-white">{{ ad.title }}</div>
       <div class="mt-8 text-xs">

@@ -236,6 +236,17 @@ export class MapPage implements AfterViewInit, OnInit {
     });
   }
 
+  getIconUrl(type) {
+    switch (type) {
+      case "shisha_bar":
+        return '/assets/icons/shisha-icon.svg';
+      case "shisha_shop":
+        return '/assets/icons/cart-icon.svg';
+      case "user":
+        return '/assets/icons/account-icon.svg';
+    }
+  }
+
   addMarkersForPlaces(places: any[], doBounds = false) {
     let markers: google.maps.Marker[] = [];
     if (places.length == 0) {
@@ -248,7 +259,7 @@ export class MapPage implements AfterViewInit, OnInit {
       let marker: any = new google.maps.Marker({
         map: this.map.googleMap,
         icon: {
-          url: place.type == "shisha_bar" || place.type == "shisha_shop" ? "/assets/icons/shisha.png" : "/assets/icons/person-circle-outline.svg",
+          url: this.getIconUrl(place.type),
           size: new google.maps.Size(71, 71),
           origin: new google.maps.Point(0, 0),
           anchor: new google.maps.Point(17, 34),

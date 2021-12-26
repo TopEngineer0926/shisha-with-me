@@ -17,6 +17,7 @@ import { slideOpts } from '../../slider-config';
 })
 export class StartSessionModalComponent implements OnInit {
   @Input() product: Manufacturer;
+  @Input() manufacturer: Manufacturer;
   @Input() type: string;
   audio: HTMLAudioElement;
   @ViewChild('mainSlider') mainSlider: IonSlides;

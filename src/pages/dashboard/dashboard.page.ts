@@ -44,6 +44,7 @@ import {
 } from '@angular/router';
 import { StartSessionModalComponent } from './components/start-session-modal/start-session-modal.component';
 import { Manufacturer } from 'src/common/types';
+import { lastValueFrom } from 'rxjs/internal/lastValueFrom';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
@@ -120,19 +121,17 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
     });
   }
 
-  async ngOnInit() { }
+  async ngOnInit() {
+    
+  }
 
   async ngAfterViewInit() {
     const loading = await this.loadingCtrl.create({translucent: true});
     loading.present()
     try {
-      const playSmoke = this.route.snapshot.queryParamMap.get('playSmoke');
-      if (playSmoke) {
-        this.showSmoke();
-      }
-
-      const data = await this.http.get('api/manufacturers').toPromise();
-      console.log('data', data);
+      
+      const data = await lastValueFrom(await this.http.get('api/manufacturers'));
+      
       this.manufacturers = data;
       this.sorted = [...this.manufacturers];
       this.mainSlider?.update();
@@ -140,6 +139,11 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
 
       this.audio = new Audio('assets/sounds/Shisha_Sound.mp3');
       this.audio.loop = false;
+
+      const playSmoke = this.route.snapshot.queryParamMap.get('playSmoke');
+      if (playSmoke) {
+        this.showSmoke();
+      }
 
       this.mainSlider.ionSlideDidChange.subscribe(async (ev) => {
         // console.log('change', ev);
@@ -155,6 +159,14 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
         // console.log('this.subSliders[prevIndex]', sliders[prevIndex], prevIndex);
       });
     } catch (error) {
+      (
+        await this.toastCtrl.create({
+          message: 'Daten konnten nicht geladen werden. Bitte prüfe Deine Internetverbindung.',
+          translucent: true,
+          position: 'top',
+          duration: 4000,
+        })
+      ).present();
       
     }
 
@@ -220,7 +232,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
     await modal.present();
   }
 
-  async selectSession(product: Manufacturer, type: string) {
+  async selectSession(product: Manufacturer | any, type: string) {
     if(type=='manufactur') {
       (
         await this.toastCtrl.create({
@@ -255,6 +267,8 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
 
     await alert.present();
     */
+
+    const manufacturer = this.manufacturers.find((manufacturer)=> manufacturer.id == product.manufacturer);
     const modal = await this.modalCtrl.create({
       component: StartSessionModalComponent,
       breakpoints: [0.0, 0.5, 0.7],
@@ -263,7 +277,8 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
       cssClass: 'smoke-start-modal',
       componentProps: {
         product,
-        type
+        type,
+        manufacturer
       }
     });
 

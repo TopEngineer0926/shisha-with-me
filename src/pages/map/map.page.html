@@ -8,8 +8,8 @@
         </div>
 
         <div class="flex justify-center items-center">
-          <div *ngIf="currentTab == 'friends'">Freunde</div>
-          <div *ngIf="currentTab == 'map'">Karte</div>
+          <div *ngIf="currentTab === 'friends'">Freunde</div>
+          <div *ngIf="currentTab === 'map'">Karte</div>
         </div>
 
         <div class="flex items-center justify-end">
@@ -32,19 +32,19 @@
   <!--<ion-button fill="none" class="close" (click)="close()">
     <ion-icon name="close-circle-outline"></ion-icon>
   </ion-button>-->
-  <div [hidden]="!(currentTab == 'map')" class="map">
+  <div [hidden]="!(currentTab === 'map')" class="map">
     <google-map [center]="center" [zoom]="zoom" [options]="options">
       <map-marker *ngFor="let markerPosition of markerPositions" [position]="markerPosition"></map-marker>
     </google-map>
   </div>
-  <div [hidden]="!(currentTab == 'friends')" class="p-5">
+  <div [hidden]="!(currentTab === 'friends')" class="p-5">
     <app-friends-list></app-friends-list>
   </div>
 
   <div slot="fixed" class="bottom-4 w-full px-8">
-    <ion-button [hidden]="!(currentTab == 'map')" color="primary" class="w-full font-normal"
+    <ion-button [hidden]="!(currentTab === 'map')" color="primary" class="w-full font-normal"
       (click)="openFilterSheet()">Filtern</ion-button>
-    <ion-button [hidden]="!(currentTab == 'friends')" color="primary" class="w-full font-normal" (click)="share()">Teile
+    <ion-button [hidden]="!(currentTab === 'friends')" color="primary" class="w-full font-normal" (click)="share()">Teile
       die App mit Freunden</ion-button>
   </div>
   <!--
@@ -68,7 +68,7 @@
 </ion-content>
 
 <!-- Filter Sheet -->
-<ion-modal #filterModal [hidden]="!(currentTab == 'map')" mode="ios" class="modal-over-bottom-nav"
+<ion-modal #filterModal [hidden]="!(currentTab === 'map')" mode="ios" class="modal-over-bottom-nav"
   [isOpen]="showFilterSheet" [breakpoints]="[0, 0.45]" [initialBreakpoint]="0.45" [swipeToClose]="true"
   (didDismiss)="showFilterSheet = false">
   <ng-template>

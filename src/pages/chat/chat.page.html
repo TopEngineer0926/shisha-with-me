@@ -93,7 +93,7 @@
 
         <div
           class="chat-item-reaction"
-          *ngIf="item.author?.id !== api?.userStorage?.id && item.type == 'image'"
+          *ngIf="item.author?.id !== api?.userStorage?.id && item.type === 'image'"
         >
           <ion-icon name="md-heart" class="text-muted"></ion-icon>
         </div>

@@ -19,7 +19,7 @@
       <ion-card-subtitle
         ><ion-badge
           color="success"
-          *ngIf="place?.business_status == 'OPERATIONAL'"
+          *ngIf="place?.business_status === 'OPERATIONAL'"
           >Geöffnet</ion-badge
         ></ion-card-subtitle
       >
@@ -32,7 +32,7 @@
   <div class="" style="
   padding: 15px;">
     <ion-list lines="none">
-      <ion-item *ngIf="location?.rating">
+      <!--<ion-item *ngIf="location?.rating">
         <ion-icon slot="start" name="analytics-outline"></ion-icon>
         <ion-label>Rating</ion-label>
         <div class="flex h-full items-center mt-2"><ngx-stars
@@ -43,19 +43,21 @@
           [maxStars]="5"
           [initialStars]="location?.rating"
         ></ngx-stars></div>
-      </ion-item>
+      </ion-item>-->
       <!--<ion-item>
         <ion-icon slot="start" name="star-outline"></ion-icon>
         <ion-label>Bewertungen</ion-label>
         <ion-badge slot="end">{{place?.user_ratings_total}}</ion-badge>
       </ion-item>-->
-      <ion-item lines="none" *ngIf="location?.location?.address">
-        <ion-icon slot="start" name="home-outline"></ion-icon>
-        <ion-label>Adresse</ion-label>
+      <ion-item  lines="none" *ngIf="location?.location?.address">
+        <div class="flex flex-col">
+          <div class="flex py-3 justify-center"><ion-icon class="mr-3" slot="start" name="home-outline"></ion-icon>
+            <ion-label>Adresse</ion-label></div>
+  
+          <div><ion-badge class="whitespace-pre-line text-left">{{location?.location?.address}}</ion-badge></div>
+        </div>
       </ion-item>
-      <ion-item>
-        <ion-badge>{{location?.location?.address}}</ion-badge></ion-item
-      >
+     
     </ion-list>
   </div>
 

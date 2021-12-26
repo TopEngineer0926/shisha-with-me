@@ -175,13 +175,22 @@
               "devServerTarget": "app:serve:production"
             }
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
   "cli": {
     "analytics": "252ac348-ccc0-4af4-b8f3-0cf2c05c82f1",
-    "defaultCollection": "@ionic/angular-toolkit",
+    "defaultCollection": "@angular-eslint/schematics",
     "cache": {
       "enabled": false
     }

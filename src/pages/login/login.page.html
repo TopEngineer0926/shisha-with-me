@@ -25,7 +25,7 @@
       </ion-segment-button>
     </ion-segment>
 
-    <div class="center" *ngIf="currentTab == 'login' && step == 1">
+    <div class="center" *ngIf="currentTab === 'login' && step == 1">
       <form class="w-full" #form="ngForm">
         <ion-item>
           <ion-input
@@ -103,7 +103,7 @@
         translate }}
       </ion-button>
     </div>
-    <app-register *ngIf="currentTab == 'register'"></app-register>
+    <app-register *ngIf="currentTab === 'register'"></app-register>
     <ion-note class="text-sm mt-5">
       Ich habe die Allgemeine Geschäftsbedingung und Datenschutzerklärung
       gelesen und akzeptiere diese.

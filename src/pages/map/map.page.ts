@@ -212,7 +212,7 @@ export class MapPage implements AfterViewInit, OnInit {
     const modal = await this.modalCtrl.create({
       component: PlacePage,
       swipeToClose: true,
-      presentingElement: elm, //this.routerOutlet.nativeEl,
+      // presentingElement: elm, //this.routerOutlet.nativeEl,
       componentProps: {
         placeId: id,
       },

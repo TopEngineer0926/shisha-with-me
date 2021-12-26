@@ -49,9 +49,9 @@
         <ion-label>Bewertungen</ion-label>
         <ion-badge slot="end">{{place?.user_ratings_total}}</ion-badge>
       </ion-item>-->
-      <ion-item  lines="none" *ngIf="location?.location?.address">
+      <ion-item class="address"  lines="none" *ngIf="location?.location?.address">
         <div class="flex flex-col">
-          <div class="flex py-3 justify-center"><ion-icon class="mr-3" slot="start" name="home-outline"></ion-icon>
+          <div class="flex py-3 items-center"><ion-icon class="mr-3" slot="start" name="home-outline"></ion-icon>
             <ion-label>Adresse</ion-label></div>
   
           <div><ion-badge class="whitespace-pre-line text-left">{{location?.location?.address}}</ion-badge></div>

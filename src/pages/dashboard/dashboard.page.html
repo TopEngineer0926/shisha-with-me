@@ -51,7 +51,7 @@
   </swiper>-->
 
   <div *ngIf="searchTerm" class="p-5">
-    <div *ngFor="let slide of sorted">
+    <div *ngFor="let slide of searchedSmokeProducts">
       <ng-container *ngIf="slide.smoke_products?.length > 0">
         <div class="py-3 font-bold">{{slide.name}}</div>
         <div class="grid grid-cols-2 gap-4 mb-3">

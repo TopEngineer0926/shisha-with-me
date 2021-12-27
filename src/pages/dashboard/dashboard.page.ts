@@ -52,7 +52,7 @@ import { slideOpts } from './slider-config';
     ]),
   ],
 })
-export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
+export class DashboardPage implements AfterViewInit, OnDestroy {
   audio: HTMLAudioElement;
   @ViewChild('mainSlider') mainSlider: IonSlides;
   @ViewChild('map') map: google.maps.Map;
@@ -79,7 +79,8 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
   };
 
   manufacturers;
-  sorted;
+  sorted
+  searchedSmokeProducts;
 
   searchTerm;
 
@@ -96,7 +97,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
     private authService: AuthService,
     private toastCtrl: ToastController,
     public platform: Platform,
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
     private loadingCtrl: LoadingController
   ) { }
 
@@ -115,21 +116,17 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
     });
   }
 
-  async ngOnInit() {
-    
-  }
-
   async ngAfterViewInit() {
-    const loading = await this.loadingCtrl.create({translucent: true});
+    const loading = await this.loadingCtrl.create({ translucent: true });
     loading.present()
     try {
-      
+
       const data = await lastValueFrom(await this.http.get('api/manufacturers'));
-      
+
       this.manufacturers = data;
       this.sorted = [...this.manufacturers];
       this.mainSlider?.update();
-      
+
 
       this.audio = new Audio('assets/sounds/Shisha_Sound.mp3');
       this.audio.loop = false;
@@ -161,7 +158,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
           duration: 4000,
         })
       ).present();
-      
+
     }
 
 
@@ -173,15 +170,21 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
       this.sorted = [...this.manufacturers];
       return;
     }
-    const searched = this.manufacturers.map((element) => {
+
+    const searchedSmokeProducts = this.manufacturers.map((element) => {
       return {
         ...element,
-        smoke_products: element.smoke_products.filter((subElement) =>
-          subElement.name.toLowerCase().includes(this.searchTerm.toLowerCase())
-        ),
+        smoke_products: element.smoke_products.filter((subElement) => {
+          let isRelevant = false;
+          if (subElement.name.toLowerCase().includes(this.searchTerm.toLowerCase())) isRelevant = true;
+          if (element.name.toLowerCase().includes(this.searchTerm.toLowerCase())) isRelevant = true;
+
+          return isRelevant;
+        })
       };
     });
-    this.sorted = [...searched];
+
+    this.searchedSmokeProducts = [...searchedSmokeProducts];
   }
 
   smokeProducts(sorted) {
@@ -227,7 +230,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
   }
 
   async selectSession(product: Manufacturer | any, type: string) {
-    if(type=='manufactur') {
+    if (type == 'manufactur') {
       (
         await this.toastCtrl.create({
           message: 'Wähle eine Sorte aus zum Starten',
@@ -262,7 +265,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy, OnInit {
     await alert.present();
     */
 
-    const manufacturer = this.manufacturers.find((manufacturer)=> manufacturer.id == product.manufacturer);
+    const manufacturer = this.manufacturers.find((manufacturer) => manufacturer.id == product.manufacturer);
     const modal = await this.modalCtrl.create({
       component: StartSessionModalComponent,
       breakpoints: [0.0, 0.5, 0.7],

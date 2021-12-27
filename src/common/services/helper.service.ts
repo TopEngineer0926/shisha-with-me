@@ -9,7 +9,6 @@ import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
 import { DocumentViewerOptions } from '@ionic-native/document-viewer';
 import { environment } from 'src/environments/environment';
 import { StatusBar, StatusBarStyle } from '@capacitor/status-bar';
-import { Browser } from '@capacitor/browser';
 
 declare var window: any;
 @Injectable({
@@ -26,8 +25,8 @@ export class HelperService {
     this.getDarkMode();
   }
 
-  async openLink(url) {
-    await Browser.open({ url: url });
+  openLink(url) {
+    window.open(url, '_blank');
   }
 
   getImageUrl(url) {

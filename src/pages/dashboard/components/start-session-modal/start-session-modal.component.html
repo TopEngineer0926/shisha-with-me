@@ -1,20 +1,34 @@
-<div class="mt-4 px-8">
-  <div class="mt-4 text-lg">{{ product.name }} - {{ manufacturer.name }}</div>
-  <div class="mt-0 flex flex-row justify-between">
-    <div class="mt-2">
-      {{ product.description  }}
-    </div>
-    <div class="relative">
-      <img loading="lazy" class="mx-auto object-cover h-28 rounded-full" [src]="helper.getImageUrl(product?.image?.formats?.small?.url || product?.image.url)" />
-      <div class="absolute top-0 right-0 bg-white rounded-full overflow-hidden flex justify-center items-center h-[40px] w-[40px]">
-        <img loading="lazy" class="" [src]="helper.getImageUrl(manufacturer?.image?.formats?.small?.url || manufacturer?.image.url)" />
+<div *ngIf="!selectLocationMode;">
+  <div class="mt-4 px-8">
+    <div class="mt-4 text-lg">{{ product.name }} - {{ manufacturer.name }}</div>
+    <div class="mt-0 flex flex-row justify-between">
+      <div class="mt-2">
+        {{ product.description }}
+      </div>
+      <div class="relative">
+        <img loading="lazy" class="mx-auto object-cover h-28 rounded-full" [src]="helper.getImageUrl(product?.image?.formats?.small?.url || product?.image.url)" />
+        <div class="absolute top-0 right-0 bg-white rounded-full overflow-hidden flex justify-center items-center h-[40px] w-[40px]">
+          <img loading="lazy" class="" [src]="helper.getImageUrl(manufacturer?.image?.formats?.small?.url || manufacturer?.image.url)" />
+        </div>
       </div>
     </div>
-  </div>
 
 
-  <div >
-    <ion-button color="primary" class="w-full font-normal mt-2" (click)="startSession(product, type)">Privat</ion-button>
-    <ion-button color="primary" class="w-full font-normal mt-4" (click)="selectLocation()">Shisha Bar</ion-button>
+    <div>
+      <ion-button color="primary" class="w-full font-normal mt-2" (click)="startSession(product, type)">Privat</ion-button>
+      <ion-button color="primary" class="w-full font-normal mt-4" (click)="selectLocation()">Shisha Bar</ion-button>
+    </div>
   </div>
 </div>
+
+<div *ngIf="selectLocationMode" [@slideInOut]>
+  <div class="mt-4 px-8">
+    <div class="mt-4 text-lg">Shisha Bars</div>
+
+    <ion-button *ngIf="nearbyShishaBars && nearbyShishaBars[0]" (click)="locationClicked(nearbyShishaBars[0])" color="primary" class="w-full font-normal mt-4">{{ nearbyShishaBars[0].name }} </ion-button>
+    <ion-button *ngIf="nearbyShishaBars && nearbyShishaBars[1]" (click)="locationClicked(nearbyShishaBars[1])" color="primary" class="w-full font-normal mt-4">{{ nearbyShishaBars[1].name }} </ion-button>
+    <ion-button *ngIf="nearbyShishaBars && nearbyShishaBars[2]" (click)="locationClicked(nearbyShishaBars[2])" color="primary" class="w-full font-normal mt-4">{{ nearbyShishaBars[2].name }} </ion-button>
+
+    <div (click)="openSearchLocationModal()" class="text-center text-sm mt-6" style="opacity: 0.7">Shisha Bar nicht gefunden? Hier hinzufügen</div>
+  </div>
+</div>>

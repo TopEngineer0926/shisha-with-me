@@ -103,6 +103,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
 
   async showSmoke() {
     this.visiblityState = 'shown';
+    this.audio.play();
     const video = this.videoElm.nativeElement;
     await video.play();
     console.log(this.visiblityState);

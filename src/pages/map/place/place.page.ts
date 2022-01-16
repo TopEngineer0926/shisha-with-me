@@ -1,11 +1,7 @@
-import { HelperService } from './../../../common/services/helper.service';
-import { ModalController } from '@ionic/angular';
-import { Component, Input, OnInit } from '@angular/core';
-import {
-  LaunchNavigator,
-  LaunchNavigatorOptions,
-} from '@ionic-native/launch-navigator/ngx';
 import { HttpClient } from '@angular/common/http';
+import { Component, Input, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { HelperService } from './../../../common/services/helper.service';
 
 @Component({
   selector: 'app-place',

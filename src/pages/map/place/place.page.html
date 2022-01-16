@@ -12,9 +12,13 @@
 <ion-content>
   <ion-card>
     <div
-      class="bg-cover bg-no-repeat h-52 w-full bg-center"
+      class="bg-cover bg-no-repeat h-52 w-full bg-center relative"
       [style.backgroundImage]="'url(' + helper.getImageUrl(location?.images[0]?.url) +')'"
-    ></div>
+    >
+    <ion-badge class="absolute top-3 right-3 opacity-80">
+      {{location?.type == "shisha_shop" ? "Shisha Shop" : "Shisha Bar"}}
+    </ion-badge>
+  </div>
     <ion-card-header >
       <ion-card-subtitle
         ><ion-badge

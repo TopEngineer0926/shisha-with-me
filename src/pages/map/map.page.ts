@@ -238,6 +238,7 @@ export class MapPage implements AfterViewInit, OnInit {
   }
 
   async openPlace(id) {
+    console.log('openPlace', id)
     const elm = await this.modalCtrl.getTop();
     const modal = await this.modalCtrl.create({
       component: PlacePage,
@@ -315,7 +316,7 @@ export class MapPage implements AfterViewInit, OnInit {
 
       google.maps.event.addListener(marker, "click", async () => {
         console.log(marker);
-        if (marker.dataType == "shisha_bar" || marker.datatype == "shisha_shop") {
+        if (marker.dataType == "shisha_bar" || marker.dataType == "shisha_shop") {
           await this.openPlace(marker.dataId);
         }
         if (marker.dataType == "user") {

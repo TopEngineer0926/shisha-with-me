@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Ort</ion-title>
+    <ion-title> {{location?.type == "shisha_shop" ? "Shisha Shop" : "Shisha Bar"}}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="dismiss()">
         <ion-icon name="close"></ion-icon>

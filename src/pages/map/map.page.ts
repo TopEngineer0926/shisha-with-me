@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ViewChild } from "@angular/core";
 import { GoogleMap } from "@angular/google-maps";
-import { IonModal, IonRouterOutlet, LoadingController, ModalController, PopoverController } from "@ionic/angular";
+import { IonModal, IonRouterOutlet, LoadingController, ModalController, PopoverController, ToastController } from "@ionic/angular";
 import { MapService } from "src/common/services/map.service";
 import { MapFilterComponent } from "./components/map-filter/map-filter.component";
 import { PlacePage } from "./place/place.page";
@@ -11,7 +11,7 @@ import { ProfilePage } from "../profile/profile.page";
 import { Share } from "@capacitor/share";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { OnInit } from "@angular/core";
-import { filter } from "rxjs";
+import { filter, lastValueFrom } from "rxjs";
 import { Event, NavigationStart, Router } from "@angular/router";
 
 @Component({
@@ -52,7 +52,8 @@ export class MapPage implements AfterViewInit, OnInit {
     private loadingCtrl: LoadingController,
     private authService: AuthService,
     private http: HttpClient,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder, 
+    private toastCtrl: ToastController
   ) {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
@@ -176,7 +177,7 @@ export class MapPage implements AfterViewInit, OnInit {
       try {
         const coordinates = await Geolocation.getCurrentPosition({
           enableHighAccuracy: false,
-          timeout: 1000,
+          timeout: 10000,
         });
         this.center = {
           lat: coordinates.coords.latitude,
@@ -193,11 +194,27 @@ export class MapPage implements AfterViewInit, OnInit {
         this.zoom = 14;
 
         const location = {
-          lat: this.options.center.lat,
-          lng: this.options.center.lng,
+          lat: coordinates.coords.latitude,
+          lng: coordinates.coords.longitude,
         };
-        await this.http.put("api/users/" + this.authService.user.id, { location: location }).toPromise();
+        await lastValueFrom(this.http.put("api/users/" + this.authService.user.id, { location: location }));
       } catch (error) {
+        const toast = await this.toastCtrl.create({
+          message: 'Standort konnte nicht ermittelt werden, bitte gebe deinen Standort in den Einstellungen frei.',
+          translucent: true,
+          position: 'top',
+          duration: 3000,
+          buttons: [
+            {
+              text: 'Ok',
+              role: 'cancel',
+              handler: () => {
+                console.log('Cancel clicked');
+              },
+            },
+          ],
+        });
+        toast.present();
         console.log("error", error);
         reject(error);
       } finally {

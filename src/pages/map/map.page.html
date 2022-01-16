@@ -47,19 +47,19 @@
     <ion-button [hidden]="!(currentTab === 'friends')" color="primary" class="w-full font-normal" (click)="share()">Teile
       die App mit Freunden</ion-button>
   </div>
-  <!--
+  
   <ion-fab
-    *ngIf="currentTab == 'map'"
     vertical="bottom"
-    horizontal="start"
+    horizontal="end"
     slot="fixed"
+    style="bottom: 87px;"
   >
     <ion-fab-button (click)="getCurrentPosition()" [disabled]="locationLoading">
       <ion-icon *ngIf="!locationLoading" name="location-outline"></ion-icon>
       <ion-spinner *ngIf="locationLoading"></ion-spinner>
     </ion-fab-button>
   </ion-fab>
--->
+
   <!--<ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="presentPopover($event)">
       <ion-icon name="funnel-outline"></ion-icon>

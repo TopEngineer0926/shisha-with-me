@@ -25,7 +25,7 @@ export class UserService {
       return;
     }
 
-    const user = await this.http.get('api​/users​/me').toPromise();
+    const user = await this.http.get('api/users/me').toPromise();
 
     return user;
     /*

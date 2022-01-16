@@ -13,6 +13,7 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 import { OnInit } from "@angular/core";
 import { filter, lastValueFrom } from "rxjs";
 import { Event, NavigationStart, Router } from "@angular/router";
+import { UserService } from 'src/common/auth/_services/user.service';
 
 @Component({
   selector: "app-map",
@@ -53,7 +54,8 @@ export class MapPage implements AfterViewInit, OnInit {
     private authService: AuthService,
     private http: HttpClient,
     public formBuilder: FormBuilder, 
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController, 
+    private userService: UserService
   ) {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
@@ -149,6 +151,17 @@ export class MapPage implements AfterViewInit, OnInit {
     loading.present();
 
     try {
+
+      const user: any = await this.userService.getUser();
+      console.log('iser', user);
+      if(user?.location?.lat) {
+        this.markerPositions = [
+          {
+            lat: user?.location?.lat,
+            lng: user?.location?.lng,
+          },
+        ];
+      }
       google.maps.event.addListener(this.map.googleMap, "dragend", async () => {
         // await this.loadPlaces(true);
       });

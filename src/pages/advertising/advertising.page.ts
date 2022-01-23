@@ -44,8 +44,8 @@ export class AdvertisingPage implements OnInit {
     // const elm = await this.modalCtrl.getTop();
     const modal = await this.modalCtrl.create({
       component: AdSavedPage,
-      swipeToClose: true,
-      presentingElement: this.routerOutlet.nativeEl,
+      // swipeToClose: true,
+      // presentingElement: this.routerOutlet.nativeEl,
     });
     return await modal.present();
   }

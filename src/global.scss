@@ -63,7 +63,7 @@ ion-item.transparent-item {
 ion-segment {
   padding: 0 2px;
 }
-ion-segment-button[mode="ios"] {
+ion-segment-button {
   --background-checked: #384455;
   --indicator-color: transparent !important;
   &.custom-padding {
@@ -368,5 +368,17 @@ ion-searchbar {
   }
   .searchbar-clear-button{
     display: none!important;
+  }
+}
+
+ion-header {
+  ion-toolbar {
+    @apply pt-4 h-16;
+  }
+  ion-title {
+    @apply text-3xl font-normal;
+  }
+  ion-button, ion-back-button {
+    --color: #fff;
   }
 }

@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
-
-import { Geolocation } from '@capacitor/geolocation';
-
-import { LoadingController, ModalController, NavController, ToastController } from '@ionic/angular';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { NavController, ToastController } from '@ionic/angular';
+import PhoneNumber from 'awesome-phonenumber';
 import { AuthService } from 'src/common/auth/_services/auth.service';
 import { MapHelperService } from 'src/common/services/map-helper.service';
+
+
+
+
 
 @Component({
   selector: 'creedle-edit-profile',
@@ -41,9 +43,7 @@ export class EditProfileComponent implements OnInit {
 
   constructor(
     private cdr: ChangeDetectorRef,
-    private loadingCtrl: LoadingController,
     public mapHelperService: MapHelperService,
-    private modalCtrl: ModalController,
     private http: HttpClient,
     private toastCtrl: ToastController,
     private authService: AuthService, 
@@ -56,7 +56,11 @@ export class EditProfileComponent implements OnInit {
     this.model.username = this.user.customUsername
     this.model.telegram = this.user.telegramUsername
     this.model.phone = this.user.phoneNumber
-    if (this.user.social) this.model.social = this.user.social
+    if (this.user.social) this.model.social = this.user.social;
+
+
+    var pn = new PhoneNumber( this.model.phone, 'DE' );
+    console.log('test', pn.getNumber( ))
   }
 
   async loadUser() {

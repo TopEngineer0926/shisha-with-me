@@ -1,32 +1,32 @@
 import { HttpClient } from '@angular/common/http';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, OnDestroy } from '@angular/core';
 import {
-  Camera,
-  CameraPhoto,
-  CameraResultType,
-  CameraSource,
+  CameraPhoto
 } from '@capacitor/camera';
 import {
   AlertController,
   LoadingController,
   ModalController,
-  ToastController,
+  ToastController
 } from '@ionic/angular';
 import { AuthService } from 'src/common/auth/_services/auth.service';
 import { HelperService } from 'src/common/services/helper.service';
 import { UploadService } from 'src/common/services/upload.service';
 import { AddEquipmentPage } from './pages/add-equipment/add-equipment.page';
 import { LocationSelectComponent } from './pages/location-select/location-select.component';
+import PhoneNumber from 'awesome-phonenumber';
+
 
 @Component({
   selector: 'app-profile-edit',
   templateUrl: './profile-edit.page.html',
   styleUrls: ['./profile-edit.page.scss'],
 })
-export class ProfileEditPage implements OnInit {
+export class ProfileEditPage implements OnInit, OnDestroy {
   image: CameraPhoto | any = { webPath: '/assets/mathis.png' };
 
   user: any = {};
+  fileInput;
 
   constructor(
     private alertController: AlertController,
@@ -42,6 +42,15 @@ export class ProfileEditPage implements OnInit {
 
   async ngOnInit() {
     await this.loadUser();
+
+    var pn = new PhoneNumber( '0707123456', 'SE' );
+    console.log('test', pn.isMobile())
+  }
+
+  ngOnDestroy() {
+    if(this.fileInput) {
+      document.body.removeChild(this.fileInput)
+    }
   }
 
   async loadUser() {
@@ -223,25 +232,30 @@ export class ProfileEditPage implements OnInit {
   async changePicture($event: MouseEvent): Promise<void> {
     $event.preventDefault();
 
+    if(this.fileInput) {
+      document.body.removeChild(this.fileInput)
+    }
+    
+
     let files: FileList;
     if ($event instanceof DragEvent) {
       if ($event?.dataTransfer?.files?.length > 0) {
         files = $event?.dataTransfer?.files;
       }
     } else {
-      const fileInput = document.createElement('input');
-      fileInput.type = 'file';
-      fileInput.accept = 'image/*';
-      fileInput.multiple = false;
+      this.fileInput = document.createElement('input');
+      this.fileInput.type = 'file';
+      this.fileInput.accept = 'image/*';
+      this.fileInput.multiple = false;
       const fileSelectPromise = new Promise((resolve, reject) => {
-        fileInput.onchange = resolve;
+        this.fileInput.onchange = resolve;
       });
-      document.body.appendChild(fileInput);
-      fileInput.click();
+      document.body.appendChild(this.fileInput);
+      this.fileInput.click();
       try {
         await fileSelectPromise;
-        document.body.removeChild(fileInput)
-        files = fileInput.files;
+        files = this.fileInput.files;
+        document.body.removeChild(this.fileInput)
       } catch (e) {}
     }
 

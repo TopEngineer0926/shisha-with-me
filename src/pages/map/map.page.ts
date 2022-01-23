@@ -1,19 +1,18 @@
-import { AfterViewInit, Component, ViewChild } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
+import { FormBuilder, FormGroup } from "@angular/forms";
 import { GoogleMap } from "@angular/google-maps";
-import { IonModal, IonRouterOutlet, LoadingController, ModalController, PopoverController, ToastController } from "@ionic/angular";
+import { Event, NavigationStart, Router } from "@angular/router";
+import { Geolocation } from "@capacitor/geolocation";
+import { Share } from "@capacitor/share";
+import { IonModal, LoadingController, ModalController, PopoverController, ToastController } from "@ionic/angular";
+import { lastValueFrom } from "rxjs";
+import { AuthService } from "src/common/auth/_services/auth.service";
+import { UserService } from 'src/common/auth/_services/user.service';
 import { MapService } from "src/common/services/map.service";
+import { ProfilePage } from "../profile/profile.page";
 import { MapFilterComponent } from "./components/map-filter/map-filter.component";
 import { PlacePage } from "./place/place.page";
-import { Geolocation } from "@capacitor/geolocation";
-import { AuthService } from "src/common/auth/_services/auth.service";
-import { HttpClient } from "@angular/common/http";
-import { ProfilePage } from "../profile/profile.page";
-import { Share } from "@capacitor/share";
-import { FormBuilder, FormGroup } from "@angular/forms";
-import { OnInit } from "@angular/core";
-import { filter, lastValueFrom } from "rxjs";
-import { Event, NavigationStart, Router } from "@angular/router";
-import { UserService } from 'src/common/auth/_services/user.service';
 
 @Component({
   selector: "app-map",
@@ -49,7 +48,6 @@ export class MapPage implements AfterViewInit, OnInit {
     public popoverController: PopoverController,
     private modalCtrl: ModalController,
     private router: Router,
-    //private routerOutlet: IonRouterOutlet,
     private loadingCtrl: LoadingController,
     private authService: AuthService,
     private http: HttpClient,
@@ -59,7 +57,7 @@ export class MapPage implements AfterViewInit, OnInit {
   ) {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
-        this.modalCtrl.dismiss();
+        this.modalCtrl?.dismiss();
       }
     });
   }

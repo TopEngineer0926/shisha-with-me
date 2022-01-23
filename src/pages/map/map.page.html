@@ -49,10 +49,11 @@
   </div>
   
   <ion-fab
+    *ngIf="currentTab === 'map'"
     vertical="bottom"
     horizontal="end"
     slot="fixed"
-    style="bottom: 87px;"
+    style="bottom: 87px; right: 20px;"
   >
     <ion-fab-button (click)="getCurrentPosition()" [disabled]="locationLoading">
       <ion-icon *ngIf="!locationLoading" name="location-outline"></ion-icon>

@@ -55,11 +55,7 @@ export class MapPage implements AfterViewInit, OnInit {
     private toastCtrl: ToastController, 
     private userService: UserService
   ) {
-    this.router.events.subscribe((event: Event) => {
-      if (event instanceof NavigationStart) {
-        this.modalCtrl?.dismiss();
-      }
-    });
+    
   }
 
   changeTab(ev) {
@@ -80,6 +76,15 @@ export class MapPage implements AfterViewInit, OnInit {
   }
 
   async ngOnInit() {
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationStart) {
+        try {
+          this.modalCtrl?.dismiss();
+        } catch (error) {
+          
+        }
+      }
+    });
     this.mapFilterForm = this.formBuilder.group({
       friends: [true],
       shishaShop: [true],

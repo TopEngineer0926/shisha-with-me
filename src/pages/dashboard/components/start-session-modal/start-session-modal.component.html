@@ -1,6 +1,6 @@
 <div *ngIf="!selectLocationMode;">
-  <div class="mt-4 px-8">
-    <div class="mt-4 text-lg">{{ product.name }} - {{ manufacturer.name }}</div>
+  <div class="mt-5 px-8">
+    <div class="mt-5 text-lg">{{ product.name }} - {{ manufacturer.name }}</div>
     <div class="mt-0 flex flex-row justify-between">
       <div class="mt-2">
         {{ product.description }}
@@ -22,8 +22,8 @@
 </div>
 
 <div *ngIf="selectLocationMode" [@slideInOut]>
-  <div class="mt-4 px-8">
-    <div class="mt-4 text-lg">Shisha Bars</div>
+  <div class="mt-5 px-8">
+    <div class="mt-5 text-lg">Shisha Bars</div>
 
     <ion-button *ngIf="nearbyShishaBars && nearbyShishaBars[0]" (click)="locationClicked(nearbyShishaBars[0])" color="primary" class="w-full font-normal mt-4">{{ nearbyShishaBars[0].name }} </ion-button>
     <ion-button *ngIf="nearbyShishaBars && nearbyShishaBars[1]" (click)="locationClicked(nearbyShishaBars[1])" color="primary" class="w-full font-normal mt-4">{{ nearbyShishaBars[1].name }} </ion-button>

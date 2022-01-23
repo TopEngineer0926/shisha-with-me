@@ -71,10 +71,10 @@
     <ion-item class="mb-3" button (click)="openContact()">
       <ion-label> Kontakt </ion-label>
     </ion-item>
-    <ion-item class="mb-3" button (click)="helper.openLink('https://codext.de/impressum/')">
+    <ion-item class="mb-3" button (click)="helper.openLink(settings?.imprintLink)">
       <ion-label> {{'Imprint' |translate}} </ion-label>
     </ion-item>
-    <ion-item class="mb-3" button (click)="helper.openLink('https://codext.de/datenschutz/')">
+    <ion-item class="mb-3" button (click)="helper.openLink(settings?.privacyLink)">
       <ion-label> {{'Privacy' |translate}} </ion-label>
     </ion-item>
   </ion-list>

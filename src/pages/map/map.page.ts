@@ -13,7 +13,8 @@ import { MapService } from "src/common/services/map.service";
 import { ProfilePage } from "../profile/profile.page";
 import { MapFilterComponent } from "./components/map-filter/map-filter.component";
 import { PlacePage } from "./place/place.page";
-
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+@UntilDestroy()
 @Component({
   selector: "app-map",
   templateUrl: "./map.page.html",
@@ -76,7 +77,7 @@ export class MapPage implements AfterViewInit, OnInit {
   }
 
   async ngOnInit() {
-    this.router.events.subscribe((event: Event) => {
+    this.router.events.pipe(untilDestroyed(this)).subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
         try {
           this.modalCtrl?.dismiss();

@@ -63,7 +63,6 @@
       </ion-avatar>
       <ion-label>
         <h2>{{ user.customUsername || user.name }}</h2>
-        <p>{{ user.email }}</p>
       </ion-label>
       <ion-button *ngIf="!user.isFriend" [disabled]="user.loading" slot="end" (click)="sendRequest(user)">
         <ion-spinner class="mr-3" *ngIf="user.loading"></ion-spinner>

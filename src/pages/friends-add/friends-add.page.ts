@@ -1,5 +1,4 @@
 import { HelperService } from './../../common/services/helper.service';
-import { environment } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import {
   ToastController,
@@ -15,7 +14,7 @@ import * as qs from 'qs';
   templateUrl: './friends-add.page.html',
   styleUrls: ['./friends-add.page.scss'],
 })
-export class FriendsAddPage implements OnInit {
+export class FriendsAddPage {
   friends = [
     {
       name: 'Daniel Ehrhardt',
@@ -34,8 +33,6 @@ export class FriendsAddPage implements OnInit {
     private authService: AuthService,
     private toastCtrl: ToastController
   ) { }
-
-  ngOnInit() { }
 
   segmentChanged(ev) {
     this.searchForProperty = ev.detail.value;

@@ -42,7 +42,7 @@
       <ion-segment-button value="customUsername">
         <ion-label>Name</ion-label>
       </ion-segment-button>
-      <ion-segment-button value="instagram">
+      <ion-segment-button value="social.instagram">
         <ion-label>Instagram</ion-label>
       </ion-segment-button>
       <ion-segment-button value="phoneNumber">
@@ -58,7 +58,7 @@
         <div class="bg-cover bg-no-repeat h-10 w-10 rounded-full" [style.backgroundImage]="'url(' + helper.getImageUrl(user.image?.formats?.medium?.url || user.image?.url) + ')'"></div>
       </ion-avatar>
       <ion-label>
-        <h2>{{ user.name }}</h2>
+        <h2>{{ user.customUsername || user.name }}</h2>
         <p>{{ user.email }}</p>
       </ion-label>
       <ion-button *ngIf="!user.isFriend" [disabled]="user.loading" slot="end" (click)="sendRequest(user)">

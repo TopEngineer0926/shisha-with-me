@@ -27,6 +27,7 @@ export class ProfileEditPage implements OnInit, OnDestroy {
 
   user: any = {};
   fileInput;
+  showSetup: boolean = false;
 
   constructor(
     private alertController: AlertController,

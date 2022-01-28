@@ -67,18 +67,7 @@ export class FriendsListPage implements OnInit, OnDestroy {
     this.requests = data;
 
 
-
-    const friendsQuery = qs.stringify({
-      isAccepted: true,
-      _where: {
-        _or: [
-          { oneUid_eq: this.authService.user.id },
-          { twoUid_eq: this.authService.user.id },
-        ],
-      }
-    });
-
-    const friends = await this.http.get('api/friends' + '?' + friendsQuery).toPromise();
+    const friends = await this.http.get('api/friends/friends').toPromise();
 
     console.log('friends', friends);
     this.friends = friends;

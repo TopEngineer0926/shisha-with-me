@@ -44,7 +44,7 @@
       <div class="bg-cover h-full w-full bg-no-repeat rounded-full" [style.backgroundImage]="'url(' + helper.getImageUrl(friend.image?.url) + ')'"></div>
     </div>
     <div class="flex flex-col pl-6 justify-center">
-      <h2 class="text-white text-lg mb-0 font-normal mt-0">{{ friend.oneUid == authService.user.id ? friend.twoName : friend.oneName }}</h2>
+      <h2 class="text-white text-lg mb-0 font-normal mt-0">{{ friend.name || friend.customUsername }}</h2>
       <!--<p style="color: #969696" class="text-sm">{{ friend.location ? friend.location.address : '' }}</p>-->
     </div>
 

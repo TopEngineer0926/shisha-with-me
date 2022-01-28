@@ -22,6 +22,7 @@ export class EditProfileComponent implements OnInit {
     password: string;
     telegram: string;
     phone: string;
+    instagram: string;
     social: {
       instagram: string;
       snapchat: string;
@@ -31,6 +32,7 @@ export class EditProfileComponent implements OnInit {
       password: '',
       telegram: '',
       phone: '',
+      instagram: '',
       social: {
         instagram: '',
         snapchat: ''
@@ -81,7 +83,7 @@ export class EditProfileComponent implements OnInit {
     if (this.model.telegram != this.user.telegramUsername) update.telegramUsername = this.model.telegram
     if (this.model.username != this.user.customUsername) update.customUsername = this.model.username
     if (this.model.phone !== this.user.phoneNumber) update.phoneNumber = this.model.phone
-    if (!this.user.social || this.model.social.instagram !== this.user.social.instagram) update.social = this.model.social
+    if (this.model.instagram !== this.user.instagram) update.instagram = this.model.instagram
 
 
     try {

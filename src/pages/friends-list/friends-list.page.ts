@@ -53,9 +53,10 @@ export class FriendsListPage implements OnInit, OnDestroy {
       _where: {
         _or: [
           { oneUid_eq: this.authService.user.id },
-          { twoUid_eq: this.authService.user.id },
+          { twoUid_eq: this.authService.user.id }
         ],
         isAccepted: false,
+        initiatorUid_ne: this.authService.user.id
       },
     });
 

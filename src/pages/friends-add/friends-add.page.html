@@ -57,7 +57,7 @@
 
 
   <ion-list lines="none" class="mt-7 px-6">
-    <ion-item *ngFor="let user of users" class="mb-3">
+    <ion-item *ngFor="let user of users" class="mb-5">
       <ion-avatar slot="start">
         <div class="bg-cover bg-no-repeat h-10 w-10 rounded-full" [style.backgroundImage]="'url(' + helper.getImageUrl(user.image?.formats?.medium?.url || user.image?.url) + ')'"></div>
       </ion-avatar>

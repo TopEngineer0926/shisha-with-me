@@ -125,7 +125,9 @@ export class MapPage implements AfterViewInit, OnInit {
       }
     });
     this.addMarkersForPlaces(this.locationMarker);
+    
     await loading.dismiss();
+    await this.getCurrentPosition();
   }
 
   ngAfterViewInit() {

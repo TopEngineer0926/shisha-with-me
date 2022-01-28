@@ -1,21 +1,19 @@
-import { lastValueFrom } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { ThemeSelectorComponent } from './components/theme-selector/theme-selector.component';
-import { ProfileEditPage } from './../profile-edit/profile-edit.page';
 import { Component, OnInit } from '@angular/core';
 import {
   ActionSheetController,
   IonRouterOutlet,
   ModalController,
   NavController,
-  PopoverController,
+  PopoverController
 } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { HelperService } from 'src/common/services/helper.service';
-import { get, remove, set } from 'src/common/services/storage.service';
-import { ProfilePage } from '../profile/profile.page';
-import { IdeaPage } from '../idea/idea.page';
 import { AuthService } from 'src/common/auth/_services/auth.service';
+import { HelperService } from 'src/common/services/helper.service';
+import { SettingsService } from 'src/common/services/settings.service';
+import { get, remove, set } from 'src/common/services/storage.service';
+import { IdeaPage } from '../idea/idea.page';
+import { ProfileEditPage } from './../profile-edit/profile-edit.page';
+import { ThemeSelectorComponent } from './components/theme-selector/theme-selector.component';
 
 @Component({
   selector: 'app-settings',
@@ -40,22 +38,16 @@ export class SettingsPage implements OnInit {
     private popoverController: PopoverController,
     private actionSheetController: ActionSheetController,
     private navCtrl: NavController,
-    public authService: AuthService, 
-    private httpClient: HttpClient
+    public authService: AuthService,
+    private settingsService: SettingsService
   ) {}
 
   async ngOnInit() {
     await this.authService.updateUser();
     const language = await this.getLang();
     this.language = language;
-
-    try {
-      const settings = await lastValueFrom(this.httpClient.get('api/settings'));
-      this.settings = settings;
-      console.log(settings);
-    } catch (error) {
-      
-    }
+    this.settings = await this.settingsService.getSettings();
+    
   }
 
   async goToNoSmoke() {

@@ -146,9 +146,10 @@ export class AuthService {
     this.isLoggedIn = false;
     console.log('logout');
 
+    await remove('loggedIn');
     await remove('userData');
     await remove('loginData');
 
-    this.navCtrl.navigateRoot(['/auth', 'login']);
+    this.navCtrl.navigateRoot(['/login']);
   }
 }

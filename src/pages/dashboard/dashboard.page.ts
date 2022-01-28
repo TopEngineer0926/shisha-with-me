@@ -35,6 +35,7 @@ import { lastValueFrom } from 'rxjs/internal/lastValueFrom';
 import { AuthService } from 'src/common/auth/_services/auth.service';
 import { HelperService } from 'src/common/services/helper.service';
 import { MapService } from 'src/common/services/map.service';
+import { SettingsService } from 'src/common/services/settings.service';
 import { Manufacturer } from 'src/common/types';
 import { MapPage } from '../map/map.page';
 import { StartSessionModalComponent } from './components/start-session-modal/start-session-modal.component';
@@ -98,7 +99,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
     private toastCtrl: ToastController,
     public platform: Platform,
     private route: ActivatedRoute,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController, private settingsService: SettingsService
   ) { }
 
   async showSmoke() {
@@ -333,8 +334,13 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
             text: 'Mehr Infos',
             role: 'cancel',
             cssClass: 'secondary',
-            handler: () => {
-              console.log('Confirm Cancel');
+            handler: async () => {
+              const settings = await this.settingsService.getSettings();
+              if(settings && settings.telegramMoreInfo) {
+                this.helper.openLink(settings.telegramMoreInfo)
+                console.log('Confirm Cancel');
+              }
+              
               resolve(false);
             },
           },

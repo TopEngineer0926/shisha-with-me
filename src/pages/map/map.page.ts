@@ -1,19 +1,20 @@
-import { AfterViewInit, Component, ViewChild } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
+import { FormBuilder, FormGroup } from "@angular/forms";
 import { GoogleMap } from "@angular/google-maps";
-import { IonModal, IonRouterOutlet, LoadingController, ModalController, PopoverController } from "@ionic/angular";
+import { Event, NavigationStart, Router } from "@angular/router";
+import { Geolocation } from "@capacitor/geolocation";
+import { Share } from "@capacitor/share";
+import { IonModal, LoadingController, ModalController, PopoverController, ToastController } from "@ionic/angular";
+import { lastValueFrom } from "rxjs";
+import { AuthService } from "src/common/auth/_services/auth.service";
+import { UserService } from 'src/common/auth/_services/user.service';
 import { MapService } from "src/common/services/map.service";
+import { ProfilePage } from "../profile/profile.page";
 import { MapFilterComponent } from "./components/map-filter/map-filter.component";
 import { PlacePage } from "./place/place.page";
-import { Geolocation } from "@capacitor/geolocation";
-import { AuthService } from "src/common/auth/_services/auth.service";
-import { HttpClient } from "@angular/common/http";
-import { ProfilePage } from "../profile/profile.page";
-import { Share } from "@capacitor/share";
-import { FormBuilder, FormGroup } from "@angular/forms";
-import { OnInit } from "@angular/core";
-import { filter } from "rxjs";
-import { Event, NavigationStart, Router } from "@angular/router";
-
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+@UntilDestroy()
 @Component({
   selector: "app-map",
   templateUrl: "./map.page.html",
@@ -48,17 +49,14 @@ export class MapPage implements AfterViewInit, OnInit {
     public popoverController: PopoverController,
     private modalCtrl: ModalController,
     private router: Router,
-    //private routerOutlet: IonRouterOutlet,
     private loadingCtrl: LoadingController,
     private authService: AuthService,
     private http: HttpClient,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder, 
+    private toastCtrl: ToastController, 
+    private userService: UserService
   ) {
-    this.router.events.subscribe((event: Event) => {
-      if (event instanceof NavigationStart) {
-        this.modalCtrl.dismiss();
-      }
-    });
+    
   }
 
   changeTab(ev) {
@@ -79,6 +77,15 @@ export class MapPage implements AfterViewInit, OnInit {
   }
 
   async ngOnInit() {
+    this.router.events.pipe(untilDestroyed(this)).subscribe((event: Event) => {
+      if (event instanceof NavigationStart) {
+        try {
+          this.modalCtrl?.dismiss();
+        } catch (error) {
+          
+        }
+      }
+    });
     this.mapFilterForm = this.formBuilder.group({
       friends: [true],
       shishaShop: [true],
@@ -148,6 +155,17 @@ export class MapPage implements AfterViewInit, OnInit {
     loading.present();
 
     try {
+
+      const user: any = await this.userService.getUser();
+      console.log('iser', user);
+      if(user?.location?.lat) {
+        this.markerPositions = [
+          {
+            lat: user?.location?.lat,
+            lng: user?.location?.lng,
+          },
+        ];
+      }
       google.maps.event.addListener(this.map.googleMap, "dragend", async () => {
         // await this.loadPlaces(true);
       });
@@ -176,7 +194,7 @@ export class MapPage implements AfterViewInit, OnInit {
       try {
         const coordinates = await Geolocation.getCurrentPosition({
           enableHighAccuracy: false,
-          timeout: 1000,
+          timeout: 10000,
         });
         this.center = {
           lat: coordinates.coords.latitude,
@@ -193,11 +211,27 @@ export class MapPage implements AfterViewInit, OnInit {
         this.zoom = 14;
 
         const location = {
-          lat: this.options.center.lat,
-          lng: this.options.center.lng,
+          lat: coordinates.coords.latitude,
+          lng: coordinates.coords.longitude,
         };
-        await this.http.put("api/users/" + this.authService.user.id, { location: location }).toPromise();
+        await lastValueFrom(this.http.put("api/users/" + this.authService.user.id, { location: location }));
       } catch (error) {
+        const toast = await this.toastCtrl.create({
+          message: 'Standort konnte nicht ermittelt werden, bitte gebe deinen Standort in den Einstellungen frei.',
+          translucent: true,
+          position: 'top',
+          duration: 3000,
+          buttons: [
+            {
+              text: 'Ok',
+              role: 'cancel',
+              handler: () => {
+                console.log('Cancel clicked');
+              },
+            },
+          ],
+        });
+        toast.present();
         console.log("error", error);
         reject(error);
       } finally {
@@ -208,6 +242,7 @@ export class MapPage implements AfterViewInit, OnInit {
   }
 
   async openPlace(id) {
+    console.log('openPlace', id)
     const elm = await this.modalCtrl.getTop();
     const modal = await this.modalCtrl.create({
       component: PlacePage,
@@ -285,7 +320,7 @@ export class MapPage implements AfterViewInit, OnInit {
 
       google.maps.event.addListener(marker, "click", async () => {
         console.log(marker);
-        if (marker.dataType == "shisha_bar" || marker.datatype == "shisha_shop") {
+        if (marker.dataType == "shisha_bar" || marker.dataType == "shisha_shop") {
           await this.openPlace(marker.dataId);
         }
         if (marker.dataType == "user") {

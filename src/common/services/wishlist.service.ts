@@ -8,7 +8,8 @@ import { get, set } from './storage.service';
   providedIn: 'root',
 })
 export class WishlistService {
-  wishlist: any[] = [];
+  wishlist: any[];
+  
 
   constructor(
     private toastCtrl: ToastController,
@@ -17,12 +18,16 @@ export class WishlistService {
   ) { }
 
   async loadWishlist() {
+    if(this.wishlist) {
+      return;
+    }
     // this.wishlist = await get('wishlist');
     await this.authService.updateUser();
     this.wishlist = this.authService.user.ads;
   }
 
   async saveWishlist() {
+    console.log('saveWishlist')
     await this.http
       .put('api/users/' + this.authService.user.id, { ads: this.wishlist })
       .toPromise();

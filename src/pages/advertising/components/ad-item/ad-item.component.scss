@@ -62,3 +62,13 @@ ion-card-header {
     z-index: 2;
   }
 }
+ion-card {
+  position: relative;
+  .wishlist {
+    position: absolute;
+    top: 0;
+    right: 0;
+    
+    color: #7593ab;
+  }
+}

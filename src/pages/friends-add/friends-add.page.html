@@ -19,11 +19,15 @@
 -->
 <ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/tabs/map"></ion-back-button>
-    </ion-buttons>
-    <div class="flex h-16 text-3xl pt-4 justify-center">
-      Hinzufügen
+    <div class="grid grid-cols-3 h-16 text-3xl pt-4 px-6">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/tabs/map"></ion-back-button>
+      </ion-buttons>
+
+      <div class="flex justify-center items-center">
+        Hinzufügen
+      </div>
+      <div></div>
     </div>
   </ion-toolbar>
 </ion-header>
@@ -38,14 +42,14 @@
   <div class="mt-4 px-6">
     <ion-searchbar animated="true" placeholder="Freunde suchen" [(ngModel)]="searchInput" debounce="500" (ionChange)="search()"></ion-searchbar>
 
-    <ion-segment (ionChange)="segmentChanged($event)" class="mt-4" [value]="searchForProperty">
-      <ion-segment-button value="customUsername">
+    <ion-segment mode="ios" (ionChange)="segmentChanged($event)" class="mt-4" [value]="searchForProperty">
+      <ion-segment-button mode="ios" value="customUsername">
         <ion-label>Name</ion-label>
       </ion-segment-button>
-      <ion-segment-button value="social.instagram">
+      <ion-segment-button mode="ios" value="social.instagram">
         <ion-label>Instagram</ion-label>
       </ion-segment-button>
-      <ion-segment-button value="phoneNumber">
+      <ion-segment-button mode="ios" value="phoneNumber">
         <ion-label>Telefon</ion-label>
       </ion-segment-button>
     </ion-segment>
@@ -53,7 +57,7 @@
 
 
   <ion-list lines="none" class="mt-7 px-6">
-    <ion-item *ngFor="let user of users">
+    <ion-item *ngFor="let user of users" class="mb-3">
       <ion-avatar slot="start">
         <div class="bg-cover bg-no-repeat h-10 w-10 rounded-full" [style.backgroundImage]="'url(' + helper.getImageUrl(user.image?.formats?.medium?.url || user.image?.url) + ')'"></div>
       </ion-avatar>

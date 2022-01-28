@@ -7,13 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { NoSmokePageRoutingModule } from './no-smoke-routing.module';
 
 import { NoSmokePage } from './no-smoke.page';
-
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    NoSmokePageRoutingModule
+    NoSmokePageRoutingModule, 
+    LazyLoadImageModule
   ],
   declarations: [NoSmokePage]
 })

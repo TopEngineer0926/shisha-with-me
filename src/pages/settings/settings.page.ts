@@ -1,3 +1,5 @@
+import { lastValueFrom } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { ThemeSelectorComponent } from './components/theme-selector/theme-selector.component';
 import { ProfileEditPage } from './../profile-edit/profile-edit.page';
 import { Component, OnInit } from '@angular/core';
@@ -27,6 +29,7 @@ export class SettingsPage implements OnInit {
   };
 
   theme = 'Blau';
+  settings;
 
   constructor(
     public helper: HelperService,
@@ -37,13 +40,22 @@ export class SettingsPage implements OnInit {
     private popoverController: PopoverController,
     private actionSheetController: ActionSheetController,
     private navCtrl: NavController,
-    public authService: AuthService
+    public authService: AuthService, 
+    private httpClient: HttpClient
   ) {}
 
   async ngOnInit() {
     await this.authService.updateUser();
     const language = await this.getLang();
     this.language = language;
+
+    try {
+      const settings = await lastValueFrom(this.httpClient.get('api/settings'));
+      this.settings = settings;
+      console.log(settings);
+    } catch (error) {
+      
+    }
   }
 
   async goToNoSmoke() {
@@ -53,7 +65,6 @@ export class SettingsPage implements OnInit {
   async goToProfile() {
     const modal = await this.modalCtrl.create({
       component: ProfileEditPage,
-      cssClass: 'my-custom-class',
       swipeToClose: true,
       presentingElement: this.routerOutlet.nativeEl,
     });
@@ -63,7 +74,6 @@ export class SettingsPage implements OnInit {
   async selectTheme(ev: any) {
     const popover = await this.popoverController.create({
       component: ThemeSelectorComponent,
-      cssClass: 'my-custom-class',
       event: ev,
       animated: true,
       translucent: true,

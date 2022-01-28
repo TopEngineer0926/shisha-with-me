@@ -76,7 +76,11 @@ export class FriendsListPage implements OnInit, OnDestroy {
       },
     });*/
 
-    const friends = await this.http.get('api/friends/friends').toPromise();
+    const friendsQuery = qs.string({
+      isAccepted: true
+    })
+
+    const friends = await this.http.get('api/friends/friends' + '?' + friendsQuery).toPromise();
 
     console.log('friends', friends);
     this.friends = friends;

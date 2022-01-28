@@ -95,11 +95,11 @@ export class FriendsAddPage {
     const data = {
       initiatorUid: this.authService.user.id.toString(),
       oneUid: this.authService.user.id.toString(),
-      oneName: this.authService.user.name,
+      oneName: this.authService.user.name || this.authService.user.customUsername,
       oneImage: this.authService.user.image,
       twoUid: user.id.toString(),
       twoImage: user.image,
-      twoName: user.name,
+      twoName: user.name || user.customUsername,
       isAccepted: false,
     };
 

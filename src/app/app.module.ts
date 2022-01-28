@@ -27,6 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { ApiInterceptor } from 'src/common/auth/_helpers/api.interceptor';
 import { JwtInterceptor } from 'src/common/auth/_helpers/jwt.interceptor';
+import { ErrorInterceptor } from 'src/common/auth/_helpers/error.interceptor';
 
 registerLocaleData(localeDe, 'de', localeDeExtra);
 
@@ -74,6 +75,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
 
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
     {
       provide: LOCALE_ID,

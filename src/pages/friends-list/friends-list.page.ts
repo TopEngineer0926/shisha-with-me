@@ -39,7 +39,7 @@ export class FriendsListPage implements OnInit, OnDestroy {
     private loadingCtrl: LoadingController,
     private http: HttpClient,
     public helper: HelperService,
-    private authService: AuthService,
+    public authService: AuthService,
     private routerOutlet: IonRouterOutlet,
     private toastCtrl: ToastController
   ) {}
@@ -66,21 +66,19 @@ export class FriendsListPage implements OnInit, OnDestroy {
     console.log('data', data);
     this.requests = data;
 
-    /*const query = qs.stringify({
+
+
+    const friendsQuery = qs.stringify({
+      isAccepted: true,
       _where: {
         _or: [
           { oneUid_eq: this.authService.user.id },
           { twoUid_eq: this.authService.user.id },
         ],
-        isAccepted: true,
-      },
-    });*/
+      }
+    });
 
-    const friendsQuery = qs.string({
-      isAccepted: true
-    })
-
-    const friends = await this.http.get('api/friends/friends' + '?' + friendsQuery).toPromise();
+    const friends = await this.http.get('api/friends' + '?' + friendsQuery).toPromise();
 
     console.log('friends', friends);
     this.friends = friends;

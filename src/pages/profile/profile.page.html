@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>{{user.name}}</ion-title>
+    <ion-title>{{user.name || user.customUsername }}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="close()">
         <ion-icon name="close"></ion-icon>
@@ -17,7 +17,7 @@
   <ion-card>
     <ion-list>
       <ion-item class="mb-5">
-        <ion-label>{{ user.name }}</ion-label>
+        <ion-label>{{ user.name || user.customUsername }}</ion-label>
       </ion-item>
       <ion-item *ngFor="let setup of user.setups" class="my-3">
         <ion-label>

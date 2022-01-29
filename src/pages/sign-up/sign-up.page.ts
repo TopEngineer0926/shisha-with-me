@@ -11,7 +11,7 @@ export class SignUpPage implements OnInit {
 
   ngOnInit() {
   }
-  
+
   changeTab(ev) {
     this.currentTab = ev.detail.value;
   }

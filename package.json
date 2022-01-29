@@ -77,6 +77,9 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
+    "eslint-plugin-import": "2.25.4",
+    "eslint-plugin-jsdoc": "37.7.0",
+    "eslint-plugin-prefer-arrow": "1.2.3",
     "@angular-devkit/build-angular": "~13.2.0",
     "@angular-eslint/builder": "13.0.1",
     "@angular-eslint/eslint-plugin": "13.0.1",

@@ -31,35 +31,13 @@
   <div class="flex items-center justify-center">
     <ion-button
       [disabled]="locationLoading"
-      class="creedle-btn mt-8"
+      class="mt-8"
       (click)="getCurrentPosition()"
     >
       <ion-spinner *ngIf="locationLoading" class="mr-3"></ion-spinner>
       Meinen Standort verwenden
     </ion-button>
   </div>
-
-  <!--<div class="flex mt-6 flex-col">
-    <div class="flex">
-      <input
-        class="creedle-btn w-full"
-        placeholder="PLZ"
-        [(ngModel)]="mapHelperService.postalCode"
-        min="5"
-        max="5"
-        type="tel"
-      />
-      <button
-        (click)="findLocation()"
-        [disabled]="mapHelperService.postalCode.length !== 5"
-        class="creedle-btn btn-custom"
-      >
-        <ion-icon name="search-outline"></ion-icon>
-      </button>
-    </div>
-
-   
-  </div>-->
 
   <div class="flex items-center justify-center mt-8">
     <ion-button [disabled]="saveLoading" (click)="save()">

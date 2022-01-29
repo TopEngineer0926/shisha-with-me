@@ -9,7 +9,7 @@ import { MapService } from 'src/common/services/map.service';
 import { Manufacturer } from 'src/common/types';
 import { SelectLocationPage } from 'src/pages/select-location/select-location.page';
 import { slideOpts } from '../../slider-config';
-import { trigger, transition, animate, style } from '@angular/animations'
+import { trigger, transition, animate, style } from '@angular/animations';
 
 @Component({
   selector: 'app-start-session-modal',
@@ -37,7 +37,7 @@ export class StartSessionModalComponent implements OnInit {
   @ViewChild('videoElm') videoElm: ElementRef<HTMLVideoElement>;
   @ViewChildren('subSlider') subSliders: QueryList<IonSlides>;
   slideOpts = slideOpts;
-  locationLoading: boolean = false;
+  locationLoading = false;
   visiblityState = 'hidden';
   selectLocationMode = false;
   nearbyShishaBars = [];
@@ -90,12 +90,12 @@ export class StartSessionModalComponent implements OnInit {
 
       locations.map((location) => {
         location.distance = this.calculateDistance(location.location.lat, location.location.lng, this.authService.user.location.lat, this.authService.user.location.lng, null);
-      })
+      });
 
       const sorted = locations.sort((a, b) => a.distance > b.distance ? 1 : -1);
       this.nearbyShishaBars = [sorted[0], sorted[1], sorted[2]];
       this.selectLocationMode = true;
-    } else this.openSearchLocationModal();
+    } else {this.openSearchLocationModal();}
   }
 
   async locationClicked(location) {
@@ -140,7 +140,7 @@ export class StartSessionModalComponent implements OnInit {
             handler: async (data) => {
               const update = {
                 telegramUsername: data.name
-              }
+              };
 
               try {
                 await this.http
@@ -175,7 +175,7 @@ export class StartSessionModalComponent implements OnInit {
 
 
       await alert.present();
-    })
+    });
 
   }
 
@@ -184,7 +184,7 @@ export class StartSessionModalComponent implements OnInit {
     loading.present();
 
     try {
-      let data: any = {
+      const data: any = {
         start_user: this.authService.user.id.toString(),
       };
       if (location) {
@@ -215,7 +215,7 @@ export class StartSessionModalComponent implements OnInit {
 
           this.modalCtrl.dismiss({
             showSmoke: true
-          })
+          });
         }
       } else {
         await this.http.post('api/sessions/start', data).toPromise();
@@ -231,7 +231,7 @@ export class StartSessionModalComponent implements OnInit {
 
         this.modalCtrl.dismiss({
           showSmoke: true
-        })
+        });
       }
 
     } catch (error) {

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title> {{location?.type == "shisha_shop" ? "Shisha Shop" : "Shisha Bar"}}</ion-title>
+    <ion-title> {{location?.type === "shisha_shop" ? "Shisha Shop" : "Shisha Bar"}}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="dismiss()">
         <ion-icon name="close"></ion-icon>
@@ -16,7 +16,7 @@
       [style.backgroundImage]="'url(' + helper.getImageUrl(location?.images[0]?.url) +')'"
     >
     <ion-badge class="absolute top-3 right-3 opacity-80">
-      {{location?.type == "shisha_shop" ? "Shisha Shop" : "Shisha Bar"}}
+      {{location?.type === "shisha_shop" ? "Shisha Shop" : "Shisha Bar"}}
     </ion-badge>
   </div>
     <ion-card-header >

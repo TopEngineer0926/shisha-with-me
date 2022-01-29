@@ -114,7 +114,7 @@ export class LocationSelectComponent implements OnInit {
       lng: this.options.center.lng,
     };
     await this.http
-      .put('api/users/' + this.authService.user.id, { location: location })
+      .put('api/users/' + this.authService.user.id, { location })
       .toPromise();
     await this.mapHelperService.save();
     this.saveLoading = false;

@@ -27,7 +27,7 @@ export class ProfileEditPage implements OnInit, OnDestroy {
 
   user: any = {};
   fileInput;
-  showSetup: boolean = false;
+  showSetup = false;
 
   constructor(
     private alertController: AlertController,
@@ -44,13 +44,13 @@ export class ProfileEditPage implements OnInit, OnDestroy {
   async ngOnInit() {
     await this.loadUser();
 
-    var pn = new PhoneNumber( '0707123456', 'SE' );
-    console.log('test', pn.isMobile())
+    const pn = new PhoneNumber( '0707123456', 'SE' );
+    console.log('test', pn.isMobile());
   }
 
   ngOnDestroy() {
     if(this.fileInput) {
-      document.body.removeChild(this.fileInput)
+      document.body.removeChild(this.fileInput);
     }
   }
 
@@ -109,7 +109,7 @@ export class ProfileEditPage implements OnInit, OnDestroy {
   }
 
   async change(mode, value) {
-    let text, inputType;
+    let text; let inputType;
 
     switch (mode) {
       case 'name':
@@ -153,7 +153,7 @@ export class ProfileEditPage implements OnInit, OnDestroy {
           text: 'Speichern',
           handler: async (data) => {
             console.log(data);
-            let update: any = {};
+            const update: any = {};
             if (mode == 'name') {
               update.name = data.name;
             }
@@ -234,9 +234,9 @@ export class ProfileEditPage implements OnInit, OnDestroy {
     $event.preventDefault();
 
     if(this.fileInput) {
-      document.body.removeChild(this.fileInput)
+      document.body.removeChild(this.fileInput);
     }
-    
+
 
     let files: FileList;
     if ($event instanceof DragEvent) {
@@ -256,7 +256,7 @@ export class ProfileEditPage implements OnInit, OnDestroy {
       try {
         await fileSelectPromise;
         files = this.fileInput.files;
-        document.body.removeChild(this.fileInput)
+        document.body.removeChild(this.fileInput);
       } catch (e) {}
     }
 

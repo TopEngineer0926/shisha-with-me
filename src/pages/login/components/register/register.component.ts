@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
   apiUrl = environment.apiUrl;
   errorStr = '';
   submitted = false;
-  showPassword: boolean = false;
+  showPassword = false;
 
   constructor(
     private app: AppService,

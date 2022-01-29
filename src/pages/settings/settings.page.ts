@@ -47,7 +47,7 @@ export class SettingsPage implements OnInit {
     const language = await this.getLang();
     this.language = language;
     this.settings = await this.settingsService.getSettings();
-    
+
   }
 
   async goToNoSmoke() {

@@ -10,12 +10,12 @@ import { DocumentViewerOptions } from '@ionic-native/document-viewer';
 import { environment } from 'src/environments/environment';
 import { StatusBar, StatusBarStyle } from '@capacitor/status-bar';
 
-declare var window: any;
+declare let window: any;
 @Injectable({
   providedIn: 'root',
 })
 export class HelperService {
-  darkModeEnabled: boolean = false;
+  darkModeEnabled = false;
 
   constructor(
     private alertController: AlertController,

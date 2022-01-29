@@ -14,7 +14,7 @@ import { WishlistService } from './../../../../common/services/wishlist.service'
 export class AdPage implements OnInit {
   @Input() id: number | string;
   ad: any;
-  isInWishList: boolean = false;
+  isInWishList = false;
   constructor(
     private route: ActivatedRoute,
     public adService: AdService,

@@ -104,7 +104,7 @@ export class FriendsListPage implements OnInit, OnDestroy {
       swipeToClose: true,
       presentingElement: this.routerOutlet.nativeEl,
       componentProps: {
-        id: id,
+        id,
       },
     });
     return await modal.present();
@@ -205,7 +205,7 @@ export class FriendsListPage implements OnInit, OnDestroy {
   }
 
   async SocialSharing() {
-    let shareRet = await Share.share({
+    const shareRet = await Share.share({
       title: 'See cool stuff',
       text: 'Really awesome thing you need to see right meow',
       url: 'http://ionicframework.com/',

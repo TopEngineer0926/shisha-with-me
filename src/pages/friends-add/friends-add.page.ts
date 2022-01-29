@@ -36,11 +36,11 @@ export class FriendsAddPage {
 
   segmentChanged(ev) {
     this.searchForProperty = ev.detail.value;
-    this.search()
+    this.search();
   }
 
   async search() {
-    const filterObject = {}
+    const filterObject = {};
 
     filterObject[this.searchForProperty + '_contains'] = this.searchInput;
     const query = qs.stringify({

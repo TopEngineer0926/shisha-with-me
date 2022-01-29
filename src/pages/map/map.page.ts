@@ -1,29 +1,29 @@
-import { HttpClient } from "@angular/common/http";
-import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
-import { GoogleMap } from "@angular/google-maps";
-import { Event, NavigationStart, Router } from "@angular/router";
-import { Geolocation } from "@capacitor/geolocation";
-import { Share } from "@capacitor/share";
-import { IonModal, LoadingController, ModalController, PopoverController, ToastController } from "@ionic/angular";
-import { lastValueFrom } from "rxjs";
-import { AuthService } from "src/common/auth/_services/auth.service";
+import { HttpClient } from '@angular/common/http';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { GoogleMap } from '@angular/google-maps';
+import { Event, NavigationStart, Router } from '@angular/router';
+import { Geolocation } from '@capacitor/geolocation';
+import { Share } from '@capacitor/share';
+import { IonModal, LoadingController, ModalController, PopoverController, ToastController } from '@ionic/angular';
+import { lastValueFrom } from 'rxjs';
+import { AuthService } from 'src/common/auth/_services/auth.service';
 import { UserService } from 'src/common/auth/_services/user.service';
-import { MapService } from "src/common/services/map.service";
-import { ProfilePage } from "../profile/profile.page";
-import { MapFilterComponent } from "./components/map-filter/map-filter.component";
-import { PlacePage } from "./place/place.page";
+import { MapService } from 'src/common/services/map.service';
+import { ProfilePage } from '../profile/profile.page';
+import { MapFilterComponent } from './components/map-filter/map-filter.component';
+import { PlacePage } from './place/place.page';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 @UntilDestroy()
 @Component({
-  selector: "app-map",
-  templateUrl: "./map.page.html",
-  styleUrls: ["./map.page.scss"],
+  selector: 'app-map',
+  templateUrl: './map.page.html',
+  styleUrls: ['./map.page.scss'],
 })
 export class MapPage implements AfterViewInit, OnInit {
   @ViewChild(GoogleMap) map: GoogleMap;
   @ViewChild(IonModal) filterModal: IonModal;
-  locationLoading: boolean = false;
+  locationLoading = false;
   infowindow: google.maps.InfoWindow;
   options: google.maps.MapOptions = {
     disableDefaultUI: true,
@@ -38,7 +38,7 @@ export class MapPage implements AfterViewInit, OnInit {
 
   users;
   locations;
-  currentTab: "map" | "friends" = "map";
+  currentTab: 'map' | 'friends' = 'map';
   showFilterSheet = false;
   mapFilterForm: FormGroup;
   locationMarker = [];
@@ -52,11 +52,11 @@ export class MapPage implements AfterViewInit, OnInit {
     private loadingCtrl: LoadingController,
     private authService: AuthService,
     private http: HttpClient,
-    public formBuilder: FormBuilder, 
-    private toastCtrl: ToastController, 
+    public formBuilder: FormBuilder,
+    private toastCtrl: ToastController,
     private userService: UserService
   ) {
-    
+
   }
 
   changeTab(ev) {
@@ -69,10 +69,10 @@ export class MapPage implements AfterViewInit, OnInit {
 
   async share() {
     await Share.share({
-      title: "Shisha With Me",
+      title: 'Shisha With Me',
       text: `Lade dir jetzt Shisha With Me.`,
-      url: "https://shishawithme.com/",
-      dialogTitle: "Teile die App mit Freunden",
+      url: 'https://shishawithme.com/',
+      dialogTitle: 'Teile die App mit Freunden',
     });
   }
 
@@ -82,7 +82,7 @@ export class MapPage implements AfterViewInit, OnInit {
         try {
           this.modalCtrl?.dismiss();
         } catch (error) {
-          
+
         }
       }
     });
@@ -95,8 +95,8 @@ export class MapPage implements AfterViewInit, OnInit {
     loading.present();
     this.locationMarker = [];
 
-    const users: any = await this.http.get("api/friends/friends").toPromise();
-    console.log("users", users);
+    const users: any = await this.http.get('api/friends/friends').toPromise();
+    console.log('users', users);
     this.users = users;
     users.map((location) => {
       if (location.location) {
@@ -104,13 +104,13 @@ export class MapPage implements AfterViewInit, OnInit {
           lat: location.location.lat,
           lng: location.location.lng,
           id: location.id,
-          type: "user",
+          type: 'user',
         });
       }
     });
 
-    const locations: any = await this.http.get("api/locations").toPromise();
-    console.log("locations", locations);
+    const locations: any = await this.http.get('api/locations').toPromise();
+    console.log('locations', locations);
     this.locations = locations;
 
     locations.map((location) => {
@@ -125,7 +125,7 @@ export class MapPage implements AfterViewInit, OnInit {
       }
     });
     this.addMarkersForPlaces(this.locationMarker);
-    
+
     await loading.dismiss();
     await this.getCurrentPosition();
   }
@@ -139,9 +139,9 @@ export class MapPage implements AfterViewInit, OnInit {
   filterMarkers() {
     let filteredMarkers = this.locationMarker;
 
-    if (!this.mapFilterForm.value.friends) filteredMarkers = filteredMarkers.filter((location) => location.type !== "user");
-    if (!this.mapFilterForm.value.shishaBar) filteredMarkers = filteredMarkers.filter((location) => location.type !== "shisha_bar");
-    if (!this.mapFilterForm.value.shishaShop) filteredMarkers = filteredMarkers.filter((location) => location.type !== "shisha_shop");
+    if (!this.mapFilterForm.value.friends) {filteredMarkers = filteredMarkers.filter((location) => location.type !== 'user');}
+    if (!this.mapFilterForm.value.shishaBar) {filteredMarkers = filteredMarkers.filter((location) => location.type !== 'shisha_bar');}
+    if (!this.mapFilterForm.value.shishaShop) {filteredMarkers = filteredMarkers.filter((location) => location.type !== 'shisha_shop');}
 
     console.log('filteredMarkers', filteredMarkers);
     this.addMarkersForPlaces(filteredMarkers, true);
@@ -168,7 +168,7 @@ export class MapPage implements AfterViewInit, OnInit {
           },
         ];
       }
-      google.maps.event.addListener(this.map.googleMap, "dragend", async () => {
+      google.maps.event.addListener(this.map.googleMap, 'dragend', async () => {
         // await this.loadPlaces(true);
       });
 
@@ -216,7 +216,7 @@ export class MapPage implements AfterViewInit, OnInit {
           lat: coordinates.coords.latitude,
           lng: coordinates.coords.longitude,
         };
-        await lastValueFrom(this.http.put("api/users/" + this.authService.user.id, { location: location }));
+        await lastValueFrom(this.http.put('api/users/' + this.authService.user.id, { location }));
       } catch (error) {
         const toast = await this.toastCtrl.create({
           message: 'Standort konnte nicht ermittelt werden, bitte gebe deinen Standort in den Einstellungen frei.',
@@ -234,7 +234,7 @@ export class MapPage implements AfterViewInit, OnInit {
           ],
         });
         toast.present();
-        console.log("error", error);
+        console.log('error', error);
         reject(error);
       } finally {
         this.locationLoading = false;
@@ -244,7 +244,7 @@ export class MapPage implements AfterViewInit, OnInit {
   }
 
   async openPlace(id) {
-    console.log('openPlace', id)
+    console.log('openPlace', id);
     const elm = await this.modalCtrl.getTop();
     const modal = await this.modalCtrl.create({
       component: PlacePage,
@@ -258,18 +258,18 @@ export class MapPage implements AfterViewInit, OnInit {
   }
 
   loadPlaces(doBounds = false) {
-    console.log("loadPlaces", this.options, this.map);
+    console.log('loadPlaces', this.options, this.map);
 
     const request: any = {
-      keyword: "shisha",
-      fields: ["name", "geometry"],
+      keyword: 'shisha',
+      fields: ['name', 'geometry'],
       location: this.map.googleMap.getCenter(), //{ lat: this.center.lat, lng: this.center.lng },
       radius: 50000,
     };
 
     const service = new google.maps.places.PlacesService(this.map.googleMap);
     service.nearbySearch(request, (results, status) => {
-      console.log("service");
+      console.log('service');
       console.log(results, status);
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         this.addMarkersForPlaces(results, doBounds);
@@ -279,11 +279,11 @@ export class MapPage implements AfterViewInit, OnInit {
 
   getIconUrl(type) {
     switch (type) {
-      case "shisha_bar":
+      case 'shisha_bar':
         return '/assets/icons/shisha-icon.svg';
-      case "shisha_shop":
+      case 'shisha_shop':
         return '/assets/icons/cart-icon.svg';
-      case "user":
+      case 'user':
         return '/assets/icons/account-icon.svg';
     }
   }
@@ -292,10 +292,10 @@ export class MapPage implements AfterViewInit, OnInit {
     if(this.markers.length> 0) {
       this.markers.forEach((marker)=> {
         marker.setMap(null);
-      })
+      });
       this.markers = [];
     }
-    
+
     if (places.length == 0) {
       return;
     }
@@ -303,7 +303,7 @@ export class MapPage implements AfterViewInit, OnInit {
     // For each place, get the icon, name and location.
     const bounds = new google.maps.LatLngBounds();
     places.forEach((place) => {
-      let marker: any = new google.maps.Marker({
+      const marker: any = new google.maps.Marker({
         map: this.map.googleMap,
         icon: {
           url: this.getIconUrl(place.type),
@@ -320,12 +320,12 @@ export class MapPage implements AfterViewInit, OnInit {
 
       this.markers.push(marker);
 
-      google.maps.event.addListener(marker, "click", async () => {
+      google.maps.event.addListener(marker, 'click', async () => {
         console.log(marker);
-        if (marker.dataType == "shisha_bar" || marker.dataType == "shisha_shop") {
+        if (marker.dataType == 'shisha_bar' || marker.dataType == 'shisha_shop') {
           await this.openPlace(marker.dataId);
         }
-        if (marker.dataType == "user") {
+        if (marker.dataType == 'user') {
           await this.openFriend(marker.dataId);
         }
       });
@@ -354,7 +354,7 @@ export class MapPage implements AfterViewInit, OnInit {
       swipeToClose: true,
       presentingElement: elm,
       componentProps: {
-        id: id,
+        id,
       },
     });
     return await modal.present();

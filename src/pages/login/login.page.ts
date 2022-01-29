@@ -46,7 +46,7 @@ export class LoginPage implements OnInit {
 
   currentUser: any;
 
-  showPassword: boolean = false;
+  showPassword = false;
 
   constructor(
     private loadingCtrl: LoadingController,

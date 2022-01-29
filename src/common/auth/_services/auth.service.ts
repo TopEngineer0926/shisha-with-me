@@ -8,7 +8,7 @@ import { User } from '../_models/user';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  isLoggedIn: boolean = false;
+  isLoggedIn = false;
   user: any | User;
   device: any;
 
@@ -70,7 +70,7 @@ export class AuthService {
       const alert = await this.alertCtrl.create({
         header: 'Vielen Dank!',
         translucent: true,
-        backdropDismiss: backdropDismiss,
+        backdropDismiss,
         message:
           'Geben Sie hier den Code ein, den Sie per E-Mail erhalten haben:',
         inputs: [

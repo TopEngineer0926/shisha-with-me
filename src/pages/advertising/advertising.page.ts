@@ -14,8 +14,8 @@ export class AdvertisingPage implements OnInit {
   ads: any;
   topDeals: any;
   selectedCategory: any;
-  searchTerm = ""
-  sorted
+  searchTerm = '';
+  sorted;
 
   constructor(
     public helper: HelperService,
@@ -36,7 +36,7 @@ export class AdvertisingPage implements OnInit {
 
     this.topDeals = this.ads.filter((ad) => ad.topDeal == true);
 
-    this.search()
+    this.search();
 
   }
 
@@ -56,7 +56,7 @@ export class AdvertisingPage implements OnInit {
       return;
     }
 
-    this.sorted = this.ads.filter((element) => element.title.toLowerCase().includes(this.searchTerm.toLowerCase()))
+    this.sorted = this.ads.filter((element) => element.title.toLowerCase().includes(this.searchTerm.toLowerCase()));
   }
 
   async doRefresh(event) {
@@ -78,7 +78,7 @@ export class AdvertisingPage implements OnInit {
       this.selectedCategory = this.data[0];
       this.topDeals = this.ads.filter((ad) => ad.topDeal == true);
 
-      this.sorted = this.ads
+      this.sorted = this.ads;
 
       console.log('data', data);
     } catch (error) {
@@ -93,7 +93,7 @@ export class AdvertisingPage implements OnInit {
 
     this.topDeals = this.ads.filter((ad) => ad.topDeal == true);
 
-    this.search()
+    this.search();
 
     console.log($event, this.data, this.ads);
   }

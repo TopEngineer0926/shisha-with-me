@@ -16,7 +16,7 @@ export class ApiInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    
+
     let newReq = req.clone();
     if (req.url.startsWith('api/')) {
       const api = `${environment.apiUrl}/${req.url.replace('api/', '')}`;

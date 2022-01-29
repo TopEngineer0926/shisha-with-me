@@ -67,7 +67,7 @@ export class ChatService {
     },
   ];
 
-  isConnected: boolean = true;
+  isConnected = true;
 
   async sendMessage(
     chatId: number,

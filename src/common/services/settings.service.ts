@@ -18,10 +18,10 @@ export class SettingsService {
             console.log(settings);
             return settings;
           } catch (error) {
-            
+
           }
     }
 
 
-    
+
 }

@@ -1,8 +1,8 @@
-import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import { AdSavedPageModule } from '../ad-saved/ad-saved.module';
-import { AdvertisingPage } from "./advertising.page";
-import { AdPageModule } from "./pages/ad/ad.module";
+import { AdvertisingPage } from './advertising.page';
+import { AdPageModule } from './pages/ad/ad.module';
 
 
 const routes: Routes = [
@@ -11,10 +11,10 @@ const routes: Routes = [
     component: AdvertisingPage,
   },
   {
-    path: ":id",
+    path: ':id',
     loadChildren: () => AdPageModule,
   },
-  
+
 ];
 
 @NgModule({

@@ -10,7 +10,7 @@ import { MapHelperService } from 'src/common/services/map-helper.service';
 
 
 @Component({
-  selector: 'creedle-edit-profile',
+  selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.scss'],
 })
@@ -26,7 +26,7 @@ export class EditProfileComponent implements OnInit {
     social: {
       instagram: string;
       snapchat: string;
-    }
+    };
   } = {
       username: '',
       password: '',
@@ -37,9 +37,9 @@ export class EditProfileComponent implements OnInit {
         instagram: '',
         snapchat: ''
       }
-    }
+    };
 
-  user: any
+  user: any;
 
 
 
@@ -48,21 +48,21 @@ export class EditProfileComponent implements OnInit {
     public mapHelperService: MapHelperService,
     private http: HttpClient,
     private toastCtrl: ToastController,
-    private authService: AuthService, 
+    private authService: AuthService,
     private navCtrl: NavController
   ) { }
 
   async ngOnInit() {
-    await this.loadUser()
+    await this.loadUser();
     console.log(this.user);
-    this.model.username = this.user.customUsername
-    this.model.telegram = this.user.telegramUsername
-    this.model.phone = this.user.phoneNumber
-    if (this.user.social) this.model.social = this.user.social;
+    this.model.username = this.user.customUsername;
+    this.model.telegram = this.user.telegramUsername;
+    this.model.phone = this.user.phoneNumber;
+    if (this.user.social) {this.model.social = this.user.social;}
 
 
-    var pn = new PhoneNumber( this.model.phone, 'DE' );
-    console.log('test', pn.getNumber( ))
+    const pn = new PhoneNumber( this.model.phone, 'DE' );
+    console.log('test', pn.getNumber( ));
   }
 
   async loadUser() {
@@ -77,13 +77,13 @@ export class EditProfileComponent implements OnInit {
   }
 
   async save() {
-    const update = {} as any
+    const update = {} as any;
 
-    if (this.model.password) update.password = this.model.password
-    if (this.model.telegram != this.user.telegramUsername) update.telegramUsername = this.model.telegram
-    if (this.model.username != this.user.customUsername) update.customUsername = this.model.username
-    if (this.model.phone !== this.user.phoneNumber) update.phoneNumber = this.model.phone
-    if (this.model.instagram !== this.user.instagram) update.instagram = this.model.instagram
+    if (this.model.password) {update.password = this.model.password;}
+    if (this.model.telegram != this.user.telegramUsername) {update.telegramUsername = this.model.telegram;}
+    if (this.model.username != this.user.customUsername) {update.customUsername = this.model.username;}
+    if (this.model.phone !== this.user.phoneNumber) {update.phoneNumber = this.model.phone;}
+    if (this.model.instagram !== this.user.instagram) {update.instagram = this.model.instagram;}
 
 
     try {
@@ -96,7 +96,7 @@ export class EditProfileComponent implements OnInit {
           position: 'top',
           duration: 4000
         })
-      ).present()
+      ).present();
       this.navCtrl.back();
     } catch (error) {
       (
@@ -106,7 +106,7 @@ export class EditProfileComponent implements OnInit {
           position: 'top',
           duration: 4000
         })
-      ).present()
+      ).present();
 
     }
 

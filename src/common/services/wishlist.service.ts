@@ -9,7 +9,7 @@ import { get, set } from './storage.service';
 })
 export class WishlistService {
   wishlist: any[];
-  
+
 
   constructor(
     private toastCtrl: ToastController,
@@ -27,7 +27,7 @@ export class WishlistService {
   }
 
   async saveWishlist() {
-    console.log('saveWishlist')
+    console.log('saveWishlist');
     await this.http
       .put('api/users/' + this.authService.user.id, { ads: this.wishlist })
       .toPromise();
@@ -37,7 +37,7 @@ export class WishlistService {
   }
 
   async isInWishList(adItem) {
-    if (!adItem) return false
+    if (!adItem) {return false;}
     return this.wishlist?.find((_adItem) => _adItem.id == adItem.id);
   }
 

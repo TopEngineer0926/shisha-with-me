@@ -19,7 +19,7 @@ export class NoSmokePage implements OnInit {
   ) {}
 
   ngAfterViewInit() {
-    var swiperH = new Swiper('.swiper-container-h', {
+    const swiperH = new Swiper('.swiper-container-h', {
       spaceBetween: 50,
       pagination: {
         el: '.swiper-pagination-h',

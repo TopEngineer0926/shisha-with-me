@@ -40,7 +40,7 @@ export class AutoResizeDirective implements AfterViewInit {
   }
 
   adjust(): void {
-    if (!this.textareaEl) return;
+    if (!this.textareaEl) {return;}
 
     this.textareaEl.style.height = 'auto';
     let newHeight = this.textareaEl.scrollHeight;

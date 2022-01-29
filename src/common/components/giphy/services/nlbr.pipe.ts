@@ -10,7 +10,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class NlbrPipe implements PipeTransform {
   transform(value: string) {
-    if (!value) return value;
+    if (!value) {return value;}
 
     return value.replace(/\n/gi, '<br>');
   }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject, Subscription } from 'rxjs';
 
-const ServiceName: string = 'Events';
+const ServiceName = 'Events';
 
 @Injectable({
   providedIn: 'root'

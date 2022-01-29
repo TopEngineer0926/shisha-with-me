@@ -12,8 +12,8 @@ export class GifSearchComponent {
   @Output() onClose = new EventEmitter();
 
   gifs: any[] = [];
-  isLoading: boolean = false;
-  query: string = '';
+  isLoading = false;
+  query = '';
 
   constructor(public GiphyService: GiphyService, private cdr: ChangeDetectorRef) {
     this.getTrending();
@@ -30,7 +30,7 @@ export class GifSearchComponent {
   }
 
   searchGif(query: string) {
-    if (query.length === 0) return this.getTrending();
+    if (query.length === 0) {return this.getTrending();}
     this.isLoading = true;
 
     this.GiphyService.search(query).subscribe(res => {

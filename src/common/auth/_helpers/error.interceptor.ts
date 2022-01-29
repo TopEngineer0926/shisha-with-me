@@ -18,12 +18,12 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((err) => {
         if (err.status === 401) {
-         this.authService.logout()
+         this.authService.logout();
         }
 
         const error = err.error.message || err.statusText;
         return throwError(error);
-       
+
       })
     );
   }

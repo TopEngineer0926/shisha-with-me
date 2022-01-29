@@ -15,8 +15,8 @@ import { IonTextarea } from '@ionic/angular';
   styleUrls: ['./input-with-giphy.scss'],
 })
 export class InputWithGiphyComponent {
-  typingMessage: string = '';
-  showGiphy: boolean = false;
+  typingMessage = '';
+  showGiphy = false;
   @Output() onSubmit = new EventEmitter();
   @Output() onSizeChange = new EventEmitter();
   @ViewChild('messageInput', { static: false }) messageInput: IonTextarea;
@@ -51,7 +51,7 @@ export class InputWithGiphyComponent {
   sendGif(giphy) {
     this.onSubmit.emit({
       type: 'giphy',
-      giphy: giphy,
+      giphy,
     });
     this.typingMessage = '';
   }

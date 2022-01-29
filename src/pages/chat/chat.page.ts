@@ -34,7 +34,7 @@ export class ChatPage implements OnInit {
   };
 
   messages: any = [];
-  userActive: boolean = true;
+  userActive = true;
   @ViewChild(IonContent) content: IonContent;
 
   api = {
@@ -45,14 +45,12 @@ export class ChatPage implements OnInit {
     },
     exceptMe(array: any, pathToUser?: string): any {
       return typeof array === 'object'
-        ? array.filter((item) => {
-            return (
+        ? array.filter((item) => (
               (typeof item[pathToUser] !== 'undefined' &&
               item[pathToUser] !== null
                 ? item[pathToUser].id
                 : item.id) !== this.userStorage.id
-            );
-          })
+            ))
         : array;
     },
   };

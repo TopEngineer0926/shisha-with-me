@@ -13,7 +13,7 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
     CommonModule,
     FormsModule,
     IonicModule,
-    NoSmokePageRoutingModule, 
+    NoSmokePageRoutingModule,
     LazyLoadImageModule
   ],
   declarations: [NoSmokePage]

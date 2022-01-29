@@ -60,7 +60,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
   @ViewChild('videoElm') videoElm: ElementRef<HTMLVideoElement>;
   @ViewChildren('subSlider') subSliders: QueryList<IonSlides>;
   slideOpts = slideOpts;
-  locationLoading: boolean = false;
+  locationLoading = false;
   visiblityState = 'hidden';
 
   options: google.maps.MapOptions = {
@@ -80,12 +80,12 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
   };
 
   manufacturers;
-  sorted
+  sorted;
   searchedSmokeProducts;
 
   searchTerm;
 
-  cupertino: boolean = false;
+  cupertino = false;
   myPane: CupertinoPane;
 
   constructor(
@@ -120,7 +120,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
 
   async ngAfterViewInit() {
     const loading = await this.loadingCtrl.create({ translucent: true });
-    loading.present()
+    loading.present();
     try {
 
       const data = await lastValueFrom(await this.http.get('api/manufacturers'));
@@ -173,26 +173,22 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
       return;
     }
 
-    const searchedSmokeProducts = this.manufacturers.map((element) => {
-      return {
+    const searchedSmokeProducts = this.manufacturers.map((element) => ({
         ...element,
         smoke_products: element.smoke_products.filter((subElement) => {
           let isRelevant = false;
-          if (subElement.name.toLowerCase().includes(this.searchTerm.toLowerCase())) isRelevant = true;
-          if (element.name.toLowerCase().includes(this.searchTerm.toLowerCase())) isRelevant = true;
+          if (subElement.name.toLowerCase().includes(this.searchTerm.toLowerCase())) {isRelevant = true;}
+          if (element.name.toLowerCase().includes(this.searchTerm.toLowerCase())) {isRelevant = true;}
 
           return isRelevant;
         })
-      };
-    });
+      }));
 
     this.searchedSmokeProducts = [...searchedSmokeProducts];
   }
 
   smokeProducts(sorted) {
-    let show = sorted.some((item) => {
-      return item.smoke_products?.length > 0;
-    });
+    const show = sorted.some((item) => item.smoke_products?.length > 0);
     return !show;
   }
 
@@ -309,7 +305,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
             handler: async (data) => {
               const update = {
                 telegramUsername: data.name
-              }
+              };
 
               try {
                 await this.http
@@ -337,10 +333,10 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
             handler: async () => {
               const settings = await this.settingsService.getSettings();
               if(settings && settings.telegramMoreInfo) {
-                this.helper.openLink(settings.telegramMoreInfo)
+                this.helper.openLink(settings.telegramMoreInfo);
                 console.log('Confirm Cancel');
               }
-              
+
               resolve(false);
             },
           },
@@ -349,7 +345,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
 
 
       await alert.present();
-    })
+    });
 
   }
 

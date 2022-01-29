@@ -39,10 +39,10 @@ export class UploadService {
                 return event;
             }
           }),
-          catchError((error: HttpErrorResponse) => {
+          catchError((error: HttpErrorResponse) =>
             // file.inProgress = false;
-            return of(`upload failed.`);
-          })
+             of(`upload failed.`)
+          )
         )
         .subscribe((event: any) => {
           if (typeof event === 'object') {

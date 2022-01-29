@@ -11,12 +11,12 @@ import { AdPage } from '../../pages/ad/ad.page';
 })
 export class AdItemComponent implements OnInit {
   @Input() ad: any;
-  @Input() modalOpen: boolean = false;
-  isInWishList: boolean = false;
+  @Input() modalOpen = false;
+  isInWishList = false;
   constructor(
     public helper: HelperService,
     private modalCtrl: ModalController,
-    private navCtrl: NavController, 
+    private navCtrl: NavController,
     private wishlist: WishlistService
     // private routerOutlet: IonRouterOutlet
   ) {}
@@ -42,11 +42,11 @@ export class AdItemComponent implements OnInit {
 
   open() {
     if(this.modalOpen)
-      this.modalCtrl?.dismiss()
+      {this.modalCtrl?.dismiss();}
     setTimeout(() =>{
-      this.navCtrl.navigateForward(['/tabs/advertising', this.ad.id])
-    }, this.modalCtrl ? 200 : 0)
-    
+      this.navCtrl.navigateForward(['/tabs/advertising', this.ad.id]);
+    }, this.modalCtrl ? 200 : 0);
+
   }
 
   async addOrRemoveFromWishList($event) {

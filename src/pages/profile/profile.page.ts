@@ -15,10 +15,10 @@ import { HelperService } from 'src/common/services/helper.service';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-  @Input() id: number = 1;
+  @Input() id = 1;
   elementType = 'canvas';
   value = 'Mathis';
-  locationLoading: boolean = false;
+  locationLoading = false;
   user: any = {};
 
   markers = [];

@@ -4,11 +4,18 @@
   </ion-list-header>
   <ion-item *ngFor="let friend of friends">
     <ion-avatar slot="start">
-      <img loading="lazy" [src]="helper.getImageUrl(friend.image?.formats?.small?.url || friend.image?.url)" />
+      <img
+        loading="lazy"
+        [src]="
+          helper.getImageUrl(
+            friend.image?.formats?.small?.url || friend.image?.url
+          )
+        "
+      />
     </ion-avatar>
     <ion-label>
       <h2>{{ friend.name }}</h2>
-      <p>{{ friend.Platform }}</p>
+      <p>{{ friend.platform }}</p>
     </ion-label>
     <ion-button slot="end" (click)="connect(friend)"> Verbinden </ion-button>
   </ion-item>

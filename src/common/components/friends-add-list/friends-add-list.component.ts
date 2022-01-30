@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./friends-add-list.component.scss'],
 })
 export class FriendsAddListComponent implements OnInit {
-  friends = [
+  friends: any = [
     {
       name: 'Daniel Ehrhardt',
       platform: 'Instagram',

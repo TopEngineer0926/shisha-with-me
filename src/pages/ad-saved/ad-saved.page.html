@@ -1,26 +1,24 @@
+<ion-content>
+  <ion-header class="ion-no-border mt-3">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)="close()">
+          <ion-icon name="chevron-back-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
 
-<ion-content >
-  
-<ion-header  class="ion-no-border mt-3">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button (click)="close()">
-        <ion-icon name="chevron-back-outline"></ion-icon>
-      </ion-button>
-    
-    </ion-buttons>
-
-    <ion-title >
-      Favoriten
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
+      <ion-title> Favoriten </ion-title>
+    </ion-toolbar>
+  </ion-header>
 
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <app-ad-item *ngFor="let ad of wishlist.wishlist" [ad]="ad" [modalOpen]="true"></app-ad-item>
+  <app-ad-item
+    *ngFor="let ad of wishlist.wishlist"
+    [ad]="ad"
+    [modalOpen]="true"
+  ></app-ad-item>
   <div class="no-items" *ngIf="!(wishlist?.wishlist?.length > 0)">
     Noch keine Einträge vorhanden
   </div>

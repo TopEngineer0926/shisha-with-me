@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonRouterOutlet, LoadingController, ModalController, NavController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
 import { AdSavedPage } from '../ad-saved/ad-saved.page';
 import { HelperService } from './../../common/services/helper.service';
 import { AdService } from './services/ad.service';
@@ -21,9 +21,8 @@ export class AdvertisingPage implements OnInit {
     public helper: HelperService,
     public adService: AdService,
     private loadingCtrl: LoadingController,
-    private nav: NavController, private modalCtrl: ModalController,
-    private routerOutlet: IonRouterOutlet,
-  ) { }
+    private modalCtrl: ModalController
+  ) {}
 
   async ngOnInit() {
     this.load();
@@ -37,7 +36,6 @@ export class AdvertisingPage implements OnInit {
     this.topDeals = this.ads.filter((ad) => ad.topDeal == true);
 
     this.search();
-
   }
 
   async wishListPage() {
@@ -56,7 +54,9 @@ export class AdvertisingPage implements OnInit {
       return;
     }
 
-    this.sorted = this.ads.filter((element) => element.title.toLowerCase().includes(this.searchTerm.toLowerCase()));
+    this.sorted = this.ads.filter((element) =>
+      element.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
   }
 
   async doRefresh(event) {

@@ -9,14 +9,17 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./ad-saved.page.scss'],
 })
 export class AdSavedPage implements OnInit {
-  constructor(public adService: AdService, public wishlist: WishlistService, private modalCtrl: ModalController) { }
+  constructor(
+    public adService: AdService,
+    public wishlist: WishlistService,
+    private modalCtrl: ModalController
+  ) {}
 
   close() {
     this.modalCtrl.dismiss();
   }
 
   async ngOnInit() {
-    console.log('INITING');
     await this.wishlist.loadWishlist();
   }
 

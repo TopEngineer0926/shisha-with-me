@@ -1,13 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component, OnInit, OnDestroy } from '@angular/core';
-import {
-  CameraPhoto
-} from '@capacitor/camera';
+import { CameraPhoto } from '@capacitor/camera';
 import {
   AlertController,
   LoadingController,
   ModalController,
-  ToastController
+  ToastController,
 } from '@ionic/angular';
 import { AuthService } from 'src/common/auth/_services/auth.service';
 import { HelperService } from 'src/common/services/helper.service';
@@ -15,7 +13,6 @@ import { UploadService } from 'src/common/services/upload.service';
 import { AddEquipmentPage } from './pages/add-equipment/add-equipment.page';
 import { LocationSelectComponent } from './pages/location-select/location-select.component';
 import PhoneNumber from 'awesome-phonenumber';
-
 
 @Component({
   selector: 'app-profile-edit',
@@ -44,12 +41,12 @@ export class ProfileEditPage implements OnInit, OnDestroy {
   async ngOnInit() {
     await this.loadUser();
 
-    const pn = new PhoneNumber( '0707123456', 'SE' );
+    const pn = new PhoneNumber('0707123456', 'SE');
     console.log('test', pn.isMobile());
   }
 
   ngOnDestroy() {
-    if(this.fileInput) {
+    if (this.fileInput) {
       document.body.removeChild(this.fileInput);
     }
   }
@@ -109,7 +106,8 @@ export class ProfileEditPage implements OnInit, OnDestroy {
   }
 
   async change(mode, value) {
-    let text; let inputType;
+    let text;
+    let inputType;
 
     switch (mode) {
       case 'name':
@@ -233,10 +231,10 @@ export class ProfileEditPage implements OnInit, OnDestroy {
   async changePicture($event: MouseEvent): Promise<void> {
     $event.preventDefault();
 
-    if(this.fileInput) {
+    console.log('this.fileInput', this.fileInput);
+    if (this.fileInput) {
       document.body.removeChild(this.fileInput);
     }
-
 
     let files: FileList;
     if ($event instanceof DragEvent) {
@@ -252,11 +250,13 @@ export class ProfileEditPage implements OnInit, OnDestroy {
         this.fileInput.onchange = resolve;
       });
       document.body.appendChild(this.fileInput);
+
       this.fileInput.click();
       try {
         await fileSelectPromise;
         files = this.fileInput.files;
         document.body.removeChild(this.fileInput);
+        delete this.fileInput;
       } catch (e) {}
     }
 
@@ -264,7 +264,6 @@ export class ProfileEditPage implements OnInit, OnDestroy {
       const loading = await this.loadingCtrl.create({ translucent: true });
       loading.present();
       for (const file of Array.from(files)) {
-
         const files = [];
         files.push(file);
         const formData = new FormData();

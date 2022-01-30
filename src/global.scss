@@ -11,7 +11,6 @@
 
 @import "./assets/fonts/stylesheet.css";
 
-
 .ng-lazyloaded {
   animation: fadein 0.4s;
 }
@@ -23,7 +22,6 @@
     opacity: 1;
   }
 }
-
 
 ion-refresher {
   z-index: 1;
@@ -73,7 +71,6 @@ ion-segment-button {
     border-radius: 10px;
   }
 }
-
 
 ion-avatar {
   > div {
@@ -155,7 +152,14 @@ small {
     rgba(244, 246, 249, 0.013) 91.9%,
     rgba(244, 246, 249, 0) 100%
   );*/
-  background: linear-gradient(180deg, rgba(244, 246, 249, 0) 0%, rgba(244, 246, 249, 1) 30%, rgba(244, 246, 249, 1) 50%, rgba(244, 246, 249, 1) 70%, rgba(244, 246, 249, 0) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(244, 246, 249, 0) 0%,
+    rgba(244, 246, 249, 1) 30%,
+    rgba(244, 246, 249, 1) 50%,
+    rgba(244, 246, 249, 1) 70%,
+    rgba(244, 246, 249, 0) 100%
+  );
 }
 
 .dark {
@@ -191,7 +195,14 @@ small {
       transparent 100%
     );*/
 
-    background: linear-gradient(0deg, rgba(41, 43, 43, 0) 0%, rgba(41, 43, 43, 1) 30%, rgba(41, 43, 43, 1) 50%, rgba(41, 43, 43, 1) 70%, rgba(41, 43, 43, 0) 100%);
+    background: linear-gradient(
+      0deg,
+      rgba(41, 43, 43, 0) 0%,
+      rgba(41, 43, 43, 1) 30%,
+      rgba(41, 43, 43, 1) 50%,
+      rgba(41, 43, 43, 1) 70%,
+      rgba(41, 43, 43, 0) 100%
+    );
   }
 }
 
@@ -311,7 +322,8 @@ ion-fab-button[data-desc]::after {
   padding: 9px;
   border-radius: 15px;
   color: var(--ion-color-dark);
-  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
 }
 ion-list[lines="none"] {
   border: none !important;
@@ -361,24 +373,29 @@ ion-input {
 
 ion-searchbar {
   ion-icon {
-    right: 5px; left: unset!important;
+    right: 5px;
+    left: unset !important;
   }
   input {
-    padding-left: 9px!important;
+    padding-left: 9px !important;
   }
-  .searchbar-clear-button{
-    display: none!important;
+  .searchbar-clear-button {
+    display: none !important;
   }
 }
 
 ion-header {
   ion-toolbar {
-    @apply pt-4 h-16;
+    @apply pt-4 h-16 flex items-center;
+    ion-buttons {
+      @apply px-4;
+    }
   }
   ion-title {
     @apply text-3xl font-normal;
   }
-  ion-button, ion-back-button {
+  ion-button,
+  ion-back-button {
     --color: #fff;
   }
 }

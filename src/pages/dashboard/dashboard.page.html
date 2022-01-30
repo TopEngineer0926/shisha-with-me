@@ -1,26 +1,42 @@
 <ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
     <div class="flex flex-col items-center pt-4 h-16">
-      <img src="assets/images/logo-light.svg" class="w-24">
+      <img src="assets/images/logo-light.svg" class="w-24" />
     </div>
   </ion-toolbar>
 </ion-header>
 
-<div class="fixed z-50 top-0 left-0 h-screen w-screen bg-black pointer-events-none" [@visibilityChanged]="visiblityState">
-  <video #videoElm muted preload="auto" playsinline onloadedmetadata="this.muted = true" >
-    <source src="/assets/videos/rauch-1.webm" type="video/webm" *ngIf="!platform.SAFARI" />
+<div
+  class="fixed z-50 top-0 left-0 h-screen w-screen bg-black pointer-events-none"
+  [@visibilityChanged]="visiblityState"
+>
+  <video
+    #videoElm
+    muted
+    preload="auto"
+    playsinline
+    onloadedmetadata="this.muted = true"
+  >
+    <source
+      src="/assets/videos/rauch-1.webm"
+      type="video/webm"
+      *ngIf="!platform.SAFARI"
+    />
     <source src="/assets/videos/rauch-1.mp4" type="video/mp4" />
   </video>
 </div>
 
-<ion-content [fullscreen]="true" [style.--overflow]="searchTerm ? 'scroll' : 'hidden'">
+<ion-content [style.--overflow]="searchTerm ? 'scroll' : 'hidden'">
   <div class="pt-2 px-6 flex justify-center h-16">
-    <ion-searchbar class="z-10 h-5/6" [(ngModel)]="searchTerm" (ngModelChange)="search()" placeholder="Suche..."></ion-searchbar>
+    <ion-searchbar
+      class="z-10 h-5/6"
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="search()"
+      placeholder="Suche..."
+    ></ion-searchbar>
   </div>
 
   <!--<div class="dot"></div>-->
-
-  
 
   <!--<swiper [slidesPerView]="4" [spaceBetween]="30" [centeredSlides]="true">
     <ng-template swiperSlide *ngFor="let slide of manufacturers">
@@ -60,8 +76,16 @@
       <ng-container *ngIf="slide.smoke_products?.length > 0">
         <div class="py-3 font-bold">{{slide.name}}</div>
         <div class="grid grid-cols-2 gap-4 mb-3">
-          <div (click)="selectSession(children, 'product')" class="bg-white rounded-2xl" *ngFor="let children of slide.smoke_products">
-            <img loading="lazy" class="mx-auto object-contain h-28" [src]="helper.getImageUrl(children.image?.formats?.medium?.url ||children.image?.url)" />
+          <div
+            (click)="selectSession(children, 'product')"
+            class="bg-white rounded-2xl"
+            *ngFor="let children of slide.smoke_products"
+          >
+            <img
+              loading="lazy"
+              class="mx-auto object-contain h-28"
+              [src]="helper.getImageUrl(children.image?.formats?.medium?.url ||children.image?.url)"
+            />
             <div class="text-center text-black py-2">{{children.name}}</div>
           </div>
         </div>
@@ -73,18 +97,38 @@
     </div>
   </div>
 
-  <ion-slides [hidden]="searchTerm" #mainSlider class="first" [options]="slideOpts">
+  <ion-slides
+    [hidden]="searchTerm"
+    #mainSlider
+    class="first"
+    [options]="slideOpts"
+  >
     <ion-slide class="first-slide" *ngFor="let slide of manufacturers">
       <ion-slides class="inner-slides" #subSlider [options]="slideOptsVert">
         <ion-slide class="manufactur">
-          <div class="slide-item slide-item-manufactur" (click)="selectSession(slide, 'manufactur')">
-            <div class="inside-dot" [lazyLoad]="helper.getImageUrl(slide.image?.formats?.small?.url || slide.image?.url)"></div>
+          <div
+            class="slide-item slide-item-manufactur"
+            (click)="selectSession(slide, 'manufactur')"
+          >
+            <div
+              class="inside-dot"
+              [lazyLoad]="helper.getImageUrl(slide.image?.formats?.small?.url || slide.image?.url)"
+            ></div>
             <div class="item-title">{{slide.name}}</div>
           </div>
         </ion-slide>
-        <ion-slide class="product-slide" *ngFor="let children of slide.smoke_products">
-          <div class="slide-item inner-slide" (click)="selectSession(children, 'product')">
-            <div class="inside-dot" [lazyLoad]="helper.getImageUrl(children.image?.formats?.small?.url ||children.image?.url)"></div>
+        <ion-slide
+          class="product-slide"
+          *ngFor="let children of slide.smoke_products"
+        >
+          <div
+            class="slide-item inner-slide"
+            (click)="selectSession(children, 'product')"
+          >
+            <div
+              class="inside-dot"
+              [lazyLoad]="helper.getImageUrl(children.image?.formats?.small?.url ||children.image?.url)"
+            ></div>
             <div class="item-title">{{children.name}}</div>
           </div>
         </ion-slide>

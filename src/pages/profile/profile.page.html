@@ -12,8 +12,11 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <div class="user-image" [style.backgroundImage]="'url(' +  helper.getImageUrl(user.image?.formats?.medium?.url || user.image?.url) + ')'"></div>
+<ion-content>
+  <div
+    class="user-image"
+    [style.backgroundImage]="'url(' +  helper.getImageUrl(user.image?.formats?.medium?.url || user.image?.url) + ')'"
+  ></div>
   <ion-card>
     <ion-list>
       <ion-item class="mb-5">
@@ -38,7 +41,10 @@
         <ion-icon name="chatbubbles-outline"></ion-icon>
         <ion-label>Guter Rauch! 💨🙌🏼</ion-label>
       </ion-chip>
-      <ion-chip color="secondary" (click)="sendMessage('Kann ich mitrauchen? 🙋‍♂️')">
+      <ion-chip
+        color="secondary"
+        (click)="sendMessage('Kann ich mitrauchen? 🙋‍♂️')"
+      >
         <ion-icon name="chatbubbles-outline"></ion-icon>
         <ion-label>Kann ich mitrauchen? 🙋‍♂️</ion-label>
       </ion-chip>
@@ -66,7 +72,10 @@
     </ion-card-header>
 
     <google-map #map [center]="center" [zoom]="zoom" [options]="options">
-      <map-marker *ngFor="let marker of markers" [position]="marker"></map-marker>
+      <map-marker
+        *ngFor="let marker of markers"
+        [position]="marker"
+      ></map-marker>
     </google-map>
     <!--<agm-map
       [latitude]="lat"

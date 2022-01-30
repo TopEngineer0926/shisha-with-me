@@ -1,11 +1,8 @@
-<ion-content [fullscreen]="true" class="relative">
+<ion-content class="relative">
   <ion-header [translucent]="true" class="ion-no-border">
     <ion-toolbar>
-
       <div class="grid grid-cols-3 h-16 text-3xl pt-4 px-6">
-        <div>
-
-        </div>
+        <div></div>
 
         <div class="flex justify-center items-center">
           <div *ngIf="currentTab === 'friends'">Freunde</div>
@@ -13,9 +10,18 @@
         </div>
 
         <div class="flex items-center justify-end">
-          <ion-button class="px-0 mx-0" color="transparent" size="small" routerLink="/tabs/map/friends-add"
-            routerDirection="forward">
-            <ion-icon [hidden]="currentTab !== 'friends'" class="h-6 w-6" name="add"></ion-icon>
+          <ion-button
+            class="px-0 mx-0"
+            color="transparent"
+            size="small"
+            routerLink="/tabs/map/friends-add"
+            routerDirection="forward"
+          >
+            <ion-icon
+              [hidden]="currentTab !== 'friends'"
+              class="h-6 w-6"
+              name="add"
+            ></ion-icon>
           </ion-button>
         </div>
       </div>
@@ -23,9 +29,16 @@
   </ion-header>
   <div class="background-gradient"></div>
   <div class="z-10 pt-2 px-8">
-    <ion-segment class="z-10 h-10" mode="ios" [value]="currentTab" (ionChange)="changeTab($event)">
+    <ion-segment
+      class="z-10 h-10"
+      mode="ios"
+      [value]="currentTab"
+      (ionChange)="changeTab($event)"
+    >
       <ion-segment-button mode="ios" value="map"> Karte </ion-segment-button>
-      <ion-segment-button mode="ios" value="friends"> Freunde </ion-segment-button>
+      <ion-segment-button mode="ios" value="friends">
+        Freunde
+      </ion-segment-button>
     </ion-segment>
   </div>
 
@@ -34,7 +47,10 @@
   </ion-button>-->
   <div [hidden]="!(currentTab === 'map')" class="map">
     <google-map [center]="center" [zoom]="zoom" [options]="options">
-      <map-marker *ngFor="let markerPosition of markerPositions" [position]="markerPosition"></map-marker>
+      <map-marker
+        *ngFor="let markerPosition of markerPositions"
+        [position]="markerPosition"
+      ></map-marker>
     </google-map>
   </div>
   <div [hidden]="!(currentTab === 'friends')" class="p-5">
@@ -42,13 +58,23 @@
   </div>
 
   <div slot="fixed" class="bottom-4 w-full px-8">
-    <ion-button [hidden]="!(currentTab === 'map')" color="primary" class="w-full font-normal"
-      (click)="openFilterSheet()">Filtern</ion-button>
-    <ion-button [hidden]="!(currentTab === 'friends')" color="primary" class="w-full font-normal" (click)="share()">Teile
-      die App mit Freunden</ion-button>
+    <ion-button
+      [hidden]="!(currentTab === 'map')"
+      color="primary"
+      class="w-full font-normal"
+      (click)="openFilterSheet()"
+      >Filtern</ion-button
+    >
+    <ion-button
+      [hidden]="!(currentTab === 'friends')"
+      color="primary"
+      class="w-full font-normal"
+      (click)="share()"
+      >Teile die App mit Freunden</ion-button
+    >
   </div>
-  
- <!-- <ion-fab
+
+  <!-- <ion-fab
     *ngIf="currentTab === 'map'"
     vertical="bottom"
     horizontal="end"
@@ -69,33 +95,50 @@
 </ion-content>
 
 <!-- Filter Sheet -->
-<ion-modal #filterModal [hidden]="!(currentTab === 'map')" mode="ios" class="modal-over-bottom-nav"
-  [isOpen]="showFilterSheet" [breakpoints]="[0, 0.45]" [initialBreakpoint]="0.45" [swipeToClose]="true"
-  (didDismiss)="showFilterSheet = false">
+<ion-modal
+  #filterModal
+  [hidden]="!(currentTab === 'map')"
+  mode="ios"
+  class="modal-over-bottom-nav"
+  [isOpen]="showFilterSheet"
+  [breakpoints]="[0, 0.45]"
+  [initialBreakpoint]="0.45"
+  [swipeToClose]="true"
+  (didDismiss)="showFilterSheet = false"
+>
   <ng-template>
     <div class="px-8 pt-8">
       Filter
-      <form class="w-full filter-wrapper" [formGroup]="mapFilterForm" novalidate>
+      <form
+        class="w-full filter-wrapper"
+        [formGroup]="mapFilterForm"
+        novalidate
+      >
         <ion-item class="my-2">
-          <img src="/assets/icons/account-icon.svg">
+          <img src="/assets/icons/account-icon.svg" />
           <ion-label>Freunde</ion-label>
           <ion-checkbox formControlName="friends" slot="end"></ion-checkbox>
         </ion-item>
 
         <ion-item class="mb-2">
-          <img src="/assets/icons/cart-icon.svg">
+          <img src="/assets/icons/cart-icon.svg" />
           <ion-label>Shisha Shop</ion-label>
           <ion-checkbox formControlName="shishaShop" slot="end"></ion-checkbox>
         </ion-item>
 
         <ion-item class="mb-4">
-          <img src="/assets/icons/shisha-icon.svg">
+          <img src="/assets/icons/shisha-icon.svg" />
           <ion-label>Shisha Bar</ion-label>
           <ion-checkbox formControlName="shishaBar" slot="end"></ion-checkbox>
         </ion-item>
       </form>
 
-      <ion-button color="primary" class="w-full font-normal" (click)="filterMarkers()">Filtern</ion-button>
+      <ion-button
+        color="primary"
+        class="w-full font-normal"
+        (click)="filterMarkers()"
+        >Filtern</ion-button
+      >
     </div>
   </ng-template>
 </ion-modal>

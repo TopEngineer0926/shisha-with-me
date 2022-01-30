@@ -4,7 +4,7 @@ import {
   IonRouterOutlet,
   ModalController,
   NavController,
-  PopoverController
+  PopoverController,
 } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'src/common/auth/_services/auth.service';
@@ -47,11 +47,6 @@ export class SettingsPage implements OnInit {
     const language = await this.getLang();
     this.language = language;
     this.settings = await this.settingsService.getSettings();
-
-  }
-
-  async goToNoSmoke() {
-    this.navCtrl.navigateForward('no-smoke');
   }
 
   async goToProfile() {

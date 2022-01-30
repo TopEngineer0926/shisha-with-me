@@ -1,14 +1,15 @@
-<ion-content [fullscreen]="true">
-
+<ion-content>
   <ion-header collapse="condense" class="ion-no-border">
     <ion-toolbar class="pt-4 h-16">
       <ion-buttons slot="start">
-        <ion-back-button defaultHref="tabs/settings/profile" color="dark"></ion-back-button>
+        <ion-back-button
+          defaultHref="tabs/settings/profile"
+          color="dark"
+        ></ion-back-button>
       </ion-buttons>
       <ion-title class="text-3xl font-normal">Bearbeiten</ion-title>
     </ion-toolbar>
   </ion-header>
-
 
   <div class="px-7 mt-10">
     <ion-label>Benutzername ändern</ion-label>
@@ -38,6 +39,8 @@
     </ion-item>
   </div>
   <div slot="fixed" class="bottom-4 w-full px-8">
-    <ion-button (click)="save()" color="primary" class="w-full font-normal">Speichern</ion-button>
+    <ion-button (click)="save()" color="primary" class="w-full font-normal"
+      >Speichern</ion-button
+    >
   </div>
 </ion-content>

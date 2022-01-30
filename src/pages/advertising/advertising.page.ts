@@ -1,3 +1,4 @@
+import { WishlistService } from './../../common/services/wishlist.service';
 import { Component, OnInit } from '@angular/core';
 import { LoadingController, ModalController } from '@ionic/angular';
 import { AdSavedPage } from '../ad-saved/ad-saved.page';
@@ -21,7 +22,8 @@ export class AdvertisingPage implements OnInit {
     public helper: HelperService,
     public adService: AdService,
     private loadingCtrl: LoadingController,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    public wishlistService: WishlistService
   ) {}
 
   async ngOnInit() {

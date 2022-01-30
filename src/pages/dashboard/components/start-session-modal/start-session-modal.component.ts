@@ -1,8 +1,24 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  QueryList,
+  ViewChild,
+  ViewChildren,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
-import { AlertController, IonSlides, LoadingController, ModalController, Platform, ToastController } from '@ionic/angular';
+import {
+  AlertController,
+  IonSlides,
+  LoadingController,
+  ModalController,
+  Platform,
+  ToastController,
+} from '@ionic/angular';
 import { AuthService } from 'src/common/auth/_services/auth.service';
 import { HelperService } from 'src/common/services/helper.service';
 import { MapService } from 'src/common/services/map.service';
@@ -19,13 +35,13 @@ import { trigger, transition, animate, style } from '@angular/animations';
     trigger('slideInOut', [
       transition(':enter', [
         style({ transform: 'translateY(100%)' }),
-        animate('400ms ease-in', style({ transform: 'translateY(0%)' }))
+        animate('400ms ease-in', style({ transform: 'translateY(0%)' })),
       ]),
       transition(':leave', [
-        animate('400ms ease-in', style({ transform: 'translateY(100%)' }))
-      ])
-    ])
-  ]
+        animate('400ms ease-in', style({ transform: 'translateY(100%)' })),
+      ]),
+    ]),
+  ],
 })
 export class StartSessionModalComponent implements OnInit {
   @Input() product: Manufacturer;
@@ -54,7 +70,8 @@ export class StartSessionModalComponent implements OnInit {
     public platform: Platform,
     private router: Router,
     private route: ActivatedRoute,
-    private loadingCtrl: LoadingController) { }
+    private loadingCtrl: LoadingController
+  ) {}
 
   ngOnInit() {
     console.log('A', this.product);
@@ -85,17 +102,28 @@ export class StartSessionModalComponent implements OnInit {
   public async selectLocation(): Promise<void> {
     if (this.authService.user.location) {
       const locations: any = await this.http
-        .get('api/locations')
+        .get('api/locations', { params: { type_eq: 'shisha_bar' } })
         .toPromise();
+      console.log('locations', locations);
 
       locations.map((location) => {
-        location.distance = this.calculateDistance(location.location.lat, location.location.lng, this.authService.user.location.lat, this.authService.user.location.lng, null);
+        location.distance = this.calculateDistance(
+          location.location.lat,
+          location.location.lng,
+          this.authService.user.location.lat,
+          this.authService.user.location.lng,
+          null
+        );
       });
 
-      const sorted = locations.sort((a, b) => a.distance > b.distance ? 1 : -1);
+      const sorted = locations.sort((a, b) =>
+        a.distance > b.distance ? 1 : -1
+      );
       this.nearbyShishaBars = [sorted[0], sorted[1], sorted[2]];
       this.selectLocationMode = true;
-    } else {this.openSearchLocationModal();}
+    } else {
+      this.openSearchLocationModal();
+    }
   }
 
   async locationClicked(location) {
@@ -139,14 +167,13 @@ export class StartSessionModalComponent implements OnInit {
             text: 'Hinzufügen',
             handler: async (data) => {
               const update = {
-                telegramUsername: data.name
+                telegramUsername: data.name,
               };
 
               try {
                 await this.http
                   .put('api/users/' + this.authService.user.id, update)
                   .toPromise();
-
 
                 resolve(true);
               } catch (error) {
@@ -173,10 +200,8 @@ export class StartSessionModalComponent implements OnInit {
         ],
       });
 
-
       await alert.present();
     });
-
   }
 
   async startSession(smokeProduct, type, location?) {
@@ -214,7 +239,7 @@ export class StartSessionModalComponent implements OnInit {
           ).present();
 
           this.modalCtrl.dismiss({
-            showSmoke: true
+            showSmoke: true,
           });
         }
       } else {
@@ -230,12 +255,10 @@ export class StartSessionModalComponent implements OnInit {
         ).present();
 
         this.modalCtrl.dismiss({
-          showSmoke: true
+          showSmoke: true,
         });
       }
-
     } catch (error) {
-
     } finally {
       loading.dismiss();
     }
@@ -263,5 +286,4 @@ export class StartSessionModalComponent implements OnInit {
     });
     return await modal.present();*/
   }
-
 }

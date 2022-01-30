@@ -1,8 +1,8 @@
-import { WishlistService } from './../../../../common/services/wishlist.service';
-import { HelperService } from './../../../../common/services/helper.service';
 import { Component, Input, OnInit } from '@angular/core';
-import { IonRouterOutlet, ModalController, NavController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { AdPage } from '../../pages/ad/ad.page';
+import { HelperService } from './../../../../common/services/helper.service';
+import { WishlistService } from './../../../../common/services/wishlist.service';
 
 @Component({
   selector: 'app-ad-item',
@@ -17,13 +17,11 @@ export class AdItemComponent implements OnInit {
     public helper: HelperService,
     private modalCtrl: ModalController,
     private navCtrl: NavController,
-    private wishlist: WishlistService
-    // private routerOutlet: IonRouterOutlet
+    private wishlist: WishlistService // private routerOutlet: IonRouterOutlet
   ) {}
 
- async ngOnInit() {
+  async ngOnInit() {
     await this.wishlist.loadWishlist();
-    console.log(this.wishlist.wishlist);
     this.isInWishList = !!(await this.wishlist.isInWishList(this.ad));
   }
 
@@ -41,22 +39,24 @@ export class AdItemComponent implements OnInit {
   }
 
   open() {
-    if(this.modalOpen)
-      {this.modalCtrl?.dismiss();}
-    setTimeout(() =>{
-      this.navCtrl.navigateForward(['/tabs/advertising', this.ad.id]);
-    }, this.modalCtrl ? 200 : 0);
-
+    if (this.modalOpen) {
+      this.modalCtrl?.dismiss();
+    }
+    setTimeout(
+      () => {
+        this.navCtrl.navigateForward(['/tabs/advertising', this.ad.id]);
+      },
+      this.modalCtrl ? 200 : 0
+    );
   }
 
   async addOrRemoveFromWishList($event) {
     $event.preventDefault();
     $event.stopPropagation();
     this.isInWishList
-    ? this.wishlist.removeFromWishlist(this.ad)
-    : this.wishlist.addToWishlist(this.ad);
+      ? this.wishlist.removeFromWishlist(this.ad)
+      : this.wishlist.addToWishlist(this.ad);
 
     this.isInWishList = !!(await this.wishlist.isInWishList(this.ad));
-
   }
 }

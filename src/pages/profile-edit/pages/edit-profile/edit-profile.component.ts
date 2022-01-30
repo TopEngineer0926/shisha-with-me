@@ -5,17 +5,12 @@ import PhoneNumber from 'awesome-phonenumber';
 import { AuthService } from 'src/common/auth/_services/auth.service';
 import { MapHelperService } from 'src/common/services/map-helper.service';
 
-
-
-
-
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.scss'],
 })
 export class EditProfileComponent implements OnInit {
-
   currentUser: any;
   public model: {
     username: string;
@@ -28,20 +23,18 @@ export class EditProfileComponent implements OnInit {
       snapchat: string;
     };
   } = {
-      username: '',
-      password: '',
-      telegram: '',
-      phone: '',
+    username: '',
+    password: '',
+    telegram: '',
+    phone: '',
+    instagram: '',
+    social: {
       instagram: '',
-      social: {
-        instagram: '',
-        snapchat: ''
-      }
-    };
+      snapchat: '',
+    },
+  };
 
   user: any;
-
-
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -50,19 +43,21 @@ export class EditProfileComponent implements OnInit {
     private toastCtrl: ToastController,
     private authService: AuthService,
     private navCtrl: NavController
-  ) { }
+  ) {}
 
   async ngOnInit() {
     await this.loadUser();
     console.log(this.user);
     this.model.username = this.user.customUsername;
     this.model.telegram = this.user.telegramUsername;
+    this.model.instagram = this.user.instagram;
     this.model.phone = this.user.phoneNumber;
-    if (this.user.social) {this.model.social = this.user.social;}
+    if (this.user.social) {
+      this.model.social = this.user.social;
+    }
 
-
-    const pn = new PhoneNumber( this.model.phone, 'DE' );
-    console.log('test', pn.getNumber( ));
+    // const pn = new PhoneNumber(this.model.phone, 'DE');
+    // console.log('test', pn.getNumber());
   }
 
   async loadUser() {
@@ -79,22 +74,31 @@ export class EditProfileComponent implements OnInit {
   async save() {
     const update = {} as any;
 
-    if (this.model.password) {update.password = this.model.password;}
-    if (this.model.telegram != this.user.telegramUsername) {update.telegramUsername = this.model.telegram;}
-    if (this.model.username != this.user.customUsername) {update.customUsername = this.model.username;}
-    if (this.model.phone !== this.user.phoneNumber) {update.phoneNumber = this.model.phone;}
-    if (this.model.instagram !== this.user.instagram) {update.instagram = this.model.instagram;}
-
+    if (this.model.password) {
+      update.password = this.model.password;
+    }
+    if (this.model.telegram != this.user.telegramUsername) {
+      update.telegramUsername = this.model.telegram;
+    }
+    if (this.model.username != this.user.customUsername) {
+      update.customUsername = this.model.username;
+    }
+    if (this.model.phone !== this.user.phoneNumber) {
+      update.phoneNumber = this.model.phone;
+    }
+    //if (this.model.instagram !== this.user.instagram) {update.instagram = this.model.instagram;}
 
     try {
-      const user: any = await this.http.put('api/users/' + this.user.id, update).toPromise();
+      const user: any = await this.http
+        .put('api/users/' + this.user.id, update)
+        .toPromise();
       await this.loadUser();
       (
         await this.toastCtrl.create({
           message: 'Änderungen gespeichert',
           translucent: true,
           position: 'top',
-          duration: 4000
+          duration: 4000,
         })
       ).present();
       this.navCtrl.back();
@@ -104,12 +108,9 @@ export class EditProfileComponent implements OnInit {
           message: error,
           translucent: true,
           position: 'top',
-          duration: 4000
+          duration: 4000,
         })
       ).present();
-
     }
-
   }
-
 }

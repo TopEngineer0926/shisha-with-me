@@ -16,7 +16,7 @@
     </ion-toolbar>
   </ion-header>
   <div class="px-5 py-5">
-    <ion-radio-group
+    <ion-radio-group [(ngModel)]="selection"
       ><ion-list>
         <!--
         <ion-item class="mb-3"
@@ -26,14 +26,14 @@
         -->
         <ion-item class="mb-3"
           ><ion-label>Idee vorschlagen</ion-label>
-          <ion-radio value="cor1d"></ion-radio
+          <ion-radio value="idea"></ion-radio
         ></ion-item>
         <ion-item class="mb-3"
-          ><ion-label>Tabak oder Shishabar hinzufügen</ion-label>
-          <ion-radio value="cor2d"></ion-radio
+          ><ion-label>Tabak oder Shisha Bar hinzufügen</ion-label>
+          <ion-radio value="shisha-bar"></ion-radio
         ></ion-item>
         <ion-item class="mb-3"
-          ><ion-label>Sonstiges </ion-label><ion-radio value="cor3d"></ion-radio
+          ><ion-label>Sonstiges </ion-label><ion-radio value="other"></ion-radio
         ></ion-item> </ion-list
     ></ion-radio-group>
   </div>
@@ -42,6 +42,7 @@
       class="px-3"
       autoGrow="true"
       placeholder="Nachricht ..."
+      [(ngModel)]="message"
     ></ion-textarea>
   </div>
   <div class="px-5 mt-5">

@@ -26,6 +26,7 @@ import { Manufacturer } from 'src/common/types';
 import { SelectLocationPage } from 'src/pages/select-location/select-location.page';
 import { slideOpts } from '../../slider-config';
 import { trigger, transition, animate, style } from '@angular/animations';
+import { IdeaPage } from 'src/pages/idea/idea.page';
 
 @Component({
   selector: 'app-start-session-modal',
@@ -133,17 +134,19 @@ export class StartSessionModalComponent implements OnInit {
   async openSearchLocationModal() {
     const elm = await this.modalCtrl.getTop();
     const modal = await this.modalCtrl.create({
-      component: SelectLocationPage,
+      component: IdeaPage,
       swipeToClose: true,
       presentingElement: elm,
-      componentProps: {},
+      componentProps: {
+        selectSishaBar: true,
+      },
     });
     modal.onDidDismiss().then(async (data) => {
-      if (data?.data) {
+      /*if (data?.data) {
         console.log(data);
 
         await this.startSession(this.product, this.type, data.data);
-      }
+      }*/
     });
     return await modal.present();
   }
@@ -262,28 +265,5 @@ export class StartSessionModalComponent implements OnInit {
     } finally {
       loading.dismiss();
     }
-    /*setTimeout(() => {
-      this.localNotifications.schedule({
-        id: 1,
-        text: '💨 Frankenstraße 20, 74562 Wolpertshausen, Deutschland',
-        title: 'Mathis raucht eine Shisha',
-        attachments: [
-          `https://maps.googleapis.com/maps/api/staticmap?center=Wolpertshausen&zoom=13&size=300x200&maptype=roadmap&key=AIzaSyDfBZEEoOwxq0nqGAtU49iNbsC8Lhp88pU`,
-        ],
-        actions: [
-          { id: '1', title: 'Guter Rauch!' },
-          { id: '2', title: 'Leg nochmal Kohle auf. Ich bin unterwegs!' },
-        ],
-      });
-    }, 2000);*/
-
-    /*
-    const modal = await this.modalCtrl.create({
-      component: StartSessionPage,
-      swipeToClose: true,
-      presentingElement: this.routerOutlet.nativeEl,
-      componentProps: {},
-    });
-    return await modal.present();*/
   }
 }

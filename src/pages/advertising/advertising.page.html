@@ -1,27 +1,25 @@
-<ion-content>
-  <ion-header collapse="condense" class="ion-no-border">
-    <ion-toolbar>
-      <div class="grid grid-cols-3 h-16 text-3xl justify-between px-4">
-        <div></div>
-        <div class="flex justify-center items-center">Shop</div>
-
-        <div class="flex justify-end items-center">
-          <div class="relative" (click)="wishListPage()">
-            <ion-button class="px-0 mx-0" color="transparent" size="small">
-              <ion-icon class="h-6 w-6" name="heart-outline"></ion-icon>
-            </ion-button>
-            <div
-              class="badge absolute top-0 right-0 -mr-1 bg-red-500 rounded-full"
-              *ngIf="wishlistService.wishlist"
-            >
-              {{wishlistService.wishlist?.length}}
-            </div>
-          </div>
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Shop</ion-title>
+    <ion-buttons slot="end">
+      <div class="relative" (click)="wishListPage()">
+        <ion-button class="px-0 mx-0" color="transparent" size="small">
+          <ion-icon class="h-6 w-6" name="heart-outline"></ion-icon>
+        </ion-button>
+        <div
+          class="badge absolute top-0 right-0 -mr-1 bg-red-500 rounded-full"
+          *ngIf="wishlistService.wishlist"
+        >
+          {{wishlistService.wishlist?.length}}
         </div>
       </div>
-    </ion-toolbar>
-  </ion-header>
-
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
   <div class="mt-2 pt-2 px-6 flex justify-center h-16">
     <ion-searchbar
       class="z-10 h-5/6"
@@ -37,7 +35,7 @@
     </ion-segment-button>
   </ion-segment>-->
 
-  <div class="px-6 pt-5">
+  <div class="px-6 pt-1">
     <div class="overflow-x-auto flex">
       <div
         class="pr-5 py-5 pb-2 cursor-pointer"

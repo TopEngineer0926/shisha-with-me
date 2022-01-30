@@ -1,34 +1,10 @@
-<!--
-<ion-header [translucent]="true">
+<ion-header class="ion-no-border">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button defaultHref="/tabs/map"></ion-back-button>
     </ion-buttons>
-    <ion-title>Freund suchen</ion-title>
-  </ion-toolbar>
-  <ion-toolbar>
-    <ion-searchbar
-      animated="true"
-      placeholder="E-Mail"
-      [(ngModel)]="searchInput"
-      debounce="500"
-      (ionChange)="search()"
-    ></ion-searchbar>
-  </ion-toolbar>
-</ion-header>  
--->
-<ion-header [translucent]="true" class="ion-no-border">
-  <ion-toolbar>
-    <div class="grid grid-cols-3 h-16 text-3xl pt-4 px-6">
-      <ion-buttons slot="start">
-        <ion-back-button defaultHref="/tabs/map"></ion-back-button>
-      </ion-buttons>
 
-      <div class="flex justify-center items-center">
-        Hinzufügen
-      </div>
-      <div></div>
-    </div>
+    <ion-title> Hinzufügen </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -40,9 +16,20 @@
   <app-friends-add-list></app-friends-add-list>-->
 
   <div class="mt-4 px-6">
-    <ion-searchbar animated="true" placeholder="Freunde suchen" [(ngModel)]="searchInput" debounce="500" (ionChange)="search()"></ion-searchbar>
+    <ion-searchbar
+      animated="true"
+      placeholder="Freunde suchen"
+      [(ngModel)]="searchInput"
+      debounce="500"
+      (ionChange)="search()"
+    ></ion-searchbar>
 
-    <ion-segment mode="ios" (ionChange)="segmentChanged($event)" class="mt-4" [value]="searchForProperty">
+    <ion-segment
+      mode="ios"
+      (ionChange)="segmentChanged($event)"
+      class="mt-4"
+      [value]="searchForProperty"
+    >
       <ion-segment-button mode="ios" value="customUsername">
         <ion-label>Name</ion-label>
       </ion-segment-button>
@@ -55,16 +42,23 @@
     </ion-segment>
   </div>
 
-
   <ion-list lines="none" class="mt-7 px-6">
     <ion-item *ngFor="let user of users" class="mb-5">
       <ion-avatar slot="start">
-        <div class="bg-cover bg-no-repeat h-10 w-10 rounded-full" [style.backgroundImage]="'url(' + helper.getImageUrl(user.image?.formats?.medium?.url || user.image?.url) + ')'"></div>
+        <div
+          class="bg-cover bg-no-repeat h-10 w-10 rounded-full"
+          [style.backgroundImage]="'url(' + helper.getImageUrl(user.image?.formats?.medium?.url || user.image?.url) + ')'"
+        ></div>
       </ion-avatar>
       <ion-label>
         <h2>{{ user.customUsername || user.name }}</h2>
       </ion-label>
-      <ion-button *ngIf="!user.isFriend" [disabled]="user.loading" slot="end" (click)="sendRequest(user)">
+      <ion-button
+        *ngIf="!user.isFriend"
+        [disabled]="user.loading"
+        slot="end"
+        (click)="sendRequest(user)"
+      >
         <ion-spinner class="mr-3" *ngIf="user.loading"></ion-spinner>
         Verbinden
       </ion-button>
@@ -74,7 +68,6 @@
   <!--
     <div slot="fixed" class="bottom-4 w-full px-8">
       <ion-button color="primary" class="w-full font-normal" disabled>Freund hinzufügen</ion-button>
-    </div>    
+    </div>
   -->
-
 </ion-content>

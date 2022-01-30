@@ -32,7 +32,7 @@ export class FriendsAddPage {
     public helper: HelperService,
     private authService: AuthService,
     private toastCtrl: ToastController
-  ) { }
+  ) {}
 
   segmentChanged(ev) {
     this.searchForProperty = ev.detail.value;
@@ -42,13 +42,18 @@ export class FriendsAddPage {
   async search() {
     const filterObject = {};
 
-    filterObject[this.searchForProperty + '_contains'] = this.searchInput;
+    let searchString = this.searchInput.replace('+49', '').replace('0049', '');
+    if (
+      this.searchForProperty === 'phoneNumber' &&
+      searchString.startsWith('0')
+    ) {
+      searchString = searchString.substring(1);
+    }
+
+    filterObject[this.searchForProperty + '_contains'] = searchString;
     const query = qs.stringify({
       _where: {
-        _and: [
-          filterObject,
-          { id_ne: this.authService.user.id },
-        ],
+        _and: [filterObject, { id_ne: this.authService.user.id }],
       },
     });
 
@@ -58,7 +63,6 @@ export class FriendsAddPage {
     const friends = await this.http.get('api/friends/friends').toPromise();
     console.log('layers', data, friends);
     this.users = data;
-    // this.searchInput = '';
   }
 
   async sendRequest(user) {
@@ -95,7 +99,8 @@ export class FriendsAddPage {
     const data = {
       initiatorUid: this.authService.user.id.toString(),
       oneUid: this.authService.user.id.toString(),
-      oneName: this.authService.user.name || this.authService.user.customUsername,
+      oneName:
+        this.authService.user.name || this.authService.user.customUsername,
       oneImage: this.authService.user.image,
       twoUid: user.id.toString(),
       twoImage: user.image,

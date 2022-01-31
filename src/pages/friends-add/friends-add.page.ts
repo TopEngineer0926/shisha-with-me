@@ -15,13 +15,7 @@ import * as qs from 'qs';
   styleUrls: ['./friends-add.page.scss'],
 })
 export class FriendsAddPage {
-  friends = [
-    {
-      name: 'Daniel Ehrhardt',
-      platform: 'Instagram',
-    },
-  ];
-
+  friends = [];
   users = [];
   searchInput = '';
   searchForProperty = 'customUsername';
@@ -64,13 +58,20 @@ export class FriendsAddPage {
       },
     });
 
-    const data: any = await this.http
+    const searchResults: any = await this.http
       .get('api/users' + '?' + query)
       .toPromise();
-    const friends = await this.http.get('api/friends/friends').toPromise();
-    console.log('layers', data, friends);
-    this.users = data;
+    const friendsResult: any = await this.http.get('api/friends/friends').toPromise();
+    console.log('SEARCH RESULTS:', searchResults)
+    console.log('FRIENDS:', friendsResult);
+  
+    this.friends = friendsResult;
+    this.users = searchResults;
     this.searching = false;
+  }
+
+  areFriends(id): boolean {
+    return this.friends.findIndex((el) => el.id == id) != -1
   }
 
   async sendRequest(user) {

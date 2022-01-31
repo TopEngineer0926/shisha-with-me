@@ -129,6 +129,14 @@ export class FriendsAddPage {
         duration: 4000,
       })
     ).present();
+
+    const messageBody = {
+      toUserId: user.id,
+      message: 'Du hast eine Freundschaftsanfrage erhalten',
+    };
+
+    await this.http.post('api/sessions/message', messageBody).toPromise().catch((e) => console.error('Error sending Push', e))
+
     user.isFriend = true;
     user.loading = false;
   }

@@ -25,6 +25,7 @@ export class FriendsAddPage {
   users = [];
   searchInput = '';
   searchForProperty = 'customUsername';
+  searching = false;
 
   constructor(
     private modalCtrl: ModalController,
@@ -40,6 +41,12 @@ export class FriendsAddPage {
   }
 
   async search() {
+    if (this.searchInput.length === 0) {
+      this.users = [];
+      return;
+    }
+
+    this.searching = true;
     const filterObject = {};
 
     let searchString = this.searchInput.replace('+49', '').replace('0049', '');
@@ -63,6 +70,7 @@ export class FriendsAddPage {
     const friends = await this.http.get('api/friends/friends').toPromise();
     console.log('layers', data, friends);
     this.users = data;
+    this.searching = false;
   }
 
   async sendRequest(user) {

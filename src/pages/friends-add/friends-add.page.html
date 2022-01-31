@@ -43,7 +43,19 @@
   </div>
 
   <ion-list lines="none" class="mt-7 px-6">
-    <ion-item *ngFor="let user of users" class="mb-5">
+
+    <div *ngIf="searchInput.length === 0 && users.length === 0" class="text-center">
+      Suche deine Freunde
+    </div>
+    <div *ngIf="searchInput.length > 0 && users.length === 0 && !searching" class="text-center">
+      Keine Ergebnisse gefunden
+    </div>
+  
+    <div *ngIf="searching" class="text-center">
+      <ion-spinner></ion-spinner>
+    </div>
+
+    <ion-item *ngFor="let user of users" class="mb-5 py-2">
       <ion-avatar slot="start">
         <div
           class="bg-cover bg-no-repeat h-10 w-10 rounded-full"

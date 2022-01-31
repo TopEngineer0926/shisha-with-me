@@ -76,20 +76,23 @@ export class FriendsAddPage {
 
   async sendRequest(user) {
     user.loading = true;
+    console.log("INITIATOR", user.id)
     const query = qs.stringify({
       _where: {
         _or: [
-          { initiatorUid_eq: user.id },
-          { initiatorUid_eq: this.authService.user.id },
+          { oneUid_eq: user.id },
+          { twoUid_eq: user.id }
         ],
         isAccepted: false,
+        initiatorUid: this.authService.user.id
       },
     });
+
     const friends: any = await this.http
       .get('api/friends' + '?' + query)
       .toPromise();
 
-    console.log(friends, typeof friends);
+    console.log(friends[0], typeof friends);
     if (!(friends.length === 0)) {
       (
         await this.toastCtrl.create({

@@ -66,13 +66,14 @@
           <h2>{{ user.customUsername || user.name }}</h2>
         </ion-label>
         <ion-button
-          *ngIf="!areFriends(user.id)"
+          *ngIf="!areFriends(user.id) && !user.isFriend"
           [disabled]="user.loading"
           slot="end"
           (click)="sendRequest(user)"
         >
-          <ion-spinner class="mr-3" *ngIf="user.loading"></ion-spinner>
-          Verbinden
+          <ion-spinner name="crescent" class="mr-3" *ngIf="user.loading"></ion-spinner>
+          <span *ngIf="!user.loading">Verbinden</span>
+          <span *ngIf="user.isFriend">Anfrage versendet</span>
         </ion-button>
       </ion-item>      
     </div>

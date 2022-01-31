@@ -52,29 +52,32 @@
     </div>
   
     <div *ngIf="searching" class="text-center">
-      <ion-spinner></ion-spinner>
+      <ion-spinner name="crescent"></ion-spinner>
+    </div>
+    <div *ngIf="!searching">
+      <ion-item *ngFor="let user of users" class="mb-5 py-2">
+        <ion-avatar slot="start">
+          <div
+            class="bg-cover bg-no-repeat h-10 w-10 rounded-full"
+            [style.backgroundImage]="'url(' + helper.getImageUrl(user.image?.formats?.medium?.url || user.image?.url) + ')'"
+          ></div>
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ user.customUsername || user.name }}</h2>
+        </ion-label>
+        <ion-button
+          *ngIf="!user.isFriend"
+          [disabled]="user.loading"
+          slot="end"
+          (click)="sendRequest(user)"
+        >
+          <ion-spinner class="mr-3" *ngIf="user.loading"></ion-spinner>
+          Verbinden
+        </ion-button>
+      </ion-item>      
     </div>
 
-    <ion-item *ngFor="let user of users" class="mb-5 py-2">
-      <ion-avatar slot="start">
-        <div
-          class="bg-cover bg-no-repeat h-10 w-10 rounded-full"
-          [style.backgroundImage]="'url(' + helper.getImageUrl(user.image?.formats?.medium?.url || user.image?.url) + ')'"
-        ></div>
-      </ion-avatar>
-      <ion-label>
-        <h2>{{ user.customUsername || user.name }}</h2>
-      </ion-label>
-      <ion-button
-        *ngIf="!user.isFriend"
-        [disabled]="user.loading"
-        slot="end"
-        (click)="sendRequest(user)"
-      >
-        <ion-spinner class="mr-3" *ngIf="user.loading"></ion-spinner>
-        Verbinden
-      </ion-button>
-    </ion-item>
+
   </ion-list>
 
   <!--

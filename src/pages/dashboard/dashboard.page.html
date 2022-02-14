@@ -84,7 +84,7 @@
             <img
               loading="lazy"
               class="mx-auto object-contain h-28"
-              [src]="helper.getImageUrl(children.image?.formats?.medium?.url ||children.image?.url)"
+              [src]="helper.getImageUrl(children.image?.formats?.small?.url || children.image?.url)"
             />
             <div class="text-center text-black py-2">{{children.name}}</div>
           </div>
@@ -127,7 +127,7 @@
           >
             <div
               class="inside-dot"
-              [lazyLoad]="helper.getImageUrl(children.image?.formats?.small?.url ||children.image?.url)"
+              [lazyLoad]="helper.getImageUrl(children.image?.formats?.small?.url || children.image?.url)"
             ></div>
             <div class="item-title">{{children.name}}</div>
           </div>

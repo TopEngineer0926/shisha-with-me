@@ -1,27 +1,10 @@
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger
-} from '@angular/animations';
-import { Platform } from '@angular/cdk/platform';
-import { HttpClient } from '@angular/common/http';
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnDestroy,
-  OnInit,
-  QueryList,
-  ViewChild,
-  ViewChildren
-} from '@angular/core';
-import {
-  ActivatedRoute
-} from '@angular/router';
-import { Geolocation } from '@capacitor/geolocation';
-import { Share } from '@capacitor/share';
+import {animate, state, style, transition, trigger} from '@angular/animations';
+import {Platform} from '@angular/cdk/platform';
+import {HttpClient} from '@angular/common/http';
+import {AfterViewInit, Component, ElementRef, OnDestroy, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Geolocation} from '@capacitor/geolocation';
+import {Share} from '@capacitor/share';
 import {
   AlertController,
   IonRouterOutlet,
@@ -30,16 +13,17 @@ import {
   ModalController,
   ToastController
 } from '@ionic/angular';
-import { CupertinoPane, CupertinoSettings } from 'cupertino-pane';
-import { lastValueFrom } from 'rxjs/internal/lastValueFrom';
-import { AuthService } from 'src/common/auth/_services/auth.service';
-import { HelperService } from 'src/common/services/helper.service';
-import { MapService } from 'src/common/services/map.service';
-import { SettingsService } from 'src/common/services/settings.service';
-import { Manufacturer } from 'src/common/types';
-import { MapPage } from '../map/map.page';
-import { StartSessionModalComponent } from './components/start-session-modal/start-session-modal.component';
-import { slideOpts } from './slider-config';
+import {CupertinoPane, CupertinoSettings} from 'cupertino-pane';
+import {lastValueFrom} from 'rxjs/internal/lastValueFrom';
+import {AuthService} from 'src/common/auth/_services/auth.service';
+import {HelperService} from 'src/common/services/helper.service';
+import {MapService} from 'src/common/services/map.service';
+import {SettingsService} from 'src/common/services/settings.service';
+import {Manufacturer} from 'src/common/types';
+import {MapPage} from '../map/map.page';
+import {StartSessionModalComponent} from './components/start-session-modal/start-session-modal.component';
+import {slideOpts} from './slider-config';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
@@ -127,6 +111,8 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
 
       this.manufacturers = data;
       this.sorted = [...this.manufacturers];
+      console.log('this.manufacturers', this.manufacturers);
+      
       this.mainSlider?.update();
 
 

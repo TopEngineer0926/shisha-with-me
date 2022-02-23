@@ -1,28 +1,42 @@
-import {animate, state, style, transition, trigger} from '@angular/animations';
-import {Platform} from '@angular/cdk/platform';
-import {HttpClient} from '@angular/common/http';
-import {AfterViewInit, Component, ElementRef, OnDestroy, QueryList, ViewChild, ViewChildren} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {Geolocation} from '@capacitor/geolocation';
-import {Share} from '@capacitor/share';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
+import { Platform } from '@angular/cdk/platform';
+import { HttpClient } from '@angular/common/http';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  QueryList,
+  ViewChild,
+  ViewChildren,
+} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Geolocation } from '@capacitor/geolocation';
+import { Share } from '@capacitor/share';
 import {
   AlertController,
   IonRouterOutlet,
   IonSlides,
   LoadingController,
   ModalController,
-  ToastController
+  ToastController,
 } from '@ionic/angular';
-import {CupertinoPane, CupertinoSettings} from 'cupertino-pane';
-import {lastValueFrom} from 'rxjs/internal/lastValueFrom';
-import {AuthService} from 'src/common/auth/_services/auth.service';
-import {HelperService} from 'src/common/services/helper.service';
-import {MapService} from 'src/common/services/map.service';
-import {SettingsService} from 'src/common/services/settings.service';
-import {Manufacturer} from 'src/common/types';
-import {MapPage} from '../map/map.page';
-import {StartSessionModalComponent} from './components/start-session-modal/start-session-modal.component';
-import {slideOpts} from './slider-config';
+import { CupertinoPane, CupertinoSettings } from 'cupertino-pane';
+import { lastValueFrom } from 'rxjs/internal/lastValueFrom';
+import { AuthService } from 'src/common/auth/_services/auth.service';
+import { HelperService } from 'src/common/services/helper.service';
+import { MapService } from 'src/common/services/map.service';
+import { SettingsService } from 'src/common/services/settings.service';
+import { Manufacturer } from 'src/common/types';
+import { MapPage } from '../map/map.page';
+import { StartSessionModalComponent } from './components/start-session-modal/start-session-modal.component';
+import { slideOpts } from './slider-config';
 
 @Component({
   selector: 'app-dashboard',
@@ -50,6 +64,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
   options: google.maps.MapOptions = {
     disableDefaultUI: true,
     styles: this.mapService.getStyles(),
+    maxZoom: 22,
   };
 
   center: google.maps.LatLngLiteral = { lat: 51.178418, lng: 11 };
@@ -83,8 +98,9 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
     private toastCtrl: ToastController,
     public platform: Platform,
     private route: ActivatedRoute,
-    private loadingCtrl: LoadingController, private settingsService: SettingsService
-  ) { }
+    private loadingCtrl: LoadingController,
+    private settingsService: SettingsService
+  ) {}
 
   async showSmoke() {
     this.visiblityState = 'shown';
@@ -106,15 +122,15 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
     const loading = await this.loadingCtrl.create({ translucent: true });
     loading.present();
     try {
-
-      const data = await lastValueFrom(await this.http.get('api/manufacturers'));
+      const data = await lastValueFrom(
+        await this.http.get('api/manufacturers')
+      );
 
       this.manufacturers = data;
       this.sorted = [...this.manufacturers];
       console.log('this.manufacturers', this.manufacturers);
-      
-      this.mainSlider?.update();
 
+      this.mainSlider?.update();
 
       this.audio = new Audio('assets/sounds/Shisha_Sound.mp3');
       this.audio.loop = false;
@@ -140,15 +156,14 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
     } catch (error) {
       (
         await this.toastCtrl.create({
-          message: 'Daten konnten nicht geladen werden. Bitte prüfe Deine Internetverbindung.',
+          message:
+            'Daten konnten nicht geladen werden. Bitte prüfe Deine Internetverbindung.',
           translucent: true,
           position: 'top',
           duration: 4000,
         })
       ).present();
-
     }
-
 
     loading.dismiss();
   }
@@ -160,15 +175,23 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
     }
 
     const searchedSmokeProducts = this.manufacturers.map((element) => ({
-        ...element,
-        smoke_products: element.smoke_products.filter((subElement) => {
-          let isRelevant = false;
-          if (subElement.name.toLowerCase().includes(this.searchTerm.toLowerCase())) {isRelevant = true;}
-          if (element.name.toLowerCase().includes(this.searchTerm.toLowerCase())) {isRelevant = true;}
+      ...element,
+      smoke_products: element.smoke_products.filter((subElement) => {
+        let isRelevant = false;
+        if (
+          subElement.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+        ) {
+          isRelevant = true;
+        }
+        if (
+          element.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+        ) {
+          isRelevant = true;
+        }
 
-          return isRelevant;
-        })
-      }));
+        return isRelevant;
+      }),
+    }));
 
     this.searchedSmokeProducts = [...searchedSmokeProducts];
   }
@@ -249,7 +272,9 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
     await alert.present();
     */
 
-    const manufacturer = this.manufacturers.find((manufacturer) => manufacturer.id == product.manufacturer);
+    const manufacturer = this.manufacturers.find(
+      (manufacturer) => manufacturer.id == product.manufacturer
+    );
     const modal = await this.modalCtrl.create({
       component: StartSessionModalComponent,
       breakpoints: [0.0, 0.5, 0.7],
@@ -259,17 +284,18 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
       componentProps: {
         product,
         type,
-        manufacturer
-      }
+        manufacturer,
+      },
     });
 
     await modal.present();
 
     const result = await modal.onWillDismiss();
 
-    if (result.data && result.data.showSmoke) { this.showSmoke(); }
+    if (result.data && result.data.showSmoke) {
+      this.showSmoke();
+    }
   }
-
 
   async openTelegramModal() {
     return new Promise(async (resolve, reject) => {
@@ -290,14 +316,13 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
             text: 'Hinzufügen',
             handler: async (data) => {
               const update = {
-                telegramUsername: data.name
+                telegramUsername: data.name,
               };
 
               try {
                 await this.http
                   .put('api/users/' + this.authService.user.id, update)
                   .toPromise();
-
 
                 resolve(true);
               } catch (error) {
@@ -318,7 +343,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
             cssClass: 'secondary',
             handler: async () => {
               const settings = await this.settingsService.getSettings();
-              if(settings && settings.telegramMoreInfo) {
+              if (settings && settings.telegramMoreInfo) {
                 this.helper.openLink(settings.telegramMoreInfo);
                 console.log('Confirm Cancel');
               }
@@ -329,10 +354,8 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
         ],
       });
 
-
       await alert.present();
     });
-
   }
 
   async sharePosition() {

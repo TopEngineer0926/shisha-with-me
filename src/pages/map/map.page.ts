@@ -5,7 +5,13 @@ import { GoogleMap } from '@angular/google-maps';
 import { Event, NavigationStart, Router } from '@angular/router';
 import { Geolocation } from '@capacitor/geolocation';
 import { Share } from '@capacitor/share';
-import { IonModal, LoadingController, ModalController, PopoverController, ToastController } from '@ionic/angular';
+import {
+  IonModal,
+  LoadingController,
+  ModalController,
+  PopoverController,
+  ToastController,
+} from '@ionic/angular';
 import { lastValueFrom } from 'rxjs';
 import { AuthService } from 'src/common/auth/_services/auth.service';
 import { UserService } from 'src/common/auth/_services/user.service';
@@ -28,8 +34,7 @@ export class MapPage implements AfterViewInit, OnInit {
   options: google.maps.MapOptions = {
     disableDefaultUI: true,
     styles: this.mapService.getStyles(),
-    minZoom: 5,
-    maxZoom: 14,
+    maxZoom: 22,
   };
   center: google.maps.LatLngLiteral = { lat: 51.178418, lng: 9.95 };
   zoom = 6;
@@ -55,9 +60,7 @@ export class MapPage implements AfterViewInit, OnInit {
     public formBuilder: FormBuilder,
     private toastCtrl: ToastController,
     private userService: UserService
-  ) {
-
-  }
+  ) {}
 
   changeTab(ev) {
     this.currentTab = ev.detail.value;
@@ -81,9 +84,7 @@ export class MapPage implements AfterViewInit, OnInit {
       if (event instanceof NavigationStart) {
         try {
           this.modalCtrl?.dismiss();
-        } catch (error) {
-
-        }
+        } catch (error) {}
       }
     });
     this.mapFilterForm = this.formBuilder.group({
@@ -139,9 +140,21 @@ export class MapPage implements AfterViewInit, OnInit {
   filterMarkers() {
     let filteredMarkers = this.locationMarker;
 
-    if (!this.mapFilterForm.value.friends) {filteredMarkers = filteredMarkers.filter((location) => location.type !== 'user');}
-    if (!this.mapFilterForm.value.shishaBar) {filteredMarkers = filteredMarkers.filter((location) => location.type !== 'shisha_bar');}
-    if (!this.mapFilterForm.value.shishaShop) {filteredMarkers = filteredMarkers.filter((location) => location.type !== 'shisha_shop');}
+    if (!this.mapFilterForm.value.friends) {
+      filteredMarkers = filteredMarkers.filter(
+        (location) => location.type !== 'user'
+      );
+    }
+    if (!this.mapFilterForm.value.shishaBar) {
+      filteredMarkers = filteredMarkers.filter(
+        (location) => location.type !== 'shisha_bar'
+      );
+    }
+    if (!this.mapFilterForm.value.shishaShop) {
+      filteredMarkers = filteredMarkers.filter(
+        (location) => location.type !== 'shisha_shop'
+      );
+    }
 
     console.log('filteredMarkers', filteredMarkers);
     this.addMarkersForPlaces(filteredMarkers, true);
@@ -157,10 +170,9 @@ export class MapPage implements AfterViewInit, OnInit {
     loading.present();
 
     try {
-
       const user: any = await this.userService.getUser();
       console.log('iser', user);
-      if(user?.location?.lat) {
+      if (user?.location?.lat) {
         this.markerPositions = [
           {
             lat: user?.location?.lat,
@@ -216,10 +228,13 @@ export class MapPage implements AfterViewInit, OnInit {
           lat: coordinates.coords.latitude,
           lng: coordinates.coords.longitude,
         };
-        await lastValueFrom(this.http.put('api/users/' + this.authService.user.id, { location }));
+        await lastValueFrom(
+          this.http.put('api/users/' + this.authService.user.id, { location })
+        );
       } catch (error) {
         const toast = await this.toastCtrl.create({
-          message: 'Standort konnte nicht ermittelt werden, bitte gebe deinen Standort in den Einstellungen frei.',
+          message:
+            'Standort konnte nicht ermittelt werden, bitte gebe deinen Standort in den Einstellungen frei.',
           translucent: true,
           position: 'top',
           duration: 3000,
@@ -289,8 +304,8 @@ export class MapPage implements AfterViewInit, OnInit {
   }
 
   addMarkersForPlaces(places: any[], doBounds = false) {
-    if(this.markers.length> 0) {
-      this.markers.forEach((marker)=> {
+    if (this.markers.length > 0) {
+      this.markers.forEach((marker) => {
         marker.setMap(null);
       });
       this.markers = [];
@@ -322,7 +337,10 @@ export class MapPage implements AfterViewInit, OnInit {
 
       google.maps.event.addListener(marker, 'click', async () => {
         console.log(marker);
-        if (marker.dataType == 'shisha_bar' || marker.dataType == 'shisha_shop') {
+        if (
+          marker.dataType == 'shisha_bar' ||
+          marker.dataType == 'shisha_shop'
+        ) {
           await this.openPlace(marker.dataId);
         }
         if (marker.dataType == 'user') {

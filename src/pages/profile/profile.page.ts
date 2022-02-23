@@ -26,6 +26,7 @@ export class ProfilePage implements OnInit {
   options: google.maps.MapOptions = {
     disableDefaultUI: true,
     styles: this.mapService.getStyles(),
+    maxZoom: 22,
   };
 
   center: google.maps.LatLngLiteral = { lat: 51.178418, lng: 9.95 };

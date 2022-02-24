@@ -56,13 +56,13 @@
     </div>
     <div *ngIf="!searching">
       <ion-item *ngFor="let user of users" class="mb-5 py-2">
-        <ion-avatar slot="start">
+        <ion-avatar slot="start" (click)="openFriend(user.id)">
           <div
             class="bg-cover bg-no-repeat h-10 w-10 rounded-full"
             [style.backgroundImage]="'url(' + helper.getImageUrl(user.image?.formats?.medium?.url || user.image?.url) + ')'"
           ></div>
         </ion-avatar>
-        <ion-label>
+        <ion-label (click)="openFriend(user.id)">
           <h2>{{ user.customUsername || user.name }}</h2>
         </ion-label>
         <ion-button

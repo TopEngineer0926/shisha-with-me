@@ -4,10 +4,12 @@ import {
   ToastController,
   LoadingController,
   ModalController,
+  IonRouterOutlet,
 } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/common/auth/_services/auth.service';
 import * as qs from 'qs';
+import { ProfilePage } from '../profile/profile.page';
 
 @Component({
   selector: 'app-friends-add',
@@ -26,12 +28,26 @@ export class FriendsAddPage {
     private http: HttpClient,
     public helper: HelperService,
     private authService: AuthService,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private routerOutlet: IonRouterOutlet,
   ) {}
 
   segmentChanged(ev) {
     this.searchForProperty = ev.detail.value;
     this.search();
+  }
+
+  async openFriend(id) {
+    const modal = await this.modalCtrl.create({
+      component: ProfilePage,
+
+      swipeToClose: true,
+      presentingElement: this.routerOutlet.nativeEl,
+      componentProps: {
+        id,
+      },
+    });
+    return await modal.present();
   }
 
   async search() {

@@ -65,27 +65,28 @@
       </ngx-qrcode>
     </ion-card-content>
   </ion-card>-->
-
+<!--
   <ion-card>
     <ion-card-header>
       <ion-card-subtitle>Standort</ion-card-subtitle>
     </ion-card-header>
 
+    
     <google-map #map [center]="center" [zoom]="zoom" [options]="options">
       <map-marker
         *ngFor="let marker of markers"
         [position]="marker"
       ></map-marker>
     </google-map>
-    <!--<agm-map
+    <agm-map
       [latitude]="lat"
       [longitude]="lng"
       [zoom]="zoom"
       [disableDefaultUI]="true"
       [styles]="mapService.styles"
     >
-    </agm-map>-->
-  </ion-card>
+    </agm-map>
+  </ion-card>-->
 
   <!--<ion-card>
     <ion-card-header>

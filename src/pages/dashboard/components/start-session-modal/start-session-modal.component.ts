@@ -227,6 +227,7 @@ export class StartSessionModalComponent implements OnInit {
       // show telegram modal on first session if no telegram is set
       const telegramUsername = this.authService.user.telegramUsername;
       if (!telegramUsername) {
+        loading.dismiss();
         const hasSetANewName = await this.openTelegramModal();
 
         if (hasSetANewName) {

@@ -2,6 +2,7 @@ import { AfterViewInit, Component } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
 import { Capacitor } from '@capacitor/core';
 import { SplashScreen } from '@capacitor/splash-screen';
+import { StatusBar, StatusBarStyle, Style } from '@capacitor/status-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { HelperService } from 'src/common/services/helper.service';
 import { get } from 'src/common/services/storage.service';
@@ -27,16 +28,13 @@ export class AppComponent implements AfterViewInit {
   }
 
   async ngAfterViewInit() {
-    await this.wishlist.loadWishlist();
-    if (Capacitor.isNative) {
-      // StatusBar.setStyle({ style: StatusBarStyle.Light });
+    if (Capacitor.isNativePlatform()) {
+      SplashScreen.hide();
+      StatusBar.setStyle({ style: Style.Dark });
     }
-
+    await this.wishlist.loadWishlist();
     const darkMode = await this.helperService.getDarkMode();
     await this.helperService.setDarkMode(darkMode);
-
-    SplashScreen.hide();
-
     this.setLanguage();
     await this.initPush();
   }

@@ -244,6 +244,10 @@ button {
   &.bold {
     font-weight: bold !important;
   }
+  &:active {
+    opacity: 0.8;
+    transform: scale(0.98);
+  }
 }
 
 ion-toolbar {

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { GoogleMap } from '@angular/google-maps';
 import { Event, NavigationStart, Router } from '@angular/router';
@@ -12,7 +12,7 @@ import {
   PopoverController,
   ToastController,
 } from '@ionic/angular';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, Subscription } from 'rxjs';
 import { AuthService } from 'src/common/auth/_services/auth.service';
 import { UserService } from 'src/common/auth/_services/user.service';
 import { MapService } from 'src/common/services/map.service';
@@ -26,7 +26,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   templateUrl: './map.page.html',
   styleUrls: ['./map.page.scss'],
 })
-export class MapPage implements AfterViewInit, OnInit {
+export class MapPage implements AfterViewInit, OnInit, OnDestroy {
   @ViewChild(GoogleMap) map: GoogleMap;
   @ViewChild(IonModal) filterModal: IonModal;
   locationLoading = false;
@@ -48,6 +48,7 @@ export class MapPage implements AfterViewInit, OnInit {
   mapFilterForm: FormGroup;
   locationMarker = [];
   markers: google.maps.Marker[] = [];
+  sub$: Subscription;
 
   constructor(
     public mapService: MapService,
@@ -80,10 +81,11 @@ export class MapPage implements AfterViewInit, OnInit {
   }
 
   async ngOnInit() {
-    this.router.events.pipe(untilDestroyed(this)).subscribe((event: Event) => {
+    this.sub$ = this.router.events.subscribe(async (event: Event) => {
       if (event instanceof NavigationStart) {
+        console.log('NavigationStart', event, this.modalCtrl);
         try {
-          this.modalCtrl?.dismiss();
+          await this.modalCtrl?.dismiss();
         } catch (error) {}
       }
     });
@@ -129,6 +131,17 @@ export class MapPage implements AfterViewInit, OnInit {
 
     await loading.dismiss();
     await this.getCurrentPosition();
+  }
+
+  async ionViewWillLeave() {
+    this.sub$?.unsubscribe();
+    await this.modalCtrl?.dismiss();
+  }
+
+  ngOnDestroy() {
+    console.log('ngOnDestroy')
+    this.sub$?.unsubscribe();
+
   }
 
   ngAfterViewInit() {

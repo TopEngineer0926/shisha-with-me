@@ -62,15 +62,12 @@ export class StartSessionModalComponent implements OnInit {
   constructor(
     public mapService: MapService,
     private modalCtrl: ModalController,
-    private localNotifications: LocalNotifications,
     private alertController: AlertController,
     private http: HttpClient,
     public helper: HelperService,
     private authService: AuthService,
     private toastCtrl: ToastController,
     public platform: Platform,
-    private router: Router,
-    private route: ActivatedRoute,
     private loadingCtrl: LoadingController
   ) {}
 
@@ -235,7 +232,7 @@ export class StartSessionModalComponent implements OnInit {
 
           (
             await this.toastCtrl.create({
-              message: 'Session wurde gestartet',
+              message: 'Deine Freunde wurden informiert',
               translucent: true,
               position: 'top',
               duration: 4000,
@@ -251,7 +248,7 @@ export class StartSessionModalComponent implements OnInit {
 
         (
           await this.toastCtrl.create({
-            message: 'Session wurde gestartet',
+            message: 'Deine Freunde wurden informiert',
             translucent: true,
             position: 'top',
             duration: 4000,

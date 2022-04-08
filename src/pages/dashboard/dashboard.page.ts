@@ -281,6 +281,7 @@ export class DashboardPage implements AfterViewInit, OnDestroy {
       initialBreakpoint: 0.5,
       swipeToClose: true,
       cssClass: 'smoke-start-modal',
+      showBackdrop: true,
       componentProps: {
         product,
         type,

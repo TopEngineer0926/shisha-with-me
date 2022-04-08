@@ -76,6 +76,10 @@ export class StartSessionModalComponent implements OnInit {
     console.log('B', this.type);
   }
 
+  addLineBreak(description) {
+    return description.replace(/Geschmack:/g, 'Geschmack:<br/>');
+  }
+
   private calculateDistance(lat1, lon1, lat2, lon2, unit) {
     console.log(lat1, lon1, lat2, lon2, unit);
     const radlat1 = (Math.PI * lat1) / 180;

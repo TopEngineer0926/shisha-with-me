@@ -36,10 +36,10 @@ import { IdeaPage } from 'src/pages/idea/idea.page';
     trigger('slideInOut', [
       transition(':enter', [
         style({ transform: 'translateY(100%)' }),
-        animate('400ms ease-in', style({ transform: 'translateY(0%)' })),
+        animate('400ms ease', style({ transform: 'translateY(0%)', opacity: 1 })),
       ]),
       transition(':leave', [
-        animate('400ms ease-in', style({ transform: 'translateY(100%)' })),
+        animate('400ms ease', style({ transform: 'translateY(100%)', opacity: 0 })),
       ]),
     ]),
   ],
@@ -77,7 +77,7 @@ export class StartSessionModalComponent implements OnInit {
   }
 
   addLineBreak(description) {
-    return description.replace(/Geschmack:/g, 'Geschmack:<br/>');
+    return description?.replace(/Geschmack:/g, 'Geschmack:<br/>');
   }
 
   private calculateDistance(lat1, lon1, lat2, lon2, unit) {

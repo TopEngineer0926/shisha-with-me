@@ -2,7 +2,7 @@
   <div class="mt-8 px-8">
     <div class="mt-5 text-lg font-bold">{{ product.name }} - {{ manufacturer.name }}</div>
     <div class="mt-0 flex flex-row justify-between">
-      <div class="mt-2" [innerHtml]="addLineBreak(product.description)">
+      <div class="mt-2" [innerHtml]="addLineBreak(product?.description)">
       </div>
       <div class="relative">
         <img
@@ -35,13 +35,13 @@
       <div>Wo rauchst du?</div>
       <ion-button
         color="primary"
-        class="w-full font-normal mt-2"
+        class="w-full font-normal mt-4"
         (click)="startSession(product, type)"
         >Privat</ion-button
       >
       <ion-button
         color="primary"
-        class="w-full font-normal mt-4"
+        class="w-full font-normal mt-2"
         (click)="selectLocation()"
         >Shisha Bar</ion-button
       >
@@ -50,8 +50,8 @@
 </div>
 
 <div *ngIf="selectLocationMode" [@slideInOut]>
-  <div class="mt-5 px-8">
-    <div class="mt-5 text-lg">Shisha Bars</div>
+  <div class="mt-8 px-8">
+    <div class="mt-5 text-lg">In welcher Shisha Bar rauchst du?</div>
 
     <ion-button
       *ngIf="nearbyShishaBars && nearbyShishaBars[0]"
